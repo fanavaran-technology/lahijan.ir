@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->timestamp('published_at')->nullable();
             $table->bigInteger('view_count')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_drfat')->default(0);
             $table->tinyInteger('is_pined')->default(0);
             $table->tinyInteger('is_fire_station')->default(0);
             $table->timestamps();

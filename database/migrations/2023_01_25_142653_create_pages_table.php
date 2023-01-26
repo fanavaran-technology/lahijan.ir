@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->foreignId('user_id')->constrained('users');
             $table->tinyInteger('is_quick_access')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_draft')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

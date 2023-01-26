@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('parent_id')->nullable()->constrained('menus');
-            $table->tinyInteger('is_external_address')->default(0);
             $table->string('url');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
