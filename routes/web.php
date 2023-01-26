@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Content\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
+// admin routes
+Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', fn() => view('admin.index'));
+    
+    // news routes
+    Route::prefix('content')->as('content.')->group(function () {
+        Route::resource('news', NewsController::class)->except('show');
+    });
 });

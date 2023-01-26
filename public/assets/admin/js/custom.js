@@ -38,5 +38,52 @@ function copyToSlug(element) {
     document.querySelector('.slug-box').innerHTML= str
 
     document.querySelector('input[name=slug]').value = str
+}
 
+function renderEditor(key)
+{
+    let editor_config = {
+        path_absolute : "/",
+        selector: key,
+        relative_urls: false,
+        file_picker_types: 'file image media',
+        plugins: 'link directionality image code table fullscreen',
+        language : 'fa' ,
+        toolbar: [
+            {name: 'styles', items: [ 'styleselect' ]},
+            {name: 'formatting', items: [ 'bold', 'italic','underline']},
+            {name: 'alignment', items: [ 'alignright', 'aligncenter', 'alignleft', 'alignjustify' , "format"  ,"link" ]},
+            {name: 'indentation', items: [ 'outdent', 'indent' ]},
+            {name: 'image' , items: ['image']},
+            {name: 'table' , items: ['table']},
+            {name: 'direction', items: [ 'rtl', 'ltr' ]},
+            {name: 'history', items: [ 'undo', 'redo' ]},
+            {name: 'fullscreen', items: [ "fullscreen" ]},
+        ],
+        file_picker_callback : function(callback, value, meta) {
+          let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+          let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+    
+          let cmsURL = editor_config.path_absolute + 'filemanager?editor=' + meta.fieldname;
+          if (meta.filetype == 'image') {
+            cmsURL = cmsURL + "&type=Images";
+          } else {
+            cmsURL = cmsURL + "&type=Files";
+          }
+    
+          tinyMCE.activeEditor.windowManager.openUrl({
+            url : cmsURL,
+            title : 'انتخاب فایل',
+            width : x * 0.8,
+            height : y * 0.8,
+            resizable : "yes",
+            close_previous : "no",
+            onMessage: (api, message) => {
+              callback(message.content);
+            }
+          });
+        }
+      };
+    
+    tinymce.init(editor_config);
 }

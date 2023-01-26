@@ -1,7 +1,18 @@
 <!doctype html>
 <html lang="en">
 
+<head>
 @include('admin.layouts.includes.head-tag')
+{{-- add custom head items --}}
+@yield('head-tag')
+
+<title>
+    @isset($title)
+        {{ 'شهرداری لاهیجان |' . $title }}
+    @endisset
+</title>
+
+</head>
 
 <body class="vertical light rtl " style="font-family: vazir;">
     <div class=" wrapper">
@@ -21,7 +32,8 @@
     </div> <!-- .wrapper -->
 
     @include('admin.layouts.includes.script')
-
+    {{-- add custom js --}}
+    @yield('script')
 </body>
 
 </html>
