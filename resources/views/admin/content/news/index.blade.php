@@ -68,8 +68,8 @@
                                     <td>
                                         <div class="custom-control item-danger custom-checkbox align-items-center">
                                             <input type="checkbox"
-                                                class="custom-control-input item-success align-items-center" id="news-{{ $news->id }}-status">
-                                            <label class="custom-control-label align-items-center" for="news-{{ $news->id }}-status"></label>
+                                                class="custom-control-input item-success align-items-center" id="news-{{ $news->id }}-draft">
+                                            <label class="custom-control-label align-items-center" for="news-{{ $news->id }}-draft"></label>
                                         </div>
                                     </td>
                                     <td>

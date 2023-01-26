@@ -7,14 +7,12 @@ function readUrl(input) {
             let imgData = e.target.result;
             let imgName = input.files[0].name;
             input.setAttribute("data-title", imgName);
-            console.log(e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 
 function openCard(element){
-    console.log(element);
     cardBody = element.nextElementSibling;
 
     icon = element.querySelector('.card-dropdown-button');
@@ -36,8 +34,6 @@ function copyToSlug(element) {
     str = str.replace(/^-+|-+$/g, '');
 
     document.querySelector('.slug-box').innerHTML= str
-
-    document.querySelector('input[name=slug]').value = str
 }
 
 function renderEditor(key)

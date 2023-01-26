@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin\Content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Content\NewsRequest;
 use App\Models\Content\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -35,9 +38,29 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        //
+        
+        DB::transaction(function () use ($request) {
+            $inputs = $request->all();
+            // temporarily
+            // TODO
+            $inputs['user_id'] = 1;
+
+            $publishedAt = substr($inputs['published_at'], 0, -3);
+
+            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
+
+            $news = News::create($inputs);
+
+            if ($request->filled('tags')) {
+                $tags = explode(',', $request->tags);
+                $this->saveTags($news, $tags);
+            }
+            
+        });
+
+        return to_route('admin.content.news.index')->with('toast-success' , 'خبر جدیدی اضافه گردید.');
     }
 
     /**
@@ -72,5 +95,14 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveTags(News $news , Array $tags){
+
     }
 }
