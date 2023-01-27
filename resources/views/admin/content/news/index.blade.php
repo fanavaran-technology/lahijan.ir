@@ -20,7 +20,7 @@
                                 <thead>
                                     <div class="form-row py-2">
                                         <input class="col-md-3 form-control form-group" type="text"
-                                            placeholder="خبر خود را جستو جو کنید ...">
+                                            placeholder="خبر خود را جستجو جو کنید ...">
 
                                         <div class="ml-3 mt-2 custom-control custom-checkbox ">
                                             <input type="checkbox" class="custom-control-input  " id="10">
