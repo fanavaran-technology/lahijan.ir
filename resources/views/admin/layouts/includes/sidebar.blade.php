@@ -40,6 +40,24 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a href="#places" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+              <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+            </svg>
+            <span class="ml-3 item-text">مکان های گردشگری</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="places">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.places.index') }}"><span class="ml-1 item-text">همه مکان ها</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.places.create') }}"><span class="ml-1 item-text">مکان گردشگری جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a href="#article" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <i class="fe fe-book fe-16"></i>
             <span class="ml-3 item-text">مقالات</span>
