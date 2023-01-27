@@ -202,3 +202,11 @@
     }
 </script> --}}
 <script src="{{ asset('assets/admin/js/apps.js') }}"></script>
+
+<script src="{{ asset('assets/admin/plugins/simple-notify/simple-notify.min.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/jquery-confirm/jquery-confirm.min.js') }}"></script>
+
+
+@include('admin.alerts.toast.success')
+@include('admin.alerts.toast.error')
+@include('admin.alerts.toast.warning')

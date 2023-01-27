@@ -3,7 +3,6 @@
 @section('head-tag')
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css')}}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
 
 <!-- tinymce -->
 <script src="{{ asset('assets/admin/plugins/tinymce/js/tinymce/tinymce.min.js') }}"  referrerpolicy="origin"></script>
@@ -135,8 +134,8 @@
               <label class="custom-control-label input-title" for="is_fire_station">این خبر مربوط به آتش نشانی است</label>
             </div>
             <div class="form-group custom-control custom-checkbox ">
-              <input type="checkbox" name="is_drfat" value="1" @checked(old('is_drfat')) class="custom-control-input" id="is_drfat">
-              <label class="custom-control-label input-title" for="is_drfat">این خبر پیش نویس است</label>
+              <input type="checkbox" name="is_draft" value="1" @checked(old('is_draft')) class="custom-control-input" id="is_draft">
+              <label class="custom-control-label input-title" for="is_draft">این خبر پیش نویس است</label>
             </div>
             <label for="published_at_view" class="input-title">
               تعیین زمان انتشار

@@ -81,23 +81,23 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link pl-3" href="./create-user.html"><span class="ml-1 item-text">کاربر جدید</span></a>
+              <a class="nav-link pl-3" href="#"><span class="ml-1 item-text">کاربر جدید</span></a>
             </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a href="#سمهیثق" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+          <a href="#slider" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <i class="fe fe-layers
           fe-16"></i>
             <span class="ml-3 item-text">اسلایدر</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="سمهیثق">
+          <ul class="collapse list-unstyled pl-4 w-100" id="slider">
             <li class="nav-item">
-              <a class="nav-link pl-3" href="./all-slider.html"><span class="ml-1 item-text">همه اسلایدر </span>
+              <a class="nav-link pl-3" href="{{ route('admin.content.sliders.index') }}"><span class="ml-1 item-text">همه اسلایدر </span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link pl-3" href="./create-slider.html"><span class="ml-1 item-text">الایدر جدید</span></a>
+              <a class="nav-link pl-3" href="{{ route('admin.content.sliders.create') }}"><span class="ml-1 item-text">اسلایدر جدید</span></a>
             </li>
           </ul>
         </li>
