@@ -4,8 +4,79 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "130786df9157b61664f9a357b0be4b6b",
+=======
     "content-hash": "7c4c839162b95be48c78705d81a73971",
+>>>>>>> 67ab10c9ecb73c36b04efe38f74c73967eee55a2
     "packages": [
+        {
+            "name": "beberlei/assert",
+            "version": "v3.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/assert.git",
+                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/cb70015c04be1baee6f5f5c953703347c0ac1655",
+                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
+                "php": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "*",
+                "phpstan/phpstan": "*",
+                "phpunit/phpunit": ">=6.0.0",
+                "yoast/phpunit-polyfills": "^0.1.0"
+            },
+            "suggest": {
+                "ext-intl": "Needed to allow Assertion::count(), Assertion::isCountable(), Assertion::minCount(), and Assertion::maxCount() to operate on ResourceBundles"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/Assert/functions.php"
+                ],
+                "psr-4": {
+                    "Assert\\": "lib/Assert"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Richard Quadling",
+                    "email": "rquadling@gmail.com",
+                    "role": "Collaborator"
+                }
+            ],
+            "description": "Thin assertion library for input validation in business models.",
+            "keywords": [
+                "assert",
+                "assertion",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/beberlei/assert/issues",
+                "source": "https://github.com/beberlei/assert/tree/v3.3.2"
+            },
+            "time": "2021-12-16T21:41:27+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",
@@ -61,6 +132,153 @@
                 }
             ],
             "time": "2022-08-10T22:54:19+00:00"
+        },
+        {
+            "name": "cocur/slugify",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cocur/slugify.git",
+                "reference": "652234ef5f1be844a2ae1c36ad1b4c88b05160f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/652234ef5f1be844a2ae1c36ad1b4c88b05160f9",
+                "reference": "652234ef5f1be844a2ae1c36ad1b4c88b05160f9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.1 || ~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "conflict": {
+                "symfony/config": "<3.4 || >=4,<4.3",
+                "symfony/dependency-injection": "<3.4 || >=4,<4.3",
+                "symfony/http-kernel": "<3.4 || >=4,<4.3",
+                "twig/twig": "<2.12.1"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.0|^6.0|^7.0|^8.0",
+                "latte/latte": "~2.2",
+                "league/container": "^2.2.0",
+                "mikey179/vfsstream": "~1.6.8",
+                "mockery/mockery": "^1.3",
+                "nette/di": "~2.4",
+                "pimple/pimple": "~1.1",
+                "plumphp/plum": "~0.1",
+                "symfony/config": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.4 || ^6.0",
+                "twig/twig": "^2.12.1 || ~3.0",
+                "zendframework/zend-modulemanager": "~2.2",
+                "zendframework/zend-servicemanager": "~2.2",
+                "zendframework/zend-view": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cocur\\Slugify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Eckerstorfer",
+                    "email": "florian@eckerstorfer.co",
+                    "homepage": "https://florian.ec"
+                },
+                {
+                    "name": "Ivo Bathke",
+                    "email": "ivo.bathke@gmail.com"
+                }
+            ],
+            "description": "Converts a string into a slug.",
+            "keywords": [
+                "slug",
+                "slugify"
+            ],
+            "support": {
+                "issues": "https://github.com/cocur/slugify/issues",
+                "source": "https://github.com/cocur/slugify/tree/v4.3.0"
+            },
+            "time": "2022-12-07T19:48:48+00:00"
+        },
+        {
+            "name": "cviebrock/eloquent-sluggable",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cviebrock/eloquent-sluggable.git",
+                "reference": "3100e37682491424dd13eaeb3ec33cbbad186992"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/3100e37682491424dd13eaeb3ec33cbbad186992",
+                "reference": "3100e37682491424dd13eaeb3ec33cbbad186992",
+                "shasum": ""
+            },
+            "require": {
+                "cocur/slugify": "^4.0",
+                "illuminate/config": "^9.0",
+                "illuminate/database": "^9.0",
+                "illuminate/support": "^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "limedeck/phpunit-detailed-printer": "^6.0",
+                "mockery/mockery": "^1.4.2",
+                "orchestra/database": "^7.0",
+                "orchestra/testbench": "^7.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cviebrock\\EloquentSluggable\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cviebrock\\EloquentSluggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Colin Viebrock",
+                    "email": "colin@viebrock.ca"
+                }
+            ],
+            "description": "Easy creation of slugs for your Eloquent models in Laravel",
+            "homepage": "https://github.com/cviebrock/eloquent-sluggable",
+            "keywords": [
+                "eloquent",
+                "eloquent-sluggable",
+                "laravel",
+                "lumen",
+                "slug",
+                "sluggable"
+            ],
+            "support": {
+                "issues": "https://github.com/cviebrock/eloquent-sluggable/issues",
+                "source": "https://github.com/cviebrock/eloquent-sluggable/tree/9.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cviebrock",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-25T02:55:58+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1799,6 +2017,65 @@
                 }
             ],
             "time": "2022-07-24T11:55:47+00:00"
+        },
+        {
+            "name": "morilog/jalali",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morilog/jalali.git",
+                "reference": "6051d96facb33ccb384db6349b27ce39bd93fe5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morilog/jalali/zipball/6051d96facb33ccb384db6349b27ce39bd93fe5b",
+                "reference": "6051d96facb33ccb384db6349b27ce39bd93fe5b",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "3.*",
+                "nesbot/carbon": "^1.21 || ^2.0",
+                "php": "^7.0 | ^7.1 | ^7.2 | ^8.0 | ^8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Morilog\\Jalali\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Milad Rey",
+                    "email": "miladr@gmail.com"
+                },
+                {
+                    "name": "Morteza Parvini",
+                    "email": "m.parvini@outlook.com"
+                }
+            ],
+            "description": "This Package helps developers to easily work with Jalali (Shamsi or Iranian) dates in PHP applications, based on Jalali (Shamsi) DateTime class.",
+            "keywords": [
+                "Jalali",
+                "date",
+                "datetime",
+                "laravel",
+                "morilog"
+            ],
+            "support": {
+                "issues": "https://github.com/morilog/jalali/issues",
+                "source": "https://github.com/morilog/jalali/tree/v3.4.0"
+            },
+            "time": "2022-08-07T09:19:26+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -6116,16 +6393,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.23",
+            "version": "9.2.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "9f1f0f9a2fbb680b26d1cf9b61b6eac43a6e4e9c"
+                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/9f1f0f9a2fbb680b26d1cf9b61b6eac43a6e4e9c",
-                "reference": "9f1f0f9a2fbb680b26d1cf9b61b6eac43a6e4e9c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2cf940ebc6355a9d430462811b5aaa308b174bed",
+                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed",
                 "shasum": ""
             },
             "require": {
@@ -6181,7 +6458,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.23"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.24"
             },
             "funding": [
                 {
@@ -6189,7 +6466,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-28T12:41:10+00:00"
+            "time": "2023-01-26T08:26:55+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

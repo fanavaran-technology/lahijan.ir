@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('alt')->nullable();
             $table->string('image');
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_draft')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();

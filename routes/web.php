@@ -17,7 +17,9 @@ use App\Http\Controllers\Admin\Content\SliderController;
 
 // admin routes
 Route::prefix('admin')->as('admin.')->group(function () {
+    
     Route::get('/', fn() => view('admin.index'));
+
     Route::prefix('content')->as('content.')->group(function () {
 
         // news routes
