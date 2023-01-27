@@ -47,14 +47,20 @@
                                     </td>
                                     <td>{{ $slider->published_at }}</td>
                                     <td>
-                                        <a href="#" class="text-decoration-none text-danger"><i
-                                                class="fe fe-x-circle fe-24 mr-1"></i></a>
-                                                
-                                        <a href="{{ route('admin.content.sliders.edit' , $slider->id) }}" class="text-decoration-none text-success"><i
-                                                class="fe fe-edit fe-24 mr-1"></i></a>
+                                        
 
+                                        <a href="{{ route('admin.content.sliders.edit' , $slider->id) }}" class="text-decoration-none text-success"><i
+                                                class="fe fe-edit fe-24 mr-2"></i></a>
+                                                
                                         <a href="#" class="text-decoration-none text-primary-light"><i
                                                 class="fe fe-eye fe-24 mr-1"></i></a>
+
+                                                <form class="d-inline" action="{{ route('admin.content.sliders.destroy' , $slider->id) }}" method="POST">
+                                                    @csrf
+                                                    {{ method_field('delete') }}
+                                                <button href="#" class="text-decoration-none text-danger text-right btn btn-transparent mb-1"><i
+                                                        class="fe fe-x-circle fe-24 text-left"></i></button>
+                                                </form>
                                     </td>
                                 </tr>
                                 @empty
@@ -138,5 +144,8 @@
         }
     }
 </script>
+
+{{-- @include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete']) --}}
+
 
 @endsection

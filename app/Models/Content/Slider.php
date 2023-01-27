@@ -10,6 +10,8 @@ class Slider extends Model
 {
     use HasFactory , SoftDeletes;
 
+    protected $casts = ['image' => 'array'];
+
     protected $fillable = [
         'alt' ,
         'image' ,

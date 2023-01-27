@@ -78,7 +78,7 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slider $slider, ImageService $imageService)
+    public function update(SliderRequest $request, Slider $slider, ImageService $imageService)
     {
 
         $inputs = $request->all();
@@ -88,13 +88,13 @@ class SliderController extends Controller
 
         if ($request->hasFile('image')) {
             if (!empty($banner->image)) {
-                $imageService->deleteImage($slider->image);
+                $imageService->deleteImage($banner->image);
             }
-            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'slider');
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'banner');
             $result = $imageService->save($request->file('image'));
 
             if ($result === false) {
-                return redirect()->route('admin.content.slider.index');
+                return redirect()->route('admin.content.slider.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
             }
             $inputs['image'] = $result;
         } else {
@@ -115,9 +115,10 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Slider $slider)
     {
-        //
+        $result = $slider->delete();
+        return to_route("admin.content.sliders.index");
     }
 
     public function status(Slider $slider)

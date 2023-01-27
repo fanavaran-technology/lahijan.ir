@@ -1,4 +1,4 @@
-@extends('admin.layouts.app' , ['title' => ' ویرایش اسلایدر'])
+@extends('admin.layouts.app' , ['title' => ' اسلایدر جدید'])
 
 @section('head-tag')
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css')}}">
@@ -13,15 +13,15 @@
 @section('content')
 <div class="d-flex justify-content-between">
   <div class="col mb-2">
-      <h2 class="h3 mb-0 page-title">ویرایش اسلایدر</h2>
+      <h2 class="h3 mb-0 page-title">ایجاد اسلایدر</h2>
   </div>
   <div class="col-auto mb-3">
       <a href="{{ route('admin.content.sliders.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
   </div>
   </div>
-  <form action="{{ route('admin.content.sliders.update' , $slider->id) }}" method="POST" enctype="multipart/form-data">
+  
+  <form action="{{ route('admin.content.sliders.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    {{ method_field('put') }}
     <div class="row">
       <div class="col-12 col-md-12">
         <div class="row">
@@ -32,15 +32,29 @@
                   <div class="form-row">
                     <div class="col-md-12 mb-3">
                       <label for="validationCustom3">alt تصویر</label>
-                      <input type="text" name="alt"  placeholder="alt را اینجا وارد کنید"  class="form-control" id="validationCustom3" value="{{ old('alt' , $slider->alt) }}">
+                      <input type="text" name="alt"  placeholder="alt را اینجا وارد کنید"  class="form-control" id="validationCustom3" value="{{ old('alt') }}" >
+                      @error('alt')
+                         <div class="mt-2">
+                          <strong class="text-danger mt-2">
+                            {{ $message }}
+                        </strong>
+                         </div>
+                  @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom3">آدرس صفحه داخلی</label>
-                      <input type="text" name="url" placeholder="https://lahijan.ir"  class="form-control text-right" id="validationCustom3" value="{{ old('url' , $slider->url) }}">
+                      <input type="text" name="url"  placeholder="https://lahijan.ir"  class="form-control text-right" id="validationCustom3" value="{{ old('url') }}" >
+                      @error('url')
+                      <div class="mt-2">
+                       <strong class="text-danger mt-2">
+                         {{ $message }}
+                     </strong>
+                      </div>
+               @enderror
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="validationCustom3">آدرس صفحه خارجی</label>
-                      <input type="text" value="" placeholder="https://lahijan.ir" class="form-control" id="validationCustom3" >
+                      <input type="text" value="" placeholder="https://lahijan.ir" class="form-control text-right" id="validationCustom3" >
                     </div>
                   </div> <!-- /.form-row -->
                 <!-- /.form-row -->
@@ -51,6 +65,13 @@
                         <option value="0" @if(old('status') == 0) selected @endif>غیرفعال</option>
                         <option value="1" @if(old('status') == 1) selected @endif>فعال</option>
                         </optgroup>
+                        @error('alt')
+                         <div class="mt-2">
+                          <strong class="text-danger mt-2">
+                            {{ $message }}
+                        </strong>
+                         </div>
+                  @enderror
                       </select>
                       <div class="form-group mt-3">
                         <label for="customFile">تصویر شاخص را انتخاب کنید</label>
@@ -58,6 +79,13 @@
                           <input type="file" name="image" class=" form-control custom-focus" id="customFile">
                            <label class="custom-file-label" for="customFile">choose file</label>
                         </div>
+                        @error('image')
+                        <div class="mt-2">
+                         <strong class="text-danger mt-2">
+                           {{ $message }}
+                       </strong>
+                        </div>
+                 @enderror
                       </div>
                     </div>
                       <div class="col-md-6 mb-3">
@@ -76,6 +104,7 @@
               </div> <!-- /.card-body -->
             </div> <!-- /.card -->
           </div>
+
         </div> <!-- /. end-section -->
       </div>
     </div> <!-- .row -->

@@ -25,7 +25,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // slider routes  
 
         Route::resource('sliders', SliderController::class)->except('show');
-        Route::get('sliders/{slider}/status', [BannerController::class, 'status'])->name('sliders.status');
+        Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
 
         
     });
