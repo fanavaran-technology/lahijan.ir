@@ -41,9 +41,9 @@
                          </div>
                   @enderror
                     </div>
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom3">آدرس صفحه داخلی</label>
-                      <input type="text" name="url" placeholder="https://lahijan.ir"  class="form-control text-right" id="validationCustom3" value="{{ old('url' , $slider->url) }}">
+                    <div class="col-md-12 mb-3">
+                      <label for="validationCustom3">URL</label>
+                      <input type="text" name="url"  value="https://lahijan.ir"  class="form-control direction-ltr" id="validationCustom3" value="{{ old('url') }}" >
                       @error('url')
                       <div class="mt-2">
                        <strong class="text-danger mt-2">
@@ -51,11 +51,7 @@
                      </strong>
                       </div>
                @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label for="validationCustom3">آدرس صفحه خارجی</label>
-                      <input type="text" value="" placeholder="https://lahijan.ir" class="form-control" id="validationCustom3" >
-                    </div>
+                    </div>                  
                   </div> <!-- /.form-row -->
                 <!-- /.form-row -->
                   <div class="form-row">
@@ -76,8 +72,8 @@
                       <div class="form-group mt-3">
                         <label for="customFile">تصویر شاخص را انتخاب کنید</label>
                         <div class="custom-file">
-                          <input type="file" name="image" class=" form-control custom-focus" id="customFile">
-                           <label class="custom-file-label" for="customFile">choose file</label>
+                          <input type="file" name="image"  class="custom-file-label form-control custom-focus" id="customFile">
+                           <label class="custom-file-label" for="customFile"></label>
                         </div>
                         @error('image')
                          <div class="mt-2">
@@ -92,8 +88,8 @@
                       <div class="col-md-6 mb-3">
                         <label for="date-input1">تاریخ انتشار</label>
                         <div class="input-group">
-                          <input type="text" name="published_at" id="published_at" class="form-control  d-none" value="{{ old('published_at' , $slider->published_at) }}">
-                          <input type="text"  id="published_at_view" class="form-control rounded">
+                          <input type="hidden" name="published_at" id="published_at" value="{{ $slider->published_at }}">
+                          <input id="published_at_view" class="form-control custom-focus" value="{{ $slider->published_at }}">
                           <div class="input-group-append">
                             <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16 mx-2"></span></div>
                           </div>

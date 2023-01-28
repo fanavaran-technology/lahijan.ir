@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Content;
 
 use Illuminate\Http\Request;
 use App\Models\Content\Slider;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
@@ -41,22 +42,19 @@ class SliderController extends Controller
     public function store(SliderRequest $request , ImageService $imageService)
     {
         $inputs = $request->all();
-    
         
-        $realTimestampStart = substr($request->published_at ,0 ,10);
-        $inputs['published_at'] = date("Y-m-d H:i:s" , (int) $realTimestampStart);
+        $publishedAt = substr($inputs['published_at'], 0, -3);
+            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
-        if ($request->hasFile('image')) {
-            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'slider');
-            $result = $imageService->save($request->file('image'));
-            if ($result === false) {
-                return redirect()->route('admin.content.sliders.index');
+            // save image
+            if ($request->hasFile('image')) {
+                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "slider");
+                $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
             }
-            $inputs['image'] = $result;
-        }
 
         $slider = Slider::create($inputs);
-        return to_route("admin.content.sliders.index");
+
+        return to_route('admin.content.sliders.index')->with('toast-success' , 'اسلایدر جدید اضافه شد');
     }
 
 
@@ -83,30 +81,21 @@ class SliderController extends Controller
 
         $inputs = $request->all();
 
-        $realTimestampStart = substr($request->published_at ,0 ,10);
-        $inputs['published_at'] = date("Y-m-d H:i:s" , (int) $realTimestampStart);
+        // set published at
+        $publishedAt = substr($inputs['published_at'], 0, -3);
+        $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
+        // save image
         if ($request->hasFile('image')) {
-            if (!empty($banner->image)) {
-                $imageService->deleteImage($banner->image);
-            }
-            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'banner');
-            $result = $imageService->save($request->file('image'));
-
-            if ($result === false) {
-                return redirect()->route('admin.content.slider.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
-            }
-            $inputs['image'] = $result;
-        } else {
-            if (isset($inputs['currentImage']) && !empty($banner->image)) {
-                $image = $banner->image;
-                $image['currentImage'] = $inputs['currentImage'];
-                $inputs['image'] = $image;
-            }
+            if (!empty($news->image['directory']))
+                $imageService->deleteDirectoryAndFiles($news->image['directory']);
+                
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "slider");
+            $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
         }
 
         $slider->update($inputs);
-        return to_route("admin.content.sliders.index");
+        return to_route('admin.content.sliders.index')->with('toast-success' , 'تغییرات روی اسلایدر اعمال شد.');
     }
 
     /**
@@ -118,21 +107,22 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         $result = $slider->delete();
-        return to_route("admin.content.sliders.index");
+        return back()->with('toast-success', 'اسلایدر حذف گردید.');
+
     }
 
-    public function status(Slider $slider)
+    public function is_draft(Slider $slider)
     {
-        $slider->status = $slider->status == 0 ? 1 : 0;
+        $slider->is_draft = $slider->is_draft == 0 ? 1 : 0;
         $result = $slider->save();
         if ($result) {
-            if ($slider->status == 0) {
-                return response()->json(['status' => true, 'checked' => false]);
+            if ($slider->is_draft == 0) {
+                return response()->json(['is_draft' => true, 'checked' => false]);
             } else {
-                return response()->json(['status' => true, 'checked' => true]);
+                return response()->json(['is_draft' => true, 'checked' => true]);
             }
         } else {
-            return response()->json(['status' => false]);
+            return response()->json(['is_draft' => false]);
         }
     }
 }

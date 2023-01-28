@@ -26,16 +26,14 @@ class SliderRequest extends FormRequest
         if($this->isMethod('post')){
             return [    
                 'alt' => 'required|max:120|min:2',
-                'url' => 'max:500|min:5',
-                'status' => 'required|numeric|in:0,1',
+                'url' => 'nullable|max:500|',
                 'image' => 'required|image|mimes:png,jpg,jpeg,gif',
             ];
             }
             else{
                 return [
                     'alt' => 'required|max:120|min:2',
-                    'url' => 'max:500|min:5',
-                    'status' => 'required|numeric|in:0,1',
+                    'url' => 'max:500',
                     'image' => 'image|mimes:png,jpg,jpeg,gif',
                 ];
             }

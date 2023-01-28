@@ -16,7 +16,7 @@ class Slider extends Model
         'alt' ,
         'image' ,
         'url' , 
-        'status',
+        'is_draft',
         'published_at'
     ];
 
