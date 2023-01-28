@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                       <label for="validationCustom3">URL</label>
-                      <input type="text" name="url"  value="https://lahijan.ir"  class="form-control direction-ltr " id="validationCustom3" value="{{ old('url') }}" >
+                      <input type="text" name="url"  value="{{ old('url' , request('url') ?? URL::to('/')) }}"  class="form-control direction-ltr " id="validationCustom3" value="{{ old('url') }}" >
                      
                     </div>
                     

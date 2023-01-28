@@ -29,6 +29,8 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::resource('sliders', SliderController::class)->except('show');
         Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
 
+        // Route::get('sliders', [SliderController::class, 'setUrlAttribiute'])->name('sliders.setUrlAttribiute');
+
         
     });
 });

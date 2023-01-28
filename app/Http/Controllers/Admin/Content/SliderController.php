@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
+use Illuminate\Support\Facades\URL;
 
 class SliderController extends Controller
 {
@@ -18,7 +19,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-   
+        return $this->setUrlAttribiute();
+
         $sliders = Slider::latest()->paginate(15);
         return view('admin.content.slider.index' , compact('sliders'));
     }
@@ -124,5 +126,11 @@ class SliderController extends Controller
         } else {
             return response()->json(['is_draft' => false]);
         }
+    }
+
+    public function setUrlAttribiute()
+    {
+        $url = URL::to('/');
+        dd($url);
     }
 }

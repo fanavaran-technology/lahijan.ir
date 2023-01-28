@@ -20,5 +20,7 @@ class Slider extends Model
         'published_at'
     ];
 
+   
+
     
 }
