@@ -19,8 +19,6 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return $this->setUrlAttribiute();
-
         $sliders = Slider::latest()->paginate(15);
         return view('admin.content.slider.index' , compact('sliders'));
     }
@@ -126,11 +124,5 @@ class SliderController extends Controller
         } else {
             return response()->json(['is_draft' => false]);
         }
-    }
-
-    public function setUrlAttribiute()
-    {
-        $url = URL::to('/');
-        dd($url);
     }
 }
