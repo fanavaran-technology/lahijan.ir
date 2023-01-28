@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Content\PlaceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\SliderController;
@@ -24,12 +25,11 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
         // news routes
         Route::resource('news', NewsController::class)->except('show');
+        Route::resource('places', PlaceController::class)->except('show');
         // slider routes  
 
         Route::resource('sliders', SliderController::class)->except('show');
         Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
-
-
         
     });
 });
