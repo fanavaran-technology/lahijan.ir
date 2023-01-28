@@ -230,6 +230,7 @@ return [
         'phone_number'    =>   'شماره تلفن',
         'is_quick_access' =>   'دسترسی سریع',
         'icon'            =>   'آیکن',
-        'is_fire_station' =>   'خبر آتش نشانی'
+        'is_fire_station' =>   'خبر آتش نشانی',
+        'location'        =>   'موقعیت مکانی',
     ],
 ];

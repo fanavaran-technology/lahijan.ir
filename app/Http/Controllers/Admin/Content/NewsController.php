@@ -109,8 +109,11 @@ class NewsController extends Controller
                 $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
             }
     
-            # update check inputs
-    
+            // update check inputs
+            $inputs['is_draft'] = $inputs['is_draft'] ?? 0; 
+            $inputs['is_pined'] = $inputs['is_pined'] ?? 0; 
+            $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0; 
+
             $news->update($inputs);
 
             // add tags 
