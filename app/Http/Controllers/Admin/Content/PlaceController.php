@@ -102,8 +102,9 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Place $place)
     {
-        //
+        $place->delete();
+        return back()->with('toast-success', 'مکان گردشگری حذف گردید.');
     }
 }
