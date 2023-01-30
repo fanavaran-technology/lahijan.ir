@@ -82,7 +82,7 @@
                         </strong>
                          </div>
                   @enderror
-                  <img src="{{ asset($slider->image['indexArray']['small']) }}" class="mt-2" alt="">
+                  <img src="{{ asset($slider->image) }}" class="mt-2" alt="">
                       </div>
                     </div>
                       <div class="col-md-6 mb-3">

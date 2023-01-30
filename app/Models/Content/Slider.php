@@ -5,13 +5,11 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Url;
 
 class Slider extends Model
 {
     use HasFactory , SoftDeletes;
-
-    protected $casts = ['image' => 'array'];
-
     protected $fillable = [
         'alt' ,
         'image' ,
@@ -20,6 +18,12 @@ class Slider extends Model
         'published_at'
     ];
 
+
+    public function setUrlAttribute($url)
+    {
+        str_contains($url, URL::to('/')) ? 
+            $this->attributes['url'] = str_replace(URL::to('/'), '', $url) : $this->attributes['url'] = $url;
+    }
    
 
     

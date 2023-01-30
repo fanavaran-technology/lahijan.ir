@@ -50,7 +50,7 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <img src="{{ asset($slider->image['indexArray'][$slider->image['currentImage']] ) }}" alt="" width="100" height="50">
+                                        <img src="{{ asset($slider->image ) }}" alt="" width="100" height="50">
                                     </td>
                                     <td>
                                         <a href="#" class="text-decoration-none text-info mr-3">
@@ -90,9 +90,9 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
 <script type="text/javascript">
-
     function changeStatus(id){
         var element = $("#" + id)
         var url = element.attr('data-url')
@@ -105,11 +105,11 @@
                 if(response.is_draft){
                     if(response.checked){
                         element.prop('checked', true);
-                        successToast('بنر  با موفقیت فعال شد')
+                        successToast('اسلایدر  با موفقیت فعال شد')
                     }
                     else{
                         element.prop('checked', false);
-                        successToast('بنر  با موفقیت غیر فعال شد')
+                        successToast('اسلایدر  با موفقیت غیر فعال شد')
                     }
                 }
                 else{
@@ -122,44 +122,9 @@
                 errorToast('ارتباط برقرار نشد')
             }
         });
-
-        function successToast(message){
-
-            var successToastTag = '<section class="toast" data-delay="5000">\n' +
-                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
-                    '<strong class="ml-auto">' + message + '</strong>\n' +
-                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
-                        '<span aria-hidden="true">&times;</span>\n' +
-                        '</button>\n' +
-                        '</section>\n' +
-                        '</section>';
-
-                        $('.toast-wrapper').append(successToastTag);
-                        $('.toast').toast('show').delay(5500).queue(function() {
-                            $(this).remove();
-                        })
-        }
-
-        function errorToast(message){
-
-            var errorToastTag = '<section class="toast" data-delay="5000">\n' +
-                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
-                    '<strong class="ml-auto">' + message + '</strong>\n' +
-                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
-                        '<span aria-hidden="true">&times;</span>\n' +
-                        '</button>\n' +
-                        '</section>\n' +
-                        '</section>';
-
-                        $('.toast-wrapper').append(errorToastTag);
-                        $('.toast').toast('show').delay(5500).queue(function() {
-                            $(this).remove();
-                        })
-        }
     }
 </script>
 
-{{-- @include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete']) --}}
-
+@include('admin.alerts.confirm')
 
 @endsection

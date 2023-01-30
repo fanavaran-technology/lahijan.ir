@@ -41,18 +41,21 @@ class SliderController extends Controller
      */
     public function store(SliderRequest $request , ImageService $imageService)
     {
-        $inputs = $request->all();
-        
-        $publishedAt = substr($inputs['published_at'], 0, -3);
-            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
+        DB::transaction(function () use($request , $imageService) {
+            $inputs = $request->all();
+            
+            $publishedAt = substr($inputs['published_at'], 0, -3);
+                $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
             // save image
             if ($request->hasFile('image')) {
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "slider");
-                $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
+                $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-        $slider = Slider::create($inputs);
+            $slider = Slider::create($inputs);
+        });
+
 
         return to_route('admin.content.sliders.index')->with('toast-success' , 'اسلایدر جدید اضافه شد');
     }
@@ -79,22 +82,25 @@ class SliderController extends Controller
     public function update(SliderRequest $request, Slider $slider, ImageService $imageService)
     {
 
-        $inputs = $request->all();
+        DB::transaction(function () use($request , $slider ,$imageService) {
+            $inputs = $request->all();
 
-        // set published at
-        $publishedAt = substr($inputs['published_at'], 0, -3);
-        $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
+            // set published at
+            $publishedAt = substr($inputs['published_at'], 0, -3);
+            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
-        // save image
-        if ($request->hasFile('image')) {
-            if (!empty($news->image['directory']))
-                $imageService->deleteDirectoryAndFiles($news->image['directory']);
-                
-            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "slider");
-            $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
-        }
+            // save image
+            if ($request->hasFile('image')) {
+                if (!empty($news->image))
+                    $imageService->deleteImage($slider->image);
 
-        $slider->update($inputs);
+                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "sliders");
+                $inputs['image'] = $imageService->save($inputs['image']);
+            }
+
+            $slider->update($inputs);
+        });
+
         return to_route('admin.content.sliders.index')->with('toast-success' , 'تغییرات روی اسلایدر اعمال شد.');
     }
 
