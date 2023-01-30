@@ -58,17 +58,20 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a href="#article" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-            <i class="fe fe-book fe-16"></i>
-            <span class="ml-3 item-text">مقالات</span>
+          <a href="#public-call" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check" viewBox="0 0 16 16">
+              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z"/>
+              <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+            </svg>
+            <span class="ml-3 item-text">فراخوان های عمومی</span>
           </a>
-          <ul class="collapse list-unstyled pl-4 w-100" id="article">
+          <ul class="collapse list-unstyled pl-4 w-100" id="public-call">
             <li class="nav-item">
-              <a class="nav-link pl-3" href="./all-article.html"><span class="ml-1 item-text">همه مقالات </span>
+              <a class="nav-link pl-3" href="{{ route('admin.content.public-calls.index') }}"><span class="ml-1 item-text">همه فراخوان ها </span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link pl-3" href="./create-article.html"><span class="ml-1 item-text">مقاله جدید</span></a>
+              <a class="nav-link pl-3" href="{{ route('admin.content.public-calls.create') }}"><span class="ml-1 item-text">فراخوان جدید</span></a>
             </li>
           </ul>
         </li>

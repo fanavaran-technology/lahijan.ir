@@ -7,9 +7,7 @@ use App\Http\Requests\Admin\Content\NewsRequest;
 use App\Http\Services\Image\ImageService;
 use App\Models\Content\News;
 use App\Models\Content\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -48,9 +46,6 @@ class NewsController extends Controller
             // temporarily
             // TODO
             $inputs['user_id'] = 1;
-
-            $publishedAt = substr($inputs['published_at'], 0, -3);
-            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
             // save image
             if ($request->hasFile('image')) {
@@ -95,10 +90,6 @@ class NewsController extends Controller
     {
         DB::transaction(function () use($request , $news , $imageService) {
             $inputs = $request->all();
-
-            // set published at
-            $publishedAt = substr($inputs['published_at'], 0, -3);
-            $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
             // save image
             if ($request->hasFile('image')) {

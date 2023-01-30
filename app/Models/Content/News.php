@@ -37,6 +37,13 @@ class News extends Model
         ];
     }
 
+    // set data before store to database
+    public function setPublishedAtAttribute($published_at)
+    {
+        $correctPublishedAt = substr($published_at , 0, -3);
+        $this->attributes['published_at'] = date('Y-m-d H:i:s', $correctPublishedAt);
+    }
+
     // relations
     public function user()
     {

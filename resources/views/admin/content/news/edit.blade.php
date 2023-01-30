@@ -1,4 +1,4 @@
-@extends('admin.layouts.app' , ['title' => 'نوشتن خبری جدید'])
+@extends('admin.layouts.app' , ['title' => 'ویرایش خبر'])
 
 @section('head-tag')
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css')}}">
@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between">
-    <h2 class="h3 mb-0 section-heading">افزودن خبر جدید</h2>
+    <h2 class="h3 mb-0 section-heading">ویرایش خبر</h2>
   </div>
   @if ($errors->any())
   <div class="alert alert-danger d-flex flex-column" role="alert">
