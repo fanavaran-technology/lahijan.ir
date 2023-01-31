@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
-use Illuminate\Support\Facades\URL;
 
 class SliderController extends Controller
 {

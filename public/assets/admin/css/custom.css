@@ -131,6 +131,14 @@ button{
     cursor: pointer;
 }
 
+.url {
+    direction: ltr;
+}
+
+.form-control::placeholder{
+    text-align: right !important;
+}
+
 /* customize tagify */
 .tagify--outside{
     border: 0;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
         // news routes
         Route::resource('news', NewsController::class)->except('show');
+        
         // place routes
         Route::resource('places', PlaceController::class)->except('show');
         
+        // menu routes
+        Route::resource('menus', MenuController::class)->except('show');
+
         // public call routes
         Route::resource('public-calls', PublicCallController::class)->except('show');
         
