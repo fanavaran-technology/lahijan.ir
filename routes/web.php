@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\Content\MenuController;
-use App\Http\Controllers\Admin\Content\PlaceController;
-use App\Http\Controllers\Admin\Content\PublicCallController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
+use App\Http\Controllers\Admin\Content\PageController;
+use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\SliderController;
+use App\Http\Controllers\Admin\Content\PublicCallController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // slider routes  
         Route::resource('sliders', SliderController::class)->except('show');
         Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
+
+        // page routes  
+        Route::resource('pages', PageController::class)->except('show');
+        Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
+        Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
+
+
         
     });
 });

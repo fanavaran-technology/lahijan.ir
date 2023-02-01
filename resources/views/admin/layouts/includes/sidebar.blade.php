@@ -140,6 +140,22 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a href="#page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <i class="fe fe-layers
+          fe-16"></i>
+            <span class="ml-3 item-text">صفحه ها</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="page">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.pages.index') }}"><span class="ml-1 item-text">همه صفحات </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.pages.create') }}"><span class="ml-1 item-text">صفحه جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a href="./setting.html" data-toggle="collapse" aria-expanded="false" class="nav-link">
             <i class="fe fe-settings fe-16"></i>
             <span class="ml-3 item-text">تنظیمات</span>
