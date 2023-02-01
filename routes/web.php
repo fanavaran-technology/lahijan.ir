@@ -18,10 +18,12 @@ use App\Http\Controllers\Admin\Content\SliderController;
 |
 */
 
+require __DIR__.'/auth.php';
+
 // admin routes
-Route::prefix('admin')->as('admin.')->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group(function () {
     
-    Route::get('/', fn() => view('admin.index'));
+    Route::get('/', fn() => view('admin.index'))->name('index');
 
     Route::prefix('content')->as('content.')->group(function () {
 
@@ -43,3 +45,4 @@ Route::prefix('admin')->as('admin.')->group(function () {
         
     });
 });
+

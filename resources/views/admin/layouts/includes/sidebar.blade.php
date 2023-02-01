@@ -11,7 +11,7 @@
       </div>
       <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item ">
-          <a href="./index.html"  aria-expanded="false" class=" nav-link">
+          <a href="{{ route('admin.index') }}"  aria-expanded="false" class=" nav-link">
             <i class="fe fe-home fe-16"></i>
             <span class="ml-3 item-text">داشبورد</span><span class="sr-only">(current)</span>
           </a>

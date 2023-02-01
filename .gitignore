@@ -3,6 +3,8 @@
 /public/hot
 /public/storage
 /public/images
+/config/filesystems.php
+/config/lfm.php
 /storage/*.key
 /vendor
 .env
