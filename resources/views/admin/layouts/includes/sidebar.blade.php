@@ -145,6 +145,58 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+<<<<<<< HEAD
+=======
+          <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <i class="fe fe-users fe-16"></i>
+            <span class="ml-3 item-text">کاربران</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="users">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="./all-user.html"><span class="ml-1 item-text">همه کاربران </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="#"><span class="ml-1 item-text">کاربر جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#slider" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <i class="fe fe-layers
+          fe-16"></i>
+            <span class="ml-3 item-text">اسلایدر</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="slider">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.sliders.index') }}"><span class="ml-1 item-text">همه اسلایدر </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.sliders.create') }}"><span class="ml-1 item-text">اسلایدر جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
+              <path d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V5.5zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
+              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+            </svg>
+            <span class="ml-3 item-text">صفحه ها</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="page">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.pages.index') }}"><span class="ml-1 item-text">همه صفحات </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.content.pages.create') }}"><span class="ml-1 item-text">صفحه جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+>>>>>>> 4ec2b06a8db467ee81ac5a6e75971bc84b9c7924
           <a href="./setting.html" data-toggle="collapse" aria-expanded="false" class="nav-link">
             <i class="fe fe-settings fe-16"></i>
             <span class="ml-3 item-text">تنظیمات</span>

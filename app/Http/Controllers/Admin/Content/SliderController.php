@@ -111,8 +111,7 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
-        $result = $slider->delete();
-        return back()->with('toast-success', 'اسلایدر حذف گردید.');
+        
 
     }
 

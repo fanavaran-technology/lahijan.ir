@@ -1,12 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\MenuController;
+use App\Http\Controllers\Admin\Content\NewsController;
+use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PlaceController;
+use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\SliderController;
-use App\Http\Controllers\Admin\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +37,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         
         // place routes
         Route::resource('places', PlaceController::class)->except('show');
+        Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
+        Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');
+        Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');
         
         // menu routes
         Route::resource('menus', MenuController::class)->except('show');
@@ -44,6 +50,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         // slider routes  
         Route::resource('sliders', SliderController::class)->except('show');
         Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
+
+        // page routes  
+        Route::resource('pages', PageController::class)->except('show');
+        Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
+        Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
         
     });
 

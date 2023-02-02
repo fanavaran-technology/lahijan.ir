@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Content\PlaceRequest;
-use App\Http\Services\Image\ImageService;
-use App\Models\Content\Place;
 use Illuminate\Http\Request;
+use App\Models\Content\Place;
+use App\Models\Content\Gallery;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\Content\PlaceRequest;
+use App\Http\Requests\Admin\Content\PlacesGalleryRequest;
 
 class PlaceController extends Controller
 {
@@ -106,5 +108,33 @@ class PlaceController extends Controller
     {
         $place->delete();
         return back()->with('toast-success', 'مکان گردشگری حذف گردید.');
+    }
+
+    public function indexGallery(Place $place)
+    {
+        // $places = Gallery::orderBy('created_at', 'desc')->where('gallerizable_type', 'App\Models\Content\Place')->simplePaginate(15);
+        return view("admin.content.place.gallery.index", compact('place'));
+    }
+
+    public function createGallery(PlacesGalleryRequest $request,Place $place , ImageService $imageService)
+    {
+        $inputs = $request->all();
+
+
+        if ($request->hasFile('image')) {
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places-gallery");
+            $inputs['image'] = $imageService->save($inputs['image']);
+        }
+      
+        $place->gallerizable()->create($inputs);
+        return to_route("admin.content.places.index-gallery", $place->id)->with('cute-success', 'تصویر جدید اضافه شد.');
+    }
+
+  
+
+    public function destroyGallery(Gallery $gallery)
+    {
+        $gallery->delete();
+        return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 }
