@@ -30,24 +30,26 @@
                                     </tr>
                                 </thead>
                                 @forelse($pages as $page)  
-                                <tr>
+                                <tr class="flex item-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <small>{{ $page->title }}</small>
                                     </td>
                                     <td>
-                                        <label>
-                                            <input id="{{ $page->id }}" onchange="changeStatus({{ $page->id }})" data-url="{{ route('admin.content.pages.is_draft', $page->id) }}" type="checkbox" @if ($page->is_draft === 1)
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" id="{{ $page->id }}" onchange="changeStatus({{ $page->id }})" data-url="{{ route('admin.content.pages.is_draft', $page->id) }}" type="checkbox" @if ($page->is_draft === 1)
                                             checked
                                             @endif>
-                                        </label>
+                                            <label class="custom-control-label" for="{{ $page->id }}"></label>
+                                        </div>
                                     </td>
                                     <td>
-                                        <label>
-                                            <input id="{{ $page->id }}-access" onchange="changeStatus1({{ $page->id }})" data-url="{{ route('admin.content.pages.is_quick_access', $page->id) }}" type="checkbox" @if ($page->is_quick_access === 1)
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" id="{{ $page->id }}-access" onchange="changeStatus1({{ $page->id }})" data-url="{{ route('admin.content.pages.is_quick_access', $page->id) }}" type="checkbox" @if ($page->is_quick_access === 1)
                                             checked
                                             @endif>
-                                        </label>
+                                            <label class="custom-control-label" for="{{ $page->id }}-access"></label>
+                                        </div>
                                     </td>
                                     
                                     <td>

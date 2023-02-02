@@ -31,6 +31,9 @@ Route::prefix('admin')->as('admin.')->group(function () {
         
         // place routes
         Route::resource('places', PlaceController::class)->except('show');
+        Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
+        Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');
+        Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');
         
         // menu routes
         Route::resource('menus', MenuController::class)->except('show');

@@ -76,6 +76,8 @@
                             <label class="custom-control-label input-title" for="is_draft">این صفحه فعال باشد</label>
                         </div>
 
+                       
+
                         <div class="form-group mt-2 custom-control custom-checkbox ">
                             <input type="checkbox" name="is_quick_access" value="1" @checked(old('is_quick_access' , $page->is_quick_access))
                                 class="custom-control-input" id="is_quick_access">

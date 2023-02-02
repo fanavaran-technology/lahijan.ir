@@ -2,10 +2,11 @@
 
 namespace App\Models\Content;
 
-use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Content\Gallery;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Place extends Model
 {
@@ -24,12 +25,17 @@ class Place extends Model
         'image' => 'array' ,
     ];
     
-    public function sluggable(): array
+public function sluggable(): array
     {
         return [
             'slug' => [
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function gallerizable()
+    {
+        return $this->morphMany(Gallery::class, 'gallerizable');
     }
 }

@@ -31,6 +31,7 @@
                                     <th>#</th>
                                     <th>عناوین</th>
                                     <th>وضعیت نمایش</th>
+                                    <th>گالری تصاویر</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,11 @@
                                                 class="custom-control-input item-success align-items-center" id="place-{{ $place->id }}-status">
                                             <label class="custom-control-label align-items-center" for="place-{{ $place->id }}-status"></label>
                                         </div>
+                                    </td>
+                                    <td>
+                                       <a href="{{ route('admin.content.places.index-gallery' , $place->id) }}">
+                                         تصاویر مکان های گردشگری
+                                    </a>
                                     </td>
                                     <td>
                                         <a href="#" class="text-decoration-none text-info mr-3">
