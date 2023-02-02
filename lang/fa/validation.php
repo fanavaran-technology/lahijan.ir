@@ -232,5 +232,8 @@ return [
         'icon'            =>   'آیکن',
         'is_fire_station' =>   'خبر آتش نشانی',
         'location'        =>   'موقعیت مکانی',
+        'full_name'       =>   'اسم کاربر',
+        'profile_photo'   =>   'تصویر کاربر',
+        'is_block'        =>   'مسدود شدن کاربر',
     ],
 ];

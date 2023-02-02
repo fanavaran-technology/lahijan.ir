@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Content\PublicCallController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\SliderController;
+use App\Http\Controllers\Admin\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     
     Route::get('/', fn() => view('admin.index'))->name('index');
 
+    // content module routes
     Route::prefix('content')->as('content.')->group(function () {
 
         // news routes
@@ -44,5 +46,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
         
     });
+
+    // user module routes
+    Route::prefix('user')->as('user.')->group(function () {
+        Route::resource('users', UserController::class)->except('show');
+        Route::post('change-password/{user}', [UserController::class, 'changePassword'])->name('change-password')->middleware('password.confirm');
+    });
+
 });
 

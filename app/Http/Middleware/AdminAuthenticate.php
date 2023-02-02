@@ -18,7 +18,7 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->is_admin)
+        if ($request->user()->is_admin || $request->user()->is_staff)
             return $next($request);
 
         return redirect(RouteServiceProvider::HOME);

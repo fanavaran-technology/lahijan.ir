@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -20,9 +21,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'full_name' ,
+        'username' ,
+        'password', 
+        'email' ,
+        'mobile' ,
+        'profile_photo' ,
+        'email_verified_at',
+        'mobile_verified_at' ,
+        'is_staff' ,
+        'is_block' 
     ];
 
     /**
@@ -43,6 +51,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // set data before store to database
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function setEmailVerifiedAtAttribute($verified_at)
+    {
+        $this->attributes['email_verified_at'] = date("Y-m-d H:i:s", time());
+    }
+
+    public function setMobileVerifiedAtAttribute($verified_at)
+    {
+        $this->attributes['mobile_verified_at'] = date("Y-m-d H:i:s", time());
+    }
+
 
     // relations
     public function news()
