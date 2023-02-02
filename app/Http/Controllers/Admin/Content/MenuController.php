@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\MenuRequest;
 use App\Models\Content\Menu;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MenuController extends Controller
 {
@@ -15,7 +16,7 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $menus = Menu::latest()->paginate(15);
         return view('admin.content.menu.index', compact('menus'));
@@ -26,7 +27,7 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $parentMenus = Menu::whereNull('parent_id')->get();
         return view('admin.content.menu.create' , compact('parentMenus'));
@@ -38,7 +39,7 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MenuRequest $request)
+    public function store(MenuRequest $request): RedirectResponse
     {
         $inputs = $request->all();
 
@@ -53,7 +54,7 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit(Menu $menu): View
     {
         $parentMenus = Menu::whereNull('parent_id')->get()->except($menu->id);
         return view('admin.content.menu.edit', compact('menu', 'parentMenus'));
@@ -66,7 +67,7 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MenuRequest $request, Menu $menu)
+    public function update(MenuRequest $request, Menu $menu): RedirectResponse
     {
         DB::transaction(function () use ($request, $menu) {
 
@@ -86,7 +87,7 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(Menu $menu) : RedirectResponse
     {
         if ($menu->childrens->isNotEmpty())
             return to_route('admin.content.menus.index')->with('toast-error' , 'این منو شامل زیر منو می باشد.');

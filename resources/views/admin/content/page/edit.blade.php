@@ -34,7 +34,11 @@
                                 <input type="text" name="title" value="{{ old('title' , $page->title) }}" onkeyup="copyToSlug(this)"
                                     placeholder="عنوان را اینجا وارد کنید"
                                     class="form-control custom-input-size custom-focus" id="title">
-                            </div>                 
+                            </div>       
+                            <div class="col-12 slug d-flex">
+                                <span>https://lahijan.ir/pages/</span>
+                                <span class="slug-box"></span>
+                            </div>          
                             <div class="form-group col-md-12 my-2">
                                 <textarea name="body" id="editor">{{ old('body' , $page->body) }}</textarea>
                             </div>

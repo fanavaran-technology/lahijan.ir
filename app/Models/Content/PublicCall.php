@@ -12,6 +12,17 @@ class PublicCall extends Model
 {
     use HasFactory , SoftDeletes , Sluggable;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'published_at',
+        'event_date',
+        'image',
+        'slug',
+        'status',
+        'user_id',
+    ];
+
     public function sluggable(): array
     {
         return [
@@ -20,18 +31,6 @@ class PublicCall extends Model
             ]
         ];
     }
-
-    protected $fillable = [
-        'title',
-        'description',
-        'published_at',
-        'event_date',
-        'image',
-        'status',
-        'slug',
-        'user_id',
-    ];
-
 
     // set data before store to database
     public function setPublishedAtAttribute($published_at)

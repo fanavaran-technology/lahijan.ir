@@ -7,9 +7,7 @@ use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Content\NewsController;
-use App\Http\Controllers\Admin\Content\SliderController;
+use App\Http\Controllers\Admin\User\UserController;
 
 /*
 |--------------------------------------------------------------------------

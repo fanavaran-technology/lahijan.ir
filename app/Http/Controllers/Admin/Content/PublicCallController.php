@@ -8,6 +8,8 @@ use App\Http\Services\Image\ImageService;
 use App\Models\Content\PublicCall;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PublicCallController extends Controller
 {
@@ -16,7 +18,7 @@ class PublicCallController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $publicCalls = PublicCall::latest()->paginate(15);
         return view('admin.content.public-call.index' , compact('publicCalls'));
@@ -27,7 +29,7 @@ class PublicCallController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.public-call.create');
     }
@@ -38,14 +40,10 @@ class PublicCallController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PublicCallRequest $request , ImageService $imageService)
+    public function store(PublicCallRequest $request , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
-            
-            // temporarily
-            // TODO
-            $inputs['user_id'] = 1;
 
             // save image
             if ($request->hasFile('image')) {
@@ -53,7 +51,7 @@ class PublicCallController extends Controller
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-            $publicCall = PublicCall::create($inputs);
+            $publicCall = $request->user()->publicCalls()->create($inputs);
 
             // add tags
             if ($request->filled('tags')) {
@@ -72,7 +70,7 @@ class PublicCallController extends Controller
      * @param  \App\Models\Content\PublicCall  $publicCall
      * @return \Illuminate\Http\Response
      */
-    public function edit(PublicCall $publicCall)
+    public function edit(PublicCall $publicCall): View
     {
         return view('admin.content.public-call.edit', compact('publicCall'));
     }
@@ -84,7 +82,7 @@ class PublicCallController extends Controller
      * @param  \App\Models\Content\PublicCall  $publicCall
      * @return \Illuminate\Http\Response
      */
-    public function update(PublicCallRequest $request, PublicCall $publicCall , ImageService $imageService)
+    public function update(PublicCallRequest $request, PublicCall $publicCall , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use($request , $publicCall , $imageService) {
             $inputs = $request->all();
@@ -113,7 +111,7 @@ class PublicCallController extends Controller
      * @param  \App\Models\Content\PublicCall  $publicCall
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PublicCall $publicCall)
+    public function destroy(PublicCall $publicCall): RedirectResponse
     {
         $publicCall->delete();
 
