@@ -59,7 +59,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // user module routes
     Route::prefix('user')->as('user.')->group(function () {
         Route::resource('users', UserController::class)->except('show');
-        Route::post('change-password/{user}', [UserController::class, 'changePassword'])->name('change-password')->middleware('password.confirm');
+        Route::post('change-password/{user}', [UserController::class, 'changePassword'])->name('change-password');
     });
 
 });

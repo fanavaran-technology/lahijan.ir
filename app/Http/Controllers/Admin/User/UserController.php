@@ -15,6 +15,11 @@ use Illuminate\Validation\Rules;
 class UserController extends Controller
 {
 
+    public function __construct() 
+    {   
+        $this->middleware('password.confirm')->except('index' , 'create' , 'store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -97,7 +102,12 @@ class UserController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
-        
+        if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
+            return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
+        }
+
+        $user->delete();
+        return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
     }
 
     // change password
