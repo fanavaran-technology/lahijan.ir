@@ -16,7 +16,8 @@
             @endforeach
         </div>
     @endif
-    <form action="{{ route('admin.user.users.update' , $user->id) }}" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{ route('admin.user.users.update', $user->id) }}" method="post" enctype="multipart/form-data"
+        id="form">
         @csrf
         @method('PUT')
         <div class="row">
@@ -97,25 +98,36 @@
                             </span>
                         </div>
                     </div>
+                    @php
+                        $userRoles = $user->roles->pluck('id')->toArray();
+                    @endphp
                     <div class="card-body">
                         <div class="mr-3 font-weight-bold text-muted">انتخاب نقش</div>
                         <div class="d-flex flex-wrap mt-2">
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1" class="custom-control-input">
-                                <label class="custom-control-label input-title"> مدیر</label>
-                            </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1" class="custom-control-input">
-                                <label class="custom-control-label input-title">مدیریت محتوا</label>
-                            </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1" class="custom-control-input">
-                                <label class="custom-control-label input-title">شفاف سازی</label>
-                            </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1" class="custom-control-input">
-                                <label class="custom-control-label input-title">مدیریت کاربران</label>
-                            </div>
+                            @foreach ($roles as $key => $role)
+                                <div class="form-group mt-2 custom-control custom-checkbox mr-4">
+                                    <input type="checkbox" name="roles[]" @checked(in_array($role->id, old('roles', $userRoles) ?? []))
+                                        value="{{ $role->id }}" class="custom-control-input"
+                                        id="{{ $role->id }}">
+                                    <label class="custom-control-label input-title" for="{{ $role->id }}">
+                                        {{ $role->title }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @php
+                        $userPermissions = $user->permissions->pluck('id')->toArray();
+                        @endphp
+                        <div class="mr-3 font-weight-bold text-muted">انتخاب دسترسی</div>
+                        <div class="d-flex flex-wrap mt-2">
+                            @foreach ($permissions as $key => $permission)
+                                <div class="form-group mt-2 custom-control custom-checkbox mr-4">
+                                    <input type="checkbox" name="permissions[]" @checked(in_array($permission->id, old('permissions', $userRoles) ?? []))
+                                        value="{{ $permission->id }}" class="custom-control-input"
+                                        id="{{ $permission->key }}">
+                                    <label class="custom-control-label input-title" for="{{ $permission->key }}">
+                                        {{ $permission->key }}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- end places content -->
@@ -146,25 +158,27 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="is_staff" value="1" @checked(old('is_staff' , $user->is_staff))
+                            <input type="checkbox" name="is_staff" value="1" @checked(old('is_staff', $user->is_staff))
                                 class="custom-control-input" id="is_staff">
                             <label class="custom-control-label input-title" for="is_staff">به این کاربر مجوز داده
                                 شود</label>
                         </div>
                         <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="email_verified_at" @if($user->email_verified_at) disabled @endif value="1" @checked(old('email_verified_at' , $user->email_verified_at ?? false))
-                                class="custom-control-input" id="email_verified_at">
+                            <input type="checkbox" name="email_verified_at"
+                                @if ($user->email_verified_at) disabled @endif value="1"
+                                @checked(old('email_verified_at', $user->email_verified_at ?? false)) class="custom-control-input" id="email_verified_at">
                             <label class="custom-control-label input-title" for="email_verified_at"> ایمیل تایید
                                 شود</label>
                         </div>
                         <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="mobile_verified_at" @if($user->mobile_verified_at) disabled @endif value="1" @checked(old('mobile_verified_at' , $user->mobile_verified_at ?? false))
-                                class="custom-control-input" id="mobile_verified_at">
+                            <input type="checkbox" name="mobile_verified_at"
+                                @if ($user->mobile_verified_at) disabled @endif value="1"
+                                @checked(old('mobile_verified_at', $user->mobile_verified_at ?? false)) class="custom-control-input" id="mobile_verified_at">
                             <label class="custom-control-label input-title" for="mobile_verified_at"> شماره تلفن تایید
                                 شود</label>
                         </div>
                         <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="is_block" value="1" @checked(old('is_block' , $user->is_block))
+                            <input type="checkbox" name="is_block" value="1" @checked(old('is_block', $user->is_block))
                                 class="custom-control-input" id="is_block">
                             <label class="custom-control-label input-title" for="is_block"> کاربر مسدود باشد</label>
                         </div>
@@ -200,7 +214,7 @@
                 </div>
             </div>
             <div class="card-body d-none">
-                <form action="{{ route('admin.user.change-password' , $user->id) }}" method="post">
+                <form action="{{ route('admin.user.change-password', $user->id) }}" method="post">
                     @csrf
                     <div class="form-row">
                         <div class="form-group">

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Content\NewsRequest;
-use App\Http\Services\Image\ImageService;
-use App\Models\Content\News;
 use App\Models\Content\Tag;
+use App\Models\Content\News;
+use App\Models\Content\Gallery;
+// use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\Content\NewsRequest;
+use App\Http\Requests\Admin\Content\NewsGalleryRequest;
 
 class NewsController extends Controller
 {
@@ -88,6 +92,17 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request,News $news , ImageService $imageService)
     {
+
+        // $response = Gate::inspect('update-news');
+
+        // if($response->allowed())
+        // {
+
+        // }else
+        // {
+        //     dd($response->message());
+        // }
+
         DB::transaction(function () use($request , $news , $imageService) {
             $inputs = $request->all();
 
@@ -151,5 +166,32 @@ class NewsController extends Controller
             # create article tag
             $news->tags()->attach($tag);
         });
+    }
+
+    public function indexGallery(News $news)
+    {
+        return view("admin.content.news.gallery.index", compact('news'));
+    }
+
+    public function createGallery(NewsGalleryRequest $request,News $news , ImageService $imageService)
+    {
+        $inputs = $request->all();
+
+
+        if ($request->hasFile('image')) {
+            $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news-gallery");
+            $inputs['image'] = $imageService->save($inputs['image']);
+        }
+      
+        $news->gallerizable()->create($inputs);
+        return to_route("admin.content.news.index-gallery", $news->id)->with('cute-success', 'تصویر جدید اضافه شد.');
+    }
+
+  
+
+    public function destroyGallery(Gallery $gallery)
+    {
+        $gallery->delete();
+        return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 }

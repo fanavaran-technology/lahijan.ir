@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\ACL\Role;
 use App\Models\Content\News;
+use App\Models\ACL\Permission;
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\Content\PublicCall;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -78,5 +80,13 @@ class User extends Authenticatable
     public function publicCalls()
     {
         return $this->hasMany(PublicCall::class);
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
     }
 }

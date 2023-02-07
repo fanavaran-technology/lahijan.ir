@@ -112,7 +112,6 @@ class PlaceController extends Controller
 
     public function indexGallery(Place $place)
     {
-        // $places = Gallery::orderBy('created_at', 'desc')->where('gallerizable_type', 'App\Models\Content\Place')->simplePaginate(15);
         return view("admin.content.place.gallery.index", compact('place'));
     }
 

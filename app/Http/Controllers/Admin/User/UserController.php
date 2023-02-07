@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\User\UserRequest;
-use App\Http\Services\Image\ImageService;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Models\ACL\Role;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\ACL\Permission;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\User\UserRequest;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -31,9 +33,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create(User $user): View
     {
-        return view('admin.user.users.create');
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.user.users.create' , compact('roles' , 'user' , 'permissions') );
     }
 
     /**
@@ -42,7 +46,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request , ImageService $imageService) :RedirectResponse
+    public function store(UserRequest $request , User $user, ImageService $imageService) :RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
@@ -53,7 +57,15 @@ class UserController extends Controller
                 $image = $imageService->save($request->profile_photo);
                 $inputs['profile_photo'] = $image;
             }
-            User::create($inputs);
+           $user = User::create($inputs);
+
+           if ($user->is_staff) {
+            if ($request->has('roles'))
+            $user->roles()->sync($inputs['roles']);
+
+            if ($request->has('permissions'))
+            $user->permissions()->sync($inputs['permissions']);
+           }
         });
 
         return to_route('admin.user.users.index')->with('toast-success' , 'کاربر جدید ایجاد شد.');
@@ -67,7 +79,9 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('admin.user.users.edit', compact('user'));
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.user.users.edit', compact('user' , 'roles' , 'permissions'));
     }
 
     /**
@@ -84,6 +98,16 @@ class UserController extends Controller
 
             [$inputs['is_staff'], $inputs['is_block']] = [$inputs['is_staff'] ?? 0, $inputs['is_block'] ?? 0];
             $user->update($inputs);
+
+            if ($user->is_staff) {
+                $request->has('roles') ?
+                $user->roles()->sync($inputs['roles']) :
+                $user->roles()->sync([]);
+
+                $request->has('permissions') ?
+                $user->permissions()->sync($inputs['permissions']) :
+                $user->permissions()->sync([]);
+               }
         });
 
         return to_route('admin.user.users.index')->with('toast-success' , 'تغییرات روی کاربر اعمال شد.');
@@ -113,4 +137,35 @@ class UserController extends Controller
         
         return to_route('admin.user.users.index')->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
     }
+
+    public function roles(User $user)
+    {
+        $roles = Role::all();
+        return view('admin.user.users.roles', compact('user' , 'roles' ));
+    }
+
+    public function roleStore(Request $request , User $user)
+    {
+        $validated = $request->validate([
+            'roles' => 'exists:roles,id|array',
+        ]);
+        $user->roles()->sync($request->roles);
+        return to_route('admin.user.users.index')->with('toast-success' , 'نقش اعمال گردید');
+    }
+
+    public function permissions(User $user)
+    {
+        $permissions = Permission::all();
+        return view('admin.user.users.permissions', compact('user'  , 'permissions'));
+    }
+
+    public function permissionStore(Request $request , User $user)
+    {
+        $validated = $request->validate([
+            'permissions' => 'exists:permissions,id|array'
+        ]);
+        $user->permissions()->sync($request->permissions);
+        return to_route('admin.user.users.index')->with('toast-success' , 'دسترسی اعمال گردید.');
+    }
+
 }

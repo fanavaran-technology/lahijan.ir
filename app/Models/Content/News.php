@@ -60,4 +60,9 @@ class News extends Model
     {
         return $this->published_at <= now() ? 'منتشر شده' : jalaliDate($this->published_at, "%Y/%m/%d H:i:s");
     }
+
+    public function gallerizable()
+    {
+        return $this->morphMany(Gallery::class, 'gallerizable');
+    }
 }

@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-auto ">
-                <a href="{{ route('admin.content.places.index') }}" class="btn btn-success px-4">بازگشت</a>
+                <a href="{{ route('admin.content.news.index') }}" class="btn btn-success px-4">بازگشت</a>
             </div>
         
    
@@ -33,7 +33,7 @@
                             <table class="table table-striped" id="table-id">
                                 <thead>
                                     <div class="form-row py-2">
-                                        <h6 class="font-bold">گالری تصاویر مکان گردشگری {{ $place->title }}</h6>
+                                        <h6 class="font-bold">گالری تصاویر مکان گردشگری {{ $news->title }}</h6>
                                     </div>
                                     <th>#</th>
                                     <th>alt تصویر</th>
@@ -41,9 +41,7 @@
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
-                                {{-- {{ dd($place->gallerizable) }} --}}
-
-                                @forelse($place->gallerizable as $image)
+                                @forelse($news->gallerizable as $image)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -55,7 +53,7 @@
                                         <td>
 
                                     
-                                        <form action="{{ route('admin.content.places.destroy-gallery', $image->id) }}" class="d-inline" method="post">
+                                        <form action="{{ route('admin.content.news.destroy-gallery', $image->id) }}" class="d-inline" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" x-data="{{ $image->id }}" class="delete border-none bg-transparent text-decoration-none text-danger mr-3">
@@ -92,7 +90,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.content.places.create-gallery', $place->id) }}" method="post"
+                <form action="{{ route('admin.content.news.create-gallery', $news->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
