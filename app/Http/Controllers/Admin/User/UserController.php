@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserRequest;
 use App\Http\Services\Image\ImageService;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\View\View;
-use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -18,6 +16,7 @@ class UserController extends Controller
     public function __construct() 
     {   
         $this->middleware('password.confirm')->except('index' , 'create' , 'store');
+        $this->middleware('users.prohibition')->except('index', 'create', 'store');
     }
 
     /**
@@ -27,7 +26,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::whereIsAdmin(0)->latest()->paginate(15);
+        $users = User::whereIsAdmin(0)->whereNot('id', auth()->user()->id)->latest()->paginate(15);
         return view('admin.user.users.index' , compact('users'));
     }
 
@@ -108,19 +107,5 @@ class UserController extends Controller
 
         $user->delete();
         return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
-    }
-
-    // change password
-    public function changePassword(Request $request , User $user): RedirectResponse
-    {
-        $validated = $request->validate([
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user->update([
-            'password'  =>   $validated['password']
-        ]);
-        
-        return to_route('admin.user.users.index')->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
     }
 }
