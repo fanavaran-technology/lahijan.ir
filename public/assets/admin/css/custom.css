@@ -1,40 +1,45 @@
 :root {
     /* custom colors */
-    --white : rgb(255 , 255 , 255);
+    --white: rgb(255, 255, 255);
     /* gray color spectrum */
-    --gray-300 : rgb(209 213 219);
-    --gray-400 : rgb(156 163 175);
-    --gray-500 : rgb(107 114 128);
-    --gray-600 : rgb(75 85 99);
-    --gray-700 : rgb(55 65 81);
-    --gray-800 : rgb(31 41 55);
+    --gray-300: rgb(209 213 219);
+    --gray-400: rgb(156 163 175);
+    --gray-500: rgb(107 114 128);
+    --gray-600: rgb(75 85 99);
+    --gray-700: rgb(55 65 81);
+    --gray-800: rgb(31 41 55);
 
     /* blue color spectrum */
-    --blue-400 : rgb(96 165 250);
-    --blue-500 : rgb(59 130 246);
-    --blue-600 : rgb(37 99 235);
-    --blue-700 : rgb(29 78 216);
-    --blue-800 : rgb(30 64 175);
+    --blue-400: rgb(96 165 250);
+    --blue-500: rgb(59 130 246);
+    --blue-600: rgb(37 99 235);
+    --blue-700: rgb(29 78 216);
+    --blue-800: rgb(30 64 175);
 
     /* red color spectrum */
-    --red-300  : rgb(252 165 165);
-    --red-400  : rgb(248 113 113);
-    --red-500  : rgb(239 68 68);
-    --red-600  : rgb(220 38 38);
+    --red-300: rgb(252 165 165);
+    --red-400: rgb(248 113 113);
+    --red-500: rgb(239 68 68);
+    --red-600: rgb(220 38 38);
+
+    --circleSize: 8rem;
+    --radius: 100px;
+    --shadow: 0 0 10px 0 rgba(255,255,255,.35);
+    --fontColor: rgb(250,250,250);
 }
 
 .direction-ltr {
     direction: ltr;
 }
 
-button{
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 .section-heading {
@@ -87,14 +92,14 @@ button{
     cursor: pointer;
     border-radius: .3rem;
     box-shadow: 0 0 5px solid var(--gray-300);
-  }
+}
 
-  .form-control-file:hover .form-control-file:before{
-      border-style: solid;
-      box-shadow: inset 0px 0px 0px 0.25em var(--gray-300);
-  }
+.form-control-file:hover .form-control-file:before {
+    border-style: solid;
+    box-shadow: inset 0px 0px 0px 0.25em var(--gray-300);
+}
 
-  .form-control-file:before {
+.form-control-file:before {
     content: attr(data-title);
     position: absolute;
     left: 0;
@@ -108,7 +113,7 @@ button{
     border: 0.19em dashed var(--gray-300);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     overflow: visible;
-  }
+}
 
 /* define errors class */
 .error-text {
@@ -140,27 +145,30 @@ button{
     direction: ltr;
 }
 
-.form-control::placeholder{
+.form-control::placeholder {
     text-align: right !important;
 }
 
 /* customize tagify */
-.tagify--outside{
+.tagify--outside {
     border: 0;
 }
 
-.tagify--outside .tagify__input{
-  order: -1;
-  flex: 100%;
-  border: 1px solid var(--tags-border-color);
-  margin-bottom: 1em;
-  transition: .1s;
+.tagify--outside .tagify__input {
+    order: -1;
+    flex: 100%;
+    border: 1px solid var(--tags-border-color);
+    margin-bottom: 1em;
+    transition: .1s;
 }
 
-.tagify--outside .tagify__input:hover{ border-color:var(--tags-hover-border-color); }
-.tagify--outside.tagify--focus .tagify__input{
-  transition:0s;
-  border-color: var(--tags-focus-border-color);
+.tagify--outside .tagify__input:hover {
+    border-color: var(--tags-hover-border-color);
+}
+
+.tagify--outside.tagify--focus .tagify__input {
+    transition: 0s;
+    border-color: var(--tags-focus-border-color);
 }
 
 .tagify__tag-text {
@@ -196,4 +204,67 @@ button{
 
 .notify {
     font-family: 'vazir';
+}
+
+.profile_image {
+    width: 2.4rem !important;
+    height: 2.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all .1s ease-in;
+}
+
+.profile_image:hover {
+    border: solid 2px gray;
+}
+
+.profile-pic {
+    color: transparent;
+    transition: all .3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    position: relative;
+}
+
+.profile-pic input {
+    display: none;
+}
+
+.profile-pic .-label {
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+    border-radius: var(--radius);
+    z-index: 1000;
+    height: var(--circleSize);
+    width: var(--circleSize);
+}
+
+.profile-pic .-label:hover {
+    background-color: rgba(0, 0, 0);
+    opacity: 50%;
+    z-index: 10000;
+    color: var(--fontColor);
+    transition: var(--background-color) .1s ease-in;
+    border-radius: var(--radius);
+}
+
+.profile-pic span {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15%;
+    padding: .2em;
+    height: 2em;
+}
+
+.profile-pic img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    width: var(--circleSize);
+    height: var(--circleSize);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    z-index: 0;
 }

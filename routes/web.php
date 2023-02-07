@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\User\ChangePasswordController;
+use App\Http\Controllers\Admin\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
@@ -59,7 +61,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // user module routes
     Route::prefix('user')->as('user.')->group(function () {
         Route::resource('users', UserController::class)->except('show');
-        Route::post('change-password/{user}', [UserController::class, 'changePassword'])->name('change-password');
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('change-password/{user}', ChangePasswordController::class)->name('change-password');
     });
 
 });

@@ -41,7 +41,11 @@
                                 </thead>
                                 @forelse($users as $user)  
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <span class="avatar avatar-sm mt-2">
+                                            <img src="{{ asset($user->profile_image) }}" alt="{{ auth()->user()->full_name }}" class="profile_image">
+                                        </span>
+                                    </td>
                                     <td>
                                         <small>{{ $user->full_name }}</small>
                                     </td>

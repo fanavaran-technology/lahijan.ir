@@ -52,6 +52,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    const DEFAULT_PROFILE_PHOTO = 'images/user/default.png';
+
     // set data before store to database
     public function setPasswordAttribute($password)
     {
@@ -68,7 +70,6 @@ class User extends Authenticatable
         $this->attributes['mobile_verified_at'] = date("Y-m-d H:i:s", time());
     }
 
-
     // relations
     public function news()
     {
@@ -78,5 +79,11 @@ class User extends Authenticatable
     public function publicCalls()
     {
         return $this->hasMany(PublicCall::class);
+    }
+
+    // accessor
+    public function getProfileImageAttribute()
+    {
+        return $this->profile_photo ?? self::DEFAULT_PROFILE_PHOTO;
     }
 }
