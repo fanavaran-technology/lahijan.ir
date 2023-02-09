@@ -205,6 +205,7 @@
 
 <script src="{{ asset('assets/admin/plugins/simple-notify/simple-notify.min.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/jquery-confirm/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
 
 @include('admin.alerts.toast.success')

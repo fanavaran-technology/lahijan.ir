@@ -20,7 +20,16 @@ class PublicCallController extends Controller
      */
     public function index(): View
     {
-        $publicCalls = PublicCall::latest()->paginate(15);
+        $publicCalls = PublicCall::query();
+
+        if ($searchString = request('search'))
+            $publicCalls->where('title', "LIKE" , "%{$searchString}%");
+
+        if (request('status')) 
+            $publicCalls->where('status', 1);
+
+        $publicCalls = $publicCalls->latest()->paginate(10);
+
         return view('admin.content.public-call.index' , compact('publicCalls'));
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
+use Illuminate\View\View;
 
 class SliderController extends Controller
 {
@@ -16,9 +17,17 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $sliders = Slider::latest()->paginate(15);
+        $sliders = Slider::query();
+
+        if ($searchString = request('search'))
+            $sliders->where('alt', "LIKE" , "%{$searchString}%");
+
+        if (request('status')) 
+            $sliders->wherePublished();
+
+        $sliders = $sliders->latest()->paginate(15);
         return view('admin.content.slider.index' , compact('sliders'));
     }
 
