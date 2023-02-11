@@ -9,7 +9,6 @@
             <a href="{{ route('admin.content.pages.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
         </div>
         <div class="col-12">
-
             <div class="row my-4">
                 <!-- Small table -->
                 <div class="col-md-12">

@@ -15,6 +15,7 @@ use App\Http\Requests\Admin\Content\NewsGalleryRequest;
 
 class NewsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +23,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $allNews = News::latest()->paginate(15);
-        return view('admin.content.news.index' , compact('allNews'));
+            $allNews = News::latest()->paginate(15);
+            return view('admin.content.news.index' , compact('allNews'));
     }
 
     /**

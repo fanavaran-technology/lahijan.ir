@@ -13,9 +13,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\User\UserRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Database\Seeders\PermissionSeeder;
+
 
 class UserController extends Controller
 {
+
+    public function __construct() 
+    {   
+        $this->middleware('password.confirm')->except('index' , 'create' , 'store');
+        $this->middleware('users.prohibition')->except('index', 'create', 'store');
+    }
+
+    
 
     /**
      * Display a listing of the resource.
@@ -24,7 +34,16 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::whereIsAdmin(0)->latest()->paginate(15);
+    // create all permissions
+       // create all permissions
+       if (Permission::all()->isEmpty()) {
+        $permissionSeed = new PermissionSeeder;
+        $permissionSeed->run();
+    }
+    
+
+    
+        $users = User::whereIsAdmin(0)->whereNot('id', auth()->user()->id)->latest()->paginate(15);
         return view('admin.user.users.index' , compact('users'));
     }
 
@@ -119,53 +138,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user): RedirectResponse
-    {
-        
+   
+public function destroy(User $user): RedirectResponse
+{
+    if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
+        return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
     }
 
-    // change password
-    public function changePassword(Request $request , User $user): RedirectResponse
-    {
-        $validated = $request->validate([
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+    $user->delete();
+    return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
+}
 
-        $user->update([
-            'password'  =>   $validated['password']
-        ]);
-        
-        return to_route('admin.user.users.index')->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
-    }
-
-    public function roles(User $user)
-    {
-        $roles = Role::all();
-        return view('admin.user.users.roles', compact('user' , 'roles' ));
-    }
-
-    public function roleStore(Request $request , User $user)
-    {
-        $validated = $request->validate([
-            'roles' => 'exists:roles,id|array',
-        ]);
-        $user->roles()->sync($request->roles);
-        return to_route('admin.user.users.index')->with('toast-success' , 'نقش اعمال گردید');
-    }
-
-    public function permissions(User $user)
-    {
-        $permissions = Permission::all();
-        return view('admin.user.users.permissions', compact('user'  , 'permissions'));
-    }
-
-    public function permissionStore(Request $request , User $user)
-    {
-        $validated = $request->validate([
-            'permissions' => 'exists:permissions,id|array'
-        ]);
-        $user->permissions()->sync($request->permissions);
-        return to_route('admin.user.users.index')->with('toast-success' , 'دسترسی اعمال گردید.');
-    }
-
+    
 }

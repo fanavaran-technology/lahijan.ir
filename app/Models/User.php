@@ -10,12 +10,15 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Content\PublicCall;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasPermissionsTrait;
+
 
     /**
      * The attributes that are mass assignable.
@@ -54,6 +57,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    const DEFAULT_PROFILE_PHOTO = 'images/user/default.png';
+
     // set data before store to database
     public function setPasswordAttribute($password)
     {
@@ -69,7 +74,6 @@ class User extends Authenticatable
     {
         $this->attributes['mobile_verified_at'] = date("Y-m-d H:i:s", time());
     }
-
 
     // relations
     public function news()
@@ -88,5 +92,11 @@ class User extends Authenticatable
 
     public function permissions(){
         return $this->belongsToMany(Permission::class);
+    }
+
+    // accessor
+    public function getProfileImageAttribute()
+    {
+        return $this->profile_photo ?? self::DEFAULT_PROFILE_PHOTO;
     }
 }

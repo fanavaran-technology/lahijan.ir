@@ -7,7 +7,7 @@
 @section('content')
     <div class="d-flex justify-content-between">
         <div class="col mb-2">
-            <h2 class="h3 mb-0 page-title">ویرایش دسترسی</h2>
+            <h2 class="h3 mb-0 page-title"> دسترسی ها</h2>
         </div>
 
         <div class="col-auto mb-3">
@@ -38,14 +38,14 @@
                                         @php
                                             $rolePermissionArray = $role->permissions->pluck('id')->toArray();
                                         @endphp
-                                        @foreach ($permissions as $key => $permission)
+                                        @foreach ($permissions as $title => $permission)
                                         <section class="col-md-3">  
-                                            <div class="custom-control custom-checkbox pl-2">
+                                            <div class="custom-control custom-checkbox pl-2  pt-3">
                                                 <input type="checkbox" class="custom-control-input" name="permissions[]"
                                                  value="{{ $permission->id }}" id="{{ $permission->id }}" @if (in_array($permission->id, $rolePermissionArray))
                                                      checked
                                                  @endif>
-                                                <label class="custom-control-label" for="{{ $permission->id }}">{{ $permission->key }}</label>
+                                                <label class="custom-control-label" for="{{ $permission->id }}">{{ $permission->title }}</label>
                                             </div>                                
                                           </section>
                                         @endforeach

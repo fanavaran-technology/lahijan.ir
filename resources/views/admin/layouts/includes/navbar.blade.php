@@ -22,13 +22,13 @@
         <a class="nav-link dropdown-toggle text-muted pr-0 mx-2" href="#" id="navbarDropdownMenuLink" role="button"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="avatar avatar-sm mt-2">
-            <img src="{{ asset('images/avatars/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
+            <img src="{{ asset(auth()->user()->profile_image) }}" alt="{{ auth()->user()->full_name }}" class="profile_image">
           </span>
         </a>
         <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item text-secondary text-left" href="#">{{ auth()->user()->full_name }}</a>
           <hr class="mb-1 mt-1">
-          <a class="dropdown-item text-secondary text-left" href="#">
+          <a class="dropdown-item text-secondary text-left" href="{{ route('admin.user.profile.index') }}">
             <i class="fe fe-user"></i>
             پروفایل
           </a>

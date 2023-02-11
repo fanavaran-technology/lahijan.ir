@@ -4,11 +4,18 @@
     </a>
     <nav class="vertnav navbar navbar-light">
       <!-- nav bar -->
-      <div class="w-100 mb-4 d-flex">
-        <a class="mx-auto mt-2 flex-fill text-center" href="./index.html">
-          <img src="{{ asset('images/settings/logo.jpg') }}" alt="logo" class="brand-sm ">
-        </a>
-      </div>
+     
+            <div class="user-box text-center flex flex-fill mt-3">
+                <img   src="{{ asset( auth()->user()->profile_photo ) }}" alt="تصویر کاربر" title="{{ auth()->user()->full_name }}"
+                class="rounded-circle img-thumbnail" style="height: 60px">
+                    <p href="#" class="text-dark h5 mt-2 mb-1  ">{{ auth()->user()->full_name }}</p>
+                <a class="text-muted mb-2" type="button">@if (auth()->user()->is_admin == 1)
+                  مدیر کامل سایت
+                @else
+                 
+                @endif</a>
+            </div>
+          
       <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item ">
           <a href="{{ route('admin.index') }}"  aria-expanded="false" class="nav-link @active('admin.index') active @endactive">
@@ -21,6 +28,7 @@
         <small>بخش محتوا</small>
       </p>
       <ul class="navbar-nav flex-fill w-100 mb-2">
+        @can('manage_news')
         <li class="nav-item dropdown @active('admin.content.news') active @endactive">
           <a href="#news" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
@@ -39,6 +47,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_places')
         <li class="nav-item dropdown @active('admin.content.places') active @endactive">
           <a href="#places" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map" viewBox="0 0 16 16">
@@ -57,6 +67,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_public_cell')
         <li class="nav-item dropdown @active('admin.content.public-calls') active @endactive">
           <a href="#public-call" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check" viewBox="0 0 16 16">
@@ -75,6 +87,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_menus')
         <li class="nav-item dropdown @active('admin.content.menus') active @endactive">
           <a href="#menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-up" viewBox="0 0 16 16">
@@ -92,6 +106,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_sliders')
         <li class="nav-item dropdown @active('admin.content.sliders') active @endactive">
           <a href="#slider" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <i class="fe fe-layers
@@ -108,6 +124,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_pages')
         <li class="nav-item dropdown @active('admin.content.pages') active @endactive">
           <a href="#page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
@@ -126,9 +144,11 @@
             </li>
           </ul>
         </li>
+        @endcan
         <p class="text-muted text-sm nav-heading mt-2 mb-1">
           <small>بخش کاربران و دسترسی ها </small>
         </p>
+        @can('manage_users')
         <li class="nav-item dropdown @active('admin.user.users') active @endactive">
           <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
@@ -146,6 +166,7 @@
             </li>
           </ul>
         </li>
+        @endcan
         <li class="nav-item dropdown @active('admin.user.roles') active @endactive">
           <a href="#roles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-exclamation" viewBox="0 0 16 16">
