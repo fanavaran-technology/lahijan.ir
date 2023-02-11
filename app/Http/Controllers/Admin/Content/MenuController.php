@@ -18,7 +18,15 @@ class MenuController extends Controller
      */
     public function index(): View
     {
-        $menus = Menu::latest()->paginate(15);
+        $menus = Menu::query();
+
+        if ($searchString = request('search'))
+            $menus->where('title', "LIKE" , "%{$searchString}%");
+
+        if (request('status')) 
+            $menus->where('status', 1);
+
+        $menus = $menus->latest()->paginate(15);
         return view('admin.content.menu.index', compact('menus'));
     }
 

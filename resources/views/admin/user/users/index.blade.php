@@ -3,7 +3,9 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">کاربران</h2>
+            <h2 class="h3 mb-0 page-title">کاربران
+                <span class="text-sm text-muted">({{ $users->total() }})</span>
+            </h2>
         </div>
         <div class="col-auto">
             <a href="{{ route('admin.user.users.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
@@ -19,19 +21,59 @@
                             <table class="table table-striped" id="table-id">
                                 <thead>
                                     <div class="form-row py-2">
-                                        <input class="col-md-3 form-control form-group" type="text"
-                                            placeholder="نام کاربر را جستجو جو کنید ...">
-
-                                        <div class="ml-3 mt-2 custom-control custom-checkbox ">
-                                            <input type="checkbox" class="custom-control-input  " id="block_users">
-                                            <label class="custom-control-label" for="block_users">کاربران مسدود شده</label>
+                                        <form action="">
+                                            <input name="search" class="col-md-3 form-control custom-focus form-group" type="text"
+                                                placeholder="عنوان را جستجو و enter کنید">
+                                        </form>
+                                        <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="staff" data-action="{{ request()->fullUrlWithQuery(['staff' => 1]) }}" @checked(request('staff')==1) id="staff">
+                                            <label class="custom-control-label" for="staff">پرسنل</label>
                                         </div>
-                                        <div class="ml-3 mt-2 custom-control custom-checkbox ">
-                                            <input type="checkbox" class="custom-control-input  " id="personnel">
-                                            <label class="custom-control-label" for="personnel">پرسنل</label>
+                                        <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="block" data-action="{{ request()->fullUrlWithQuery(['block' => 1]) }}" @checked(request('block')==1) id="block">
+                                            <label class="custom-control-label" for="block">کاربران مسدود</label>
                                         </div>
-
                                     </div>
+                                    <div class="row w-100 mb-4 ml-1">
+                                        @request('search')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                 جستجو : {{ request('search') }}
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('search')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
+                                        @request('staff')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                <small>کارمندان</small>
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('staff')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
+                                        @request('block')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                <small>کاربران مسدود</small>
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('block')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
                                     <th>#</th>
                                     <th>نام کاربر</th>
                                     <th>مسدود است</th>

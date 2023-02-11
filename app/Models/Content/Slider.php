@@ -18,13 +18,20 @@ class Slider extends Model
         'published_at'
     ];
 
+    // scopes
+    public function scopeWherePublished($query)
+    {
+        $query->where('is_draft', 0)->where('published_at', '<=', now());
+    }
 
+    // accessor 
     public function setUrlAttribute($url)
     {
         str_contains($url, URL::to('/')) ? 
             $this->attributes['url'] = str_replace(URL::to('/'), '', $url) : $this->attributes['url'] = $url;
     }
    
+
 
     
 }

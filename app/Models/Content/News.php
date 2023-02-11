@@ -55,6 +55,12 @@ class News extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    // scopes
+    public function scopeWherePublished($query)
+    {
+        $query->where('is_draft', 0)->where('published_at', '<=', now());
+    }
+
     // accessors
     public function getPublishStatusAttribute()
     {

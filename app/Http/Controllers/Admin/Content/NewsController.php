@@ -7,11 +7,13 @@ use App\Models\Content\News;
 use App\Models\Content\Gallery;
 // use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\NewsRequest;
 use App\Http\Requests\Admin\Content\NewsGalleryRequest;
+use Illuminate\View\View;
 
 class NewsController extends Controller
 {
@@ -21,10 +23,28 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-            $allNews = News::latest()->paginate(15);
-            return view('admin.content.news.index' , compact('allNews'));
+        $allNews = News::query();
+
+        if ($searchString = request('search'))
+            $allNews->where('title', "LIKE" , "%{$searchString}%");
+
+        if (request('firestation')) 
+            $allNews->where('is_fire_station', 1);
+
+        if (request('draft')) 
+            $allNews->where('is_draft', 1);
+
+        if (request('status'))
+            $allNews->wherePublished();
+
+        if (request('pin')) 
+            $allNews->where('is_pined', 1);
+
+        $allNews = $allNews->latest()->paginate(10);
+
+        return view('admin.content.news.index' , compact('allNews'));
     }
 
     /**
@@ -32,7 +52,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.news.create');
     }

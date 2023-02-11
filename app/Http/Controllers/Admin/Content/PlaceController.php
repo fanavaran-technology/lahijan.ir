@@ -12,6 +12,7 @@ use Database\Seeders\PermissionSeeder;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\PlaceRequest;
 use App\Http\Requests\Admin\Content\PlacesGalleryRequest;
+use Illuminate\View\View;
 
 class PlaceController extends Controller
 {
@@ -20,9 +21,17 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $places = Place::latest()->paginate(15);
+        $places = Place::query();
+
+        if ($searchString = request('search'))
+            $places->where('title', "LIKE" , "%{$searchString}%");
+
+        if (request('status')) 
+            $places->where('status', 1);
+
+        $places = $places->latest()->paginate(10);    
         return view('admin.content.place.index' , compact('places'));
     }
 

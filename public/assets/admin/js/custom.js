@@ -106,8 +106,32 @@ function successToast(message) {
   })
 } 
 
-
 function loadFile(event) {
   var image = document.getElementById("output");
   image.src = URL.createObjectURL(event.target.files[0]);
-};
+}
+
+function removeFilter(key) {
+  let sourceURL = location.href;
+  let rtn = sourceURL.split("?")[0],
+      param,
+      params_arr = [],
+      queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+  if (queryString !== "") {
+      params_arr = queryString.split("&");
+      for (let i = params_arr.length - 1; i >= 0; i -= 1) {
+          param = params_arr[i].split("=")[0];
+          if (param === key) {
+              params_arr.splice(i, 1);
+          }
+      }
+      if (params_arr.length) rtn = rtn + "?" + params_arr.join("&");
+  }
+  location.href = rtn;
+}
+
+function filterAction(checkbox){
+  const filterName = checkbox.getAttribute('data-filter');
+  const action = checkbox.getAttribute('data-action');
+  checkbox.checked ? location.href = action : removeFilter(filterName);
+}

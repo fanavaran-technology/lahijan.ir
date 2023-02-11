@@ -34,16 +34,26 @@ class UserController extends Controller
      */
     public function index(): View
     {
-    // create all permissions
+
        // create all permissions
        if (Permission::all()->isEmpty()) {
         $permissionSeed = new PermissionSeeder;
         $permissionSeed->run();
     }
     
+        $users = User::query();
 
-    
-        $users = User::whereIsAdmin(0)->whereNot('id', auth()->user()->id)->latest()->paginate(15);
+        if ($searchString = request('search'))
+            $users->where('full_name', "LIKE" , "%{$searchString}%");
+
+        if (request('staff')) 
+            $users->where('is_staff', 1);
+
+        if (request('block')) 
+            $users->where('is_block', 1);
+
+        $users = $users->whereIsAdmin(0)->whereNot('id', auth()->user()->id)->latest()->paginate(10);
+
         return view('admin.user.users.index' , compact('users'));
     }
 

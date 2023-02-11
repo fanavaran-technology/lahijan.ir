@@ -6,6 +6,7 @@ use App\Models\Content\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PageRequest;
+use Illuminate\View\View;
 
 class PageController extends Controller
 {
@@ -14,9 +15,21 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $pages = Page::orderBy('created_at', 'desc')->simplePaginate(15);
+        $pages = Page::query();
+
+        if ($searchString = request('search'))
+            $pages->where('title', "LIKE" , "%{$searchString}%");
+
+        if (request('status')) 
+            $pages->where('is_draft', 1);
+
+        if (request('quick-access')) 
+            $pages->where('is_quick_access', 1);
+
+        
+        $pages = $pages->latest()->paginate(10);
         return view('admin.content.page.index', compact('pages'));
     }
 

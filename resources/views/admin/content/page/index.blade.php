@@ -3,7 +3,9 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">همه صفحات</h2>
+            <h2 class="h3 mb-0 page-title">همه صفحات
+                <span class="text-sm text-muted">({{ $pages->total() }})</span>
+            </h2>
         </div>
         <div class="col-auto">
             <a href="{{ route('admin.content.pages.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
@@ -18,8 +20,59 @@
                             <table class="table table-striped" id="table-id">
                                 <thead>
                                     <div class="form-row py-2">
-                                        <input class="col-md-3 form-control form-group" type="text"
-                                            placeholder="مکان گردشگری را جستجو جو کنید ...">
+                                        <form action="">
+                                            <input name="search" class="col-md-3 form-control custom-focus form-group" type="text"
+                                                placeholder="عنوان را جستجو و enter کنید">
+                                        </form>
+                                        <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="status" data-action="{{ request()->fullUrlWithQuery(['status' => 1]) }}" @checked(request('status')==1) id="status">
+                                            <label class="custom-control-label" for="status">پیش نویس ها</label>
+                                        </div>
+                                        <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="quick-access" data-action="{{ request()->fullUrlWithQuery(['quick-access' => 1]) }}" @checked(request('quick-access')==1) id="quick-access">
+                                            <label class="custom-control-label" for="quick-access">دسترسی های سریع</label>
+                                        </div>
+                                    </div>
+                                    <div class="row w-100 mb-4 ml-1">
+                                        @request('search')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                 جستجو : {{ request('search') }}
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('search')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
+                                        @request('status')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                <small>پیش نویس ها</small>
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('status')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
+                                        @request('quick-access')
+                                        <h5>
+                                            <span class="badge bg-light text-dark border mr-2">
+                                                <small>دسترسی های سریع</small>
+                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('quick-access')"
+                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </span>
+                                        </h5>
+                                        @endrequest
                                     </div>
                                     <th>#</th>
                                     <th>عناوین</th>
