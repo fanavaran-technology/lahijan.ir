@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Admin\User\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,11 +29,10 @@ require __DIR__.'/auth.php';
 // admin routes
 Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group(function () {
     
-    Route::get('/', fn() => view('admin.index'))->name('index');
+    Route::get('/', AdminDashboardController::class)->name('index');
 
     // content module routes
     Route::prefix('content')->as('content.')->group(function () {
-
         // news routes
         Route::resource('news', NewsController::class)->except('show')->middleware('can:manage_news');
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');

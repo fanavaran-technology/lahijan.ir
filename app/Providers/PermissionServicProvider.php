@@ -31,7 +31,6 @@ class PermissionServicProvider extends ServiceProvider
     public function boot()
     {
         try {
-
             Permission::get()->map(function ($permission) {
             Gate::define($permission->key, function ($user) use ($permission){
                     return $user->is_admin ? true : $user->hasPermissionTo($permission);
@@ -42,9 +41,6 @@ class PermissionServicProvider extends ServiceProvider
             report($e);
             return false;
         }
-
-        
-        
     }
 }
 

@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
-use App\Models\Content\Tag;
-use App\Models\Content\News;
-use App\Models\Content\Gallery;
-// use Illuminate\Auth\Access\Gate;
-use Illuminate\Support\Facades\DB;
-
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\NewsRequest;
+use App\Http\Services\Image\ImageService;
+use App\Models\Content\Gallery;
+use App\Models\Content\News;
+use App\Models\Content\Tag;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\Content\NewsGalleryRequest;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class NewsController extends Controller
 {
@@ -42,7 +40,7 @@ class NewsController extends Controller
         if (request('pin')) 
             $allNews->where('is_pined', 1);
 
-        $allNews = $allNews->latest()->paginate(10);
+        $allNews = $allNews->orderBy('id' , 'DESC')->paginate(10);
 
         return view('admin.content.news.index' , compact('allNews'));
     }
@@ -63,22 +61,18 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewsRequest $request , ImageService $imageService)
+    public function store(NewsRequest $request , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
-            
-            // temporarily
-            // TODO
-            $inputs['user_id'] = 1;
 
             // save image
             if ($request->hasFile('image')) {
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
-                $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
+                $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-            $news = News::create($inputs);
+            $news = $request->user()->create($inputs);
 
             // add tags
             if ($request->filled('tags')) {
@@ -97,7 +91,7 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(News $news): View
     {
         $tags = Tag::all()->pluck('title')->implode(',');
 
@@ -111,29 +105,18 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request,News $news , ImageService $imageService)
+    public function update(NewsRequest $request,News $news , ImageService $imageService): RedirectResponse
     {
-
-        // $response = Gate::inspect('update-news');
-
-        // if($response->allowed())
-        // {
-
-        // }else
-        // {
-        //     dd($response->message());
-        // }
-
         DB::transaction(function () use($request , $news , $imageService) {
             $inputs = $request->all();
 
             // save image
             if ($request->hasFile('image')) {
                 if (!empty($news->image['directory']))
-                    $imageService->deleteDirectoryAndFiles($news->image['directory']);
+                    $imageService->deleteImage($news->image);
                     
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
-                $inputs['image'] = $imageService->createIndexAndSave($inputs['image']);
+                $inputs['image'] = $imageService->save($inputs['image']);
             }
     
             // update check inputs
@@ -161,7 +144,7 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(News $news): RedirectResponse
     {
         DB::transaction(function () use ($news) {
             $news->tags()->detach();
@@ -176,7 +159,8 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveTags(News $news , Array $tags){
+    public function saveTags(News $news , Array $tags): void
+    {
         # remove all news tags
         $news->tags()->detach();
         collect($tags)->map(function($item) use($news){

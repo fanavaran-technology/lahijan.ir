@@ -123,7 +123,7 @@
                         @foreach ($permissions as $key => $permission )                           
                             <div class="form-group mt-2 custom-control custom-checkbox ">
                                 <input type="checkbox" name="permissions[]" @checked(in_array($permission->id , old('permissions') ?? [])) value="{{ $permission->id }}" class="custom-control-input" id="{{ $permission->key }}">
-                                <label class="custom-control-label input-title" for="{{ $permission->key }}"> {{ $permission->key }}</label>
+                                <label class="custom-control-label input-title" for="{{ $permission->key }}"> {{ $permission->title }}</label>
                             </div>
                             @endforeach
                         </div>

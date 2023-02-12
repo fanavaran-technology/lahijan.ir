@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title' , 700);
             $table->longText('body');
             $table->text('image');
-            $table->string('slug')->unique();
+            $table->string('slug' , 700)->unique();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamp('published_at')->nullable();
             $table->bigInteger('view_count')->default(0);

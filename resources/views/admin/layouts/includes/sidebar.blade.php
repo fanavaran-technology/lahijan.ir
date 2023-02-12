@@ -4,18 +4,11 @@
     </a>
     <nav class="vertnav navbar navbar-light">
       <!-- nav bar -->
-     
-            <div class="user-box text-center flex flex-fill mt-3">
-                <img   src="{{ asset( auth()->user()->profile_photo ) }}" alt="تصویر کاربر" title="{{ auth()->user()->full_name }}"
-                class="rounded-circle img-thumbnail" style="height: 60px">
-                    <p href="#" class="text-dark h5 mt-2 mb-1  ">{{ auth()->user()->full_name }}</p>
-                <a class="text-muted mb-2" type="button">@if (auth()->user()->is_admin == 1)
-                  مدیر کامل سایت
-                @else
-                 
-                @endif</a>
-            </div>
-          
+      <div class="w-100 mb-4 d-flex">
+        <a class="mx-auto mt-2 flex-fill text-center" href="./index.html">
+          <img src="{{ asset('images/settings/logo.jpg') }}" alt="logo" class="brand-sm ">
+        </a>
+      </div>
       <ul class="navbar-nav flex-fill w-100 mb-2">
         <li class="nav-item ">
           <a href="{{ route('admin.index') }}"  aria-expanded="false" class="nav-link @active('admin.index') active @endactive">

@@ -13,13 +13,6 @@ class Permission extends Model
 
     protected $fillable = ['key', 'title'];
 
-    
-    // protected $casts = [
-    //     'check_owner'   => 'boolean'
-    // ];
-
-
-
     public function roles(){
         return $this->belongsToMany(Role::class);
     }

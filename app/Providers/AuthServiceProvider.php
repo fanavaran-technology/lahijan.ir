@@ -28,10 +28,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        // Gate::define('update-news' , function(User $user){
-        //     return $user->user_type == 1 ? Response::allow()
-        //     : Response::deny('اجازه دسترسی ندارید');
-        // });
     }
 }

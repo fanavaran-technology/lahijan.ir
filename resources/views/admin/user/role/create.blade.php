@@ -49,7 +49,7 @@
                                         <section class="col-md-3">  
                                             <div class="custom-control custom-checkbox pl-2">
                                                 <input type="checkbox" class="custom-control-input" name="permissions[]" value="{{ $permission->id }}" id="{{ $permission->id }}">
-                                                <label class="custom-control-label" for="{{ $permission->id }}">{{ $permission->key }}</label>
+                                                <label class="custom-control-label" for="{{ $permission->id }}">{{ $permission->title }}</label>
                                             </div>                                
                                           </section>
                                         @endforeach
