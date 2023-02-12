@@ -72,7 +72,7 @@ class NewsController extends Controller
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-            $news = $request->user()->create($inputs);
+            $news = $request->user()->news()->create($inputs);
 
             // add tags
             if ($request->filled('tags')) {
