@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">اخبار 
+            <h2 class="h3 mb-0 page-title">اخبار
                 <span class="text-sm text-muted">({{ $allNews->total() }})</span>
             </h2>
         </div>
@@ -22,91 +22,104 @@
                                 <thead>
                                     <div class="form-row py-2">
                                         <form action="">
-                                            <input name="search" class="col-md-3 form-control custom-focus form-group" type="text"
-                                                placeholder="عنوان را جستجو و enter کنید">
+                                            <input name="search" class="col-md-3 form-control custom-focus form-group"
+                                                type="text" placeholder="عنوان را جستجو و enter کنید">
                                         </form>
                                         <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="firestation" data-action="{{ request()->fullUrlWithQuery(['firestation' => 1]) }}" @checked(request('firestation')==1) id="firestation">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)"
+                                                data-filter="firestation"
+                                                data-action="{{ request()->fullUrlWithQuery(['firestation' => 1]) }}"
+                                                @checked(request('firestation') == 1) id="firestation">
                                             <label class="custom-control-label" for="firestation">اخبار آتش نشانی</label>
                                         </div>
                                         <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="draft" data-action="{{ request()->fullUrlWithQuery(['draft' => 1]) }}" @checked(request('draft')==1) id="draft">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)"
+                                                data-filter="draft"
+                                                data-action="{{ request()->fullUrlWithQuery(['draft' => 1]) }}"
+                                                @checked(request('draft') == 1) id="draft">
                                             <label class="custom-control-label" for="draft">پیش نویس ها</label>
                                         </div>
                                         <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="status" data-action="{{ request()->fullUrlWithQuery(['status' => 1]) }}" @checked(request('status')==1) id="status">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)"
+                                                data-filter="status"
+                                                data-action="{{ request()->fullUrlWithQuery(['status' => 1]) }}"
+                                                @checked(request('status') == 1) id="status">
                                             <label class="custom-control-label" for="status">منتشر شده ها</label>
                                         </div>
                                         <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)" data-filter="pin" data-action="{{ request()->fullUrlWithQuery(['pin' => 1]) }}" @checked(request('pin')==1) id="pin">
+                                            <input type="checkbox" class="custom-control-input" onclick="filterAction(this)"
+                                                data-filter="pin"
+                                                data-action="{{ request()->fullUrlWithQuery(['pin' => 1]) }}"
+                                                @checked(request('pin') == 1) id="pin">
                                             <label class="custom-control-label" for="pin">سنجاق شده ها</label>
                                         </div>
                                     </div>
                                     <div class="row w-100 mb-4 ml-1">
                                         @request('search')
-                                        <h5>
-                                            <span class="badge bg-light text-dark border mr-2">
-                                                 جستجو : {{ request('search') }}
-                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('search')"
-                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg>
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge bg-light text-dark border mr-2">
+                                                    جستجو : {{ request('search') }}
+                                                    <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('search')"
+                                                        xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                        fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </span>
+                                            </h5>
                                         @endrequest
                                         @request('draft')
-                                        <h5>
-                                            <span class="badge bg-light text-dark border mr-2">
-                                                <small>پیش نویس ها</small>
-                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('draft')"
-                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg>
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge bg-light text-dark border mr-2">
+                                                    <small>پیش نویس ها</small>
+                                                    <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('draft')"
+                                                        xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                        fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </span>
+                                            </h5>
                                         @endrequest
                                         @request('firestation')
-                                        <h5>
-                                            <span class="badge bg-light text-dark border mr-2">
-                                                <small>اخبار آتش نشانی</small>
-                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('firestation')"
-                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg>
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge bg-light text-dark border mr-2">
+                                                    <small>اخبار آتش نشانی</small>
+                                                    <svg style="cursor:pointer" class="ml-4"
+                                                        onclick="removeFilter('firestation')" xmlns="http://www.w3.org/2000/svg"
+                                                        width="12" height="12" fill="currentColor" class="bi bi-x-lg"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </span>
+                                            </h5>
                                         @endrequest
                                         @request('status')
-                                        <h5>
-                                            <span class="badge bg-light text-dark border mr-2">
-                                                <small>منتشر شده ها</small>
-                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('status')"
-                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg>
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge bg-light text-dark border mr-2">
+                                                    <small>منتشر شده ها</small>
+                                                    <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('status')"
+                                                        xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                        fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </span>
+                                            </h5>
                                         @endrequest
                                         @request('pin')
-                                        <h5>
-                                            <span class="badge bg-light text-dark border mr-2">
-                                                <small>سنجاق شده ها</small>
-                                                <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('pin')"
-                                                    xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg>
-                                            </span>
-                                        </h5>
+                                            <h5>
+                                                <span class="badge bg-light text-dark border mr-2">
+                                                    <small>سنجاق شده ها</small>
+                                                    <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('pin')"
+                                                        xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                        fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </span>
+                                            </h5>
                                         @endrequest
                                     </div>
                                     <th>#</th>
@@ -143,9 +156,31 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.content.news.index-gallery' , $news->id) }}">
-                                              تصاویر مکان های گردشگری
-                                         </a>
+                                            <a href="{{ route('admin.content.news.index-gallery', $news->id) }}">
+                                                <svg fill="#000000" version="1.1" id="Capa_1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 445.199 445.199" xml:space="preserve">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke="#CCCCCC"
+                                                        stroke-width="10.684776"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M127.21,310.611h190.779c1.32,0,2.568-0.604,3.389-1.643c0.818-1.035,1.119-2.39,0.814-3.675 c-0.164-0.685-4.059-16.931-11.439-33.459c-10.445-23.392-22.441-35.251-35.65-35.251c-5.137,0-10.315,1.848-15.39,5.495 c-0.084,0.06-0.165,0.122-0.245,0.188c-2.949,2.459-5.785,5.422-8.789,8.561c-7.803,8.154-15.871,16.586-26.326,16.587 c-5.336,0.001-10.967-2.132-17.214-6.521c-5.665-3.979-11.953-5.996-18.689-5.996c-16.587,0-32.813,12.416-43.505,22.832 c-11.056,10.771-19.971,23.133-21.649,26.738c-0.622,1.338-0.519,2.899,0.274,4.144 C124.361,309.857,125.734,310.611,127.21,310.611z">
+                                                                </path>
+                                                                <path
+                                                                    d="M435.198,343.061H393.06V62.139c0-5.523-4.477-10-10-10h-280.92V10c0-5.523-4.477-10-10-10h-30c-5.523,0-10,4.477-10,10 v42.139H10.001c-5.523,0-10,4.477-10,10v30c0,5.523,4.477,10,10,10h42.138v280.921c0,5.523,4.477,10,10,10h280.92v42.139 c0,5.523,4.477,10,10,10h30c5.523,0,10-4.477,10-10v-42.139h42.139c5.523,0,10-4.477,10-10v-30 C445.198,347.538,440.722,343.061,435.198,343.061z M343.06,102.139v240.921h-240.92V102.139H343.06z">
+                                                                </path>
+                                                                <circle cx="270.856" cy="175.623" r="23.999">
+                                                                </circle>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </a>
                                         <td>{{ $news->publishStatus }}</td>
                                         <td>
                                             <a href="#" class="text-decoration-none text-info mr-3">

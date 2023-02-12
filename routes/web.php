@@ -34,7 +34,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // content module routes
     Route::prefix('content')->as('content.')->group(function () {
         // news routes
-        Route::resource('news', NewsController::class)->except('show')->middleware('can:manage_news');
+        Route::resource('news', NewsController::class)->except('show');
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
