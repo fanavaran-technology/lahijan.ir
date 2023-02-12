@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\User\UserRequest;
-use App\Http\Services\Image\ImageService;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Models\ACL\Role;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\ACL\Permission;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Services\Image\ImageService;
+use App\Http\Requests\Admin\User\UserRequest;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Database\Seeders\PermissionSeeder;
+
 
 class UserController extends Controller
 {
@@ -19,6 +25,8 @@ class UserController extends Controller
         $this->middleware('users.prohibition')->except('index', 'create', 'store');
     }
 
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +34,13 @@ class UserController extends Controller
      */
     public function index(): View
     {
+
+       // create all permissions
+       if (Permission::all()->isEmpty()) {
+        $permissionSeed = new PermissionSeeder;
+        $permissionSeed->run();
+    }
+    
         $users = User::query();
 
         if ($searchString = request('search'))
@@ -47,9 +62,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create(User $user): View
     {
-        return view('admin.user.users.create');
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.user.users.create' , compact('roles' , 'user' , 'permissions') );
     }
 
     /**
@@ -58,7 +75,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request , ImageService $imageService) :RedirectResponse
+    public function store(UserRequest $request , User $user, ImageService $imageService) :RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
@@ -69,7 +86,15 @@ class UserController extends Controller
                 $image = $imageService->save($request->profile_photo);
                 $inputs['profile_photo'] = $image;
             }
-            User::create($inputs);
+           $user = User::create($inputs);
+
+           if ($user->is_staff) {
+            if ($request->has('roles'))
+            $user->roles()->sync($inputs['roles']);
+
+            if ($request->has('permissions'))
+            $user->permissions()->sync($inputs['permissions']);
+           }
         });
 
         return to_route('admin.user.users.index')->with('toast-success' , 'کاربر جدید ایجاد شد.');
@@ -83,7 +108,9 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('admin.user.users.edit', compact('user'));
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('admin.user.users.edit', compact('user' , 'roles' , 'permissions'));
     }
 
     /**
@@ -100,6 +127,16 @@ class UserController extends Controller
 
             [$inputs['is_staff'], $inputs['is_block']] = [$inputs['is_staff'] ?? 0, $inputs['is_block'] ?? 0];
             $user->update($inputs);
+
+            if ($user->is_staff) {
+                $request->has('roles') ?
+                $user->roles()->sync($inputs['roles']) :
+                $user->roles()->sync([]);
+
+                $request->has('permissions') ?
+                $user->permissions()->sync($inputs['permissions']) :
+                $user->permissions()->sync([]);
+               }
         });
 
         return to_route('admin.user.users.index')->with('toast-success' , 'تغییرات روی کاربر اعمال شد.');
@@ -111,13 +148,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user): RedirectResponse
-    {
-        if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
-            return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
-        }
-
-        $user->delete();
-        return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
+   
+public function destroy(User $user): RedirectResponse
+{
+    if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
+        return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
     }
+
+    $user->delete();
+    return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
+}
+
+    
 }

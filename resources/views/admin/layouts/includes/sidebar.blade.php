@@ -21,6 +21,7 @@
         <small>بخش محتوا</small>
       </p>
       <ul class="navbar-nav flex-fill w-100 mb-2">
+        @can('manage_news')
         <li class="nav-item dropdown @active('admin.content.news') active @endactive">
           <a href="#news" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
@@ -39,6 +40,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_places')
         <li class="nav-item dropdown @active('admin.content.places') active @endactive">
           <a href="#places" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map" viewBox="0 0 16 16">
@@ -57,6 +60,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_public_cell')
         <li class="nav-item dropdown @active('admin.content.public-calls') active @endactive">
           <a href="#public-call" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check" viewBox="0 0 16 16">
@@ -75,6 +80,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_menus')
         <li class="nav-item dropdown @active('admin.content.menus') active @endactive">
           <a href="#menu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-up" viewBox="0 0 16 16">
@@ -92,6 +99,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_sliders')
         <li class="nav-item dropdown @active('admin.content.sliders') active @endactive">
           <a href="#slider" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <i class="fe fe-layers
@@ -108,6 +117,8 @@
             </li>
           </ul>
         </li>
+        @endcan
+        @can('manage_pages')
         <li class="nav-item dropdown @active('admin.content.pages') active @endactive">
           <a href="#page" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
@@ -126,9 +137,11 @@
             </li>
           </ul>
         </li>
+        @endcan
         <p class="text-muted text-sm nav-heading mt-2 mb-1">
           <small>بخش کاربران و دسترسی ها </small>
         </p>
+        @can('manage_users')
         <li class="nav-item dropdown @active('admin.user.users') active @endactive">
           <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
@@ -143,6 +156,25 @@
             </li>
             <li class="nav-item">
               <a class="nav-link pl-3" href="{{ route('admin.user.users.create') }}"><span class="ml-1 item-text">کاربر جدید</span></a>
+            </li>
+          </ul>
+        </li>
+        @endcan
+        <li class="nav-item dropdown @active('admin.user.roles') active @endactive">
+          <a href="#roles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-exclamation" viewBox="0 0 16 16">
+              <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+              <path d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg>
+            <span class="ml-3 item-text">سطوح دسترسی</span>
+          </a>
+          <ul class="collapse list-unstyled pl-4 w-100" id="roles">
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.user.roles.index') }}"><span class="ml-1 item-text">همه نقش ها </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-3" href="{{ route('admin.user.roles.create') }}"><span class="ml-1 item-text">نقش جدید</span></a>
             </li>
           </ul>
         </li>

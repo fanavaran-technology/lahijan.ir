@@ -78,6 +78,7 @@
                                     <th>نام کاربر</th>
                                     <th>مسدود است</th>
                                     <th>نقش</th>
+                                    <th>دسترسی</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
@@ -98,7 +99,24 @@
                                             <label class="custom-control-label align-items-center" for="user-{{ $user->id }}-status"></label>
                                         </div>
                                     </td>
-                                    <td>-</td>
+                                    <td>
+                                        @forelse ($user->roles as $role)
+                                            <div>
+                                                {{ $role->title }}
+                                            </div>
+                                        @empty
+                                            <small class="text-danger">نقشی یافت نشد</small>
+                                        @endforelse
+                                    </td>
+                                    <td>
+                                        @forelse ($user->permissions as $permission)
+                                            <div>
+                                                {{ $permission->title }}
+                                            </div>
+                                        @empty
+                                            <small class="text-danger">دسترسی یافت نشد</small>
+                                        @endforelse
+                                    </td>
                                     <td>
                                         <a href="#" class="text-decoration-none text-info mr-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
@@ -141,7 +159,5 @@
 
 
 @section('script')
-
     @include('admin.alerts.confirm')
-
 @endsection

@@ -111,26 +111,21 @@
                     <div class="card-body">
                         <div class="mr-3 font-weight-bold text-muted">انتخاب نقش</div>
                         <div class="d-flex flex-wrap mt-2">
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1"
-                                    class="custom-control-input">
-                                <label class="custom-control-label input-title"> مدیر</label>
+                        @foreach ($roles as $key => $role )                           
+                            <div class="form-group mt-2 custom-control custom-checkbox ">
+                                <input type="checkbox" name="roles[]" @checked(in_array($role->id , old('roles') ?? [])) value="{{ $role->id }}" class="custom-control-input" id="{{ $role->id }}">
+                                <label class="custom-control-label input-title" for="{{ $role->id }}"> {{ $role->title }}</label>
                             </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1"
-                                    class="custom-control-input">
-                                <label class="custom-control-label input-title">مدیریت محتوا</label>
+                            @endforeach
+                        </div>
+                        <div class="mr-3 font-weight-bold text-muted">انتخاب دسترسی</div>
+                        <div class="d-flex flex-wrap mt-2">
+                        @foreach ($permissions as $key => $permission )                           
+                            <div class="form-group mt-2 custom-control custom-checkbox ">
+                                <input type="checkbox" name="permissions[]" @checked(in_array($permission->id , old('permissions') ?? [])) value="{{ $permission->id }}" class="custom-control-input" id="{{ $permission->key }}">
+                                <label class="custom-control-label input-title" for="{{ $permission->key }}"> {{ $permission->title }}</label>
                             </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1"
-                                    class="custom-control-input">
-                                <label class="custom-control-label input-title">شفاف سازی</label>
-                            </div>
-                            <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                <input type="checkbox" value="1"
-                                    class="custom-control-input">
-                                <label class="custom-control-label input-title">مدیریت کاربران</label>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- end places content -->

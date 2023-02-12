@@ -113,6 +113,7 @@
                                     <th>عناوین</th>
                                     <th>پیش نویس</th>
                                     <th>سنجاق شده</th>
+                                    <th>گالری تصاویر</th>
                                     <th>وضعیت انتشار</th>
                                     <th>عملیات</th>
                                     </tr>
@@ -141,6 +142,10 @@
                                                     for="news-{{ $news->id }}-pined"></label>
                                             </div>
                                         </td>
+                                        <td>
+                                            <a href="{{ route('admin.content.news.index-gallery' , $news->id) }}">
+                                              تصاویر مکان های گردشگری
+                                         </a>
                                         <td>{{ $news->publishStatus }}</td>
                                         <td>
                                             <a href="#" class="text-decoration-none text-info mr-3">

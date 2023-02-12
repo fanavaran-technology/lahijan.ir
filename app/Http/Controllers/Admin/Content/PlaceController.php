@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin\Content;
 
 use Illuminate\Http\Request;
 use App\Models\Content\Place;
+use App\Models\ACL\Permission;
 use App\Models\Content\Gallery;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Database\Seeders\PermissionSeeder;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\PlaceRequest;
 use App\Http\Requests\Admin\Content\PlacesGalleryRequest;
@@ -121,7 +123,6 @@ class PlaceController extends Controller
 
     public function indexGallery(Place $place)
     {
-        // $places = Gallery::orderBy('created_at', 'desc')->where('gallerizable_type', 'App\Models\Content\Place')->simplePaginate(15);
         return view("admin.content.place.gallery.index", compact('place'));
     }
 
