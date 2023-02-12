@@ -81,7 +81,7 @@
                                     </td>
                                     <td>
                                         <label>
-                                            <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})" data-url="{{ route('admin.content.sliders.is_draft', $slider->id) }}" type="checkbox" @if ($slider->is_draft === 1)
+                                            <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})" data-url="{{ route('admin.content.sliders.status', $slider->id) }}" type="checkbox" @if ($slider->status === 1)
                                             checked
                                             @endif>
                                         </label>
@@ -139,7 +139,7 @@
             url : url,
             type : "GET",
             success : function(response){
-                if(response.is_draft){
+                if(response.status){
                     if(response.checked){
                         element.prop('checked', true);
                         successToast('اسلایدر  با موفقیت فعال شد')

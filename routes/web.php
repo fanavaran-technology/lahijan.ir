@@ -53,7 +53,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         
         // slider routes  
         Route::resource('sliders', SliderController::class)->except('show')->middleware('can:manage_sliders');
-        Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
+        Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
 
         // page routes  
         Route::resource('pages', PageController::class)->except('show')->middleware('can:manage_pages');
