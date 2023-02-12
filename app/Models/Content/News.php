@@ -24,10 +24,6 @@ class News extends Model
         'is_fire_station',
     ];
 
-    protected $casts = [
-        'image' => 'array' ,
-    ];
-
     public function sluggable(): array
     {
         return [
