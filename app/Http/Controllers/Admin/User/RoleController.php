@@ -10,6 +10,13 @@ use App\Http\Requests\Admin\User\RoleRequest;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_roles');
+        $this->middleware('can:edit_roles')->only('edit', 'update');
+        $this->middleware('can:create_roles')->only('store', 'create');
+        $this->middleware('can:delete_roles')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

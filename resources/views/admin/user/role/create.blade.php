@@ -35,18 +35,18 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="validationCustom3">عنوان نقش</label>
                                             <input type="text" name="title" placeholder="عنوان نقش را وراد کنید""
-                                                class="form-control" id="validationCustom3" value="{{ old('title') }}">
+                                                class="form-control custom-focus" id="validationCustom3" value="{{ old('title') }}">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="validationCustom3">توضیح نقش</label>
                                             <input type="text" name="description" placeholder="توضیح نقش را وراد کنید""
-                                                class="form-control" id="validationCustom3" value="{{ old('description') }}">
+                                                class="form-control custom-focus" id="validationCustom3" value="{{ old('description') }}">
                                         </div>
                                     </div>
                                     <section class="col-12">
                                       <section class="row border-top mt-3 py-3">
                                         @foreach ($permissions as $permission)
-                                        <section class="col-md-3">  
+                                        <section class="col-md-3 mt-2">  
                                             <div class="custom-control custom-checkbox pl-2">
                                                 <input type="checkbox" class="custom-control-input" name="permissions[]" value="{{ $permission->id }}" id="{{ $permission->id }}">
                                                 <label class="custom-control-label" for="{{ $permission->id }}">{{ $permission->title }}</label>

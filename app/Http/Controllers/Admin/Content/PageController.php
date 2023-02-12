@@ -10,6 +10,13 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_pages');
+        $this->middleware('can:edit_page')->only('edit', 'update');
+        $this->middleware('can:create_page')->only('store', 'create');
+        $this->middleware('can:delete_page')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

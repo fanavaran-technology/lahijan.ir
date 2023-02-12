@@ -23,6 +23,10 @@ class UserController extends Controller
     {   
         $this->middleware('password.confirm')->except('index' , 'create' , 'store');
         $this->middleware('users.prohibition')->except('index', 'create', 'store');
+        $this->middleware('can:manage_users');
+        $this->middleware('can:edit_user')->only('edit', 'update');
+        $this->middleware('can:create_user')->only('store', 'create');
+        $this->middleware('can:delete_user')->only('destroy');
     }
 
     

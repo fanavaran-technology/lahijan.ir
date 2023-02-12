@@ -12,6 +12,14 @@ use Illuminate\View\View;
 
 class SliderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_sliders');
+        $this->middleware('can:edit_slider')->only('edit', 'update');
+        $this->middleware('can:delete_slider')->only('store', 'create');
+        $this->middleware('can:create_slider')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

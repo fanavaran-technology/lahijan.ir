@@ -141,7 +141,7 @@
         <p class="text-muted text-sm nav-heading mt-2 mb-1">
           <small>بخش کاربران و دسترسی ها </small>
         </p>
-        {{-- @can('manage_users') --}}
+        @can('manage_users')
         <li class="nav-item dropdown @active('admin.user.users') active @endactive">
           <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
@@ -159,7 +159,8 @@
             </li>
           </ul>
         </li>
-        {{-- @endcan --}}
+        @endcan
+        @can('manage_roles')
         <li class="nav-item dropdown @active('admin.user.roles') active @endactive">
           <a href="#roles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-exclamation" viewBox="0 0 16 16">
@@ -178,6 +179,7 @@
             </li>
           </ul>
         </li>
+        @endcan
         <li class="nav-item dropdown">
           <a href="#shafaf" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
             <i class="fe fe-pie-chart fe-16"></i>

@@ -7,9 +7,11 @@
                 <span class="text-sm text-muted">({{ $places->total() }})</span>
             </h2>
         </div>
+        @can('create_places')
         <div class="col-auto">
             <a href="{{ route('admin.content.places.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
         </div>
+        @endcan
         <div class="col-12">
 
             <div class="row my-4">
@@ -133,6 +135,7 @@
                                                         d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                 </svg>
                                             </a>
+                                            @can('edit_places')
                                             <a href="{{ route('admin.content.places.edit', $place->id) }}"
                                                 class="text-decoration-none text-primary mr-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -143,6 +146,8 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
                                             </a>
+                                            @endcan
+                                            @can('delete_places')
                                             <form action="{{ route('admin.content.places.destroy', $place->id) }}"
                                                 class="d-inline" method="post">
                                                 @csrf
@@ -158,6 +163,7 @@
                                                     </svg>
                                                     </a>
                                             </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
