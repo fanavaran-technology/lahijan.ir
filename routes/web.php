@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\Content\PublicCallController;
 |
 */
 
+Route::get('/' , fn() => dd('this is home page'))->name('home');
+
 require __DIR__.'/auth.php';
 
 // admin routes

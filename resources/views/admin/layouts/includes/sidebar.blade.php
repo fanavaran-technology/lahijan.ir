@@ -5,7 +5,7 @@
     <nav class="vertnav navbar navbar-light">
       <!-- nav bar -->
       <div class="w-100 mb-4 d-flex">
-        <a class="mx-auto mt-2 flex-fill text-center" href="./index.html">
+        <a class="mx-auto mt-2 flex-fill text-center" href="{{ route('home') }}">
           <img src="{{ asset('images/settings/logo.jpg') }}" alt="logo" class="brand-sm ">
         </a>
       </div>
@@ -193,12 +193,6 @@
                   جدید</span></a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a href="./setting.html" data-toggle="collapse" aria-expanded="false" class="nav-link">
-            <i class="fe fe-settings fe-16"></i>
-            <span class="ml-3 item-text">تنظیمات</span>
-          </a>
         </li>
       </ul>
     </nav>
