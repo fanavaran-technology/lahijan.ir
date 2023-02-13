@@ -70,17 +70,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
             'roles'          =>  RoleController::class,
         ] , ['except' => 'show']);
 
-        Route::get('permissions/{user}', [UserController::class, 'permissions'])->name('uesrs.permissions');
-        Route::post('permissions/{user}/store', [UserController::class, 'permissionStore'])->name('users.permissions.store');
-
-        //role
-        Route::get('roles/{role}/permission-form', [RoleController::class, 'permissionForm'])->name('roles.permission-form');
-        Route::put('roles/{role}/permission-update', [RoleController::class, 'permissionUpdate'])->name('roles.permission-update');
-
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('change-password/{user}', ChangePasswordController::class)->name('change-password');
     });
 
+    // setting routes
+    Route::resource('settings' , SettingController::class)->only('index' , 'store');
 });
 
