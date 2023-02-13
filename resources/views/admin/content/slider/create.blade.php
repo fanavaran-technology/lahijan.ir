@@ -47,7 +47,7 @@
                       <div class="form-group col-md-12 my-2">
                           <input type="text" name="url" value="{{ old('url' , request('url') ?? URL::to('/')) }}" 
                               placeholder="URL تصویر را اینجا وارد کنید"
-                              class="form-control custom-input-size custom-focus" id="title">
+                              class="form-control url custom-input-size custom-focus" id="title">
                       </div>
                   </div>
                 </div> <!-- /. col -->
@@ -115,7 +115,7 @@
                     <div class="form-group custom-control custom-checkbox ">
                         <input type="checkbox" name="status" value="1" @checked(old('status'))
                             class="custom-control-input" id="status">
-                        <label class="custom-control-label input-title" for="status">وضعیت اسلایدر</label>
+                        <label class="custom-control-label input-title" for="status">اسلاید فعال باشد</label>
                     </div>
                     <label for="published_at_view" class="input-title">
                         تعیین زمان انتشار
