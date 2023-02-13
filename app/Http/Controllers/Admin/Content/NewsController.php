@@ -16,6 +16,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class NewsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:manage_news');
+        $this->middleware('can:edit_news')->only('edit', 'update');
+        $this->middleware('can:create_news')->only('store', 'create');
+        $this->middleware('can:delete_news')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -196,7 +204,9 @@ class NewsController extends Controller
 
     public function destroyGallery(Gallery $gallery)
     {
+       
         $gallery->delete();
         return back()->with('cute-success', 'تصویر حذف گردید.');
+        
     }
 }

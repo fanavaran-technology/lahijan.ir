@@ -3,7 +3,7 @@
 @section('head-tag')
 
 @endsection
-
+@can('set_user_permission_role')
 @section('content')
     <div class="d-flex justify-content-between">
         <div class="col mb-2">
@@ -63,6 +63,7 @@
         </div> <!-- .row -->
     </form>
 @endsection
+@endcan
 
 @section('script')
 @endsection

@@ -36,7 +36,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // content module routes
     Route::prefix('content')->as('content.')->group(function () {
         // news routes
-        Route::resource('news', NewsController::class)->except('show')->middleware('can:manage_news');
+        Route::resource('news', NewsController::class)->except('show');
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
@@ -55,7 +55,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         
         // slider routes  
         Route::resource('sliders', SliderController::class)->except('show')->middleware('can:manage_sliders');
-        Route::get('sliders/{slider}/is_draft', [SliderController::class, 'is_draft'])->name('sliders.is_draft');
+        Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
 
         // page routes  
         Route::resource('pages', PageController::class)->except('show')->middleware('can:manage_pages');

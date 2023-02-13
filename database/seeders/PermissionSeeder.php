@@ -20,7 +20,6 @@ class PermissionSeeder extends Seeder
             Permission::create([
                 'key'           => $key,
                 'title'         => $permission['title'],
-                'check_owner'   => $permission['check_owner'] ? '1' : '0'
             ]);
         }
     }

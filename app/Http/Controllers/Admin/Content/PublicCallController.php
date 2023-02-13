@@ -13,6 +13,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PublicCallController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_public_cell');
+        $this->middleware('can:edit_public_cell')->only('edit', 'update');
+        $this->middleware('can:create_public_cell')->only('store', 'create');
+        $this->middleware('can:delete_public_cell')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

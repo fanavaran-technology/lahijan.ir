@@ -28,68 +28,108 @@
     @endforeach
   </div>
   @endif
-  <form action="{{ route('admin.content.sliders.store') }}" method="POST" enctype="multipart/form-data">
+
+  <form action="{{ route('admin.content.sliders.store') }}" method="post" enctype="multipart/form-data" id="form">
     @csrf
     <div class="row">
-      <div class="col-12 col-md-12">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <form class="needs-validation" novalidate="">
-                  <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                      <label for="validationCustom3">alt تصویر</label>
-                      <input type="text" name="alt"  placeholder="alt را اینجا وارد کنید"  class="form-control" id="validationCustom3" value="{{ old('alt') }}" >
-                     
-                    </div>
-                    <div class="col-md-12 mb-3">
-                      <label for="validationCustom3">URL</label>
-                      <input type="text" name="url"  value="{{ old('url' , request('url') ?? URL::to('/')) }}"  class="form-control direction-ltr " id="validationCustom3" value="{{ old('url') }}" >
-                     
-                    </div>
-                    
-                  </div> <!-- /.form-row -->
-                <!-- /.form-row -->
-                  <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                      <label for="validationSelect2">وضعیت</label>
-                      <select class="form-control select2 select2-hidden-accessible" name="status" id="validationSelect2"  data-select2-id="validationSelect2" tabindex="-1" aria-hidden="true">
-                        <option value="0" @if(old('status') == 0) selected @endif>غیرفعال</option>
-                        <option value="1" @if(old('status') == 1) selected @endif>فعال</option>
-                        </optgroup>
-                        
-                      </select>
-                      <div class="form-group mt-3">
-                        <label for="customFile">تصویر شاخص را انتخاب کنید</label>
-                        <div class="custom-file">
-                          <input type="file" name="image" class=" form-control custom-focus" id="customFile">
-                           <label class="custom-file-label" for="customFile">choose file</label>
+        <div class="col-12 col-md-9 position-sticky">
+            <div class="row">
+                <!-- news content -->
+                <div class="col-md-12">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 my-2">
+                            <input type="text" name="alt" value="{{ old('alt') }}" 
+                                placeholder="alt تصویر را اینجا وارد کنید"
+                                class="form-control custom-input-size custom-focus" id="title">
                         </div>
-                        
-                      </div>
                     </div>
-                      <div class="col-md-6 mb-3">
-                        <label for="date-input1">تاریخ انتشار</label>
-                        <div class="input-group">
-                          <input type="text" name="published_at" id="published_at" class="form-control  d-none">
-                          <input type="text" id="published_at_view" class="form-control rounded">
-                          <div class="input-group-append">
-                            <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16 mx-2"></span></div>
-                          </div>
-                        </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12 my-2">
+                          <input type="text" name="url" value="{{ old('url' , request('url') ?? URL::to('/')) }}" 
+                              placeholder="URL تصویر را اینجا وارد کنید"
+                              class="form-control custom-input-size custom-focus" id="title">
                       </div>
                   </div>
-                  <button class="btn btn-primary" type="submit">ثبت کنید</button>
-                </form>
-              </div> <!-- /.card-body -->
-            </div> <!-- /.card -->
-          </div>
-
-        </div> <!-- /. end-section -->
-      </div>
+                </div> <!-- /. col -->
+                <!-- end news content -->
+            </div> <!-- /. end-section -->
+        </div>
+        <div class="col-12 col-md-3 my-2 px-0">
+            <div class="card">
+                <div class="card-header" onclick="openCard(this)">
+                    <div class="row d-flex justify-content-between px-2">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-collection-play" viewBox="0 0 16 16">
+                                <path
+                                    d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1zm2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848l-4-2.5z" />
+                                <path
+                                    d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5h13z" />
+                            </svg>
+                            <span class="ml-1">چند رسانه ای</span>
+                        </div>
+                        <span class="card-dropdown-button caret-up">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <label for="" class="input-title">
+                        آپلود تصویر شاخص
+                    </label>
+                    <div class="form-group inputDnD">
+                        <input type="file" class="form-control-file" name="image" id="inputFile"
+                            onchange="readUrl(this)" data-title="کلیک کنید یا تصویر را بکشید">
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-2">
+                <div class="card-header" onclick="openCard(this)">
+                    <div class="row d-flex justify-content-between px-2">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-calendar2-check" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                <path
+                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
+                                <path
+                                    d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z" />
+                            </svg>
+                            <span class="ml-1">تنظیم و انتشار</span>
+                        </div>
+                        <span class="card-dropdown-button caret-up">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group custom-control custom-checkbox ">
+                        <input type="checkbox" name="status" value="1" @checked(old('status'))
+                            class="custom-control-input" id="status">
+                        <label class="custom-control-label input-title" for="status">وضعیت اسلایدر</label>
+                    </div>
+                    <label for="published_at_view" class="input-title">
+                        تعیین زمان انتشار
+                    </label>
+                    <input type="hidden" name="published_at" id="published_at" value="{{ old('published_at') }}">
+                    <input id="published_at_view" class="form-control custom-focus">
+                </div>
+                <div class="card-footer d-flex justify-content-between px-2">
+                    <button type="submit" id="save-btn" class="btn btn-primary ml-2">ذخیره</button>
+                </div>
+            </div>
+        </div>
     </div> <!-- .row -->
-  </form>
+</form>
 @endsection
 
 @section('script')
@@ -118,5 +158,22 @@ $(document).ready(function () {
                     altField: '#published_at'
                 })
             });
+</script>
+
+
+<script>
+  $(document).ready(function() {
+      $('#published_at_view').persianDatepicker({
+          altField: '#published_at',
+          format: 'YYYY/MM/DD',
+          minDate: "today",
+          timePicker: {
+              enabled: true,
+              meridiem: {
+                  enabled: true
+              }
+          }
+      })
+  });
 </script>
 @endsection

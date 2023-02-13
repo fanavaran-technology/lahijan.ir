@@ -16,6 +16,14 @@ use Illuminate\View\View;
 
 class PlaceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_places');
+        $this->middleware('can:edit_places')->only('edit', 'update');
+        $this->middleware('can:create_places')->only('store', 'create');
+        $this->middleware('can:delete_places')->only('destroy');
+    }   
     /**
      * Display a listing of the resource.
      *

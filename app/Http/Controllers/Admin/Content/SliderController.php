@@ -12,6 +12,14 @@ use Illuminate\View\View;
 
 class SliderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_sliders');
+        $this->middleware('can:edit_slider')->only('edit', 'update');
+        $this->middleware('can:delete_slider')->only('store', 'create');
+        $this->middleware('can:create_slider')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -124,18 +132,18 @@ class SliderController extends Controller
 
     }
 
-    public function is_draft(Slider $slider)
+    public function status(Slider $slider)
     {
-        $slider->is_draft = $slider->is_draft == 0 ? 1 : 0;
+        $slider->status = $slider->status == 0 ? 1 : 0;
         $result = $slider->save();
         if ($result) {
-            if ($slider->is_draft == 0) {
-                return response()->json(['is_draft' => true, 'checked' => false]);
+            if ($slider->status == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
             } else {
-                return response()->json(['is_draft' => true, 'checked' => true]);
+                return response()->json(['status' => true, 'checked' => true]);
             }
         } else {
-            return response()->json(['is_draft' => false]);
+            return response()->json(['status' => false]);
         }
     }
 }

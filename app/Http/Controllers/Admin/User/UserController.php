@@ -23,6 +23,10 @@ class UserController extends Controller
     {   
         $this->middleware('password.confirm')->except('index' , 'create' , 'store');
         $this->middleware('users.prohibition')->except('index', 'create', 'store');
+        $this->middleware('can:manage_users');
+        $this->middleware('can:edit_user')->only('edit', 'update');
+        $this->middleware('can:create_user')->only('store', 'create');
+        $this->middleware('can:delete_user')->only('destroy');
     }
 
     
@@ -34,12 +38,6 @@ class UserController extends Controller
      */
     public function index(): View
     {
-
-       // create all permissions
-       if (Permission::all()->isEmpty()) {
-        $permissionSeed = new PermissionSeeder;
-        $permissionSeed->run();
-    }
     
         $users = User::query();
 
@@ -151,6 +149,7 @@ class UserController extends Controller
    
 public function destroy(User $user): RedirectResponse
 {
+    
     if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
         return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
     }

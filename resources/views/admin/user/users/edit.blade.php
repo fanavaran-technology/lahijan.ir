@@ -101,6 +101,7 @@
                     @php
                         $userRoles = $user->roles->pluck('id')->toArray();
                     @endphp
+                    @can('set_user_permission')
                     <div class="card-body">
                         <div class="mr-3 font-weight-bold text-muted">انتخاب نقش</div>
                         <div class="d-flex flex-wrap mt-2">
@@ -121,15 +122,16 @@
                         <div class="d-flex flex-wrap mt-2">
                             @foreach ($permissions as $key => $permission)
                                 <div class="form-group mt-2 custom-control custom-checkbox mr-4">
-                                    <input type="checkbox" name="permissions[]" @checked(in_array($permission->id, old('permissions', $userRoles) ?? []))
+                                    <input type="checkbox" name="permissions[]" @checked(in_array($permission->id, old('permissions', $userPermissions) ?? []))
                                         value="{{ $permission->id }}" class="custom-control-input"
                                         id="{{ $permission->key }}">
                                     <label class="custom-control-label input-title" for="{{ $permission->key }}">
-                                        {{ $permission->key }}</label>
+                                        {{ $permission->title }}</label>
                                 </div>
                             @endforeach
                         </div>
                     </div>
+                    @endcan
                     <!-- end places content -->
                 </div>
             </div>
@@ -157,12 +159,14 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @can('set_user_permission')
                         <div class="form-group mt-2 custom-control custom-checkbox ">
                             <input type="checkbox" name="is_staff" value="1" @checked(old('is_staff', $user->is_staff))
                                 class="custom-control-input" id="is_staff">
                             <label class="custom-control-label input-title" for="is_staff">به این کاربر مجوز داده
                                 شود</label>
                         </div>
+                        @endcan
                         <div class="form-group mt-2 custom-control custom-checkbox ">
                             <input type="checkbox" name="email_verified_at"
                                 @if ($user->email_verified_at) disabled @endif value="1"

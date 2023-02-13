@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('key');
             $table->string('title');
-            $table->tinyInteger('check_owner')->default(0);
             $table->timestamps();
         });
     }

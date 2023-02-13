@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_menus');
+        $this->middleware('can:edit_menu')->only('edit', 'update');
+        $this->middleware('can:create_menu')->only('store', 'create');
+        $this->middleware('can:delete_menu')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
