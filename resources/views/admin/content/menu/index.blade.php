@@ -78,13 +78,13 @@
                                         </td>
                                         <td>{{ $menu->parent_menu }}</td>
                                         <td>
-                                            <div class="custom-control item-danger custom-checkbox align-items-center">
-                                                <input type="checkbox" @checked($menu->status)
-                                                    class="custom-control-input item-success align-items-center"
-                                                    id="place-{{ $menu->id }}-status">
-                                                <label class="custom-control-label align-items-center"
-                                                    for="place-{{ $menu->id }}-status"></label>
-                                            </div>
+                                            @can('edit_menu')
+                                            <label>
+                                                <input id="{{ $menu->id }}" onchange="changeStatus({{ $menu->id }})"
+                                                    data-url="{{ route('admin.content.menus.status', $menu->id) }}"
+                                                    type="checkbox" @if ($menu->status === 1) checked @endif>
+                                            </label>
+                                            @endcan
                                         </td>
                                         <td>
                                             @can('edit_menu')
@@ -136,4 +136,34 @@
 
 @section('script')
     @include('admin.alerts.confirm')
+    <script type="text/javascript">
+        function changeStatus(id) {
+            var element = $("#" + id)
+            var url = element.attr('data-url')
+            var elementValue = !element.prop('checked');
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            element.prop('checked', true);
+                            successToast('منو فعال شد')
+                        } else {
+                            element.prop('checked', false);
+                            successToast('منو غیر فعال شد')
+                        }
+                    } else {
+                        element.prop('checked', elementValue);
+                        errorToast('مشکلی بوجود امده است')
+                    }
+                },
+                error: function() {
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد')
+                }
+            });
+        }
+    </script>
 @endsection

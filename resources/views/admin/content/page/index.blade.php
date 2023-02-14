@@ -78,7 +78,7 @@
                                     </div>
                                     <th>#</th>
                                     <th>عناوین</th>
-                                    <th>وضعیت نمایش</th>
+                                    <th>پیش نویس </th>
                                     <th> دسترسی سریع</th>
                                     <th>عملیات</th>
                                     </tr>
@@ -90,20 +90,20 @@
                                         <small>{{ $page->title }}</small>
                                     </td>
                                     <td>
+                                        @can('edit_page')
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="{{ $page->id }}" onchange="changeStatus({{ $page->id }})" data-url="{{ route('admin.content.pages.is_draft', $page->id) }}" type="checkbox" @if ($page->is_draft === 1)
-                                            checked
-                                            @endif>
+                                            <input class="custom-control-input" id="{{ $page->id }}" onchange="changeStatus({{ $page->id }})" data-url="{{ route('admin.content.pages.is_draft', $page->id) }}" type="checkbox" @checked($page->is_draft)>
                                             <label class="custom-control-label" for="{{ $page->id }}"></label>
                                         </div>
+                                        @endcan
                                     </td>
                                     <td>
+                                        @can('edit_page')
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="{{ $page->id }}-access" onchange="changeStatus1({{ $page->id }})" data-url="{{ route('admin.content.pages.is_quick_access', $page->id) }}" type="checkbox" @if ($page->is_quick_access === 1)
-                                            checked
-                                            @endif>
+                                            <input class="custom-control-input" id="{{ $page->id }}-access" onchange="changeStatus1({{ $page->id }})" data-url="{{ route('admin.content.pages.is_quick_access', $page->id) }}" type="checkbox" @checked($page->is_quick_access)>
                                             <label class="custom-control-label" for="{{ $page->id }}-access"></label>
                                         </div>
+                                        @endcan
                                     </td>
                                     
                                     <td>
@@ -167,16 +167,16 @@
                 if(response.is_draft){
                     if(response.checked){
                         element.prop('checked', true);
-                        successToast('صفحه  با موفقیت فعال شد')
+                        successToast('صفحه فعال شد')
                     }
                     else{
                         element.prop('checked', false);
-                        successToast('صفحه  با موفقیت غیر فعال شد')
+                        successToast('صفحه غیر فعال شد')
                     }
                 }
                 else{
                     element.prop('checked', elementValue);
-                    errorToast('هنگام ویرایش مشکلی بوجود امده است')
+                    errorToast('مشکلی بوجود امده است')
                 }
             },
             error : function(){
@@ -200,16 +200,16 @@
                 if(response.is_quick_access){
                     if(response.checked){
                         element.prop('checked', true);
-                        successToast('دسترسی سریع با موفقیت فعال شد')
+                        successToast('به دسترسی های سریع اضافه گردید')
                     }
                     else{
                         element.prop('checked', false);
-                        successToast('دسترسی سریع با موفقیت غیر فعال شد')
+                        successToast('از دسترسی های سریع حذف شد.')
                     }
                 }
                 else{
                     element.prop('checked', elementValue);
-                    errorToast('هنگام ویرایش مشکلی بوجود امده است')
+                    errorToast('مشکلی بوجود امده است')
                 }
             },
             error : function(){

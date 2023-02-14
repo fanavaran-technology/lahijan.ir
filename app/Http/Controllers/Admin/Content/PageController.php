@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PageRequest;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PageController extends Controller
 {
     public function __construct()
     {
         $this->middleware('can:manage_pages');
-        $this->middleware('can:edit_page')->only('edit', 'update');
+        $this->middleware('can:edit_page')->only('edit', 'update' , 'is_draft' ,'isQuickAccess');
         $this->middleware('can:create_page')->only('store', 'create');
         $this->middleware('can:delete_page')->only('destroy');
     }
@@ -45,7 +46,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.page.create');
     }
@@ -56,7 +57,7 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PageRequest $request)
+    public function store(PageRequest $request): RedirectResponse
     {
         $inputs = $request->all();
         $inputs['user_id'] = 1;
@@ -70,7 +71,7 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(Page $page): View
     {
         return view('admin.content.page.edit' , compact('page'));
     }
@@ -82,7 +83,7 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PageRequest $request, Page $page)
+    public function update(PageRequest $request, Page $page): RedirectResponse
     {
         $inputs = $request->all();
 
@@ -100,9 +101,9 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $page)
+    public function destroy(Page $page): RedirectResponse
     {
-        $result = $page->delete();
+        $page->delete();
         return back()->with('toast-success', 'صفحه حذف گردید.');
     }
 

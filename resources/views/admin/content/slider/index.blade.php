@@ -85,11 +85,13 @@
                                             {{ jalaliDate($slider->published_at) }}
                                         </td>
                                         <td>
+                                            @can('edit_slider')
                                             <label>
                                                 <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})"
                                                     data-url="{{ route('admin.content.sliders.status', $slider->id) }}"
                                                     type="checkbox" @if ($slider->status === 1) checked @endif>
                                             </label>
+                                            @endcan
                                         </td>
                                         <td>
                                             <img src="{{ asset($slider->image) }}" alt="" width="100"
@@ -164,14 +166,14 @@
                     if (response.status) {
                         if (response.checked) {
                             element.prop('checked', true);
-                            successToast('اسلایدر  با موفقیت فعال شد')
+                            successToast('اسلایدر فعال شد')
                         } else {
                             element.prop('checked', false);
-                            successToast('اسلایدر  با موفقیت غیر فعال شد')
+                            successToast('اسلایدر غیر فعال شد')
                         }
                     } else {
                         element.prop('checked', elementValue);
-                        errorToast('هنگام ویرایش مشکلی بوجود امده است')
+                        errorToast('مشکلی بوجود امده است')
                     }
                 },
                 error: function() {

@@ -57,6 +57,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');        
         // change slider status route  
         Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
+        Route::get('places/{place}/status', [PlaceController::class, 'status'])->name('places.status');
+        Route::get('public-calls/{publicCall}/status', [PublicCallController::class, 'status'])->name('publicCalls.status');
+        Route::get('menus/{menu}/status', [MenuController::class, 'status'])->name('menus.status');
+        Route::get('news/{news}/draft', [NewsController::class, 'draft'])->name('news.is_draft');
+        Route::get('news/{news}/pined', [NewsController::class, 'pined'])->name('news.is_pined');
         // change page status route  
         Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
         Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
@@ -69,6 +74,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
             'users'          =>  UserController::class,
             'roles'          =>  RoleController::class,
         ] , ['except' => 'show']);
+
+        Route::get('users/{user}/block', [UserController::class, 'block'])->name('users.is_block');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');

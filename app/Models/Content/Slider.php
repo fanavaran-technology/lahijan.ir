@@ -14,14 +14,14 @@ class Slider extends Model
         'alt' ,
         'image' ,
         'url' , 
-        'is_draft',
+        'status',
         'published_at'
     ];
 
     // scopes
     public function scopeWherePublished($query)
     {
-        $query->where('is_draft', 0)->where('published_at', '<=', now());
+        $query->where('status', 1)->where('published_at', '<=', now());
     }
 
     // accessor 

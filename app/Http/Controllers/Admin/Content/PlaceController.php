@@ -20,7 +20,7 @@ class PlaceController extends Controller
     public function __construct()
     {
         $this->middleware('can:manage_places');
-        $this->middleware('can:edit_places')->only('edit', 'update');
+        $this->middleware('can:edit_places')->only('edit', 'update' , 'status');
         $this->middleware('can:create_places')->only('store', 'create');
         $this->middleware('can:delete_places')->only('destroy');
     }   
@@ -154,5 +154,21 @@ class PlaceController extends Controller
     {
         $gallery->delete();
         return back()->with('cute-success', 'تصویر حذف گردید.');
+    }
+
+    public function status(Place $place)
+    {
+        $place->status = $place->status == 0 ? 1 : 0;
+        $result = $place->save();
+
+        if ($result) {
+            if ($place->status == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
     }
 }

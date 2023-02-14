@@ -147,16 +147,30 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-public function destroy(User $user): RedirectResponse
-{
-    
-    if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
-        return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
+    public function destroy(User $user): RedirectResponse
+    {
+        
+        if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
+            return to_route('admin.content.menus.index')->with('toast-error' , 'حذف این کاربر امکانپذیر نیست.');
+        }
+
+        $user->delete();
+        return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
     }
 
-    $user->delete();
-    return to_route('admin.user.users.index')->with('toast-success' , "کاربر {$user->full_name} حذف گردید.");
-}
-
+    public function block(User $user)
+    {
+        $user->is_block = $user->is_block == 0 ? 1 : 0;
+        $result = $user->save();
+        if ($result) {
+            if ($user->is_block == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
+    }
     
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">کاربران
+            <h2 class="h3 mb-0 user-page-title">کاربران
                 <span class="text-sm text-muted">({{ $users->total() }})</span>
             </h2>
         </div>
@@ -102,13 +102,15 @@
                                             <small>{{ $user->full_name }}</small>
                                         </td>
                                         <td>
-                                            <div class="custom-control item-danger custom-checkbox align-items-center">
-                                                <input type="checkbox" @checked($user->is_block)
-                                                    class="custom-control-input item-success align-items-center"
-                                                    id="user-{{ $user->id }}-status">
-                                                <label class="custom-control-label align-items-center"
-                                                    for="user-{{ $user->id }}-status"></label>
-                                            </div>
+                                            @can('edit_user')
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" id="{{ $user->id }}"
+                                                        onchange="changeStatus({{ $user->id }})"
+                                                        data-url="{{ route('admin.user.users.is_block', $user->id) }}"
+                                                        type="checkbox"  @checked($user->is_block)>
+                                                    <label class="custom-control-label" for="{{ $user->id }}"></label>
+                                                </div>
+                                            @endcan
                                         </td>
                                         <td>
                                             @forelse ($user->roles as $role)
@@ -187,4 +189,37 @@
 
 @section('script')
     @include('admin.alerts.confirm')
+
+    <script type="text/javascript">
+        function changeStatus(id){
+            var element = $("#" + id)
+            var url = element.attr('data-url')
+            var elementValue = !element.prop('checked');
+    
+            $.ajax({
+                url : url,
+                type : "GET",
+                success : function(response){
+                    if(response.status){
+                        if(response.checked){
+                            element.prop('checked', true);
+                            successToast('کاربر مسدود شد')
+                        }
+                        else{
+                            element.prop('checked', false);
+                            successToast('کاربر فعال شد')
+                        }
+                    }
+                    else{
+                        element.prop('checked', elementValue);
+                        errorToast('مشکلی بوجود امده است')
+                    }
+                },
+                error : function(){
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد')
+                }
+            });
+        }
+    </script>
 @endsection
