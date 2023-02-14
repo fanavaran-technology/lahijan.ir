@@ -24,6 +24,7 @@ class SettingController extends Controller
             $permissionSeed = new SettingSeeder;
             $permissionSeed->run();
         }
+        
         return view('admin.setting');
     }
 
