@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => ' اسلایدر جدید'])
+@extends('admin.layouts.app', ['title' => ' افزودن نقش جدید'])
 
 @section('head-tag')
 @endsection

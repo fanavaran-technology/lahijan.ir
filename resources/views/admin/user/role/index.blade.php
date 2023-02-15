@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => 'همه صفحات'])
+@extends('admin.layouts.app', ['title' => 'همه نقش ها'])
 
 @section('content')
     <div class="row justify-content-center">
