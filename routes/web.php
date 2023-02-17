@@ -65,8 +65,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // user module routes
     Route::prefix('user')->as('user.')->group(function () {
         Route::resource('users', UserController::class)->except('show')->middleware('can:manage_users');
-        Route::get('permissions/{user}', [UserController::class, 'permissions'])->name('uesrs.permissions');
-        Route::post('permissions/{user}/store', [UserController::class, 'permissionStore'])->name('users.permissions.store');
 
         //role
         Route::resource('roles', RoleController::class)->except('show');
