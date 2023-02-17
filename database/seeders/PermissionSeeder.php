@@ -15,11 +15,11 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        foreach (Permission::LIST_OF_PERMISSIONS as $key => $permission)
+        foreach (Permission::LIST_OF_PERMISSIONS as $key => $value)
         {
             Permission::create([
                 'key'           => $key,
-                'title'         => $permission['title'],
+                'title'         => $value
             ]);
         }
     }

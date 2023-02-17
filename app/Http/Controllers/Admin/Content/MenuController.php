@@ -14,7 +14,7 @@ class MenuController extends Controller
     public function __construct()
     {
         $this->middleware('can:manage_menus');
-        $this->middleware('can:edit_menu')->only('edit', 'update');
+        $this->middleware('can:edit_menu')->only('edit', 'update' , 'status');
         $this->middleware('can:create_menu')->only('store', 'create');
         $this->middleware('can:delete_menu')->only('destroy');
     }
@@ -112,4 +112,20 @@ class MenuController extends Controller
         return to_route('admin.content.menus.index')->with('toast-success' , 'منو حذف گردید.');
 
     }       
+
+    public function status(Menu $menu)
+    {
+        $menu->status = $menu->status == 0 ? 1 : 0;
+        $result = $menu->save();
+
+        if ($result) {
+            if ($menu->status == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
+    }
 }

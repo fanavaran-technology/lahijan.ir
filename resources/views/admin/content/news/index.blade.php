@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">اخبار
+            <h2 class="h3 mb-0 news-title">اخبار
                 <span class="text-sm text-muted">({{ $allNews->total() }})</span>
             </h2>
         </div>
@@ -139,22 +139,20 @@
                                             <small>{{ Str::limit($news->title, 60, '...') }}</small>
                                         </td>
                                         <td>
-                                            <div class="custom-control item-danger custom-checkbox align-items-center">
-                                                <input type="checkbox" @checked($news->is_draft)
-                                                    class="custom-control-input item-success align-items-center"
-                                                    id="news-{{ $news->id }}-draft">
-                                                <label class="custom-control-label align-items-center"
-                                                    for="news-{{ $news->id }}-draft"></label>
+                                            @can('edit_news')
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="draft{{ $news->id }}" onchange="changeStatus({{ $news->id }} , 'draft')" data-url="{{ route('admin.content.news.is_draft', $news->id) }}" type="checkbox" @checked($news->is_draft)>
+                                                <label class="custom-control-label" for="draft{{ $news->id }}"></label>
                                             </div>
+                                            @endcan
                                         </td>
                                         <td>
-                                            <div class="custom-control item-danger custom-checkbox align-items-center">
-                                                <input type="checkbox" @checked($news->is_pined)
-                                                    class="custom-control-input item-success align-items-center"
-                                                    id="news-{{ $news->id }}-pined">
-                                                <label class="custom-control-label align-items-center"
-                                                    for="news-{{ $news->id }}-pined"></label>
+                                            @can('edit_news')
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="pined{{ $news->id }}" onchange="changeStatus({{ $news->id }} , 'pined')" data-url="{{ route('admin.content.news.is_pined', $news->id) }}" type="checkbox"  @checked($news->is_pined)>
+                                                <label class="custom-control-label" for="pined{{ $news->id }}"></label>
                                             </div>
+                                            @endcan
                                         </td>
 
                                         <td>{{ $news->publishStatus }}</td>
@@ -268,4 +266,29 @@
 
 @section('script')
     @include('admin.alerts.confirm')
+
+    <script type="text/javascript">
+        function changeStatus(id , idPrefix) {
+            const element = $("#"+ idPrefix + id)
+            const url = element.attr('data-url')
+            const elementValue = !element.prop('checked');
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response) {
+                    if (response.status) {
+                        successToast('تغییرات اعمال شد')
+                    } else {
+                        element.prop('checked', elementValue);
+                        errorToast('مشکلی بوجود امده است')
+                    }
+                },
+                error: function() {
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد')
+                }
+            });
+        }
+    </script>
 @endsection

@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+    select {
+        background-position: left theme('spacing.3') center !important;
+        padding-left: theme('spacing.3');
+        padding-right: theme('spacing.0');
+    }
+}
+
+.active-tab {
+    @apply bg-indigo-500 transition-all delay-150 ease-linear hover:bg-indigo-600 rounded-lg text-gray-100
+}
+
+.unactive-tab {
+    @apply transition-all delay-150 ease-linear hover:bg-indigo-100 rounded-lg text-indigo-600
+}
+
+
+@media screen and (min-width: 768px) {
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000601;
+        opacity: 83%;
+        z-index: -1;
+        border-radius: 48% 48% 0 0 / 100% 100% 0 0;
+        transform: scaleX(2);
+    }
+}
+
+.dir-ltr {
+    direction: ltr;
+}
+
+.footer-border {
+    @apply border-[#22C55E] border-opacity-20
+}
+
+input:checked~.image-wrapper>div {
+    transform: scale(1.15)
+}
+
+input:hover~.image-wrapper>div {
+    transform: scale(1.10)
+}
+
+input:checked:hover~.image-wrapper>div {
+    transform: scale(1.15)
+}
+
+.error {
+    @apply border border-red-500 
+}

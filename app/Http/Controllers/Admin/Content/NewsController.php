@@ -204,9 +204,40 @@ class NewsController extends Controller
 
     public function destroyGallery(Gallery $gallery)
     {
-       
         $gallery->delete();
-        return back()->with('cute-success', 'تصویر حذف گردید.');
         
+        return back()->with('cute-success', 'تصویر حذف گردید.');   
+    }
+
+    public function draft(News $news)
+    {
+        $news->is_draft = $news->is_draft == 0 ? 1 : 0;
+        $result = $news->save();
+
+        if ($result) {
+            if ($news->is_draft == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
+    }
+
+    public function pined(News $news)
+    {
+        $news->is_pined = $news->is_pined == 0 ? 1 : 0;
+        $result = $news->save();
+
+        if ($result) {
+            if ($news->is_pined == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
     }
 }

@@ -82,13 +82,13 @@
                                         </td>
                                         <td>{{ $publicCall->publishStatus }}</td>
                                         <td>
-                                            <div class="custom-control item-danger custom-checkbox align-items-center">
-                                                <input type="checkbox" @checked($publicCall->status)
-                                                    class="custom-control-input item-success align-items-center"
-                                                    id="publicCall-{{ $publicCall->id }}-status">
-                                                <label class="custom-control-label align-items-center"
-                                                    for="publicCall-{{ $publicCall->id }}-status"></label>
-                                            </div>
+                                            @can('edit_public_cell')
+                                            <label>
+                                                <input id="{{ $publicCall->id }}" onchange="changeStatus({{ $publicCall->id }})"
+                                                    data-url="{{ route('admin.content.publicCalls.status', $publicCall->id) }}"
+                                                    type="checkbox" @if ($publicCall->status === 1) checked @endif>
+                                            </label>
+                                            @endcan
                                         </td>
                                         <td>
                                             <a href="#" class="text-decoration-none text-info mr-3">
@@ -150,4 +150,35 @@
 
 @section('script')
     @include('admin.alerts.confirm')
+
+    <script type="text/javascript">
+        function changeStatus(id) {
+            var element = $("#" + id)
+            var url = element.attr('data-url')
+            var elementValue = !element.prop('checked');
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response) {
+                    if (response.status) {
+                        if (response.checked) {
+                            element.prop('checked', true);
+                            successToast('فراخوان فعال شد')
+                        } else {
+                            element.prop('checked', false);
+                            successToast('فراخوان غیر فعال شد')
+                        }
+                    } else {
+                        element.prop('checked', elementValue);
+                        errorToast('مشکلی بوجود امده است')
+                    }
+                },
+                error: function() {
+                    element.prop('checked', elementValue);
+                    errorToast('ارتباط برقرار نشد')
+                }
+            });
+        }
+    </script>
 @endsection

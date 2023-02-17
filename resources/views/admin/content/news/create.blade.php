@@ -42,7 +42,7 @@
                                 <span class="slug-box"></span>
                             </div>
                             <div class="form-group col-md-12 my-2">
-                                <textarea name="body" id="editor">{{ old('body') }}</textarea>
+                                <textarea name="body" class="" id="editor">{{ old('body') }}</textarea>
                             </div>
                         </div>
                     </div> <!-- /. col -->

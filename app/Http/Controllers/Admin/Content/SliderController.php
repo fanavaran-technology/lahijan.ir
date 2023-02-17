@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SliderController extends Controller
 {
@@ -16,7 +17,7 @@ class SliderController extends Controller
     public function __construct()
     {
         $this->middleware('can:manage_sliders');
-        $this->middleware('can:edit_slider')->only('edit', 'update');
+        $this->middleware('can:edit_slider')->only('edit', 'update' , 'status');
         $this->middleware('can:delete_slider')->only('store', 'create');
         $this->middleware('can:create_slider')->only('destroy');
     }
@@ -44,7 +45,7 @@ class SliderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.slider.create');
     }
@@ -55,7 +56,7 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SliderRequest $request , ImageService $imageService)
+    public function store(SliderRequest $request , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use($request , $imageService) {
             $inputs = $request->all();
@@ -83,7 +84,7 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Slider $slider)
+    public function edit(Slider $slider): View
     {
         return view('admin.content.slider.edit' , compact('slider'));
     }
@@ -95,7 +96,7 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SliderRequest $request, Slider $slider, ImageService $imageService)
+    public function update(SliderRequest $request, Slider $slider, ImageService $imageService): RedirectResponse
     {
 
         DB::transaction(function () use($request , $slider ,$imageService) {
@@ -126,10 +127,11 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slider $slider)
+    public function destroy(Slider $slider): RedirectResponse
     {
-        
+        $slider->delete();
 
+        return back()->with('cute-success', 'اسلاید حذف گردید.');
     }
 
     public function status(Slider $slider)

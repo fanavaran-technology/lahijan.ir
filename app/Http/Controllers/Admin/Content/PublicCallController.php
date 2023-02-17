@@ -134,4 +134,20 @@ class PublicCallController extends Controller
 
         return back()->with('toast-success', 'فراخوان حذف گردید.');
     }
+
+    public function status(PublicCall $publicCall)
+    {
+        $publicCall->status = $publicCall->status == 0 ? 1 : 0;
+        $result = $publicCall->save();
+
+        if ($result) {
+            if ($publicCall->status == 0) {
+                return response()->json(['status' => true, 'checked' => false]);
+            } else {
+                return response()->json(['status' => true, 'checked' => true]);
+            }
+        } else {
+            return response()->json(['status' => false]);
+        }
+    }
 }

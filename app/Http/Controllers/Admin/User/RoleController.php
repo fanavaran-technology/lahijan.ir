@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Models\ACL\Role;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\ACL\Permission;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\RoleRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class RoleController extends Controller
 {
@@ -22,9 +24,15 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        $roles = Role::all();
+        $roles = Role::query();
+
+        if ($keyword = request('search')) 
+            $roles->where('title' , "LIKE" , "%{$keyword}%");
+
+        $roles = $roles->paginate(10);
+
         return view('admin.user.role.index' , compact('roles'));
     }
 
@@ -33,7 +41,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         $permissions = Permission::all();
         return view('admin.user.role.create' , compact('permissions'));
@@ -45,7 +53,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request)
+    public function store(RoleRequest $request): RedirectResponse
     {
         $inputs = $request->all();
         $role = Role::create($inputs);
@@ -60,9 +68,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Role $role): View
     {
-        return view('admin.user.role.edit' ,compact('role'));
+        $permissions = Permission::all();
+        return view('admin.user.role.edit' ,compact('role' , 'permissions'));
     }
 
     /**
@@ -72,10 +81,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, Role $role)
+    public function update(RoleRequest $request, Role $role): RedirectResponse
     {
-        $inputs = $request->all();
-        $role->update($inputs);
+        DB::transaction(function () use($role , $request) {
+            $inputs = $request->all();
+            $inputs['permissions'] = $inputs['permissions'] ?? [];
+            $role->permissions()->sync($inputs['permissions']);
+            $role->update($inputs);
+        });
         return to_route('admin.user.roles.index')->with('toast-success' , 'تغییرات روی نقش اعمال شد.');
     }
 
@@ -85,23 +98,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Role $role): RedirectResponse
     {
         $result = $role->delete();
         return back()->with('cute-success', 'نقش حذف گردید.');
     }
 
-    public function permissionForm(Role $role)
-    {
-        $permissions = Permission::all();
-        return view('admin.user.role.permission-form' ,compact('role' , 'permissions'));
-    }
-
-    public function permissionUpdate(RoleRequest $request , Role $role)
-    {
-        $inputs = $request->all();
-        $inputs['permissions'] = $inputs['permissions'] ?? [];
-        $role->permissions()->sync($inputs['permissions']);
-        return to_route('admin.user.roles.index')->with('toast-success' , 'دسترسی ویرایش شد');
-    }
 }
