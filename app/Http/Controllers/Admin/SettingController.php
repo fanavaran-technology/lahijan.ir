@@ -21,8 +21,8 @@ class SettingController extends Controller
     public function index(): View
     {
         if (Setting::all()->isEmpty()) {
-            $permissionSeed = new SettingSeeder;
-            $permissionSeed->run();
+            $settingSeed = new SettingSeeder;
+            $settingSeed->run();
         }
         
         return view('admin.setting');
