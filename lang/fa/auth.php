@@ -14,13 +14,12 @@ return [
     */
 
     'failed' => 'اطلاعات وارد شده صحیح نمی باشد',
-    'password' => 'رمزعبور صحیح نیست',
+    'password' => 'کلمه عبور صحیح نیست',
     'throttle' => 'درخواست بیش از حد مجاز! لطفا بعد از :seconds ثانیه دوباره امتحان کنید',
 
     # authentication register page
     'name'  =>  "نام",
     'email' =>  "ایمیل",
-    'password'  =>  'کلمه عبور',
     'confirm-password'  =>  'تکرار کلمه عبور',
     'already-registered' => 'قبلا ثبت نام کرده اید ؟',
     'register'  =>  'ثبت نام',

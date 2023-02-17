@@ -27,7 +27,9 @@ use App\Http\Controllers\Admin\Content\PublicCallController;
 
 // temporary
 // TODO
-Route::get('/' , fn() => dd('this is home page'))->name('home');
+Route::get('/' , fn() => view('app.index'))->name('home');
+Route::get('/login-view' , fn() => view('app.auth.login'))->name('auth.login');
+Route::get('/confirm-view' , fn() => view('app.auth.confirm-password'))->name('auth.confirm');
 
 require __DIR__.'/auth.php';
 

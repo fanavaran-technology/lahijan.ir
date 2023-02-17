@@ -3,16 +3,25 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./resources/views/app/**/*.blade.php",
     ],
 
     theme: {
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: '1rem',
+                sm: '0rem',
+                lg: '2rem',
+                xl: '3rem',
+                '2xl': '4rem',
+            },
+        },
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
+                'vazir': ["vazirmatn"],
+                'shabnam': ["shabnam"]
+            }
         },
     },
 
