@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\User\ChangePasswordController;
-use App\Http\Controllers\Admin\User\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\PageController;
+use App\Http\Controllers\Admin\User\ProfileController;
 use App\Http\Controllers\Admin\Content\PlaceController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
+use App\Http\Controllers\Admin\User\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,4 +88,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     // setting routes
     Route::resource('settings' , SettingController::class)->only('index' , 'store');
 });
+
+# public routes
+# index route
+Route::get("/", [HomeController::class, 'home'])->name('home');
+
 

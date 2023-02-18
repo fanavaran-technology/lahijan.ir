@@ -3,18 +3,16 @@
     data-bs-ride="carousel">
     <div id="slider-content"
       class="carousel-inner relative w-full md:h-[500px] lg:h-[500px] sm:h-[400px] h-[200px] overflow-hidden">
-      <!-- Single item -->
+      @forelse ($sliders as $slider)
       <div class="carousel-item active relative float-left w-full ">
-        <img src="../assets/images/تله کابین غروب.jpg"
+        <img src="{{ asset($slider->image) }}"
           class="block w-full md:h-[500px] lg:h-[500px] sm:h-[400px] h-[200px] object-cover" alt="Motorbike Smoke" />
       </div>
-
+      @empty
+        <p>وجود ندارد</p>
+      @endforelse
       <!-- Single item -->
-      <div class="carousel-item relative float-left w-full ">
-        <img src="../assets/images/پارک بانوان.jpg"
-          class="block w-full  md:h-[500px] lg:h-[500px] sm:h-[400px]  h-[200px] object-cover" alt="Mountaintop" />
-
-      </div>
+     
 
       <!-- Single item -->
       <div class="carousel-item relative float-left w-full ">
