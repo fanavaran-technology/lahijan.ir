@@ -33,6 +33,8 @@ class News extends Model
         ];
     }
 
+    const SEARCH_KEY = 'title';
+
     public function publicPath()
     {
         return route('news.show' , $this->slug);
