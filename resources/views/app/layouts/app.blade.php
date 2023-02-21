@@ -4,9 +4,10 @@
 <head>
     @include('app.layouts.includes.head-tag')
     @yield('head-tag')
+    <title>{{ $title ?? '<بدون عنوان>' }}</title>
 </head>
 
-<body class="font-vazir">
+<body class="font-vazir bg-gray-50">
 
 
     @include('app.layouts.includes.top-nav')

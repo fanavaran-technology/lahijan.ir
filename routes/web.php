@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
+use App\Http\Controllers\Public\NewsController as PublicNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,5 +93,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 # public routes
 # index route
 Route::get("/", [HomeController::class, 'home'])->name('home');
+
+Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
 
