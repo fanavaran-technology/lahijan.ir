@@ -30,7 +30,7 @@ class MenuController extends Controller
         if ($searchString = request('search'))
             $menus->where('title', "LIKE" , "%{$searchString}%");
 
-        if (request('status')) 
+        if (request('status'))
             $menus->where('status', 1);
 
         $menus = $menus->latest()->paginate(15);
@@ -111,7 +111,7 @@ class MenuController extends Controller
         $menu->delete();
         return to_route('admin.content.menus.index')->with('toast-success' , 'منو حذف گردید.');
 
-    }       
+    }
 
     public function status(Menu $menu)
     {
@@ -128,4 +128,6 @@ class MenuController extends Controller
             return response()->json(['status' => false]);
         }
     }
+
+
 }

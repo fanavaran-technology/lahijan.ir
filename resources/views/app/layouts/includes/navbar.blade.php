@@ -44,127 +44,36 @@ class="sm:absolute font-vazir  z-40 w-full lg:bg-black lg:bg-opacity-70 md:bg-bl
   <div id="mega-menu"
     class="hidden  items-center w-full text-sm md:text-xs lg:text-sm md:flex md:w-auto md:order-1">
     <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-4 lg:space-x-6 md:mt-0">
-      <li class="md:ml-4 ml-6">
-        <button id="dropdownNavbarLink" data-dropdown-toggle="1-parentMenu"
-          class="flex items-center  whitespace-nowrap w-full text-gray-100 font-bold  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent  md:hover:text-green-400 p-1 md:p-0 md:w-auto">درباره
-          ما<svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+        @foreach ($menus->whereNull('parent_id') as $menu)
+        @if (($menu->childrens->count()))
+            <li class="md:ml-4 ml-6">
+        <button id="dropdownNavbarLink" data-dropdown-toggle="{{ $loop->iteration }}-parentMenu"
+          class="flex items-center  whitespace-nowrap w-full text-gray-100 font-bold  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent  md:hover:text-green-400 p-1 md:p-0 md:w-auto">
+            {{ $menu->title }}<svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
               clip-rule="evenodd"></path>
           </svg></button>
         <!-- Dropdown menu -->
-        <div id="1-parentMenu"
+        <div id="{{ $loop->iteration }}-parentMenu"
           class="z-10 hidden font-normal bg-white w-40 divide-y divide-gray-100 rounded shadow "
           style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1105px, 57px);"
           data-popper-placement="bottom">
 
-          <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-            <li>
-              <a href="#" class="block  px-4 py-2 hover:bg-gray-100">
-                 معرفی شهر لاهیجان</a>
-            </li>
+          @php
+          $allSubmenus = $menu->childrens;
+          @endphp
 
-            <li aria-labelledby="dropdownNavbarLink">
-              <button id="doubleDropdownButton" data-dropdown-toggle="6-menu-594"
-                data-dropdown-placement="left-start" type="button"
-                class="flex items-center  w-full px-4 py-2 hover:bg-gray">
-                زیر منو
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-4 h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path>
-                </svg>
-              </button>
-              <div id="6-menu-594" class="z-10 hidden w-32 bg-white divide-y divide-gray-100 rounded shadow "
-                style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(10px, 0px);"
-                data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="right-start">
-                <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                      زیر منو</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+            @include('app.layouts.includes.components.head-menu-items', ['menus' => $allSubmenus])
         </div>
       </li>
-
-      <li class="md:ml-4 ml-6">
-        <a href="#"
-          class="block font-bold whitespace-nowrap text-gray-100  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0">خانه</a>
-      </li>
-      <li class="md:ml-4 ml-6">
-        <a href="#"
-          class="block font-bold whitespace-nowrap text-gray-100  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0">پیوند
-          ها</a>
-      </li>
-      <li class="md:ml-4 ml-6">
-        <a href="#"
-          class="block font-bold whitespace-nowrap text-gray-100  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0">مالی</a>
-      </li>
-      <li class="md:ml-4 ml-6">
-        <button id="dropdownNavbarLink" data-dropdown-toggle="4-parentMenu"
-          class="flex items-center  whitespace-nowrap w-full text-gray-100 font-bold  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0 md:w-auto">درباره
-          شهر<svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg></button>
-        <!-- Dropdown menu -->
-        <div id="4-parentMenu"
-          class="z-10 hidden font-normal w-40 bg-white divide-y divide-gray-100 rounded shadow "
-          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(792px, 57px);"
-          data-popper-placement="bottom">
-
-          <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                زیر منو</a>
-            </li>
-
-
-          </ul>
-        </div>
-      </li>
-      <li class="md:ml-4 ml-6">
-        <a href="#"
-          class="block font-bold whitespace-nowrap text-gray-100  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0">ضوابط
-          و شرایط</a>
-      </li>
-      <li class="md:ml-4 ml-6">
-        <button id="dropdownNavbarLink" data-dropdown-toggle="7-parentMenu"
-          class="flex items-center whitespace-nowrap w-full text-gray-100 font-bold  border-gray-100 hover:bg-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-green-400 p-1 md:p-0 md:w-auto">ارتباط
-          با ما<svg class="w-4 h-4 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg></button>
-        <!-- Dropdown menu -->
-        <div id="7-parentMenu"
-          class="z-10 hidden font-normal ص-40 bg-white divide-y divide-gray-100 rounded shadow w-auto"
-          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(419px, 57px);"
-          data-popper-placement="bottom">
-
-          <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                راه هاى ارتباطى</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                پيشنهادات و انتقادات</a>
-            </li>
-            <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                رضايتمندى </a>
-            </li>
-
-          </ul>
-        </div>
-      </li>
+            @else
+                <li class="md:ml-4 ml-6">
+                    <a href="{{ $menu->url }}" class="block font-bold whitespace-nowrap text-white border-b border-gray-100 hover:bg-gray-50  md:border-0 md:hover:bg-transparent  md:hover:text-green-400 p-1 md:p-0">{{ $menu->title }}</a>
+                </li>
+            @endif
+        @endforeach
     </ul>
 
   </div>

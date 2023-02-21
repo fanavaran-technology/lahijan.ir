@@ -21,7 +21,11 @@ module.exports = {
             fontFamily: {
                 'vazir': ["vazirmatn"],
                 'shabnam': ["shabnam"]
-            }
+            },
+            // backgroundImage: {
+            //     'hero-pattern': "url('/img/hero-pattern.svg')",
+            //     'footer-texture': "url('/img/footer-texture.png')",
+            // }
         },
     },
 

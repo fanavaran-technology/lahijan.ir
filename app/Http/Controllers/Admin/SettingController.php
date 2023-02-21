@@ -18,6 +18,12 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('can:setting_manage');
+    }
+
     public function index(): View
     {
         if (Setting::all()->isEmpty()) {

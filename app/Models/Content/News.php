@@ -33,6 +33,7 @@ class News extends Model
         ];
     }
 
+
     // set data before store to database
     public function setPublishedAtAttribute($published_at)
     {

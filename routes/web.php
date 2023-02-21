@@ -36,7 +36,7 @@ require __DIR__.'/auth.php';
 
 // admin routes
 Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group(function () {
-    
+
     Route::get('/', AdminDashboardController::class)->name('index');
 
     // content module routes
@@ -47,28 +47,28 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
             'menus'         =>  MenuController::class,
             'public-calls'  =>  PublicCallController::class,
             'sliders'       =>  SliderController::class,
-            'pages'         =>  PageController::class, 
+            'pages'         =>  PageController::class,
         ] , ['except' => 'show']);
 
         // news gallery routes
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
-        Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');        
+        Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
         // place gallery routes
         Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
         Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');
-        Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');        
-        // change slider status route  
+        Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');
+        // change slider status route
         Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
         Route::get('places/{place}/status', [PlaceController::class, 'status'])->name('places.status');
         Route::get('public-calls/{publicCall}/status', [PublicCallController::class, 'status'])->name('publicCalls.status');
         Route::get('menus/{menu}/status', [MenuController::class, 'status'])->name('menus.status');
         Route::get('news/{news}/draft', [NewsController::class, 'draft'])->name('news.is_draft');
         Route::get('news/{news}/pined', [NewsController::class, 'pined'])->name('news.is_pined');
-        // change page status route  
+        // change page status route
         Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
         Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
-        
+
     });
 
     // user module routes

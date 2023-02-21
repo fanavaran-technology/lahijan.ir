@@ -9,7 +9,7 @@
             <span>سامانه تور مجازی</span>
         </div>
         <a href="#" class="bg-black">
-            <img src="./../assets/images/virtual-tour.jpg"
+            <img src="{{ asset('images/public-cell/07.jpg') }}"
                 class="w-full h-52 sm:h-60 object-cover rounded-xl">
         </a>
     </section>

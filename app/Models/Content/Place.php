@@ -13,19 +13,18 @@ class Place extends Model
     use HasFactory , SoftDeletes , Sluggable;
 
     protected $fillable = [
-        'title' , 
+        'title' ,
         'image' ,
         'description' ,
-        'location' , 
+        'location' ,
         'slug',
         'status'
     ];
 
-    protected $casts = [
-        'image' => 'array' ,
-    ];
-    
-public function sluggable(): array
+    // protected $casts = ['image' => 'array'];
+
+
+    public function sluggable(): array
     {
         return [
             'slug' => [

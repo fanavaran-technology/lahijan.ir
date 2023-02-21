@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Content\Menu;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 // use Illuminate\Contracts\Auth\Access\Gate;
@@ -27,6 +28,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//        view()->composer('app.layouts.includes.navbar', function ($view) {
+//            $menus = Menu::all();
+//
+//            $view->with(
+//                [
+//                    'menus' => $menus,
+//                ]
+//            );
+//        });
         $this->registerPolicies();
     }
 }

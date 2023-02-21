@@ -8,27 +8,21 @@
             </svg>
             <span>فراخوان های عمومی</span>
         </div>
+        @forelse($publicCells as $publicCell)
         <section
             class="flex justify-between items-center space-x-4 space-x-reverse py-4 border-b px-2">
             <section class="flex flex-col space-y-2">
-                <a href="#" class="font-bold text-sm text-gray-700">فراخوان سومین نمایشگاه گل و
-                    گیاه شهرداری لاهیجان</a>
+                <a href="#" class="font-bold text-sm text-gray-700">{{ $publicCell->title }}</a>
                 <span class="text-xs text-justify text-gray-600">
-                    از کلیه فعالان در عرصه های تولید گل و گیاه و فضای سبز دعوت میشود
+                  {{ $publicCell->title }}
                 </span>
             </section>
-            <img src="./../assets/images/farakhan1.jpg" class="w-24 h-32 rounded-xl">
+            <img src="{{ asset($publicCell->image) }}" class="w-24 h-32 rounded-xl">
         </section>
-        <section
-            class="flex justify-between items-center space-x-4 space-x-reverse py-4 border-b px-2">
-            <section class="flex flex-col space-y-2">
-                <a href="#" class="font-bold text-sm text-gray-700">فراخوان سومین نمایشگاه گل و
-                    گیاه شهرداری لاهیجان</a>
-                <span class="text-xs text-justify text-gray-600">
-                    از کلیه فعالان در عرصه های تولید گل و گیاه و فضای سبز دعوت میشود
-                </span>
-            </section>
-            <img src="./../assets/images/farakhan2.jpg" class="w-24 h-32 rounded-xl">
-        </section>
+        @empty
+            <p class="mt-4 text-center text-gray-400">هیچ فراخوانی وجود ندارد</p>
+        @endforelse
     </section>
+
+
 </section>
