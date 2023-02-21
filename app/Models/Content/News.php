@@ -33,6 +33,16 @@ class News extends Model
         ];
     }
 
+    public function publicPath()
+    {
+        return route('news.show' , $this->slug);
+    }
+
+    public function privatePath()
+    {
+        return route('admin.content.news.edit' , $this->id);
+    }
+
     // set data before store to database
     public function setPublishedAtAttribute($published_at)
     {
