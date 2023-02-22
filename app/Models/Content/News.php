@@ -79,4 +79,8 @@ class News extends Model
     {
         return $this->morphMany(Gallery::class, 'gallerizable');
     }
+
+    public function video() {
+        return $this->hasOne(Video::class);
+    }
 }

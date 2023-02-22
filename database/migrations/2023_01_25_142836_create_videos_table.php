@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('video');
+            $table->string('video')->nullable();
             $table->foreignId('news_id')->constrained('news');
             $table->timestamps();
         });

@@ -9,13 +9,44 @@
 @endsection
 
 @section('content')
+    <div class="modal" id="video-upload-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">آپلود ویدئو</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="video" class="input-title">
+                        انتخاب ویدئو
+                    </label>
+                    <div class="input-group">
+                        <input type="text" id="video" class="form-control custom-focus" autocomplete="off" name="image" aria-label="Image"
+                            aria-describedby="button-image">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-image">انتخاب</button>
+                        </div>
+                    </div>
+                    <label for="description" class="input-title mt-2">
+                        توضیحات ویدئو
+                    </label>
+                    <textarea name="video[description]" class="form-control custom-focus" id="description"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">تایید</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row d-flex justify-content-between">
-      <div class="d-flex justify-content-between align-items-center">
-          <h2 class="h3 mb-0 section-heading">افزودن خبر جدید</h2>
-      </div>
-      <div class="col-auto mb-3">
-        <a href="{{ route('admin.content.news.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
-      </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="h3 mb-0 section-heading">افزودن خبر جدید</h2>
+        </div>
+        <div class="col-auto mb-3">
+            <a href="{{ route('admin.content.news.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
+        </div>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger d-flex flex-column" role="alert">
@@ -73,12 +104,25 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <label for="" class="input-title">
+                        <label for="inputFile" class="input-title">
                             آپلود تصویر شاخص
                         </label>
                         <div class="form-group inputDnD">
                             <input type="file" class="form-control-file" name="image" id="inputFile"
                                 onchange="readUrl(this)" data-title="کلیک کنید یا تصویر را بکشید">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="" class="input-title">
+                                آپلود ویدئو
+                            </label>
+                            <button type="button" class="btn btn-indigo" id="upload-video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-film" viewBox="0 0 16 16">
+                                    <path
+                                        d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z" />
+                                </svg>
+                                <span class="ml-2">آپلود ویدئو</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -86,8 +130,8 @@
                     <div class="card-header" onclick="openCard(this)">
                         <div class="row d-flex justify-content-between px-2">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-tags" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
                                     <path
                                         d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z" />
                                     <path
@@ -96,8 +140,8 @@
                                 <span class="ml-1">تگ ها</span>
                             </div>
                             <span class="card-dropdown-button" onclick="openCard(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
                                     <path
                                         d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
                                 </svg>
@@ -117,8 +161,8 @@
                     <div class="card-header" onclick="openCard(this)">
                         <div class="row d-flex justify-content-between px-2">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-calendar2-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
                                     <path
                                         d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
                                     <path
@@ -225,5 +269,26 @@
 
             newsForm.submit();
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.getElementById('button-image').addEventListener('click', (event) => {
+                event.preventDefault();
+
+                window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+            });
+        });
+
+        // set file link
+        function fmSetLink($url) {
+            document.getElementById('video').value = $url;
+        }
+    </script>
+
+    <script>
+        $("#upload-video").on('click' , function (e) {
+            $('#video-upload-modal').modal('show')
+        })
     </script>
 @endsection

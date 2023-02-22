@@ -14,12 +14,12 @@
                 <div class="flex space-x-2 space-x-reverse">
                     <div class="flex items-center w-1/2 md:w-40 space-x-2 space-x-reverse">
                         <label for="start-date" class="text-sm text-gray-700">از</label>
-                        <input type="text" name="start_date" id="start-date" value="{{ request('start_date') }}"
+                        <input type="text" name="start_date" id="start-date" autocomplete="off" value="{{ request('start_date') }}"
                             class="datepicker w-full text-sm p-1.5 border border-gray-300 focus:border-none text-gray-700 rounded">
                     </div>
                     <div class="flex items-center w-1/2 md:w-40 space-x-2 space-x-reverse">
                         <label for="end-date" class="text-sm text-gray-700">تا</label>
-                        <input type="text" name="end_date" id="end-date" value="{{ request('end_date') }}"
+                        <input type="text" name="end_date" id="end-date" autocomplete="off" value="{{ request('end_date') }}"
                             class="datepicker w-full text-sm p-1.5 border border-gray-300 focus:border-none text-gray-700 rounded">
                     </div>
                     <button type="submit"

@@ -42,6 +42,12 @@ return [
             'url' => '/images/content',
         ],
 
+        'videos' => [
+            'driver' => 'local',
+            'root' => public_path('videos'),
+            'url' => '/videos',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
