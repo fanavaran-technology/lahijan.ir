@@ -5,6 +5,7 @@ class="m-10 mt-10  text-center rounded-[40px] p-5 sm:p-3 bg-gradient-to-r from-[
     <div
         class="w-full md:w-full ml-1  rounded-xl sm:rounded-l-none md:rounded-l-none sm:rounded-r-3xl  h-20  sm:w-auto bg-white bg-opacity-90 md:rounded-r-3xl  text-black  inline-flex items-center">
         <span
+
             class="ml-2 subs-odometrs dir-ltr mr-1 lg:text-4xl mt-4 md:text-3xl sm:text-3xl text-4xl font-bold text-green-600 w-32"></span>
         <div style="margin-right: -18px;" class="text-right ">
             <div class="md:mr-0 mr-5 mb-1 lg:text-[12px] text-[10px] text-sm font-bold text-gray-700">مساحت
@@ -28,6 +29,7 @@ class="m-10 mt-10  text-center rounded-[40px] p-5 sm:p-3 bg-gradient-to-r from-[
     <div
         class="w-full md:w-full rounded-xl sm:rounded-r-none md:rounded-r-none sm:rounded-l-3xl  h-20 ml-1 sm:w-auto bg-white bg-opacity-90 text-black  inline-flex items-center ">
         <span
+
             class="relative ml-2 subs-odometrs2 dir-ltr mr-1 lg:text-4xl mt-4 md:text-3xl sm:text-3xl text-4xl font-bold text-green-600 w-36"></span>
         <div style="margin-right: -10px;" class="text-right absolut">
             <div class=" mb-1 lg:text-[12px] text-[10px] font-bold  text-gray-700">سفرهای روزانه</div>

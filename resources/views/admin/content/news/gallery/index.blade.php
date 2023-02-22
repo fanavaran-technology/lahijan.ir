@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">اماکن گردشگری</h2>
+            <h2 class="h3 mb-0 page-title">اخبار</h2>
         </div>
         
             <div class="ml-5">
@@ -33,7 +33,7 @@
                             <table class="table table-striped" id="table-id">
                                 <thead>
                                     <div class="form-row py-2">
-                                        <h6 class="font-bold">گالری تصاویر مکان گردشگری {{ $news->title }}</h6>
+                                        <h6 class="font-bold">گالری تصاویر اخبار ( {{ $news->title }} ) </h6>
                                     </div>
                                     <th>#</th>
                                     <th>alt تصویر</th>

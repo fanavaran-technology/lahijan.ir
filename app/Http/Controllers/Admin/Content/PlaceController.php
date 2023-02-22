@@ -23,7 +23,7 @@ class PlaceController extends Controller
         $this->middleware('can:edit_places')->only('edit', 'update' , 'status');
         $this->middleware('can:create_places')->only('store', 'create');
         $this->middleware('can:delete_places')->only('destroy');
-    }   
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,10 +36,10 @@ class PlaceController extends Controller
         if ($searchString = request('search'))
             $places->where('title', "LIKE" , "%{$searchString}%");
 
-        if (request('status')) 
+        if (request('status'))
             $places->where('status', 1);
 
-        $places = $places->latest()->paginate(10);    
+        $places = $places->latest()->paginate(10);
         return view('admin.content.place.index' , compact('places'));
     }
 
@@ -70,6 +70,7 @@ class PlaceController extends Controller
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
             
+
             Place::create($inputs);
         });
 
@@ -103,13 +104,13 @@ class PlaceController extends Controller
             if ($request->hasFile('image')) {
                 if (!empty($place->image))
                     $imageService->deleteImage($place->image);
-                    
+
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
             $inputs['status'] = $inputs['status'] ?? 0;
-    
+
             # update check inputs
             $place->update($inputs);
         });
@@ -143,12 +144,12 @@ class PlaceController extends Controller
             $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places-gallery");
             $inputs['image'] = $imageService->save($inputs['image']);
         }
-      
+
         $place->gallerizable()->create($inputs);
         return to_route("admin.content.places.index-gallery", $place->id)->with('cute-success', 'تصویر جدید اضافه شد.');
     }
 
-  
+
 
     public function destroyGallery(Gallery $gallery)
     {

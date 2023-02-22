@@ -13,6 +13,7 @@ class Place extends Model
     use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
+
         'title',
         'image',
         'description',
@@ -20,6 +21,7 @@ class Place extends Model
         'slug',
         'status'
     ];
+
 
     const SEARCH_KEY = 'title';
 
