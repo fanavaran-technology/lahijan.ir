@@ -115,6 +115,15 @@
             <!-- religious times -->
             <div class="text-center w-1/3 mx-auto">
                 <h4 class="text-gray-400 font-bold">اوقات شرعی</h4>
+                <div class="space-y-3 my-6" style="font-family: iransans">
+                    <div id="div_test"  class="text-gray-400"></div>
+                    <div id="div_test1" class="text-gray-400"></div>
+                    <div id="div_test2" class="text-gray-400"></div>
+                    <div id="div_test3" class="text-gray-400"></div>
+                    <div id="div_test4" class="text-gray-400"></div>
+                    <div id="div_test5" class="text-gray-400"></div>
+                </div>
+
             </div>
         </secion>
         <!-- copyright -->
@@ -123,3 +132,22 @@
         </div>
     </div>
 </footer>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "https://prayer.aviny.com/api/prayertimes/490",
+            dataType: "json",
+            type: 'GET',
+            success: function (data) {
+                $("#div_test").append("اذان صبح: " + data.Imsaak + "<br/>");
+                $("#div_tes1").append("طلوع آفتاب: " + data.Sunrise + "<br/>");
+                $("#div_test2").append("اذان ظهر: " + data.Noon + "<br/>");
+                $("#div_test3").append("غروب خورشید: " + data.Sunset + "<br/>");
+                $("#div_test4").append("اذان مغرب: " + data.Maghreb + "<br/>");
+                $("#div_test5").append("اوقات به افق: " + data.CityName + "<br/>");
+
+            }
+        });
+    });
+</script>

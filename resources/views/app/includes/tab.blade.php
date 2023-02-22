@@ -4,7 +4,7 @@
             class="flex p-4 justify-center items-center -mb-px text-sm font-medium text-center text-gray-500">
             <li @click="openTab = 'photo'" class="mr-2">
                 <a href="#!"
-                   class="px-2 lg:px-4 py-2 flex items-center justify-center space-x-2 space-x-reverse group"
+                   class="px-2 lg:px-4 py-2 flex  items-center justify-center space-x-2 space-x-reverse group"
                    :class="openTab == 'photo' ? 'active-tab' : 'unactive-tab'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -79,34 +79,39 @@
     </section>
 
     <section x-show="openTab === 'photo'" class="px-6 py-2 flex justify-center">
-        <a href="#" class="bg-black w-full lg:h-60 rounded-lg hover:cursor-pointer relative">
+        <div  class="bg-black w-full lg:h-60 rounded-lg  relative">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper h-60">
-                    @foreach($reportImages as $reportImage)
+                    @forelse ($reportImages as $reportImage )
 
-                    <div class="swiper-slide">
+                    <a href="{{ $reportImage->publicPath() }}" class="swiper-slide hover:cursor-pointer" >
 
                         <img class="rounded-lg"
                             src="{{ $reportImage->image }}">
                         <div
                             class="text-gray-50 z-50  bg-gray-900 p-1 rounded-lg text-sm absolute bottom-2 right-2">{{ Str::limit($reportImage->title, 60, '...') }}</div>
-                    </div>
-                    @endforeach
+                            <span class="z-50 flex bg-gray-800 absolute top-2 left-2 text-gray-100 rounded px-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                </svg>
+                                ۱۴ تصویر
+                            </span>
+                    </a>
+                    @empty
+                        <p>تصویری وجود ندارد</p>
+                    @endforelse
+
+
 
                 </div>
 
                 <div class="swiper-button-next text-gray-100 hover:text-gray-300"></div>
                 <div class="swiper-button-prev text-gray-100 hover:text-gray-300"></div>
             </div>
-            <span class="z-50 flex bg-gray-800 absolute top-2 left-2 text-gray-100 rounded px-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-                ۱۴ تصویر
-            </span>
-        </a>
+
+        </div>
     </section>
 
 </section>

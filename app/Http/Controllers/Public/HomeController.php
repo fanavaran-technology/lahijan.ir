@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Public;
 
+use Carbon\Carbon;
 use App\Models\Content\Menu;
 use App\Models\Content\News;
-use App\Models\Content\Place;
-use App\Models\Content\PublicCall;
 use Illuminate\Http\Request;
+use App\Models\Content\Place;
 use App\Models\Content\Slider;
+use App\Models\Content\PublicCall;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -17,15 +18,17 @@ class HomeController extends Controller
     {
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
-        $latestNews = News::latest()->take(3)->where('is_draft' , 0)->get();
+        $latestNews = News::latest()->take(3)->wherePublished()->get();
+
+        $reportImages = News::has('gallerizable')->latest()->take(5)->wherePublished()->get();
 
         $publicCells = PublicCall::latest()->take(2)->where('status' , 1)->get();
 
         $places = Place::latest()->take(6)->where('status' , 1)->get();
 
-        $reportImages = News::latest()->take(15)->where('is_draft' , 0)->get();
-
         $menus = Menu::latest()->take(15)->get();
+
+
 
 
 

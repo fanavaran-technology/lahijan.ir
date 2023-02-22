@@ -94,6 +94,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 # index route
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
+Route::get("/app/content/news/index", [\App\Http\Controllers\Public\NewsController::class, 'index'])->name('index');
+
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
 
