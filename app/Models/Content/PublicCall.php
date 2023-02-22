@@ -32,6 +32,15 @@ class PublicCall extends Model
         ];
     }
 
+    // temporary
+    // TODO
+    public function publicPath()
+    {
+        return route('news.show' , $this->id);
+    }
+
+    const SEARCH_KEY = 'title';
+
     // set data before store to database
     public function setPublishedAtAttribute($published_at)
     {

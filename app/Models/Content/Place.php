@@ -10,19 +10,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Place extends Model
 {
-    use HasFactory , SoftDeletes , Sluggable;
+    use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
-        'title' ,
-        'image' ,
-        'description' ,
-        'location' ,
+
+        'title',
+        'image',
+        'description',
+        'location',
         'slug',
         'status'
     ];
 
-    // protected $casts = ['image' => 'array'];
 
+    const SEARCH_KEY = 'title';
+
+    protected $casts = [
+        'image' => 'array',
+    ];
 
     public function sluggable(): array
     {
@@ -31,6 +36,13 @@ class Place extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    // temporary
+    // TODO
+    public function publicPath()
+    {
+        return route('news.show' , $this->id);
     }
 
     public function gallerizable()

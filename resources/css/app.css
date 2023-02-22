@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
     select {
         background-position: left theme('spacing.3') center !important;
@@ -55,5 +56,14 @@ input:checked:hover~.image-wrapper>div {
 }
 
 .error {
-    @apply border border-red-500 
+    @apply border border-red-500
 }
+
+[x-cloak] {
+    display: none !important;
+}
+
+.search-input {
+    @apply w-4/5 md:w-3/5 py-2.5 px-0 text-lg md:text-2xl font-light text-white bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-green-300 placeholder:text-gray-400
+}
+  

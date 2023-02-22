@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Public\NewsController as PublicNewsController;
+use App\Http\Controllers\Public\SearchController as PublicSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,4 +99,5 @@ Route::get("/app/content/news/index", [\App\Http\Controllers\Public\NewsControll
 
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
+Route::get('search' , PublicSearchController::class)->name('search');
 

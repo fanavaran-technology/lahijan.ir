@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Page extends Model
 {
@@ -20,6 +21,8 @@ class Page extends Model
         'is_draft',
     ];
 
+    const SEARCH_KEY = 'title';
+
     public function sluggable(): array
     {
         return [
@@ -28,4 +31,18 @@ class Page extends Model
             ]
         ];
     }
+
+    // temporary
+    // TODO
+    public function publicPath()
+    {
+        return route('news.show' , $this->id);
+    }
+
+    // relations 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
