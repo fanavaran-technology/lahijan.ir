@@ -28,37 +28,15 @@
 @endsection
 
 @section('script')
-    <script>
-        let subsOdometr = document.querySelector(".subs-odometrs");
 
-        var odometer = new Odometer({
-            el: subsOdometr,
-
-        })
-
-        subsOdometr.innerHTML = 141;
-    </script>
 
     <script>
-        var subsOdometr1 = document.querySelector(".subs-odometrs1");
-
-        var odometer = new Odometer({
-            el: subsOdometr1,
-
-        })
-
-        subsOdometr1.innerHTML = 88;
-    </script>
-
-    <script>
-        var subsOdometr2 = document.querySelector(".subs-odometrs2");
-
-        var odometer = new Odometer({
-            el: subsOdometr2,
-
-        })
-
-        subsOdometr2.innerHTML = 1131;
+      $.appear("#ws-counter", {});
+      $('#ws-counter').on("appear", function(){
+        document.getElementById("counter1").innerHTML = 140;
+        document.getElementById("counter2").innerHTML = 88;
+        document.getElementById("counter3").innerHTML = 1131;
+      });
     </script>
 
     <script>
