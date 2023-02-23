@@ -25,9 +25,8 @@ class Place extends Model
 
     const SEARCH_KEY = 'title';
 
-    protected $casts = [
-        'image' => 'array',
-    ];
+    protected $casts = ['image' => 'array'];
+
 
     public function sluggable(): array
     {

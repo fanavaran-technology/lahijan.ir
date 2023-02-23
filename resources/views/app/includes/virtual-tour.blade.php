@@ -8,7 +8,7 @@
             </svg>
             <span>سامانه تور مجازی</span>
         </div>
-        <a href="#" class="bg-black">
+        <a href="#!" onclick="launch_toast()" class="bg-black">
             <img src="{{ asset('images/public-cell/07.jpg') }}"
                 class="w-full h-52 sm:h-60 object-cover rounded-xl">
         </a>

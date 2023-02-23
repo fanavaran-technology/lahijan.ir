@@ -65,11 +65,20 @@ class PlaceController extends Controller
             $inputs = $request->all();
 
             // save image
+//            if ($request->hasFile('image')) {
+//                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places");
+//                $inputs['image'] = $imageService->save($inputs['image']);
+//            }
+
             if ($request->hasFile('image')) {
-                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places");
-                $inputs['image'] = $imageService->save($inputs['image']);
+                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'places');
+                $result = $imageService->save($request->file('image'));
+                if ($result === false) {
+                    return redirect()->route('admin.content.banner.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
+                }
+                $inputs['image'] = $result;
             }
-            
+
 
             Place::create($inputs);
         });
