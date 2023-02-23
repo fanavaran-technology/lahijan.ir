@@ -24,8 +24,8 @@ class PlacesGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image'     =>      'required',
-            'alt'       =>      'required' ,  
+            'image'            => 'required|image|max:3072|min:1',
+            'alt'       =>      'required' ,
         ];
     }
 
@@ -33,7 +33,7 @@ class PlacesGalleryRequest extends FormRequest
     {
         return [
             'image'     =>      'عکس',
-            'alt'       =>      'alt تصویر' ,  
+            'alt'       =>      'alt تصویر' ,
         ];
     }
 }

@@ -36,8 +36,9 @@ class PublicCall extends Model
     // TODO
     public function publicPath()
     {
-        return route('news.show' , $this->id);
+        return route('publicCall.show' , $this->id);
     }
+
 
     const SEARCH_KEY = 'title';
 

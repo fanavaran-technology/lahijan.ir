@@ -28,8 +28,8 @@ class PlaceRequest extends FormRequest
                 'title'            => 'required|min:2|max:200',
                 'description'      => 'required',
                 'location'         => 'required',
-                'image'            => 'required|image|max:3072|min:1',
-                'status'           => 'nullable|in:0,1',    
+                'image'            => 'required|image|mimes:png,jpg,jpeg,gif|max:3072|min:1',
+                'status'           => 'nullable|in:0,1',
             ];
         }
 
@@ -37,8 +37,8 @@ class PlaceRequest extends FormRequest
             'title'            => 'required|min:2|max:200',
             'description'      => 'required',
             'location'         => 'required',
-            'image'            => 'nullable|image|max:3072|min:1',
-            'status'           => 'nullable|in:0,1',    
+            'image'            => 'nullable||image|mimes:png,jpg,jpeg,gif|max:3072|min:1',
+            'status'           => 'nullable|in:0,1',
         ];
     }
 }

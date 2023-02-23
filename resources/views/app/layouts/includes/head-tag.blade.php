@@ -1,22 +1,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{{-- slider text --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+{{-- slider text--}}
+<link rel="stylesheet" href="{{ asset("assets/app/plugins/top-nav/font-awesome.min.css") }}">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset("assets/app/plugins/flowbite/flowbite.min.css") }}">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- flowbit elment -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.css" rel="stylesheet">
+<link href="{{ asset("assets/app/plugins/flowbite/flowbite2.min.css") }}flowbite.min.css" rel="stylesheet">
 
 <!-- odometer -->
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/odometer/odometer-theme-default.css") }}">
 
 <!-- swiper -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+<link rel="stylesheet" href="{{ asset("assets/app/plugins/swiper/swiper-bundle.min.css") }}">
 
 <link href="{{ asset('assets/app/css/app.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/app/css/style.css') }}">
@@ -24,3 +24,4 @@
 
 <!-- alpine js -->
 <script src="{{ asset('assets/app/js/app.js') }}" defer></script>
+

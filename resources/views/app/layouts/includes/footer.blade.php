@@ -133,21 +133,4 @@
     </div>
 </footer>
 
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "https://prayer.aviny.com/api/prayertimes/490",
-            dataType: "json",
-            type: 'GET',
-            success: function (data) {
-                $("#div_test").append("اذان صبح: " + data.Imsaak + "<br/>");
-                $("#div_tes1").append("طلوع آفتاب: " + data.Sunrise + "<br/>");
-                $("#div_test2").append("اذان ظهر: " + data.Noon + "<br/>");
-                $("#div_test3").append("غروب خورشید: " + data.Sunset + "<br/>");
-                $("#div_test4").append("اذان مغرب: " + data.Maghreb + "<br/>");
-                $("#div_test5").append("اوقات به افق: " + data.CityName + "<br/>");
 
-            }
-        });
-    });
-</script>
