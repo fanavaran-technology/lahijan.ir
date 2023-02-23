@@ -41,23 +41,23 @@ class NewsController extends Controller
         $allNews = News::query();
 
         if ($searchString = request('search'))
-            $allNews->where('title', "LIKE" , "%{$searchString}%");
+            $allNews->where('title', "LIKE", "%{$searchString}%");
 
-        if (request('firestation')) 
+        if (request('firestation'))
             $allNews->where('is_fire_station', 1);
 
-        if (request('draft')) 
+        if (request('draft'))
             $allNews->where('is_draft', 1);
 
         if (request('status'))
             $allNews->wherePublished();
 
-        if (request('pin')) 
+        if (request('pin'))
             $allNews->where('is_pined', 1);
 
-        $allNews = $allNews->orderBy('id' , 'DESC')->paginate(10);
+        $allNews = $allNews->orderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.content.news.index' , compact('allNews'));
+        return view('admin.content.news.index', compact('allNews'));
     }
 
     /**
@@ -68,7 +68,7 @@ class NewsController extends Controller
     public function create(): View
     {
         $videos = Video::all();
-        return view('admin.content.news.create' , compact('videos'));
+        return view('admin.content.news.create', compact('videos'));
     }
 
     /**
@@ -77,9 +77,9 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NewsRequest $request , ImageService $imageService): RedirectResponse
+    public function store(NewsRequest $request, ImageService $imageService): RedirectResponse
     {
-        DB::transaction(function () use ($request , $imageService) {
+        DB::transaction(function () use ($request, $imageService) {
             $inputs = $request->all();
 
             // save image
@@ -92,9 +92,7 @@ class NewsController extends Controller
 
             // attach video to news
             if ($request->has('video')) {
-                $video = Video::where('video' , $inputs['video'])->first();
-                if ($video)
-                    $video->update(['news_id' => $news->id]);
+                $this->linkedVideo($inputs['video'], $news->id);
             }
 
             // add tags
@@ -102,10 +100,10 @@ class NewsController extends Controller
                 $tags = explode(',', $request->tags);
                 $this->saveTags($news, $tags);
             }
-            
+
         });
 
-        return to_route('admin.content.news.index')->with('toast-success' , 'خبر جدیدی اضافه گردید.');
+        return to_route('admin.content.news.index')->with('toast-success', 'خبر جدیدی اضافه گردید.');
     }
 
     /**
@@ -118,7 +116,7 @@ class NewsController extends Controller
     {
         $tags = Tag::all()->pluck('title')->implode(',');
 
-        return view('admin.content.news.edit', compact('news' , 'tags'));
+        return view('admin.content.news.edit', compact('news', 'tags'));
     }
 
     /**
@@ -128,44 +126,41 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request,News $news , ImageService $imageService): RedirectResponse
+    public function update(NewsRequest $request, News $news, ImageService $imageService): RedirectResponse
     {
-        DB::transaction(function () use($request , $news , $imageService) {
+        DB::transaction(function () use ($request, $news, $imageService) {
             $inputs = $request->all();
 
             // save image
             if ($request->hasFile('image')) {
                 if (!empty($news->image['directory']))
                     $imageService->deleteImage($news->image);
-                    
+
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-             // attach video to news
-             if ($request->has('video')) {
-                $video = Video::where('video' , $inputs['video'])->first();
-                if ($video)
-                    $video->update(['news_id' => $news->id]);
-            }
-    
             // update check inputs
-            $inputs['is_draft'] = $inputs['is_draft'] ?? 0; 
-            $inputs['is_pined'] = $inputs['is_pined'] ?? 0; 
-            $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0; 
+            $inputs['is_draft'] = $inputs['is_draft'] ?? 0;
+            $inputs['is_pined'] = $inputs['is_pined'] ?? 0;
+            $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0;
 
             $news->update($inputs);
+
+            // attach video to news
+            if ($request->has('video')) {
+                $this->linkedVideo($inputs['video'], $news->id);
+            }
 
             // add tags 
             if ($request->filled('tags')) {
                 $tags = explode(',', $request->tags);
                 $this->saveTags($news, $tags);
-            }
-            else if ($news->tags)
+            } else if ($news->tags)
                 $news->tags()->detach();
         });
 
-        return to_route('admin.content.news.index')->with('toast-success' , 'تغییرات روی خبر اعمال شد.');
+        return to_route('admin.content.news.index')->with('toast-success', 'تغییرات روی خبر اعمال شد.');
     }
 
     /**
@@ -184,19 +179,26 @@ class NewsController extends Controller
         return back()->with('toast-success', 'خبر حذف گردید.');
     }
 
+    private function linkedVideo($videoPath, $newsId)
+    {
+        $video = Video::where('video', $videoPath)->first();
+        if ($video)
+            $video->update(['news_id' => $newsId]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function saveTags(News $news , Array $tags): void
+    public function saveTags(News $news, array $tags): void
     {
         # remove all news tags
         $news->tags()->detach();
-        collect($tags)->map(function($item) use($news){
+        collect($tags)->map(function ($item) use ($news) {
             # create tag
             $tag = Tag::firstOrCreate([
-                'title'  =>   trim($item)
+                'title' => trim($item)
             ]);
             # create article tag
             $news->tags()->attach($tag);
@@ -208,7 +210,7 @@ class NewsController extends Controller
         return view("admin.content.news.gallery.index", compact('news'));
     }
 
-    public function createGallery(NewsGalleryRequest $request,News $news , ImageService $imageService)
+    public function createGallery(NewsGalleryRequest $request, News $news, ImageService $imageService)
     {
         $inputs = $request->all();
 
@@ -217,18 +219,18 @@ class NewsController extends Controller
             $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news-gallery");
             $inputs['image'] = $imageService->save($inputs['image']);
         }
-      
+
         $news->gallerizable()->create($inputs);
         return to_route("admin.content.news.index-gallery", $news->id)->with('cute-success', 'تصویر جدید اضافه شد.');
     }
 
-  
+
 
     public function destroyGallery(Gallery $gallery)
     {
         $gallery->delete();
-        
-        return back()->with('cute-success', 'تصویر حذف گردید.');   
+
+        return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 
     public function draft(News $news)
@@ -263,34 +265,35 @@ class NewsController extends Controller
         }
     }
 
-    public function uploadVideo(Request $request) {
+    public function uploadVideo(Request $request)
+    {
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
 
         if (!$receiver->isUploaded()) {
             throw new \Exception("Error Processing Request", 1);
         }
-    
+
         // receive file
-        $fileReceived = $receiver->receive(); 
-        
-        if ($fileReceived->isFinished()) { 
+        $fileReceived = $receiver->receive();
+
+        if ($fileReceived->isFinished()) {
             $file = $fileReceived->getFile();
 
             $extension = $file->getClientOriginalExtension();
-            $fileName =  time(). '.' . $extension;
-            
+            $fileName = time() . '.' . $extension;
+
             $disk = Storage::disk('videos');
             $jalaliDate = Jalalian::forge(time());
             $path = $jalaliDate->getYear() . '/' . $jalaliDate->getMonth() . '/' . $jalaliDate->getDay();
-            $path = $disk->putFileAs($path,$file, $fileName);
-            
+            $path = $disk->putFileAs($path, $file, $fileName);
+
             // delete chunked file
             unlink($file->getPathname());
 
-            $finalFilePath = "videos/". $path;
+            $finalFilePath = "videos/" . $path;
 
             Video::create([
-                'video' =>  $finalFilePath
+                'video' => $finalFilePath
             ]);
 
             return [
@@ -298,11 +301,11 @@ class NewsController extends Controller
                 'filename' => $fileName,
             ];
         }
-    
+
         $handler = $fileReceived->handler();
         return [
             'done' => $handler->getPercentageDone(),
             'status' => true
         ];
-    }   
+    }
 }
