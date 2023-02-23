@@ -56,6 +56,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
+        Route::post('news/upload-video' , [NewsController::class , 'uploadVideo'])->name('news.upload-video');
         // place gallery routes
         Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
         Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');

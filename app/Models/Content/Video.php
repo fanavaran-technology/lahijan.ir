@@ -11,7 +11,7 @@ class Video extends Model
 
     protected $fillable = [
         'video',
-        'description'
+        'news_id'
     ];
 
     public function news()

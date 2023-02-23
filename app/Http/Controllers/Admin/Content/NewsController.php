@@ -8,10 +8,17 @@ use App\Http\Services\Image\ImageService;
 use App\Models\Content\Gallery;
 use App\Models\Content\News;
 use App\Models\Content\Tag;
+use App\Models\Content\Video;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\Content\NewsGalleryRequest;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Morilog\Jalali\Jalalian;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Intervention\Image\Facades\Image;
 
 class NewsController extends Controller
 {
@@ -60,7 +67,8 @@ class NewsController extends Controller
      */
     public function create(): View
     {
-        return view('admin.content.news.create');
+        $videos = Video::all();
+        return view('admin.content.news.create' , compact('videos'));
     }
 
     /**
@@ -81,6 +89,13 @@ class NewsController extends Controller
             }
 
             $news = $request->user()->news()->create($inputs);
+
+            // attach video to news
+            if ($request->has('video')) {
+                $video = Video::where('video' , $inputs['video'])->first();
+                if ($video)
+                    $video->update(['news_id' => $news->id]);
+            }
 
             // add tags
             if ($request->filled('tags')) {
@@ -240,4 +255,47 @@ class NewsController extends Controller
             return response()->json(['status' => false]);
         }
     }
+
+    public function uploadVideo(Request $request) {
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+
+        if (!$receiver->isUploaded()) {
+            throw new \Exception("Error Processing Request", 1);
+        }
+    
+        // receive file
+        $fileReceived = $receiver->receive(); 
+        
+        if ($fileReceived->isFinished()) { 
+            $file = $fileReceived->getFile();
+
+            $extension = $file->getClientOriginalExtension();
+            $fileName =  time(). '.' . $extension;
+            
+            $disk = Storage::disk('videos');
+            $jalaliDate = Jalalian::forge(time());
+            $path = $jalaliDate->getYear() . '/' . $jalaliDate->getMonth() . '/' . $jalaliDate->getDay();
+            $path = $disk->putFileAs($path,$file, $fileName);
+            
+            // delete chunked file
+            unlink($file->getPathname());
+
+            $finalFilePath = "videos/". $path;
+
+            Video::create([
+                'video' =>  $finalFilePath
+            ]);
+
+            return [
+                'path' => asset($finalFilePath),
+                'filename' => $fileName,
+            ];
+        }
+    
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
+    }   
 }

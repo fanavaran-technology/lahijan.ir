@@ -17,7 +17,7 @@
 </section>
 <div class="md:flex hidden h-auto p-4  bg-black">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <span class="text-white z-50 mr-2 font-bold text-center items-center">
+        <span class="text-white z-40 mr-2 font-bold text-center items-center">
             تیتر جدید ترین خبر : <span class="font-normal text-sm">
                 <div id="featured-slider" class="mt-2 text-right ">
                     <div id="slider" class="ml-7">
