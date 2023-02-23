@@ -97,12 +97,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 # index route
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
-Route::get("/app/content/news/index", [PublicNewsController::class, 'index'])->name('index');
-
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
-Route::resource('publicCall' , indexPublicCallController::class)->parameters(['publicCalls' => 'publicCall:slug'])->only('index' ,'show');
-
+Route::resource('public-calls' , indexPublicCallController::class)->parameters(['publicCall' => 'publicCall:slug'])->only('index' ,'show');
 
 Route::get('search' , PublicSearchController::class)->name('search');
 
