@@ -32,11 +32,9 @@ class PublicCall extends Model
         ];
     }
 
-    // temporary
-    // TODO
     public function publicPath()
     {
-        return route('publicCall.show' , $this->id);
+        return route('public-calls.show' , $this->id);
     }
 
 
