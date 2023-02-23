@@ -141,6 +141,13 @@ class NewsController extends Controller
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
+
+             // attach video to news
+             if ($request->has('video')) {
+                $video = Video::where('video' , $inputs['video'])->first();
+                if ($video)
+                    $video->update(['news_id' => $news->id]);
+            }
     
             // update check inputs
             $inputs['is_draft'] = $inputs['is_draft'] ?? 0; 
