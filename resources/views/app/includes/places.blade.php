@@ -17,8 +17,9 @@
                pointer-events-none   transition-all duration-1000
                overflow-hidden rounded-xl
            '>
-                            <div style="background-image: url({{ $place->image}})"
-                                 class='relative h-full transition-all  duration-700 bg-cover image-wrapper bg-right rounded-xl'>
+                            <div
+                                 class='relative h-full transition-all  duration-700 image-wrapper bg-right rounded-xl'>
+                                <img src="{{ $place->image}}" alt="" class="w-full h-full object-cover">
                             </div>
                         </div>
                         <div
@@ -52,6 +53,8 @@
                 </div>
 
             </div>
+
+
         @endforeach
 
 
