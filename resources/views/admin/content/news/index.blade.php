@@ -134,24 +134,52 @@
                                 </thead>
                                 @forelse($allNews as $news)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            {{ $loop->iteration }} &nbsp;
+                                            @if ($news->video)
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-camera-reels-fill"
+                                                    viewBox="0 0 16 16">
+                                                    <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                                    <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                                    <path
+                                                        d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z" />
+                                                </svg>
+                                            @endif
+                                            @if ($news->gallerizable->isNotEmpty())
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                                                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                                    <path
+                                                        d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                                                </svg>
+                                            @endif
+                                        </td>
                                         <td>
                                             <small>{{ Str::limit($news->title, 60, '...') }}</small>
                                         </td>
                                         <td>
                                             @can('edit_news')
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" id="draft{{ $news->id }}" onchange="changeStatus({{ $news->id }} , 'draft')" data-url="{{ route('admin.content.news.is_draft', $news->id) }}" type="checkbox" @checked($news->is_draft)>
-                                                <label class="custom-control-label" for="draft{{ $news->id }}"></label>
-                                            </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" id="draft{{ $news->id }}"
+                                                        onchange="changeStatus({{ $news->id }} , 'draft')"
+                                                        data-url="{{ route('admin.content.news.is_draft', $news->id) }}"
+                                                        type="checkbox" @checked($news->is_draft)>
+                                                    <label class="custom-control-label"
+                                                        for="draft{{ $news->id }}"></label>
+                                                </div>
                                             @endcan
                                         </td>
                                         <td>
                                             @can('edit_news')
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="custom-control-input" id="pined{{ $news->id }}" onchange="changeStatus({{ $news->id }} , 'pined')" data-url="{{ route('admin.content.news.is_pined', $news->id) }}" type="checkbox"  @checked($news->is_pined)>
-                                                <label class="custom-control-label" for="pined{{ $news->id }}"></label>
-                                            </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input class="custom-control-input" id="pined{{ $news->id }}"
+                                                        onchange="changeStatus({{ $news->id }} , 'pined')"
+                                                        data-url="{{ route('admin.content.news.is_pined', $news->id) }}"
+                                                        type="checkbox" @checked($news->is_pined)>
+                                                    <label class="custom-control-label"
+                                                        for="pined{{ $news->id }}"></label>
+                                                </div>
                                             @endcan
                                         </td>
 
@@ -204,7 +232,8 @@
                                                         </g>
                                                     </svg>
                                                 </a>
-                                                <a href="{{ $news->publicPath() }}" target="_blank" class="text-decoration-none text-info mr-3">
+                                                <a href="{{ $news->publicPath() }}" target="_blank"
+                                                    class="text-decoration-none text-info mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
@@ -268,8 +297,8 @@
     @include('admin.alerts.confirm')
 
     <script type="text/javascript">
-        function changeStatus(id , idPrefix) {
-            const element = $("#"+ idPrefix + id)
+        function changeStatus(id, idPrefix) {
+            const element = $("#" + idPrefix + id)
             const url = element.attr('data-url')
             const elementValue = !element.prop('checked');
 

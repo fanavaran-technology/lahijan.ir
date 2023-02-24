@@ -57,6 +57,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
+        Route::post('news/upload-video' , [NewsController::class , 'uploadVideo'])->name('news.upload-video');
         // place gallery routes
         Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
         Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');
@@ -96,12 +97,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 # index route
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
-Route::get("/app/content/news/index", [PublicNewsController::class, 'index'])->name('index');
-
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
-Route::resource('publicCall' , indexPublicCallController::class)->parameters(['publicCalls' => 'publicCall:slug'])->only('index' ,'show');
-
+Route::resource('public-calls' , indexPublicCallController::class)->parameters(['publicCall' => 'publicCall:slug'])->only('index' ,'show');
 
 Route::get('search' , PublicSearchController::class)->name('search');
 

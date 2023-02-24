@@ -16,9 +16,7 @@ class PublicCallController extends Controller
      */
     public function index()
     {
-        $publicCalls = PublicCall::query();
-
-        $publicCalls = $publicCalls->orderBy('created_at' , 'DESC')->latest()->paginate(12);
+        $publicCalls = PublicCall::latest()->paginate(12);
         return view('app.content.publicCalls.index' ,  compact('publicCalls'));
 
     }

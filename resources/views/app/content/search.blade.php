@@ -1,8 +1,8 @@
-@extends('app.layouts.app', ['title' => "نتیجه جستجوی {{ request('search') }}"])
+@extends('app.layouts.app', ['title' => "نتایج جستجوی " . request('search') ])
 
 @section('content')
     <section class="min-h-screen container mt-8 sm:mt-10">
-        <section class="flex items-center space-x-2 space-x-reverse">
+        <section class="flex flex-wrap items-center space-x-2 space-x-reverse">
             <span class="text-md md:text-lg font-light">نتایج جستجو برای : </span>
             <span class="text-lg md:text-xl font-bold">{{ request('search') }}</span>
         </section>

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'video',
+        'news_id'
+    ];
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
 }

@@ -31,6 +31,7 @@ class NewsRequest extends FormRequest
                 'image'            => 'required|image|max:3072|min:1',
                 'published_at'     => 'required',        
                 'tags'             => 'nullable',
+                'video'            => 'nullable|exists:videos,video',
                 'is_draft'         => 'nullable|in:0,1',    
                 'is_pined'         => 'nullable|in:0,1',    
                 'is_fire_station'  => 'nullable|in:0,1',            
@@ -45,7 +46,8 @@ class NewsRequest extends FormRequest
             'tags'             => 'nullable',
             'is_draft'         => 'nullable|in:0,1',    
             'is_pined'         => 'nullable|in:0,1',    
-            'is_fire_station'  => 'nullable|in:0,1',            
+            'is_fire_station'  => 'nullable|in:0,1',        
+            'video'            => 'nullable|exists:videos,video',
         ];
     }
 }

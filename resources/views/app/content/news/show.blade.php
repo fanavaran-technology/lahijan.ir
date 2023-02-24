@@ -77,15 +77,17 @@
                                             {{ $lastNews->title }}
                                         </h5>
                                         <div class="text-xs text-gray-500">{{ $lastNews->user->full_name }}</div>
-                                        {{-- <div
+                                        @if ($lastNews->video)
+                                        <div
                                         class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round"
-                                                d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                                        </svg>
-                                        <span>ویدئو</span>
-                                    </div> --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                <path stroke-linecap="round"
+                                                    d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                                            </svg>
+                                            <span>+ ویدئو</span>
+                                        </div>
+                                        @endif
                                         @if ($lastNews->gallerizable->isNotEmpty())
                                             <div
                                                 class="text-xs px-1 bg-green-400 text-gray-800 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">

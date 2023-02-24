@@ -18,6 +18,7 @@ class News extends Model
         'image',
         'slug',
         'user_id',
+        'video_id',
         'published_at',
         'is_draft',
         'is_pined',
@@ -78,5 +79,9 @@ class News extends Model
     public function gallerizable()
     {
         return $this->morphMany(Gallery::class, 'gallerizable');
+    }
+
+    public function video() {
+        return $this->belongsTo(Video::class);
     }
 }

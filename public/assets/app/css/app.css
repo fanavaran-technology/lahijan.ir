@@ -1257,6 +1257,10 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.border-gray-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
 .border-green-500 {
   --tw-border-opacity: 1;
   border-color: rgb(34 197 94 / var(--tw-border-opacity));
@@ -1374,9 +1378,6 @@ select {
 }
 .to-\[\#307091\] {
   --tw-gradient-to: #307091;
-}
-.bg-cover {
-  background-size: cover;
 }
 .bg-right {
   background-position: right;
@@ -1950,6 +1951,11 @@ input:checked:hover~.image-wrapper>div {
 
 .hover\:bg-gradient-to-r:hover {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-300:hover {
