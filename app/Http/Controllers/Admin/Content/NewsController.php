@@ -89,7 +89,7 @@ class NewsController extends Controller
             }
             
             // attach video to news
-            if ($request->has('video')) {
+            if ($request->filled('video')) {
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
             }
 
@@ -146,7 +146,7 @@ class NewsController extends Controller
             $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0;
 
             // attach video to news
-            if ($request->has('video')) {
+            if ($request->filled('video')) {
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
             }
 
@@ -181,7 +181,7 @@ class NewsController extends Controller
 
     private function attachVideo($videoPath)
     {
-        $video = Video::where('video', $videoPath)->firstOrFail();
+        $video = Video::where('video', $videoPath)->first();
         return $video ? $video->id : null;
     }
 
@@ -222,8 +222,6 @@ class NewsController extends Controller
         $news->gallerizable()->create($inputs);
         return to_route("admin.content.news.index-gallery", $news->id)->with('cute-success', 'تصویر جدید اضافه شد.');
     }
-
-
 
     public function destroyGallery(Gallery $gallery)
     {

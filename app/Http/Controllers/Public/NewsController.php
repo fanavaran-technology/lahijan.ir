@@ -26,6 +26,9 @@ class NewsController extends Controller
         if (request("gallery"))
             $allNews->has('gallerizable');
 
+        if (request("video"))
+            $allNews->has('video');
+
         $allNews = $allNews->orderBy('is_pined' , 'DESC')->latest()->paginate(12);
         return view('app.content.news.index' ,  compact('allNews'));
     }
