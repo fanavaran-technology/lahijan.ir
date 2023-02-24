@@ -18,6 +18,7 @@ class News extends Model
         'image',
         'slug',
         'user_id',
+        'video_id',
         'published_at',
         'is_draft',
         'is_pined',
@@ -81,6 +82,6 @@ class News extends Model
     }
 
     public function video() {
-        return $this->hasOne(Video::class);
+        return $this->belongsTo(Video::class);
     }
 }

@@ -274,7 +274,7 @@
             }, // CSRF token
             fileType: ['mp4'],
             // default is 1*1024*1024, this should be less than your maximum limit in php.ini
-            chunkSize: 256 * 1024 * 1024,
+            chunkSize: 10 * 1024 * 1024,
             headers: {
                 'Accept': 'application/json'
             },

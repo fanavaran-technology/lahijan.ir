@@ -87,13 +87,13 @@ class NewsController extends Controller
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
-
-            $news = $request->user()->news()->create($inputs);
-
+            
             // attach video to news
             if ($request->has('video')) {
-                $this->linkedVideo($inputs['video'], $news->id);
+                $inputs['video_id'] = $this->attachVideo($inputs['video']);
             }
+
+            $news = $request->user()->news()->create($inputs);
 
             // add tags
             if ($request->filled('tags')) {
@@ -145,12 +145,12 @@ class NewsController extends Controller
             $inputs['is_pined'] = $inputs['is_pined'] ?? 0;
             $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0;
 
-            $news->update($inputs);
-
             // attach video to news
             if ($request->has('video')) {
-                $this->linkedVideo($inputs['video'], $news->id);
+                $inputs['video_id'] = $this->attachVideo($inputs['video']);
             }
+
+            $news->update($inputs);
 
             // add tags 
             if ($request->filled('tags')) {
@@ -179,11 +179,10 @@ class NewsController extends Controller
         return back()->with('toast-success', 'خبر حذف گردید.');
     }
 
-    private function linkedVideo($videoPath, $newsId)
+    private function attachVideo($videoPath)
     {
-        $video = Video::where('video', $videoPath)->first();
-        if ($video)
-            $video->update(['news_id' => $newsId]);
+        $video = Video::where('video', $videoPath)->firstOrFail();
+        return $video ? $video->id : null;
     }
 
     /**
