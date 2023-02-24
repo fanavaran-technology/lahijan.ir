@@ -20,6 +20,7 @@
 
 <link href="{{ asset('assets/app/css/app.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/app/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/app/css/slider.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/app/css/fonts.css') }}">
 
 <!-- alpine js -->

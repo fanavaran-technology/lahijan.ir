@@ -41,6 +41,7 @@
                                 <h2 class='text-gray-100 font-bold text-sm mx-3'>{{$place->location}}</h2>
                             </div>
                         </div>
+
                         <div
                             class='bg-black/30 h-full w-full absolute top-0 pointer-events-none
            peer-checked:scale-95 ransition-all duration-300 peer-checked:bg-black/0 rounded-xl'>
@@ -48,7 +49,9 @@
                         <a href="#"
                            class="flex mt-3 font-bold text-sm text-cyan-700 text-center justify-center">+ اطلاعات کلی
                             ...</a>
+
                     </div>
+
 
                 </div>
 

@@ -65,11 +65,6 @@ class PlaceController extends Controller
             $inputs = $request->all();
 
             // save image
-//            if ($request->hasFile('image')) {
-//                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "places");
-//                $inputs['image'] = $imageService->save($inputs['image']);
-//            }
-
             if ($request->hasFile('image')) {
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'places');
                 $result = $imageService->save($request->file('image'));
