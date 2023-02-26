@@ -18,7 +18,6 @@ class PublicCallController extends Controller
     {
         $publicCalls = PublicCall::latest()->paginate(12);
         return view('app.content.publicCalls.index' ,  compact('publicCalls'));
-
     }
 
     /**
@@ -30,7 +29,6 @@ class PublicCallController extends Controller
     public function show(PublicCall $publicCall , News $news)
     {
         $latestNews = News::latest()->take(10)->get()->except($news->id);
-
         return view('app.content.publicCalls.show' , compact('publicCall' , 'news' , 'latestNews'));
     }
 }

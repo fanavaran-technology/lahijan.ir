@@ -30,25 +30,28 @@
                                 </p>
                             </div>
                             <div class="flex bg-black/50 h-14 w-72 items-center mt-16">
-                                <svg class="text-white mr-3" xmlns="http://www.w3.org/2000/svg" width="18"
-                                     height="18" fill="currentColor" class="bi bi-pin-map-fill"
+                                <svg class="text-white mr-3 bi bi-pin-map-fill w-10" xmlns="http://www.w3.org/2000/svg"
+                                     height="18" fill="currentColor"
                                      viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                           d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
                                     <path fill-rule="evenodd"
                                           d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
                                 </svg>
-                                <h2 class='text-gray-100 font-bold text-sm mx-3'>{{$place->location}}</h2>
+                                <h2 class='text-gray-100 font-normal text-sm mr-1'>{{$place->location}}</h2>
                             </div>
                         </div>
+
                         <div
                             class='bg-black/30 h-full w-full absolute top-0 pointer-events-none
            peer-checked:scale-95 ransition-all duration-300 peer-checked:bg-black/0 rounded-xl'>
                         </div>
-                        <a href="#"
+                        <a href="{{ $place->publicPath() }}"
                            class="flex mt-3 font-bold text-sm text-cyan-700 text-center justify-center">+ اطلاعات کلی
                             ...</a>
+
                     </div>
+
 
                 </div>
 
@@ -63,10 +66,10 @@
 
 </div>
 <section class="mt-4 flex  flex-col items-center space-y-2">
-    <button onclick="launch_toast()"
-            class="hover:bg-gradient-to-r from-[#58A4C4] to-[#307091] bg-[#307091] w-80 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-xl ">
+    <a href="{{ route('places.index') }}"
+            class="hover:bg-gradient-to-r text-center cursor-pointer from-[#58A4C4] to-[#307091] bg-[#307091] w-80 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-xl ">
         مناطق گردشگری بیشتر
-    </button>
+    </a>
 </section>
 
 <div id="toast" class="border border-gray-600">

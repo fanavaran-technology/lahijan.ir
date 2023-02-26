@@ -116,7 +116,7 @@ span{
     text-decoration: none;
 }
 
-
+/*toast updating*/
 #toast {
     visibility: hidden;
     max-width: 50px;
