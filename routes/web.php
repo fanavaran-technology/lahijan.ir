@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Clarification\ContractController;
 use App\Http\Controllers\Clarification\PerssonelController;
 use App\Http\Controllers\Clarification\SalaryController;
 use Illuminate\Support\Facades\Route;
@@ -81,7 +82,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     Route::prefix('clarification')->as('clarification.')->group(function () {
         Route::resources([
             'perssonels'          =>  PerssonelController::class,
-            'salaries'            =>  SalaryController::class
+            'salaries'            =>  SalaryController::class,
+            'contracts'           =>  ContractController::class
         ] , ['except' => 'show']);
 
         Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');
