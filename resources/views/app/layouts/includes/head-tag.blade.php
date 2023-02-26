@@ -26,3 +26,7 @@
 <!-- alpine js -->
 <script src="{{ asset('assets/app/js/app.js') }}" defer></script>
 
+
+
+
+

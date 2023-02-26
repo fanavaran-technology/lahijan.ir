@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Public;
 
+use App\Models\Content\Video;
 use Carbon\Carbon;
 use App\Models\Content\Menu;
 use App\Models\Content\News;
@@ -22,17 +23,21 @@ class HomeController extends Controller
 
         $reportImages = News::has('gallerizable')->latest()->take(5)->wherePublished()->get();
 
+        $allNews = News::latest()->take(5)->wherePublished()->get();
+
         $publicCells = PublicCall::latest()->take(2)->where('status' , 1)->get();
 
         $places = Place::latest()->take(6)->where('status' , 1)->get();
 
         $menus = Menu::latest()->take(15)->get();
 
+        $videos = Video::latest()->take(10)->get();
 
 
 
 
-        return view('app.index', compact('sliders' , 'latestNews' , 'publicCells' , 'places' , 'reportImages' ));
+
+        return view('app.index', compact('sliders' , 'latestNews' , 'publicCells' , 'places' , 'reportImages' , 'videos' , 'allNews' ));
 
     }
 

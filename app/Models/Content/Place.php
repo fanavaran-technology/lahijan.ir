@@ -41,7 +41,7 @@ class Place extends Model
     // TODO
     public function publicPath()
     {
-        return route('news.show' , $this->id);
+        return route('places.show' , $this->id);
     }
 
     public function gallerizable()

@@ -87,7 +87,7 @@ class NewsController extends Controller
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
-            
+
             // attach video to news
             if ($request->filled('video')) {
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
@@ -152,7 +152,7 @@ class NewsController extends Controller
 
             $news->update($inputs);
 
-            // add tags 
+            // add tags
             if ($request->filled('tags')) {
                 $tags = explode(',', $request->tags);
                 $this->saveTags($news, $tags);
@@ -265,11 +265,9 @@ class NewsController extends Controller
     public function uploadVideo(Request $request)
     {
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
-
         if (!$receiver->isUploaded()) {
             throw new \Exception("Error Processing Request", 1);
         }
-
         // receive file
         $fileReceived = $receiver->receive();
 

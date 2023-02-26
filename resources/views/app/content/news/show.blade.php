@@ -2,6 +2,9 @@
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
+
+
 @endsection
 
 @section('content')
@@ -40,8 +43,14 @@
                                 @endforeach
                             </section>
                         </section>
+                        @if($news->video)
+                            <video controls crossorigin playsinline class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"  poster="{{ asset($news->image) }}" >
+                                <source src="{{ asset($news->video->video) }}" type="video/mp4" />
+                            </video>
+                        @else
                         <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
                             alt="{{ $news->title }}">
+                        @endif
                     </section>
                     <article class="py-6 text-gray-600 text-sm lg:text-base leading-8 lg:leading-10">
                         {!! $news->body !!}
@@ -110,6 +119,14 @@
             </aside>
         </section>
     </section>
+    <main>
+        <div id="container" class="container">
+        </div>
+    </main>
+
+
+
+
 @endsection
 
 @section('script')
@@ -117,4 +134,8 @@
     <script>
         new Viewer(document.getElementById('images'));
     </script>
+
+    <script src="https://cdn.plyr.io/3.7.3/demo.js" crossorigin="anonymous"></script>
+
+
 @endsection
