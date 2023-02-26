@@ -76,7 +76,7 @@
                                             <small>{{ Str::limit($place->title, 60, '...') }}</small>
                                         </td>
                                         <td>
-                                            @can('edit_slider')
+                                            @can('edit_places')
                                             <label>
                                                 <input id="{{ $place->id }}" onchange="changeStatus({{ $place->id }})"
                                                     data-url="{{ route('admin.content.places.status', $place->id) }}"
@@ -135,7 +135,7 @@
                                                         d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                 </svg>
                                             </a>
-                                            @can('edit_places')
+                                            @can('edit_placess')
                                                 <a href="{{ route('admin.content.places.edit', $place->id) }}"
                                                     class="text-decoration-none text-primary mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"

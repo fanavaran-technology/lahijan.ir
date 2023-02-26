@@ -14,12 +14,14 @@
                 <div class="flex space-x-2 space-x-reverse">
                     <div class="flex items-center w-1/2 md:w-40 space-x-2 space-x-reverse">
                         <label for="start-date" class="text-sm text-gray-700">از</label>
-                        <input type="text" name="start_date" id="start-date" autocomplete="off" value="{{ request('start_date') }}"
+                        <input type="text" name="start_date" id="start-date" autocomplete="off"
+                            value="{{ request('start_date') }}"
                             class="datepicker w-full text-sm p-1.5 border border-gray-300 focus:border-none text-gray-700 rounded">
                     </div>
                     <div class="flex items-center w-1/2 md:w-40 space-x-2 space-x-reverse">
                         <label for="end-date" class="text-sm text-gray-700">تا</label>
-                        <input type="text" name="end_date" id="end-date" autocomplete="off" value="{{ request('end_date') }}"
+                        <input type="text" name="end_date" id="end-date" autocomplete="off"
+                            value="{{ request('end_date') }}"
                             class="datepicker w-full text-sm p-1.5 border border-gray-300 focus:border-none text-gray-700 rounded">
                     </div>
                     <button type="submit"
@@ -29,7 +31,7 @@
             <div class="flex justify-center space-x-4 space-x-reverse">
                 <div class="flex items-center mr-0 sm:mr-8">
                     <input id="video" type="checkbox" onclick="filterAction(this)" data-filter="video"
-                    data-action="{{ request()->fullUrlWithQuery(['video' => 1]) }}" @checked(request('video'))
+                        data-action="{{ request()->fullUrlWithQuery(['video' => 1]) }}" @checked(request('video'))
                         class="w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2">
                     <label for="video" class="mr-2 text-sm font-medium text-gray-900">ویدئو ها</label>
                 </div>
@@ -68,8 +70,10 @@
             @request('gallery')
                 <span id="badge-dismiss-green"
                     class="inline-flex items-center px-2 py-2 ml-2 text-sm font-medium text-blue-800 bg-blue-100 rounded">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>&nbsp;
                     + گالری تصاویر
                     <button type="button" onclick="removeFilter('gallery')"
@@ -88,15 +92,17 @@
             @request('video')
                 <span id="badge-dismiss-green"
                     class="inline-flex items-center px-2 py-2 ml-2 text-sm font-medium text-blue-800 bg-blue-100 rounded">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round"
+                            d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
                     </svg>&nbsp;
                     + ویدئو
                     <button type="button" onclick="removeFilter('video')"
                         class="inline-flex items-center p-0.5 mr-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200"
                         aria-label="Remove">
-                        <svg aria-hidden="true" class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                 clip-rule="evenodd"></path>
@@ -122,12 +128,23 @@
                             </svg>
                         </section>
                     @endif
-                    <a href="{{ $news->publicPath() }}">
+                    <a href="{{ $news->publicPath() }}" class="relative">
                         <img class="rounded-lg w-full h-44 object-cover" src="{{ asset($news->image) }}"
                             alt="{{ $news->title }}" />
                         <h5 class="text-gray-900 text-base md:text-base lg:text-lg font-medium my-4">
                             {{ Str::limit($news->title, 100, '...') }}
                         </h5>
+                        @if ($news->video)
+                            <div
+                                class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute top-2 left-2 space-x-1 space-x-reverse flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round"
+                                        d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                                </svg>
+                                <span>+ ویدئو</span>
+                            </div>
+                        @endif
                     </a>
                     <section class="flex justify-between items-center">
                         <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-4">

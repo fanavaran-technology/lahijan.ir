@@ -973,6 +973,9 @@ select {
 .h-\[450px\] {
   height: 450px;
 }
+.h-\[80\%\] {
+  height: 80%;
+}
 .h-auto {
   height: auto;
 }
@@ -981,6 +984,12 @@ select {
 }
 .h-screen {
   height: 100vh;
+}
+.h-\[30\%\] {
+  height: 30%;
+}
+.h-4\/5 {
+  height: 80%;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -1050,6 +1059,9 @@ select {
 }
 .w-screen {
   width: 100vw;
+}
+.w-4\/5 {
+  width: 80%;
 }
 .flex-1 {
   flex: 1 1 0%;

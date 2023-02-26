@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Clarification\PerssonelController;
+use App\Http\Controllers\Clarification\SalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -73,6 +75,15 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
         Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
 
+    });
+
+    Route::prefix('clarification')->as('clarification.')->group(function () {
+        Route::resources([
+            'perssonels'          =>  PerssonelController::class,
+            'salaries'            =>  SalaryController::class
+        ] , ['except' => 'show']);
+
+        Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');
     });
 
     // user module routes
