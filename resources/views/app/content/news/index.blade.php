@@ -124,7 +124,7 @@
                 <section
                     class="col-span-12 sm:col-span-6 lg:col-span-4 rounded-lg flex justify-between flex-col {{ $news->is_pined ? 'relative bg-blue-50 border border-blue-400 skew-100' : 'bg-white' }} p-3 sm:p-4 md:p-6 shadow transition-all hover:shadow-lg mt-4">
                     @if ($news->is_pined)
-                        <section class="absolute top-3 right-3">
+                        <section class="absolute top-3 right-3 z-50">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  class="w-10 h-10 text-blue-600 border border-blue-600 skew-x-2 bg-white bg-opacity-75 rounded-full p-1"
                                  fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
