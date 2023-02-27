@@ -1,6 +1,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
+<link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+
+
+<link
+    href="https://unpkg.com/video.js@7/dist/video-js.min.css"
+    rel="stylesheet"
+/>
+
+<!-- City -->
+<link
+    href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css"
+    rel="stylesheet"
+/>
 
 <link rel="stylesheet" href="{{ asset("assets/app/css/slider.css") }}">
 
@@ -13,11 +25,7 @@
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/flowbite/flowbite.min.css") }}">
 
 
-<link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-    rel="stylesheet" />
-{{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />--}}
-<script src="https://cdn.tailwindcss.com/3.2.4"></script>
+
 
 <!-- flowbit elment -->
 <link href="{{ asset("assets/app/pluginsee/flowbite/flowbite2.min.css") }}flowbite.min.css" rel="stylesheet">
@@ -39,7 +47,6 @@
 <script src="{{ asset('assets/app/js/app.js') }}"></script>
 
 
-<link href="https://fonts.googleapis.com/css?family=Rajdhani&display=swap" rel="stylesheet">
 
 
 
