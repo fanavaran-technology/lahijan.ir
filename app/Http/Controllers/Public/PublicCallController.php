@@ -26,9 +26,9 @@ class PublicCallController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PublicCall $publicCall , News $news)
+    public function show(PublicCall $publicCalls , News $news)
     {
         $latestNews = News::latest()->take(10)->get()->except($news->id);
-        return view('app.content.publicCalls.show' , compact('publicCall' , 'news' , 'latestNews'));
+        return view('app.content.publicCalls.show' , compact('publicCalls' , 'news' , 'latestNews'));
     }
 }

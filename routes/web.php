@@ -111,9 +111,9 @@ Route::get("/", [HomeController::class, 'home'])->name('home');
 
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
 
-Route::resource('public-calls' , indexPublicCallController::class)->parameters(['publicCall' => 'publicCall:slug'])->only('index' ,'show');
+Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
 
-Route::resource('places' , PublicPlaceController::class)->parameters(['place' => 'place:slug'])->only('index' ,'show');
+Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'places:slug'])->only('index' ,'show');
 
 Route::get('search' , PublicSearchController::class)->name('search');
 
