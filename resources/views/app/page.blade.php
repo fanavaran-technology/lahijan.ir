@@ -29,8 +29,8 @@
                     </article>
                 </section>
             </section>
-            <aside class="col-span-12 md:col-span-3 mx-4 md:mx-2 space-y-4">
-                <section class="overflow-y-auto px-0 bg-gray-200 rounded-lg  shadow-sm bg-opacity-50 rounded">
+            <aside class="col-span-12 md:col-span-3 mx-4 md:mx-2 space-y-4 pt-5 pl-5">
+                <section class="overflow-y-auto px-0 bg-gray-200  rounded-lg  shadow-sm bg-opacity-50 rounded">
                     <section class="flex text-gray-700 items-center px-2 py-4 border-b">
                         <span class="font-semibold text-sm">جدیدترین اخبار</span>
                     </section>
