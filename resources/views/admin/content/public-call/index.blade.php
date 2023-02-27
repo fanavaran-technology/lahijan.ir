@@ -91,7 +91,7 @@
                                             @endcan
                                         </td>
                                         <td>
-                                            <a href="#" class="text-decoration-none text-info mr-3">
+                                            <a href="{{ $publicCall->publicPath() }}" class="text-decoration-none text-info mr-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                     <path

@@ -38,7 +38,6 @@ class Place extends Model
     }
 
     // temporary
-    // TODO
     public function publicPath()
     {
         return route('places.show' , $this->slug);

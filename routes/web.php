@@ -22,6 +22,7 @@ use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\placeController as PublicPlaceController;
+use App\Http\Controllers\Content\PageController as PublicPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,10 +121,12 @@ Route::resource('places' , PublicPlaceController::class)->parameters(['places' =
 
 Route::get('search' , PublicSearchController::class)->name('search');
 
+Route::get('/{page:slug}', PublicPageController::class)->name('page');
+
 Route::prefix('shafaf')->group(function() {
-   Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index'); 
-   Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary'); 
-   Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show'); 
-   Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract'); 
-   Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show'); 
+   Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index');
+   Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary');
+   Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show');
+   Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract');
+   Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show');
 });

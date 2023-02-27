@@ -65,12 +65,16 @@
     </div>
 
 </div>
-<section class="mt-4 flex  flex-col items-center space-y-2">
-    <a href="{{ route('places.index') }}"
-            class="hover:bg-gradient-to-r text-center cursor-pointer from-[#58A4C4] to-[#307091] bg-[#307091] w-80 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-xl ">
-        مناطق گردشگری بیشتر
-    </a>
-</section>
+@if($places->count() >= 6)
+    <section class="mt-4 flex  flex-col items-center space-y-2">
+        <a href="{{ route('places.index') }}"
+           class="hover:bg-gradient-to-r text-center cursor-pointer from-[#58A4C4] to-[#307091] bg-[#307091] w-80 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded-xl ">
+            مناطق گردشگری بیشتر
+        </a>
+    </section>
+@else
+
+@endif
 
 <div id="toast" class="border border-gray-600">
     <div id="img" class="flex justify-center ">

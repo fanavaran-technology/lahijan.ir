@@ -13,10 +13,11 @@ class Slider extends Model
     protected $fillable = [
         'alt' ,
         'image' ,
-        'url' , 
+        'url' ,
         'status',
         'published_at'
     ];
+
 
     // scopes
     public function scopeWherePublished($query)
@@ -24,14 +25,14 @@ class Slider extends Model
         $query->where('status', 1)->where('published_at', '<=', now());
     }
 
-    // accessor 
+    // accessor
     public function setUrlAttribute($url)
     {
-        str_contains($url, URL::to('/')) ? 
+        str_contains($url, URL::to('/')) ?
             $this->attributes['url'] = str_replace(URL::to('/'), '', $url) : $this->attributes['url'] = $url;
     }
-   
 
 
-    
+
+
 }

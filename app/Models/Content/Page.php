@@ -36,10 +36,10 @@ class Page extends Model
     // TODO
     public function publicPath()
     {
-        return route('news.show' , $this->id);
+        return route('page' , $this->slug);
     }
 
-    // relations 
+    // relations
     public function user()
     {
         return $this->belongsTo(User::class);
