@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
 
 
+
 @endsection
 
 @section('content')
@@ -43,8 +44,18 @@
                             </section>
                         </section>
                         @if($news->video)
-                            <video controls crossorigin playsinline class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg vjs-matrix video-js"  poster="{{ asset($news->image) }}" >
+                            <video
+                                id="my-video"
+                                class="video-js vjs-theme-forest"
+                                controls
+                                preload="auto"
+                                width="540"
+                                height="220"
+                                poster="{{ asset( $news->image) }}"
+                                data-setup="{}"
+                            >
                                 <source src="{{ asset($news->video->video) }}" type="video/mp4" />
+
                             </video>
                         @else
                         <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
@@ -129,7 +140,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/app/plugins/viewer/js/viewer.min.js') }}"></script>
     <script>
         new Viewer(document.getElementById('images'));
     </script>
