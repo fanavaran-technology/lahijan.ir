@@ -34,7 +34,7 @@ class PublicCall extends Model
 
     public function publicPath()
     {
-        return route('public-calls.show' , $this->id);
+        return route('public-calls.show' , $this->slug);
     }
 
 

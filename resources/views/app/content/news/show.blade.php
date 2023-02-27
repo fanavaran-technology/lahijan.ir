@@ -2,7 +2,6 @@
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
 
 
 @endsection
@@ -44,7 +43,7 @@
                             </section>
                         </section>
                         @if($news->video)
-                            <video controls crossorigin playsinline class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"  poster="{{ asset($news->image) }}" >
+                            <video controls crossorigin playsinline class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg vjs-matrix video-js"  poster="{{ asset($news->image) }}" >
                                 <source src="{{ asset($news->video->video) }}" type="video/mp4" />
                             </video>
                         @else
@@ -135,7 +134,6 @@
         new Viewer(document.getElementById('images'));
     </script>
 
-    <script src="https://cdn.plyr.io/3.7.3/demo.js" crossorigin="anonymous"></script>
 
 
 @endsection

@@ -1,4 +1,4 @@
-@extends('app.layouts.app', ['title' => "$place->title"])
+@extends('app.layouts.app', ['title' => "$places->title"])
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
@@ -12,7 +12,7 @@
                     <section class="flex flex-wrap lg:flex-nowrap space-y-4 md:space-y-4 justify-between gap-2 items-center">
                         <section class="space-y-4 w-screen lg:w-4/6">
                             <!-- title -->
-                            <section class="text-lg md:text-2xl text-gray-700 font-bold">{{ $place->title }}</section>
+                            <section class="text-lg md:text-2xl text-gray-700 font-bold">{{ $places->title }}</section>
                             <!-- utility -->
                             <section class="flex items-center space-x-3 space-x-reverse text-gray-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2" fill="none"
@@ -20,14 +20,14 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                <span class="text-sm">{{ jalaliDate($place->created_at, '%d %B، %Y') }}</span>
+                                <span class="text-sm">{{ jalaliDate($places->created_at, '%d %B، %Y') }}</span>
                             </section>
                         </section>
-                        <img src="{{ asset($place->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
-                            alt="{{ $place->title }}">
+                        <img src="{{ asset($places->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
+                            alt="{{ $places->title }}">
                     </section>
                     <article class="py-6 text-gray-600 text-sm lg:text-base leading-8 lg:leading-10">
-                        {!! $place->description !!}
+                        {!! $places->description !!}
                     </article>
                 </section>
             </section>
@@ -41,7 +41,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
-                        <p class="mt-2 mr-1">{{ $place->location }}</p>
+                        <p class="mt-2 mr-1">{{ $places->location }}</p>
                     </span>
 
                 </section>

@@ -27,8 +27,9 @@ class placeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show(Place $place): View
     {
-        return view('app.content.places.show' , compact('place'));
+        return view('app.content.places.show' , compact('places'));
     }
 }
