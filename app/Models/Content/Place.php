@@ -13,7 +13,6 @@ class Place extends Model
     use HasFactory, SoftDeletes, Sluggable;
 
     protected $fillable = [
-
         'title',
         'image',
         'description',
@@ -37,8 +36,6 @@ class Place extends Model
         ];
     }
 
-    // temporary
-    // TODO
     public function publicPath()
     {
         return route('places.show' , $this->slug);
