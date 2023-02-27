@@ -34,9 +34,7 @@ class News extends Model
             ]
         ];
     }
-
-    protected $with = ['tags'];
-
+    
     const SEARCH_KEY = 'title';
 
     public function publicPath()

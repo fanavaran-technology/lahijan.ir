@@ -2,20 +2,36 @@
 
 namespace App\Models\Content;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory , Sluggable;
 
     protected $fillable = [
         'title'
     ];
 
-    // relations
+    public function sluggable(): array
+    {
+        return [
+            'title' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    protected $with = ['news'];
+
+    public function publicPath() 
+    {
+        return route('news.tag' , $this->title);    
+    }
+
     public function news()
     {
-        return $this->belongsToMany(News::class , 'news_tag');
+        return $this->belongsToMany(News::class);
     }
 }
