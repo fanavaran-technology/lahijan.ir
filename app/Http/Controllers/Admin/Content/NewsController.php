@@ -143,7 +143,8 @@ class NewsController extends Controller
             // update check inputs
             $inputs['is_draft'] = $inputs['is_draft'] ?? 0;
             $inputs['is_pined'] = $inputs['is_pined'] ?? 0;
-            $inputs['is_fire_station'] = $inputs['is_draft'] ?? 0;
+            $inputs['is_fire_station'] = $inputs['is_fire_station'] ?? 0;
+            $inputs['is_auction_tender'] = $inputs['is_auction_tender'] ?? 0;
 
             // attach video to news
             if ($request->filled('video')) {

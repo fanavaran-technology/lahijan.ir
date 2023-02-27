@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\public;
+namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content\Place;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class placeController extends Controller
 {
@@ -13,7 +14,7 @@ class placeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $places = Place::latest()->paginate(12);
         return view('app.content.places.index' ,  compact('places'));
@@ -26,7 +27,8 @@ class placeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Place $places)
+
+    public function show(Place $place): View
     {
         return view('app.content.places.show' , compact('places'));
     }

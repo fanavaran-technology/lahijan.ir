@@ -282,7 +282,7 @@
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $allNews->render() }}
+                                {{ $allNews->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->

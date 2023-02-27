@@ -121,7 +121,7 @@
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $perssonels->render() }}
+                                {{ $perssonels->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->

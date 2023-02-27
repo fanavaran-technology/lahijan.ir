@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content\News;
@@ -28,6 +28,9 @@ class NewsController extends Controller
 
         if (request("video"))
             $allNews->has('video');
+
+        if (request('auction_tender')) 
+            $allNews->where('is_auction_tender' , 1);
 
         $allNews = $allNews->orderBy('is_pined' , 'DESC')->latest()->paginate(12);
         return view('app.content.news.index' ,  compact('allNews'));

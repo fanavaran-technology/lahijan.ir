@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{{ asset("assets/app/css/slider.css") }}">
 
 
+<link rel="icon" href="{{ asset(Setting::getValue('logo')) }}">
+
 {{-- slider text--}}
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/top-nav/font-awesome.min.css") }}">
 
@@ -18,7 +20,7 @@
 <script src="https://cdn.tailwindcss.com/3.2.4"></script>
 
 <!-- flowbit elment -->
-<link href="{{ asset("assets/app/plugins/flowbite/flowbite2.min.css") }}flowbite.min.css" rel="stylesheet">
+<link href="{{ asset("assets/app/pluginsee/flowbite/flowbite2.min.css") }}flowbite.min.css" rel="stylesheet">
 
 <!-- odometer -->
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/odometer/odometer-theme-default.css") }}">

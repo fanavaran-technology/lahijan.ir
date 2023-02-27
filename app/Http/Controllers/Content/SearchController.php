@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content\News;
@@ -8,7 +8,6 @@ use App\Models\Content\Page;
 use App\Models\Content\PublicCall;
 use App\Models\Content\Place;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class SearchController extends Controller
 {

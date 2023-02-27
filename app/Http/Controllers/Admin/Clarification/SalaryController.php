@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clarification;
+namespace App\Http\Controllers\Admin\Clarification;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clarification\SalaryRequest;
@@ -111,8 +111,12 @@ class SalaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SalarySubject $salary): RedirectResponse
     {
-        //
+        $salary->salaries()->detach();
+
+        $salary->delete();
+        
+        return back()->with('toast-success' , 'لیست حقوق و دستمزد حذف گردید.');
     }
 }

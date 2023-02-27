@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\Content;
 
 use App\Models\Content\Video;
 use Carbon\Carbon;
@@ -32,10 +32,6 @@ class HomeController extends Controller
         $menus = Menu::latest()->take(15)->get();
 
         $videos = Video::latest()->take(10)->get();
-
-
-
-
 
         return view('app.index', compact('sliders' , 'latestNews' , 'publicCells' , 'places' , 'reportImages' , 'videos' , 'allNews' ));
 

@@ -1,15 +1,17 @@
-@extends('admin.layouts.app', ['title' => 'همه نقش ها'])
+@extends('admin.layouts.app', ['title' => 'قرارداد ها'])
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">همه نقش ها</h2>
+            <h2 class="h3 mb-0 page-title">قرارداد ها
+                <span class="text-sm text-muted">({{ $contracts->total() }})</span>
+            </h2>
         </div>
-        @can('create_roles')
+        {{-- @can('create_perssonels') --}}
             <div class="col-auto">
-                <a href="{{ route('admin.user.roles.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
+                <a href="{{ route('admin.clarification.contracts.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
             </div>
-        @endcan
+        {{-- @endcan --}}
         <div class="col-12">
 
             <div class="row my-4">
@@ -42,50 +44,21 @@
                                         @endrequest
                                     </div>
                                     <th>#</th>
-                                    <th>نام نقش</th>
-                                    <th>دسترسی ها</th>
+                                    <th>عناوین</th>
+                                    <th>تاریخ عقد قرارداد</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
-                                @foreach ($roles as $role)
-                                    <tr class="flex item-center">
-
+                                @forelse($contracts as $contract)
+                                    <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $role->title }}</td>
                                         <td>
-                                            @forelse ($role->permissions->take(5) as $permission)
-                                                {{ $permission->title }}<br>
-                                            @empty
-                                                <span class="text-danger">برای این نقش هیچ دسترسی وجود ندارد</span>
-                                            @endforelse
-                                            @if (count($role->permissions) > 5)
-                                            <a href="#{{$role->title}}" onclick="showPermissions({{ $role->id }})">نمایش همه</a>
-                                            <div class="modal role-permissions-{{ $role->id }}" tabindex="-1">
-                                                <div class="modal-dialog">
-                                                  <div class="modal-content">
-                                                    <div class="modal-header">
-                                                      <h5 class="modal-title">مجوز های نقش {{ $role->title }}</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                    </div>
-                                                    <div class="modal-body" style="max-height: 65vh; overflow: auto">
-                                                        @foreach ($role->permissions as $permission)
-                                                        <p>{{ $permission->title }}<p>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                                        <a href="{{ route('admin.user.roles.edit' , $role->id) }}" class="btn btn-primary">ویرایش</a>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            @endif
+                                            <small>{{ $contract->title }}</small>
                                         </td>
+                                        <td>{{ jalaliDate($contract->contract_date) }}</td>
                                         <td>
-                                            @can('edit_roles')
-                                                <a href="{{ route('admin.user.roles.edit', $role->id) }}"
+                                            {{-- @can('edit_perssonels') --}}
+                                                <a href="{{ route('admin.clarification.contracts.edit', $contract->id) }}"
                                                     class="text-decoration-none text-primary mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -95,13 +68,13 @@
                                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                     </svg>
                                                 </a>
-                                            @endcan
-                                            @can('delete_roles')
-                                                <form action="{{ route('admin.user.roles.destroy', $role->id) }}"
+                                            {{-- @endcan --}}
+                                            {{-- @can('delete_perssonels') --}}
+                                                <form action="{{ route('admin.clarification.contracts.destroy', $contract->id) }}"
                                                     class="d-inline" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" x-data="{{ $role->id }}"
+                                                    <button type="submit" x-data="{{ $contract->id }}"
                                                         class="delete border-none bg-transparent text-decoration-none text-danger mr-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -112,13 +85,15 @@
                                                         </svg>
                                                         </a>
                                                 </form>
-                                            @endcan
+                                            {{-- @endcan --}}
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <p class="text-center text-muted">هیچ چیزی ثبت نشده است.</p>
+                                @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $roles->appends($_GET)->render() }}
+                                {{ $contracts->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->
@@ -131,12 +106,4 @@
 
 @section('script')
     @include('admin.alerts.confirm')
-
-    <script>
-        function showPermissions(roleId) {
-            $('.role-permissions-'+roleId).modal({
-                keyboard: false
-            })
-        }
-    </script>
 @endsection

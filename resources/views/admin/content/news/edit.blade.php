@@ -193,6 +193,11 @@
                             <label class="custom-control-label input-title" for="is_fire_station">این خبر مربوط به آتش
                                 نشانی است</label>
                         </div>
+                        <div class="form-group mt-2 custom-control custom-checkbox ">
+                            <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender' , $news->is_auction_tender))
+                                class="custom-control-input" id="is_auction_tender">
+                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا مناقصه است</label>
+                        </div>
                         <div class="form-group custom-control custom-checkbox ">
                             <input type="checkbox" name="is_draft" value="1" @checked(old('is_draft', $news->is_draft))
                                 class="custom-control-input" id="is_draft">

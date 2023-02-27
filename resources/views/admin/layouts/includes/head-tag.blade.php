@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="{{ asset('images/settings/logo.jpg') }}">
+<link rel="icon" href="{{ asset(Setting::getValue('logo')) }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/simple-notify/simple-notify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jquery-confirm/jquery-confirm.min.css') }}">
 <!-- Simple bar CSS -->

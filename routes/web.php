@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Clarification\ContractController;
 use App\Http\Controllers\Clarification\PerssonelController;
 use App\Http\Controllers\Clarification\SalaryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\User\UserController;
@@ -16,10 +17,10 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
-use App\Http\Controllers\Public\NewsController as PublicNewsController;
-use App\Http\Controllers\Public\SearchController as PublicSearchController;
-use App\Http\Controllers\Public\PublicCallController as indexPublicCallController;
-use App\Http\Controllers\Public\placeController as PublicPlaceController;
+use App\Http\Controllers\Content\NewsController as PublicNewsController;
+use App\Http\Controllers\Content\SearchController as PublicSearchController;
+use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
+use App\Http\Controllers\Content\placeController as PublicPlaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     Route::prefix('clarification')->as('clarification.')->group(function () {
         Route::resources([
             'perssonels'          =>  PerssonelController::class,
-            'salaries'            =>  SalaryController::class
+            'salaries'            =>  SalaryController::class,
+            'contracts'           =>  ContractController::class
         ] , ['except' => 'show']);
 
         Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');

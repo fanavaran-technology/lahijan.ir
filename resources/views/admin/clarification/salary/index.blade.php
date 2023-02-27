@@ -93,7 +93,7 @@
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $salaries->render() }}
+                                {{ $salaries->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->
