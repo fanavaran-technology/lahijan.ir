@@ -17,12 +17,13 @@ class Setting extends Model
         'title'         =>   'وب سایت شهرداری لاهیجان',
         'description'   =>   'جدید ترین اخبار و رویدادی های شهر لاهیجان معرفی و خدمات به شهروندان',
         'keywords'      =>   'شهرداری لاهیجان,شهر لاهیجان,اخبار لاهیجان',
-        'instagram'     =>   'https://www.instagram.com/shahrdarilahijan'
+        'instagram'     =>   'https://www.instagram.com/shahrdarilahijan',
+        'shafaf-image'  =>   '/images/settings/shafaf.jpg'
     ];
 
 
     static public function getValue($key) {
         $setting = Setting::where('key' , $key)->first();
-        return $setting ? $setting->value : '';
+        return $setting ? $setting->value : null;
     }
 }

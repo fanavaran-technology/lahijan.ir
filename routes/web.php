@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Clarification\ContractController;
-use App\Http\Controllers\Clarification\PerssonelController;
-use App\Http\Controllers\Clarification\SalaryController;
+use App\Http\Controllers\Clarification\ClarificationController;
+use App\Http\Controllers\Admin\Clarification\ContractController;
+use App\Http\Controllers\Admin\Clarification\PerssonelController;
+use App\Http\Controllers\Admin\Clarification\SalaryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -119,3 +120,10 @@ Route::resource('places' , PublicPlaceController::class)->parameters(['places' =
 
 Route::get('search' , PublicSearchController::class)->name('search');
 
+Route::prefix('shafaf')->group(function() {
+   Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index'); 
+   Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary'); 
+   Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show'); 
+   Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract'); 
+   Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show'); 
+});
