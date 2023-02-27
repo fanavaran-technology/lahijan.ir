@@ -117,7 +117,7 @@ Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('ne
 
 Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
 
-Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'places:slug'])->only('index' ,'show');
+Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
 
 Route::get('search' , PublicSearchController::class)->name('search');
 
