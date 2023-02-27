@@ -38,7 +38,7 @@
                             <section class="my-4 flex">
                                 @foreach ($news->tags as $tag)
                                     <a href=""
-                                        class="p-1 ml-2 text-sm text-gray-600 bg-white hover:bg-white border border-gray-300 rounded">#{{ $tag->name }}</a>
+                                        class="p-1 ml-2 text-sm text-gray-600 bg-white hover:bg-white border border-gray-300 rounded">#{{ $tag->title }}</a>
                                 @endforeach
                             </section>
                         </section>
