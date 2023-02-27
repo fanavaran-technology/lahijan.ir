@@ -1,12 +1,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
 
 {{-- slider text--}}
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/top-nav/font-awesome.min.css") }}">
 
 <link rel="stylesheet" href="{{ asset("assets/app/plugins/flowbite/flowbite.min.css") }}">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css">
+{{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css">--}}
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- flowbit elment -->
@@ -24,7 +25,7 @@
 <link rel="stylesheet" href="{{ asset('assets/app/css/fonts.css') }}">
 
 <!-- alpine js -->
-<script src="{{ asset('assets/app/js/app.js') }}" defer></script>
+<script src="{{ asset('assets/app/js/app.js') }}"></script>
 
 
 

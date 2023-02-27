@@ -1,3 +1,6 @@
+<script src="https://cdn.plyr.io/3.7.3/demo.js" crossorigin="anonymous"></script>
+
+
 <!-- flowbit element -->
 <script src="{{ asset("assets/app/js/flowbite.min.js") }}"></script>
 

@@ -2,7 +2,6 @@
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
 
 
 @endsection
@@ -135,7 +134,6 @@
         new Viewer(document.getElementById('images'));
     </script>
 
-    <script src="https://cdn.plyr.io/3.7.3/demo.js" crossorigin="anonymous"></script>
 
 
 @endsection
