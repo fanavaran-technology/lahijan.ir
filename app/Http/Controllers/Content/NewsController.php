@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content\News;
+use App\Models\Content\Tag;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Morilog\Jalali\Jalalian;
@@ -65,5 +66,14 @@ class NewsController extends Controller
             }
             return false;
         }
+    }
+
+    public function tag(Tag $tag)
+    {
+        $allNews= $tag->news()->paginate(12);
+
+        $mostUsedTags = Tag::withCount('news')->orderBy('news_count', 'DESC')->take(5)->get()->except($tag->id);
+        
+        return view('app.content.news.tag' , compact('tag' , 'allNews' , 'mostUsedTags'));   
     }
 }

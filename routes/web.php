@@ -114,6 +114,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
 Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
+Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('news.tag');
 
 Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
 

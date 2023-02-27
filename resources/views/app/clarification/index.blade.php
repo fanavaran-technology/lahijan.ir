@@ -8,7 +8,7 @@
 
 <body>
     <section
-        class='font-vazir  bg-[url("{{ str_replace(DIRECTORY_SEPARATOR, '/', Setting::getValue('shafaf-image')) }}")] bg-cover min-h-screen bg-no-repeat'>
+        class='font-vazir bg-cover min-h-screen bg-no-repeat' style="background-image: url({{ str_replace(DIRECTORY_SEPARATOR, '/', Setting::getValue('shafaf-image')) }})">
         <section class="min-h-screen bg-black/40">
             <div class="backdrop-blur-sm min-h-screen">
                 <section class="max-h-screen relative ">
