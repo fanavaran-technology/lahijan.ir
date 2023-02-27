@@ -171,7 +171,7 @@
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $places->render() }}
+                                {{ $places->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->

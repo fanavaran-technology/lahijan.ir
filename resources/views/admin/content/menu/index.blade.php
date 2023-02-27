@@ -123,7 +123,7 @@
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $menus->render() }}
+                                {{ $menus->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->
