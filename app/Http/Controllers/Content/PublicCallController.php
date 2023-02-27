@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Public;
+namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content\News;
 use App\Models\Content\PublicCall;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PublicCallController extends Controller
 {
@@ -14,7 +15,7 @@ class PublicCallController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $publicCalls = PublicCall::latest()->paginate(12);
         return view('app.content.publicCalls.index' ,  compact('publicCalls'));
@@ -26,7 +27,7 @@ class PublicCallController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PublicCall $publicCall , News $news)
+    public function show(PublicCall $publicCall , News $news): View
     {
         $latestNews = News::latest()->take(10)->get()->except($news->id);
         return view('app.content.publicCalls.show' , compact('publicCall' , 'news' , 'latestNews'));

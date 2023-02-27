@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clarification;
+namespace App\Http\Controllers\Admin\Clarification;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clarification\ContractRequest;
