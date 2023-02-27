@@ -22,6 +22,7 @@ use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\placeController as PublicPlaceController;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 
     // setting routes
     Route::resource('settings' , SettingController::class)->only('index' , 'store');
+
+    Route::get('logs' , [LogViewerController::class , 'index'])->name('logs');
 });
 
 # public routes
