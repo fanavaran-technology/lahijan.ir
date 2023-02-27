@@ -23,6 +23,7 @@ class News extends Model
         'is_draft',
         'is_pined',
         'is_fire_station',
+        'is_auction_tender'
     ];
 
     public function sluggable(): array

@@ -29,6 +29,9 @@ class NewsController extends Controller
         if (request("video"))
             $allNews->has('video');
 
+        if (request('auction_tender')) 
+            $allNews->where('is_auction_tender' , 1);
+
         $allNews = $allNews->orderBy('is_pined' , 'DESC')->latest()->paginate(12);
         return view('app.content.news.index' ,  compact('allNews'));
     }
