@@ -17,8 +17,6 @@ class Perssonel extends Model
         'is_disable',
     ];
 
-    protected $with = ['salaries'];
-
     public function salaries()
     {
         return $this->belongsToMany(SalarySubject::class , 'perssonel_salary');
