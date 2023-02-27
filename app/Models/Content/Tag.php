@@ -13,11 +13,9 @@ class Tag extends Model
         'title'
     ];
 
-    protected $with = ['news'];
-
     // relations
     public function news()
     {
-        return $this->belongsToMany(News::class);
+        return $this->belongsToMany(News::class , 'news_tag');
     }
 }
