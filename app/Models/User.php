@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\ACL\Role;
 use App\Models\Content\News;
 use App\Models\ACL\Permission;
+use App\Models\Content\Page;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Content\PublicCall;
 use Illuminate\Support\Facades\Hash;
@@ -84,6 +85,11 @@ class User extends Authenticatable
     public function publicCalls()
     {
         return $this->hasMany(PublicCall::class);
+    }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
     }
 
     public function roles(){

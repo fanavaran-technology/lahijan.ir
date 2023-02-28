@@ -62,7 +62,7 @@ class PageController extends Controller
     {
         $inputs = $request->all();
                 
-        $page = auth()->user()->create($inputs);
+        $page = auth()->user()->pages()->create($inputs);
 
         $user = auth()->user()->full_name;
 
