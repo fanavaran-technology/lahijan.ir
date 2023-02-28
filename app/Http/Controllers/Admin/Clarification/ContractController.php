@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ContractController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_clarification');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -73,7 +78,7 @@ class ContractController extends Controller
     public function update(ContractRequest $request, Contract $contract): RedirectResponse
     {
         $inputs = $request->all();
-        
+
         $inputs['is_private'] = $inputs['is_private'] ?? 0;
 
         $contract->update($inputs);

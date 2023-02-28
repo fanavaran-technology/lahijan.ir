@@ -54,7 +54,7 @@
                         @endif
                         </a>
                         @empty
-                            <p>ویدیو وجود ندارد</p>
+                            <p class="w-full flex justify-center items-center z-50 text-white text-lg">ویدیو وجود ندارد</p>
                         @endforelse
             </div>
 
@@ -68,7 +68,6 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper h-60">
                     @forelse ($reportImages as $reportImage )
-
                         <a href="{{ $reportImage->publicPath() }}" class="swiper-slide hover:cursor-pointer">
 
                             <img class="rounded-lg object-cover"
@@ -85,10 +84,8 @@
                             </span>
                         </a>
                     @empty
-                        <p>تصویری وجود ندارد</p>
+                        <p class="w-full flex justify-center items-center z-50 text-white text-lg">عکسی وجود ندارد</p>
                     @endforelse
-
-
                 </div>
 
                 <div class="swiper-button-next text-gray-100 hover:text-gray-300"></div>
@@ -99,3 +96,4 @@
     </section>
 
 </section>
+

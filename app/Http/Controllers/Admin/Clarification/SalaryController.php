@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SalaryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_clarification');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -116,7 +120,7 @@ class SalaryController extends Controller
         $salary->salaries()->detach();
 
         $salary->delete();
-        
+
         return back()->with('toast-success' , 'لیست حقوق و دستمزد حذف گردید.');
     }
 }
