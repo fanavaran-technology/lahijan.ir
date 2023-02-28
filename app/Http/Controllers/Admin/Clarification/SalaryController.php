@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 
 class SalaryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_clarification');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -123,9 +127,9 @@ class SalaryController extends Controller
         $salary->delete();
 
         $user = auth()->user()->full_name;
-        
+
         Log::warning("لیست حقوق و دستمزد با عنوان {$salary->title} توسط {$user} حذف شد.");
-        
+
         return back()->with('toast-success' , 'لیست حقوق و دستمزد حذف گردید.');
     }
 }

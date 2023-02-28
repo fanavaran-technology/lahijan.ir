@@ -62,6 +62,7 @@ class Permission extends Model
         'create_roles'              =>       'مجاز به ساخت نقش ها' ,
         'set_user_permission_role'  =>       'دسترسی دادن به نقش ها' ,
         'setting_manage'            =>       'دسترسی به تنظیمات' ,
+        'manage_clarification'      =>       'دسترسی به بخش شفاف سازی' ,
     ];
 
 }

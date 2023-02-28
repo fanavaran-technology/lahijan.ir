@@ -77,10 +77,8 @@
                             </span>
                         </a>
                     @empty
-                        <p>تصویری وجود ندارد</p>
+                        <p class="w-full flex justify-center items-center z-50 text-white text-lg">عکسی وجود ندارد</p>
                     @endforelse
-
-
                 </div>
 
                 <div class="swiper-button-next text-gray-100 hover:text-gray-300"></div>
@@ -91,3 +89,4 @@
     </section>
 
 </section>
+

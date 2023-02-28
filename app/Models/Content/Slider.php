@@ -18,6 +18,12 @@ class Slider extends Model
         'published_at'
     ];
 
+    public function publicPath()
+    {
+        return route('sliders' , $this->url);
+    }
+
+
 
     // scopes
     public function scopeWherePublished($query)

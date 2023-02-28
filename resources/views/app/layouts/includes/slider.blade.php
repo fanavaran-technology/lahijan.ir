@@ -2,7 +2,7 @@
     <div class="swiper-wrapper w-full md:h-[500px] lg:h-[500px] sm:h-[400px] h-[200px] object-cover">
         @foreach($sliders as $slider)
         <div class="swiper-slide">
-            <img class="" src="{{ $slider->image }}" alt="">
+            <a href="{{ $slider->url }}"><img class="" src="{{ $slider->image }}" alt=""></a>
         </div>
         @endforeach
     </div>

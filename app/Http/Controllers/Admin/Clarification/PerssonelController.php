@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 
 class PerssonelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_clarification');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +29,8 @@ class PerssonelController extends Controller
         if ($searchString = request('search'))
             $perssonels->where('first_name', "LIKE", "%{$searchString}%")->orWhere('last_name', "LIKE", "%{$searchString}%");
 
-        if (request('is_disable')) 
-            $perssonels->where('is_disable', 1);    
+        if (request('is_disable'))
+            $perssonels->where('is_disable', 1);
 
         $perssonels = $perssonels->latest()->paginate(15);
 
@@ -103,7 +107,7 @@ class PerssonelController extends Controller
         $user = auth()->user()->full_name;
 
         Log::warning("کارمند با نام {$perssonel->full_name} توسط {$user} حذف شد.");
-        
+
         return back()->with('toast-success' , 'از لیست کارمندان حذف گردید.');
     }
 
