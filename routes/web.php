@@ -35,31 +35,7 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 require __DIR__.'/auth.php';
-
-Route::prefix('shafaf')->group(function() {
-    Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index');
-    Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary');
-    Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show');
-    Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract');
-    Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show');
- }); 
-
-# public routes
-# index route
-Route::get("/", [HomeController::class, 'home'])->name('home');
-
-Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
-Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('news.tag');
-
-Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
-
-Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
-
-Route::get('search' , PublicSearchController::class)->name('search');
-
-Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
 // admin routes
 Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group(function () {
@@ -82,6 +58,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
         Route::post('news/upload-video' , [NewsController::class , 'uploadVideo'])->name('news.upload-video');
+        Route::delete('news/{news}/destroy-video' , [NewsController::class , 'destroyVideo'])->name('news.destroy-video');
         // place gallery routes
         Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
         Route::post('places/{place}/create-gallery', [PlaceController::class, 'createGallery'])->name('places.create-gallery');
@@ -128,3 +105,26 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 
     Route::get('logs' , [LogViewerController::class , 'index'])->name('logs');
 });
+
+Route::prefix('shafaf')->group(function() {
+    Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index');
+    Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary');
+    Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show');
+    Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract');
+    Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show');
+ }); 
+
+# public routes
+# index route
+Route::get("/", [HomeController::class, 'home'])->name('home');
+
+Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
+Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('news.tag');
+
+Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
+
+Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
+
+Route::get('search' , PublicSearchController::class)->name('search');
+
+Route::get('/{page:slug}', PublicPageController::class)->name('page');
