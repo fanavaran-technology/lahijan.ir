@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class PerssonelController extends Controller
 {
@@ -51,7 +52,9 @@ class PerssonelController extends Controller
     public function store(PerssonelRequest $request): RedirectResponse
     {
         $inputs = $request->all();
-        Perssonel::create($inputs);
+        $perssonel = Perssonel::create($inputs);
+
+        Log::info("کارمند با نام {$perssonel->full_name} توسط {$request->user()->full_name} ایجاد شد.");
 
         return to_route('admin.clarification.perssonels.index')->with('toast-success' , 'کارمند جدید اضافه گردید');
     }
@@ -80,6 +83,8 @@ class PerssonelController extends Controller
 
         $perssonel->update($inputs);
 
+        Log::info("کارمند با نام {$perssonel->full_name} توسط {$request->user()->full_name} ویرایش شد.");
+
         return to_route('admin.clarification.perssonels.index')->with('toast-success' , 'کارمند ویرایش شد');
     }
 
@@ -94,6 +99,10 @@ class PerssonelController extends Controller
         $perssonel->salaries()->detach();
 
         $perssonel->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("کارمند با نام {$perssonel->full_name} توسط {$user} حذف شد.");
         
         return back()->with('toast-success' , 'از لیست کارمندان حذف گردید.');
     }

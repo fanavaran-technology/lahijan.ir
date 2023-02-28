@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class PublicCallController extends Controller
 {
@@ -75,6 +76,7 @@ class PublicCallController extends Controller
                 $tags = explode(',', $request->tags);
                 $this->saveTags($publicCall, $tags);
             }
+            Log::info("فراخوانی با عنوان {$publicCall->title} توسط {$request->user()->full_name} ایجاد شد.");
             
         });
 
@@ -117,6 +119,7 @@ class PublicCallController extends Controller
             $inputs['status'] = $inputs['status'] ?? 0; 
 
             $publicCall->update($inputs);
+            Log::info("فراخوانی با عنوان {$publicCall->title} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
         return to_route('admin.content.public-calls.index')->with('toast-success' , 'تغییرات روی فراخوان اعمال شد.');
@@ -131,6 +134,10 @@ class PublicCallController extends Controller
     public function destroy(PublicCall $publicCall): RedirectResponse
     {
         $publicCall->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("فراخوان با عنوان {$publicCall->title} توسط {$user} حذف شد.");
 
         return back()->with('toast-success', 'فراخوان حذف گردید.');
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\Image\ImageService;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -44,6 +45,9 @@ class ProfileController extends Controller
             }
 
             $user->update($validated);
+
+            Log::warning("{$user->full_name} اطلاعات حساب خود را ویرایش کرد.");
+
         });
         
         return back()->with('toast-success' , 'اطلاعات کاربری بروز رسانی شد.'); 

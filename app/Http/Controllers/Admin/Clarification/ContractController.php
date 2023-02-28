@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class ContractController extends Controller
 {
@@ -47,7 +48,9 @@ class ContractController extends Controller
     {
         $inputs = $request->all();
 
-        Contract::create($inputs);
+        $contract = Contract::create($inputs);
+
+        Log::info("قرارداد با عنوان {$contract->title} توسط {$request->user()->full_name} ایجاد شد.");
 
         return to_route('admin.clarification.contracts.index')->with('toast-success' , 'قرارداد جدید اضافه گردید.');
     }
@@ -78,6 +81,8 @@ class ContractController extends Controller
 
         $contract->update($inputs);
 
+        Log::info("قرارداد با عنوان {$contract->title} توسط {$request->user()->full_name} ویرایش شد.");
+
         return to_route('admin.clarification.contracts.index')->with('toast-success' , 'قرارداد ویرایش شد.');
     }
 
@@ -90,6 +95,9 @@ class ContractController extends Controller
     public function destroy(Contract $contract): RedirectResponse
     {
         $contract->delete();
+
+        $user = auth()->user()->full_name;
+        Log::warning("قرارداد با عنوان {$contract->title} توسط {$user} حذف شد.");
 
         return back()->with('toast-success' , 'قرارداد حذف گردید');
     }

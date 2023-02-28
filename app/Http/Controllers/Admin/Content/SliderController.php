@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
-use Illuminate\Http\Request;
 use App\Models\Content\Slider;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -10,6 +9,7 @@ use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\SliderRequest;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class SliderController extends Controller
 {
@@ -71,6 +71,9 @@ class SliderController extends Controller
             }
 
             $slider = Slider::create($inputs);
+
+            Log::info("اسلایدر با عنوان {$slider->title} توسط {$request->user()->full_name} ایجاد شد.");
+
         });
 
 
@@ -108,12 +111,14 @@ class SliderController extends Controller
 
             // save image
             if ($request->hasFile('image')) {
-                if (!empty($news->image))
+                if (!empty($slider->image))
                     $imageService->deleteImage($slider->image);
 
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "sliders");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
+
+            Log::info("اسلایدر با عنوان {$slider->title} توسط {$request->user()->full_name} ویرایش شد.");
 
             $slider->update($inputs);
         });
@@ -130,6 +135,10 @@ class SliderController extends Controller
     public function destroy(Slider $slider): RedirectResponse
     {
         $slider->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("اسلایدر با عنوان {$slider->title} توسط {$user} حذف شد.");
 
         return back()->with('cute-success', 'اسلاید حذف گردید.');
     }

@@ -19,6 +19,7 @@ use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -101,6 +102,7 @@ class NewsController extends Controller
                 $this->saveTags($news, $tags);
             }
 
+            Log::info("خبر با عنوان {$news->title} توسط {$request->user()->full_name} ایجاد شد.");
         });
 
         return to_route('admin.content.news.index')->with('toast-success', 'خبر جدیدی اضافه گردید.');
@@ -159,6 +161,8 @@ class NewsController extends Controller
                 $this->saveTags($news, $tags);
             } else if ($news->tags)
                 $news->tags()->detach();
+
+            Log::info("خبر با عنوان {$news->title} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
         return to_route('admin.content.news.index')->with('toast-success', 'تغییرات روی خبر اعمال شد.');
@@ -175,6 +179,8 @@ class NewsController extends Controller
         DB::transaction(function () use ($news) {
             $news->tags()->detach();
             $news->delete();
+            $user = auth()->user()->full_name;
+            Log::warning("خبر با عنوان {$news->title} توسط {$user} حذف شد.");
         });
 
         return back()->with('toast-success', 'خبر حذف گردید.');
@@ -221,6 +227,9 @@ class NewsController extends Controller
         }
 
         $news->gallerizable()->create($inputs);
+
+        Log::info("{$request->user()->full_name} تصویری به گالری تصاویر خبر {$news->title} اضافه کرد.");
+
         return to_route("admin.content.news.index-gallery", $news->id)->with('cute-success', 'تصویر جدید اضافه شد.');
     }
 
@@ -228,6 +237,10 @@ class NewsController extends Controller
     {
         $gallery->delete();
 
+        $user = auth()->user()->full_name;
+
+        Log::warning("{$user} تصویری رااز گالری تصاویر خبر حذف کرد.");
+        
         return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 
@@ -291,6 +304,8 @@ class NewsController extends Controller
             Video::create([
                 'video' => $finalFilePath
             ]);
+
+            Log::info("{$request->user()->full_name} ویدئوی جدیدی آپلود کرد.");
 
             return [
                 'path' => asset($finalFilePath),

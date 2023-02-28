@@ -1,5 +1,12 @@
-@extends('admin.layouts.app')
-
+@extends('admin.layouts.app' , ['title' => 'سیستم ثبت وقایع'])
+@section('head-tag')
+  <style>
+    .active-log {
+      background: #2563eb;
+      color: #eff6ff;
+    }
+  </style>
+@endsection
 @section('content')
 <div class="row justify-content-center">
   <div class="col">
@@ -21,7 +28,7 @@
           @endforeach
           @foreach($files as $file)
             <a href="?l={{ \Illuminate\Support\Facades\Crypt::encrypt($file) }}"
-              class="list-group-item @if ($current_file == $file) active text-light @endif">
+              class="list-group-item @if ($current_file == $file) active-log text-white @endif">
               @php  
                 $fileName = str_replace('laravel-' , '' , $file);
                 $fileName = str_replace('.log' , '' , $fileName);
@@ -67,7 +74,7 @@
                       <span class="fa fa-search"></span>
                     </button>
                   @endif
-                  <div style="white-space: pre-line">
+                  <div style="white-space: pre-wrap;">
                     {{{ Str::limit($log['text'])}}}
                   </div>
                   @if (isset($log['in_file']))

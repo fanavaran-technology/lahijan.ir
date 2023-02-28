@@ -10,6 +10,7 @@ use Database\Seeders\SettingSeeder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class SettingController extends Controller
 {
@@ -51,6 +52,12 @@ class SettingController extends Controller
                 $inputs['settings']['logo'] = $imageService->save($inputs['settings']['logo']);
             }  
 
+            if ($request->hasFile('settings.shafaf-image'))  {
+                $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "settings");
+                $imageService->setImageName('shafaf');
+                $inputs['settings']['shafaf-image'] = $imageService->save($inputs['settings']['shafaf-image']);
+            }  
+
             foreach ($inputs['settings'] as $key => $value) {
                 Setting::updateOrCreate([
                     'key'   =>  $key,
@@ -59,6 +66,9 @@ class SettingController extends Controller
                     'value' =>  $value
                 ]);
             }
+
+            Log::info("تنظیمات توسط {$request->user()->full_name} ویرایش شد.");
+
         });
 
         return back()->with('toast-success' , 'تنظیمات ذخیره شد'); 

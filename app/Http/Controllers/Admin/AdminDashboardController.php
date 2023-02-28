@@ -9,6 +9,7 @@ use Database\Seeders\PermissionSeeder;
 use Database\Seeders\SettingSeeder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdminDashboardController extends Controller
 {
@@ -23,11 +24,13 @@ class AdminDashboardController extends Controller
         if (Permission::all()->isEmpty()) {
             $permissionSeed = new PermissionSeeder;
             $permissionSeed->run();
+            Log::info("تمام دسترسی ها ساخته شد.");
         }
 
         if (Setting::all()->isEmpty()) {
             $settingSeed = new SettingSeeder;
             $settingSeed->run();
+            Log::info("تنظیمات پیش فرض اعمال شد.");
         }
 
         return view('admin.index');

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\RoleRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class RoleController extends Controller
 {
@@ -59,6 +60,9 @@ class RoleController extends Controller
         $role = Role::create($inputs);
         $inputs['permissions'] = $inputs['permissions'] ?? [];
         $role->permissions()->sync($inputs['permissions']);
+
+        Log::info("نقش با عنوان {$role->title} توسط {$request->user()->full_name} ایجاد شد.");
+
         return to_route('admin.user.roles.index')->with('toast-success' , 'نقش جدید ایجاد شد');
 
     }
@@ -88,6 +92,7 @@ class RoleController extends Controller
             $inputs['permissions'] = $inputs['permissions'] ?? [];
             $role->permissions()->sync($inputs['permissions']);
             $role->update($inputs);
+            Log::info("نقش با عنوان {$role->title} توسط {$request->user()->full_name} ویرایش شد.");
         });
         return to_route('admin.user.roles.index')->with('toast-success' , 'تغییرات روی نقش اعمال شد.');
     }
@@ -100,7 +105,12 @@ class RoleController extends Controller
      */
     public function destroy(Role $role): RedirectResponse
     {
-        $result = $role->delete();
+        $role->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("نقش با عنوان {$role->title} توسط {$user} حذف شد.");
+
         return back()->with('cute-success', 'نقش حذف گردید.');
     }
 

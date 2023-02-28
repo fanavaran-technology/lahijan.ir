@@ -8,6 +8,7 @@ use App\Models\Content\Menu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
@@ -58,7 +59,9 @@ class MenuController extends Controller
     {
         $inputs = $request->all();
 
-        Menu::create($inputs);
+        $menu = Menu::create($inputs);
+
+        Log::info("منو با عنوان {$menu->title} توسط {$request->user()->full_name} ایجاد شد.");
 
         return to_route('admin.content.menus.index')->with('toast-success', 'منوی چدید اضافه شد.');
     }
@@ -91,6 +94,8 @@ class MenuController extends Controller
             $inputs['status'] = $inputs['status'] ?? 0;
 
             $menu->update($inputs);
+            
+            Log::info("منو با عنوان {$menu->title} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
         return to_route('admin.content.menus.index')->with('toast-success' , 'تغییرات روی منو اعمال شد.');
@@ -109,6 +114,11 @@ class MenuController extends Controller
 
 
         $menu->delete();
+        
+        $user = auth()->user()->full_name;
+        
+        Log::warning("منو با عنوان {$menu->title} توسط {$user} حذف شد.");
+
         return to_route('admin.content.menus.index')->with('toast-success' , 'منو حذف گردید.');
 
     }
