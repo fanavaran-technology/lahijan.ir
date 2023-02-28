@@ -36,12 +36,30 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 |
 */
 
-// temporary
-// TODO
-Route::get('/login-view' , fn() => view('app.auth.login'))->name('auth.login');
-Route::get('/confirm-view' , fn() => view('app.auth.confirm-password'))->name('auth.confirm');
-
 require __DIR__.'/auth.php';
+
+Route::prefix('shafaf')->group(function() {
+    Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index');
+    Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary');
+    Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show');
+    Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract');
+    Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show');
+ }); 
+
+# public routes
+# index route
+Route::get("/", [HomeController::class, 'home'])->name('home');
+
+Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
+Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('news.tag');
+
+Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
+
+Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
+
+Route::get('search' , PublicSearchController::class)->name('search');
+
+Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
 // admin routes
 Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group(function () {
@@ -109,27 +127,4 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
     Route::resource('settings' , SettingController::class)->only('index' , 'store');
 
     Route::get('logs' , [LogViewerController::class , 'index'])->name('logs');
-});
-
-# public routes
-# index route
-Route::get("/", [HomeController::class, 'home'])->name('home');
-
-Route::resource('news' , PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index' ,'show');
-Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('news.tag');
-
-Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
-
-Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
-
-Route::get('search' , PublicSearchController::class)->name('search');
-
-Route::get('/{page:slug}', PublicPageController::class)->name('page');
-
-Route::prefix('shafaf')->group(function() {
-   Route::get('/' , [ClarificationController::class , 'index'])->name('clarification.index');
-   Route::get('/salaries' , [ClarificationController::class , 'salary'])->name('clarification.salary');
-   Route::get('/salaries/{salarySubject:slug}' , [ClarificationController::class , 'showSalary'])->name('clarification.salary.show');
-   Route::get('/contracts' , [ClarificationController::class , 'contract'])->name('clarification.contract');
-   Route::get('/contracts/{contract:slug}' , [ClarificationController::class , 'showContract'])->name('clarification.contract.show');
 });
