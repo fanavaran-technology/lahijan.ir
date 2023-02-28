@@ -19,21 +19,19 @@ class HomeController extends Controller
     {
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
-        $latestNews = News::latest()->take(3)->wherePublished()->get();
+        $newsQuery = News::query()->latest()->wherePublished();
 
-        $reportImages = News::has('gallerizable')->latest()->take(5)->wherePublished()->get();
-
-        $allNews = News::latest()->take(5)->wherePublished()->get();
+        $news = [
+            'latestNews'    => $newsQuery->take(3)->get(),
+            'reportImages'  => $newsQuery->has('gallerizable')->take(5)->get(),
+            'newsHasVideo'  => $newsQuery->has('video')->take(5)->get(),
+        ];
 
         $publicCells = PublicCall::latest()->take(2)->where('status' , 1)->get();
 
         $places = Place::latest()->take(6)->where('status' , 1)->get();
 
-        $menus = Menu::latest()->take(15)->get();
-
-        $videos = Video::latest()->take(10)->get();
-
-        return view('app.index', compact('sliders' , 'latestNews' , 'publicCells' , 'places' , 'reportImages' , 'videos' , 'allNews' ));
+        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news'));
 
     }
 

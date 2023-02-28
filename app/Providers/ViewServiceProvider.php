@@ -25,26 +25,20 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('app.layouts.includes.navbar', function ($view) {
-            $menus = Menu::all();
-            $latestNewsHeader = News::latest()->take(3)->wherePublished()->get();
-
-
+        view()->composer('app.layouts.includes.top-nav', function ($view) {
+            $latestNews = News::latest()->take(3)->wherePublished()->get();
             $view->with(
                 [
-                    'menus' => $menus,
-                    'latestNewsHeader' => $latestNewsHeader,
+                    'latestNews' => $latestNews,
                 ]
             );
         });
 
-        view()->composer('app.layouts.includes.top-nav', function ($view) {
-            $latestNewsHeader = News::latest()->take(3)->wherePublished()->get();
-
-
+        view()->composer('app.layouts.includes.navbar', function ($view) {
+            $menus = Menu::all();
             $view->with(
                 [
-                    'latestNewsHeader' => $latestNewsHeader,
+                    'menus' => $menus,
                 ]
             );
         });
