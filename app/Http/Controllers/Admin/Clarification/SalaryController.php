@@ -122,7 +122,7 @@ class SalaryController extends Controller
      */
     public function destroy(SalarySubject $salary): RedirectResponse
     {
-        $salary->salaries()->detach();
+        $salary->perssonels()->detach();
 
         $salary->delete();
 
