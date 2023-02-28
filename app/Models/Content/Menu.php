@@ -18,6 +18,8 @@ class Menu extends Model
         'status'
     ];
 
+    protected $with = ['childrens'];
+
     public function publicPath()
     {
         return route('home');

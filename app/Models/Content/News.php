@@ -26,6 +26,8 @@ class News extends Model
         'is_auction_tender'
     ];
 
+    protected $with = ['user'];
+
     public function sluggable(): array
     {
         return [

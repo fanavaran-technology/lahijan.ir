@@ -90,9 +90,8 @@ class NewsController extends Controller
             }
 
             // attach video to news
-            if ($request->filled('video')) {
+            if ($request->filled('video')) 
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
-            }
 
             $news = $request->user()->news()->create($inputs);
 
@@ -318,5 +317,11 @@ class NewsController extends Controller
             'done' => $handler->getPercentageDone(),
             'status' => true
         ];
+    }
+
+    public function destroyVideo(News $news) 
+    {
+        $news->update(['video_id' => null]);
+        return back()->with('toast-success', 'ویدئو از خبر حذف گردید.');
     }
 }

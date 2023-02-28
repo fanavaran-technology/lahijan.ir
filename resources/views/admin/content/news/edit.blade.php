@@ -14,9 +14,24 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="h3 mb-0 section-heading">ویرایش خبر</h2>
         </div>
-        <div class="col-auto mb-3">
+        <div class="mb-3 ml-auto">
             <a href="{{ route('admin.content.news.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
+        @if ($news->video)
+        <form action="{{ route('admin.content.news.destroy-video', $news->id) }}" method="post"
+            class="text-center mx-2">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn mb-3 btn-outline-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                    class="bi bi-camera-video-off" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z" />
+                </svg>
+                <span class="ml-2">حذف ویدئو</span>
+            </button>
+        </form>
+        @endif
     </div>
     @if ($errors->any())
         <div class="alert alert-danger d-flex flex-column" role="alert">
@@ -118,8 +133,9 @@
                                     role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                                     style="width: 75%; height: 100%">75%</div>
                             </div>
-                            <video id="videoPreview" src="{{ old('video' , $news->video->video ?? '') ? URL::to('/') . '/' . old('video' , $news->video->video ?? '') : '' }}"
-                                controls class="{{ @old('video' , $news->video) ? 'block' : 'd-none' }} mt-3"
+                            <video id="videoPreview"
+                                src="{{ old('video', $news->video->video ?? '') ? URL::to('/') . '/' . old('video', $news->video->video ?? '') : '' }}"
+                                controls class="{{ @old('video', $news->video) ? 'block' : 'd-none' }} mt-3"
                                 style="width: 100%; height: auto"></video>
 
                             <input type="hidden" name="video" value="{{ old('video') }}">
@@ -194,9 +210,10 @@
                                 نشانی است</label>
                         </div>
                         <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender' , $news->is_auction_tender))
+                            <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender', $news->is_auction_tender))
                                 class="custom-control-input" id="is_auction_tender">
-                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا مناقصه است</label>
+                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا
+                                مناقصه است</label>
                         </div>
                         <div class="form-group custom-control custom-checkbox ">
                             <input type="checkbox" name="is_draft" value="1" @checked(old('is_draft', $news->is_draft))
@@ -282,101 +299,100 @@
             newsForm.submit();
         });
     </script>
-        <script src="{{ asset('assets/admin/plugins/resumable/resumable.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/resumable/resumable.min.js') }}"></script>
 
-        <script>
-            let browseFile = $('#browseFile');
-            let progress = $('.progress');
-            let resumable = new Resumable({
-                target: '{{ route('admin.content.news.upload-video') }}',
-                query: {
-                    _token: "{{ csrf_token() }}"
-                }, // CSRF token
-                fileType: ['mp4'],
-                // default is 1*1024*1024, this should be less than your maximum limit in php.ini
-                chunkSize: 256 * 1024 * 1024,
-                headers: {
-                    'Accept': 'application/json'
-                },
-                testChunks: true,
-                throttleProgressCallbacks: 1,
-                maxFileSize: "{{ Config::get('chunk-upload.max_upload_file_size') }}",
-                fileTypeErrorCallback: function(file, errorCount) {
-                    errorToast('نوع فایل نا معتبر است.');
-                },
-                maxFileSizeErrorCallback: function(file, errorCount) {
-                    errorToast("اندازه فایل نباید بزرگتر از 100 مگابایت باشد.");
-                }
-    
-            });
-    
-            resumable.assignBrowse(browseFile[0]);
-    
-            resumable.on('fileAdded', function(file) {
-                showProgress();
-                resumable.upload();
-                $("#browseFile").remove();
-            });
-    
-            resumable.on('fileProgress', function(file) {
-                updateProgress(Math.floor(file.progress() * 100));
-            });
-    
-            resumable.on('fileSuccess', function(file, response) {
-                response = JSON.parse(response)
-                $('#videoPreview').removeClass('d-none');
-                $('#videoPreview').attr('src', response.path);
-                url = response.path.replace(location.origin , '' ,response.path).substring(1);
-                $('input[name=video]').attr('value', url);
-                progress.find('.progress-bar').removeClass('bg-primary');
-                progress.find('.progress-bar').addClass('bg-success');
-                progress.find('.progress-bar').removeClass('progress-bar-animated');
-                successToast('آپلود ویدئو کامل شد')
-                successToast('به لیست ویدئو ها اضافه شد')
-            });
-    
-            resumable.on('fileError', function(file, response) {
-                progress.find('.progress-bar').removeClass('bg-primary');
-                progress.find('.progress-bar').addClass('bg-danger');
-                errorToast('آپلود با خطا مواجه شد')
-            });
-    
-    
-            function showProgress() {
-                progress.find('.progress-bar').css('width', '0%');
-                progress.find('.progress-bar').html('0%');
-                progress.show();
+    <script>
+        let browseFile = $('#browseFile');
+        let progress = $('.progress');
+        let resumable = new Resumable({
+            target: '{{ route('admin.content.news.upload-video') }}',
+            query: {
+                _token: "{{ csrf_token() }}"
+            }, // CSRF token
+            fileType: ['mp4'],
+            // default is 1*1024*1024, this should be less than your maximum limit in php.ini
+            chunkSize: 256 * 1024 * 1024,
+            headers: {
+                'Accept': 'application/json'
+            },
+            testChunks: true,
+            throttleProgressCallbacks: 1,
+            maxFileSize: "{{ Config::get('chunk-upload.max_upload_file_size') }}",
+            fileTypeErrorCallback: function(file, errorCount) {
+                errorToast('نوع فایل نا معتبر است.');
+            },
+            maxFileSizeErrorCallback: function(file, errorCount) {
+                errorToast("اندازه فایل نباید بزرگتر از 100 مگابایت باشد.");
             }
-    
-            function updateProgress(value) {
-                progress.find('.progress-bar').css('width', `${value}%`)
-                progress.find('.progress-bar').html(`${value}%`)
-            }
-    
-            function hideProgress() {
-                progress.hide();
-            }
-        </script>
-    
-        <script>
-            document.getElementById('list-video-btn').addEventListener('click', (event) => {
-                event.preventDefault();
-                window.open('/file-manager/fm-button/?leftDisk=videos', 'fm', 'width=800,height=400');
-            });
-    
-            function fmSetLink($url) {
-                const validFileType = $url.split('.')[1] === 'mp4';
-                if (validFileType) {
-                    const videoPreview = document.querySelector('#videoPreview');
-                    videoPreview.classList.remove('d-none');
-                    videoPreview.setAttribute('src' , $url);
-                    videoPreview.value = $url;
-                    $url = $url.replace(location.host , '' , $url).substring(1);
-                    document.querySelector('input[name=video]').value = $url;
-                    successToast('ویدئو اضافه شد.')
-                }
-                else
-                    errorToast('فایل انتخابی باید یک ویدئو باشد.')
-            }
-        </script>
+
+        });
+
+        resumable.assignBrowse(browseFile[0]);
+
+        resumable.on('fileAdded', function(file) {
+            showProgress();
+            resumable.upload();
+            $("#browseFile").remove();
+        });
+
+        resumable.on('fileProgress', function(file) {
+            updateProgress(Math.floor(file.progress() * 100));
+        });
+
+        resumable.on('fileSuccess', function(file, response) {
+            response = JSON.parse(response)
+            $('#videoPreview').removeClass('d-none');
+            $('#videoPreview').attr('src', response.path);
+            url = response.path.replace(location.origin, '', response.path).substring(1);
+            $('input[name=video]').attr('value', url);
+            progress.find('.progress-bar').removeClass('bg-primary');
+            progress.find('.progress-bar').addClass('bg-success');
+            progress.find('.progress-bar').removeClass('progress-bar-animated');
+            successToast('آپلود ویدئو کامل شد')
+            successToast('به لیست ویدئو ها اضافه شد')
+        });
+
+        resumable.on('fileError', function(file, response) {
+            progress.find('.progress-bar').removeClass('bg-primary');
+            progress.find('.progress-bar').addClass('bg-danger');
+            errorToast('آپلود با خطا مواجه شد')
+        });
+
+
+        function showProgress() {
+            progress.find('.progress-bar').css('width', '0%');
+            progress.find('.progress-bar').html('0%');
+            progress.show();
+        }
+
+        function updateProgress(value) {
+            progress.find('.progress-bar').css('width', `${value}%`)
+            progress.find('.progress-bar').html(`${value}%`)
+        }
+
+        function hideProgress() {
+            progress.hide();
+        }
+    </script>
+
+    <script>
+        document.getElementById('list-video-btn').addEventListener('click', (event) => {
+            event.preventDefault();
+            window.open('/file-manager/fm-button/?leftDisk=videos', 'fm', 'width=800,height=400');
+        });
+
+        function fmSetLink($url) {
+            const validFileType = $url.split('.')[1] === 'mp4';
+            if (validFileType) {
+                const videoPreview = document.querySelector('#videoPreview');
+                videoPreview.classList.remove('d-none');
+                videoPreview.setAttribute('src', $url);
+                videoPreview.value = $url;
+                $url = $url.replace(location.host, '', $url).substring(1);
+                document.querySelector('input[name=video]').value = $url;
+                successToast('ویدئو اضافه شد.')
+            } else
+                errorToast('فایل انتخابی باید یک ویدئو باشد.')
+        }
+    </script>
 @endsection

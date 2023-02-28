@@ -35,6 +35,8 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+require __DIR__.'/auth.php';
+
 
 require __DIR__ . '/auth.php';
 
@@ -66,6 +68,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::get('news/{news}/gallery', [NewsController::class, 'indexGallery'])->name('news.index-gallery');
         Route::post('news/{news}/create-gallery', [NewsController::class, 'createGallery'])->name('news.create-gallery');
         Route::delete('news/destroy-gallery/{gallery}', [NewsController::class, 'destroyGallery'])->name('news.destroy-gallery');
+        Route::post('news/upload-video' , [NewsController::class , 'uploadVideo'])->name('news.upload-video');
+        Route::delete('news/{news}/destroy-video' , [NewsController::class , 'destroyVideo'])->name('news.destroy-video');
         Route::post('news/upload-video', [NewsController::class, 'uploadVideo'])->name('news.upload-video');
         // place gallery routes
         Route::get('places/{place}/gallery', [PlaceController::class, 'indexGallery'])->name('places.index-gallery');
