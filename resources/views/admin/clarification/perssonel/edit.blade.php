@@ -53,30 +53,14 @@
                             <div class="col-md-12">
                                 <div class="form-row">
                                     <div class="form-group col-lg-6 my-2">
-                                        <label for="first_name" class="input-title mr-3">نام :</label>
+                                        <label for="first_name" class="input-title mr-3">نام و نام خانوادگی :</label>
                                         <input type="text" name="first_name" value="{{ old('first_name' , $perssonel->first_name) }}"
-                                            placeholder="نام" class="form-control custom-focus" id="first_name">
+                                            placeholder="نام و نام خانوادگی" class="form-control custom-focus" id="first_name">
                                     </div>
                                     <div class="form-group col-lg-6 my-2">
-                                        <label for="last_name" class="input-title mr-3">نام خانوادگی :</label>
-                                        <input type="text" name="last_name" value="{{ old('last_name' , $perssonel->last_name) }}"
-                                            placeholder="نام خانوادگی" class="form-control custom-focus" id="last_name">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-lg-6 my-2">
-                                        <label for="birth_date" class="input-title mr-3"> تاریخ تولد :</label>
-                                        <input type="hidden" name="birth_date" id="birth_date"
-                                            value="{{ $perssonel->birth_date }}">
-                                        <input id="birth_date_view"  value="{{ $perssonel->birth_date }}" class="form-control custom-focus"
-                                            placeholder="تاریخ تولد">
-                                    </div>
-                                    <div class="form-group col-lg-6 my-2">
-                                        <label for="employeement_date" class="input-title mr-3">تاریخ استخدام :</label>
-                                        <input type="hidden" name="employeement_date" id="employeement_date"
-                                            value="{{ $perssonel->employeement_date }}">
-                                        <input id="employeement_date_view" value="{{ $perssonel->employeement_date }}" class="form-control custom-focus"
-                                            placeholder="تاریخ استخدام">
+                                        <label for="job" class="input-title mr-3">سمت کارمند :</label>
+                                        <input type="text" name="job" value="{{ old('job' , $perssonel->job) }}"
+                                               placeholder="سمت کارمند" class="form-control custom-focus" id="job">
                                     </div>
                                 </div>
                             </div> <!-- /. col -->

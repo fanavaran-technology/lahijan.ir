@@ -11,9 +11,7 @@ class Perssonel extends Model
 
     protected $fillable = [
         'first_name',
-        'last_name' ,
-        'birth_date',
-        'employeement_date',
+        'job' ,
         'is_disable',
     ];
 

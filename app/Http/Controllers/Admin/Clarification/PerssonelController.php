@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Clarification;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Clarification\PerssonelRequest;
+use App\Imports\PerssonelImport;
 use App\Models\Clarification\Perssonel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -125,5 +127,11 @@ class PerssonelController extends Controller
         } else {
             return response()->json(['status' => false]);
         }
+    }
+
+    public function fileImport(PerssonelRequest $request)
+    {
+        Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
+        return back();
     }
 }

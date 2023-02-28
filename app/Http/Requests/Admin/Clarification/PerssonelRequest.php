@@ -25,9 +25,8 @@ class PerssonelRequest extends FormRequest
     {
         return [
             'first_name'            =>  'required|min:2|max:100',
-            'last_name'             =>  'required|min:2|max:150',
-            'birth_date'            =>  'required',
-            'employeement_date'     =>  'required',
+            'job'                   =>  'required|min:2|max:150',
+            'file'                  =>  'required',
             'is_disable'            =>  'nullable|in:0,1'
         ];
     }
