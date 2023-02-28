@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,6 +30,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        Log::info("کاربر {$request->user()->full_name} با آی پی {$request->ip()} وارد حساب کاربری شد.");
+
         return redirect()->intended('/admin')->with('toast-success' , 'شما وارد حساب شدید');
     }
 
@@ -37,6 +40,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        Log::info("کاربر {$request->user()->full_name} با آی پی {$request->ip()} از حساب  خارج شد.");
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

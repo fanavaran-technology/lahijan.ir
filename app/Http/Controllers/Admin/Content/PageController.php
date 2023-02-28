@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PageRequest;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -60,8 +61,13 @@ class PageController extends Controller
     public function store(PageRequest $request): RedirectResponse
     {
         $inputs = $request->all();
-        $inputs['user_id'] = 1;
-        $pages = Page::create($inputs);
+                
+        $page = auth()->user()->create($inputs);
+
+        $user = auth()->user()->full_name;
+
+        Log::info("صفحه با عنوان {$page->title} توسط {$user} ایجاد شد.");
+
         return to_route('admin.content.pages.index')->with('toast-success' , 'صفحه جدید اضافه شد');
     }
 
@@ -90,8 +96,10 @@ class PageController extends Controller
         $inputs['is_draft'] = $inputs['is_draft'] ?? 0; 
         $inputs['is_quick_access'] = $inputs['is_quick_access'] ?? 0; 
 
-        $inputs['user_id'] = 1;
         $page->update($inputs);
+        
+        Log::info("صفحه با عنوان {$page->title} توسط {$request->user()->full_name} ویرایش شد.");
+        
         return to_route('admin.content.pages.index')->with('toast-success' , 'صفحه ویرایش شد');
     }
 
@@ -104,6 +112,8 @@ class PageController extends Controller
     public function destroy(Page $page): RedirectResponse
     {
         $page->delete();
+        Log::warning("منو با عنوان {$page->title} توسط {auth()->user()->full_name} حذف شد.");
+
         return back()->with('toast-success', 'صفحه حذف گردید.');
     }
 

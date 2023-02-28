@@ -22,6 +22,7 @@ use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\placeController as PublicPlaceController;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 use App\Http\Controllers\Content\PageController as PublicPageController;
 
 /*
@@ -37,7 +38,6 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 
 // temporary
 // TODO
-Route::get('/' , fn() => view('app.index'))->name('home');
 Route::get('/login-view' , fn() => view('app.auth.login'))->name('auth.login');
 Route::get('/confirm-view' , fn() => view('app.auth.confirm-password'))->name('auth.confirm');
 
@@ -107,6 +107,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth' , 'auth.admin'])->group
 
     // setting routes
     Route::resource('settings' , SettingController::class)->only('index' , 'store');
+
+    Route::get('logs' , [LogViewerController::class , 'index'])->name('logs');
 });
 
 # public routes
@@ -118,7 +120,7 @@ Route::get('tags/{tag:title}' , [PublicNewsController::class , 'tag'])->name('ne
 
 Route::resource('public-calls' , indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index' ,'show');
 
-Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'places:slug'])->only('index' ,'show');
+Route::resource('places' , PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index' ,'show');
 
 Route::get('search' , PublicSearchController::class)->name('search');
 

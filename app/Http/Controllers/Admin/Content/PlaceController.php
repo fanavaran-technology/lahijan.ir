@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Content\Place;
 use App\Models\ACL\Permission;
@@ -13,6 +14,7 @@ use App\Http\Services\Image\ImageService;
 use App\Http\Requests\Admin\Content\PlaceRequest;
 use App\Http\Requests\Admin\Content\PlacesGalleryRequest;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class PlaceController extends Controller
 {
@@ -48,7 +50,7 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.place.create');
     }
@@ -59,7 +61,7 @@ class PlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PlaceRequest $request , ImageService $imageService)
+    public function store(PlaceRequest $request , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
@@ -75,7 +77,8 @@ class PlaceController extends Controller
             }
 
 
-            Place::create($inputs);
+            $place = Place::create($inputs);
+            Log::info("مکان گردشگری با عنوان {$place->title} توسط {$request->user()->full_name} ایجاد شد.");
         });
 
         return to_route('admin.content.places.index')->with('toast-success' , 'مکان گردشگری جدید اضافه گردید.');
@@ -87,7 +90,7 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Place $place)
+    public function edit(Place $place): View
     {
         return view('admin.content.place.edit', compact('place'));
     }
@@ -99,7 +102,7 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PlaceRequest $request, Place $place , ImageService $imageService)
+    public function update(PlaceRequest $request, Place $place , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use($request , $place , $imageService) {
             $inputs = $request->all();
@@ -117,6 +120,8 @@ class PlaceController extends Controller
 
             # update check inputs
             $place->update($inputs);
+
+            Log::info("مکان گردشگری با عنوان {$place->title} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
         return to_route('admin.content.places.index')->with('toast-success' , 'تغییرات روی مکان گردشگری اعمال شد.');
@@ -128,9 +133,14 @@ class PlaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Place $place)
+    public function destroy(Place $place): RedirectResponse
     {
         $place->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("مکان گردشگری با عنوان {$place->title} توسط {$user} حذف شد.");
+
         return back()->with('toast-success', 'مکان گردشگری حذف گردید.');
     }
 
@@ -150,6 +160,9 @@ class PlaceController extends Controller
         }
 
         $place->gallerizable()->create($inputs);
+
+        Log::info("{$request->user()->full_name} تصویری به گالری تصاویر مکان گردشگری {$place->title} اضافه کرد.");
+
         return to_route("admin.content.places.index-gallery", $place->id)->with('cute-success', 'تصویر جدید اضافه شد.');
     }
 
@@ -158,6 +171,11 @@ class PlaceController extends Controller
     public function destroyGallery(Gallery $gallery)
     {
         $gallery->delete();
+
+        $user = auth()->user()->full_name;
+        
+        Log::warning("{$user} تصویری رااز گالری تصاویر خبر حذف کرد.");
+
         return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 

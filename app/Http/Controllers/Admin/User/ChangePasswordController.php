@@ -8,6 +8,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class ChangePasswordController extends Controller
 {
@@ -42,6 +43,10 @@ class ChangePasswordController extends Controller
             'password'  =>   $validated['password']
         ]);
 
+        $user = auth()->user()->full_name;
+
+        Log::warning("$user} رمز عبور خود را تغییر داد.");
+
         return back()->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
     }
 
@@ -52,6 +57,8 @@ class ChangePasswordController extends Controller
         $user->update([
             'password'  =>   $validated['password']
         ]);
+
+        Log::warning("رمز عبور کاربر {$user->full_name} توسط {auth()->user()->full_name} تغییر داده شد.");
 
         return back()->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
     }

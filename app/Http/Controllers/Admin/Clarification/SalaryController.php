@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Clarification\SalaryRequest;
 use App\Models\Clarification\Perssonel;
 use App\Models\Clarification\SalarySubject;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class SalaryController extends Controller
 {
@@ -62,9 +62,11 @@ class SalaryController extends Controller
             $salaries = array_combine($inputs['perssonel_id'], $inputs['amount']);
 
             foreach ($salaries as $perssonel_id => $amount) {
-                echo $perssonel_id;
                 $salarySubject->perssonels()->attach($perssonel_id, ['amount' => $amount]);
             }
+
+            Log::info("لیست حقوق و دستمزد با عنوان {$salarySubject->title} توسط {$request->user()->full_name} ایجاد شد.");
+
         });
 
         return to_route('admin.clarification.salaries.index')->with('toast-success', 'لیست حقوق و دستمزد جدید اضافه شد.');
@@ -104,6 +106,9 @@ class SalaryController extends Controller
                 echo $perssonel_id;
                 $salary->perssonels()->attach($perssonel_id, ['amount' => $amount]);
             }
+
+            Log::info("لیست حقوق و دستمزد با عنوان {$salary->title} توسط {$request->user()->full_name} ویرایش شد.");
+
         });
 
         return to_route('admin.clarification.salaries.index')->with('toast-success', 'لیست حقوق و دستمزد جدید اضافه شد.');
@@ -120,6 +125,10 @@ class SalaryController extends Controller
         $salary->salaries()->detach();
 
         $salary->delete();
+
+        $user = auth()->user()->full_name;
+
+        Log::warning("لیست حقوق و دستمزد با عنوان {$salary->title} توسط {$user} حذف شد.");
 
         return back()->with('toast-success' , 'لیست حقوق و دستمزد حذف گردید.');
     }
