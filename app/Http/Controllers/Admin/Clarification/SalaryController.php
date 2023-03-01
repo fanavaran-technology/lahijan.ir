@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin\Clarification;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clarification\SalaryRequest;
+use App\Imports\SalaryImport;
 use App\Models\Clarification\Perssonel;
 use App\Models\Clarification\SalarySubject;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -132,4 +135,6 @@ class SalaryController extends Controller
 
         return back()->with('toast-success' , 'لیست حقوق و دستمزد حذف گردید.');
     }
+
+
 }

@@ -18,7 +18,7 @@
                             نام خانوادگی
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            تاریخ استخدام
+                            سمت
                         </th>
                         <th scope="col" class="px-6 py-3">
                              حقوق دریافتی (ریال)
@@ -36,9 +36,9 @@
                                 {{ $salary->last_name }}
                             </td>
                             <td class="px-6 py-4 text-center">
-                                {{ jalaliDate($salary->employeement_date) }}
+                                {{ $salary->job }}
                             </td>
-                            <td class="px-6 py-4 text-center font-sans">                                
+                            <td class="px-6 py-4 text-center font-sans">
                                 {{ $salary->pivot->amount }} ریال
                             </td>
                         </tr>

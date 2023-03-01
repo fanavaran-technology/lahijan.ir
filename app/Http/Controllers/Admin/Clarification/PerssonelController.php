@@ -129,7 +129,7 @@ class PerssonelController extends Controller
         }
     }
 
-    public function fileImport(PerssonelRequest $request)
+    public function fileImport(Request $request)
     {
         Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
         return back();
