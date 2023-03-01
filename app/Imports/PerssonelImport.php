@@ -16,7 +16,8 @@ class PerssonelImport implements ToModel
     {
         return new Perssonel([
             'first_name'     => $row[0],
-            'job'    => $row[1],
+            'last_name'     => $row[1],
+            'job'    => $row[2],
         ]);
     }
 }

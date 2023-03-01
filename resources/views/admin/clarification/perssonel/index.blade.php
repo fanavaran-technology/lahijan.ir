@@ -37,18 +37,19 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('admin.clarification.file-import') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.clarification.file-import') }}" method="POST"
+                                  enctype="multipart/form-data">
                                 @csrf
-                            <div class="modal-body">
-                                <div class="custom-file text-left">
-                                    <input type="file" name="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                <div class="modal-body">
+                                    <div class="custom-file text-left">
+                                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                <button class="btn btn-primary">اضافه کردن کارمند</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                    <button class="btn btn-primary">اضافه کردن کارمند</button>
+                                </div>
                             </form>
                         </div>
                     </div>

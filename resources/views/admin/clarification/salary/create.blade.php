@@ -12,6 +12,9 @@
         <div class="col-auto mb-3">
             <a href="{{ route('admin.clarification.salaries.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
+
+
+
     </div>
     @if ($errors->any())
         <div class="alert alert-danger d-flex flex-column" role="alert">
@@ -76,14 +79,14 @@
     <script>
         const salaryForm = document.querySelector('#salaryForm');
         const currencies = document.querySelectorAll('.currency-input');
-        
+
         salaryForm.addEventListener('submit' , (e) => {
             e.preventDefault();
             currencies.forEach(curr => {
                 if (!curr.value) {
                     curr.parentElement.parentElement.remove();
                 }
-            });          
+            });
             salaryForm.submit();
         });
     </script>
