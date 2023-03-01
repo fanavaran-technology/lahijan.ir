@@ -63,6 +63,7 @@ class Permission extends Model
         'set_user_permission_role'  =>       'دسترسی دادن به نقش ها' ,
         'setting_manage'            =>       'دسترسی به تنظیمات' ,
         'manage_clarification'      =>       'دسترسی به بخش شفاف سازی' ,
+        'log'                       =>       'دسترسی به لاگ ها' ,
     ];
 
 }

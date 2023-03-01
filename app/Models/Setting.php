@@ -18,7 +18,6 @@ class Setting extends Model
         'description'   =>   'جدید ترین اخبار و رویدادی های شهر لاهیجان معرفی و خدمات به شهروندان',
         'keywords'      =>   'شهرداری لاهیجان,شهر لاهیجان,اخبار لاهیجان',
         'instagram'     =>   'https://www.instagram.com/shahrdarilahijan',
-        'shafaf-image'  =>   '/images/settings/shafaf.jpg'
     ];
 
 

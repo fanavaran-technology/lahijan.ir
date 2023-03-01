@@ -117,8 +117,8 @@ function errorToast(message) {
   })
 } 
 
-function loadFile(event) {
-  var image = document.getElementById("output");
+function loadFile(event , id = "output") {
+  var image = document.getElementById(id);
   image.src = URL.createObjectURL(event.target.files[0]);
 }
 
