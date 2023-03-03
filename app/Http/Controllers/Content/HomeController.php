@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Content;
 
-use App\Models\Content\Video;
-use Carbon\Carbon;
-use App\Models\Content\Menu;
 use App\Models\Content\News;
-use Illuminate\Http\Request;
 use App\Models\Content\Place;
 use App\Models\Content\Slider;
 use App\Models\Content\PublicCall;
@@ -19,12 +15,10 @@ class HomeController extends Controller
     {
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
-        $newsQuery = News::query()->latest()->wherePublished();
-
         $news = [
-            'latestNews'    => $newsQuery->take(3)->get(),
-            'reportImages'  => $newsQuery->has('gallerizable')->take(5)->get(),
-            'newsHasVideo'  => $newsQuery->has('video')->take(5)->get(),
+            'latestNews'    => News::latest()->wherePublished()->take(3)->get(),
+            'newsHasVideo'  => News::latest()->wherePublished()->has('video')->take(5)->get(),
+            'reportImages'  => News::latest()->wherePublished()->has('gallerizable')->take(5)->get(),
         ];
 
         $publicCells = PublicCall::latest()->take(2)->where('status' , 1)->get();

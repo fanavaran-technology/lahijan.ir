@@ -70,7 +70,7 @@ class NewsController extends Controller
 
     public function tag(Tag $tag)
     {
-        $allNews= $tag->news()->paginate(12);
+        $allNews= $tag->news()->wherePublished()->paginate(12);
 
         $mostUsedTags = Tag::withCount('news')->orderBy('news_count', 'DESC')->take(5)->get()->except($tag->id);
         
