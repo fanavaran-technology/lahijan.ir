@@ -1,10 +1,6 @@
 @extends('app.layouts.app', ['title' => "$news->title"])
 
 @section('head-tag')
-    {{-- video --}}
-{{--    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />--}}
-{{--    <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />--}}
-{{--    <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />--}}
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
 @endsection
 
@@ -50,20 +46,6 @@
                                 height="220" poster="{{ asset($news->image) }}">
                                 <source src="{{ asset($news->video->video) }}" type="video/mp4" />
                             </video>
-{{--                            <video--}}
-{{--                                id="my-video"--}}
-{{--                                class="video-js vjs-theme-city"--}}
-{{--                                controls--}}
-{{--                                preload="auto"--}}
-{{--                                width="640"--}}
-{{--                                height="264"--}}
-{{--                                poster="MY_VIDEO_POSTER.jpg"--}}
-{{--                                data-setup="{}"--}}
-{{--                            >--}}
-{{--                                <source src="{{ asset($news->video->video) }}" type="video/mp4" />--}}
-{{--                                <source src="MY_VIDEO.webm" type="video/webm" />--}}
-
-{{--                            </video>--}}
                         @else
                             <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
                                 alt="{{ $news->title }}">
@@ -148,8 +130,6 @@
 @endsection
 
 @section('script')
-{{--    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>--}}
-
     <script>
         new Viewer(document.getElementById('images'));
     </script>

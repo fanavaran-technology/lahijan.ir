@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group col-md-12 my-2">
                                 <label for="" class="input-title mr-3">تعیین آدرس  : </label>
-                                <input type="text" name="url" value="{{ old('url' , filter_var($menu->url, FILTER_VALIDATE_URL) ? $menu->url : URL::to('/') . $menu->url) }}" @error('url') autofocus="autofocus" @enderror
+                                <input type="text" name="url" value="{{ old('url', filter_var($menu->url , FILTER_VALIDATE_URL) ? $menu->url : URL::to('/').$menu->url) }}" @error('url') autofocus="autofocus" @enderror
                                     placeholder="آدرس اینترنتی را وارد نمایید"
                                     class="form-control custom-input-size url custom-focus" id="url">
                             </div>

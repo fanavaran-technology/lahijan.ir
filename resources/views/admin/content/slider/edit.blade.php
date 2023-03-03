@@ -39,7 +39,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 my-2">
                                 <input type="text" name="url"
-                                    value="{{ old('url', old('url' , URL::to('/').$slider->url) ?? $slider->url  ) }}"
+                                    value="{{ old('url', filter_var($slider->url , FILTER_VALIDATE_URL) ? $slider->url : URL::to('/').$slider->url) }}"
                                     placeholder="URL تصویر را اینجا وارد کنید"
                                     class="form-control url custom-input-size custom-focus" id="title">
                             </div>
