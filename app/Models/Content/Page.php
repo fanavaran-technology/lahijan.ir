@@ -32,8 +32,6 @@ class Page extends Model
         ];
     }
 
-    // temporary
-    // TODO
     public function publicPath()
     {
         return route('page' , $this->slug);

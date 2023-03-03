@@ -5,7 +5,6 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\URL;
 
 class Menu extends Model
 {
@@ -27,8 +26,8 @@ class Menu extends Model
 
     public function setUrlAttribute($url)
     {
-        str_contains($url, URL::to('/')) ?
-            $this->attributes['url'] = str_replace(URL::to('/'), '', $url) : $this->attributes['url'] = $url;
+        str_contains($url, request()->root()) ?
+            $this->attributes['url'] = str_replace(request()->root() ,'', $url) : $this->attributes['url'] = $url;
     }
 
     // relations
