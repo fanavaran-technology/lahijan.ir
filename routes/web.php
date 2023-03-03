@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
-use App\Http\Controllers\Content\placeController as PublicPlaceController;
+use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 use App\Http\Controllers\Content\PageController as PublicPageController;
 
