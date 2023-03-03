@@ -116,7 +116,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     // setting routes
     Route::resource('settings', SettingController::class)->only('index', 'store');
 
-    Route::get('logs', [LogViewerController::class, 'index'])->name('logs');
+    Route::get('logs', [LogViewerController::class, 'index'])->name('logs')->middleware('can:log');
 });
 
 # public routes
