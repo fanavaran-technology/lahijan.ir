@@ -13,7 +13,7 @@
     <div class="px-2 sm:px-4 py-2.5 bg-gray-900 w-full rounded-bl-[40px]">
         <div class="container flex flex-wrap items-center mx-3 sm:mx-auto justify-between ">
             <div class="flex items-center">
-                <img src="{{ Setting::getValue('logo') }}" alt="لوگوی سایت" class="h-14 whitespace-nowrap">
+                <img src="{{ asset(Setting::getValue('logo')) }}" alt="لوگوی سایت" class="h-14 whitespace-nowrap">
                 <p class="text-white hidden sm:block text-xl mr-5">سامانه شفاف سازی شهرستان لاهیجان</p>
             </div>
 
