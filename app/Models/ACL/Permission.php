@@ -22,7 +22,6 @@ class Permission extends Model
     }
 
     const LIST_OF_PERMISSIONS = [
-        'manage_files'              =>       'مدیریت فایل ها',
         'manage_news'               =>       'مدیریت اخبار',
         'edit_news'                 =>       'مجاز به ویرایش اخبار' ,
         'create_news'               =>       'مجاز به ساخت اخبار' ,
