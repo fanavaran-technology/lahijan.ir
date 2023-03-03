@@ -5,7 +5,7 @@ namespace App\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\URL;
 
 class Slider extends Model
 {

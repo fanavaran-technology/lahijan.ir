@@ -35,10 +35,7 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-require __DIR__.'/auth.php';
-
-
-require __DIR__ . '/auth.php';
+require __DIR__ .'/auth.php';
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
