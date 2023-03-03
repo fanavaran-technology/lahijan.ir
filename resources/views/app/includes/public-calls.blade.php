@@ -14,11 +14,12 @@
             class="flex justify-between items-center space-x-4 space-x-reverse py-4 border-b px-2">
             <section class="flex flex-col space-y-2">
                 <a href="{{ $publicCell->publicPath() }}" class="font-bold text-sm text-gray-700">{{ $publicCell->title }}</a>
-                <span class="text-xs text-justify text-gray-600">
+                <span class="text-xs text-justify md:w-60  text-gray-600">
                  {!! Str::limit($publicCell->description, 150, '...') !!}
                 </span>
             </section>
-            <img src="{{ asset($publicCell->image) }}" class="w-24 h-32 rounded-xl">
+            <img src="{{ asset($publicCell->image) }}" class=" flex h-32 rounded-xl">
+
         </section>
         @empty
             <p class="mt-4 text-center text-gray-400">هیچ فراخوانی وجود ندارد</p>

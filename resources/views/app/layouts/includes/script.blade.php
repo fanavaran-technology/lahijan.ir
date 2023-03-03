@@ -1,3 +1,4 @@
+<script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 <!-- flowbit element -->
 <script src="{{ asset("assets/app/js/flowbite.min.js") }}"></script>
 
