@@ -1,10 +1,11 @@
 @extends('app.layouts.app', ['title' => "$news->title"])
 
 @section('head-tag')
+    {{-- video --}}
+    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
-
-
-
 @endsection
 
 @section('content')
@@ -12,7 +13,8 @@
         <section class="grid grid-cols-12">
             <section class="col-span-12 md:col-span-9 md:ml-2">
                 <section class="my-4 bg-gray-50 bg-opacity-50 p-4 md:p-8 text-gray-700 shadow-sm rounded">
-                    <section class="flex flex-wrap lg:flex-nowrap space-y-4 md:space-y-4 justify-between gap-2 items-center">
+                    <section
+                        class="flex flex-wrap lg:flex-nowrap space-y-4 md:space-y-4 justify-between gap-2 items-center">
                         <section class="space-y-4 w-screen lg:w-4/6">
                             <!-- title -->
                             <section class="text-lg md:text-2xl text-gray-700 font-bold">{{ $news->title }}</section>
@@ -43,23 +45,15 @@
                                 @endforeach
                             </section>
                         </section>
-                        @if($news->video)
-                            <video
-                                id="my-video"
-                                class="video-js vjs-theme-forest"
-                                controls
-                                preload="auto"
-                                width="540"
-                                height="220"
-                                poster="{{ asset( $news->image) }}"
-                                data-setup="{}"
-                            >
+                        @if ($news->video)
+                            <video id="news-video" class="video-js vjs-theme-forest" controls preload="auto" width="540"
+                                height="220" poster="{{ asset($news->image) }}">
                                 <source src="{{ asset($news->video->video) }}" type="video/mp4" />
 
                             </video>
                         @else
-                        <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
-                            alt="{{ $news->title }}">
+                            <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
+                                alt="{{ $news->title }}">
                         @endif
                     </section>
                     <article class="py-6 text-gray-600 text-sm lg:text-base leading-8 lg:leading-10">
@@ -71,8 +65,9 @@
                                 <ul id="images" class="grid grid-cols-4 gap-2">
                                     @foreach ($news->gallerizable as $gallery)
                                         <li class="col-span-4 sm:col-span-2 lg:col-span-1">
-                                            <img class="object-cover w-full h-48 lg:h-32" src="{{ asset($gallery->image) }}"
-                                                alt="{{ $gallery->alt }}" alt="Picture 1">
+                                            <img class="object-cover w-full h-48 lg:h-32"
+                                                src="{{ asset($gallery->image) }}" alt="{{ $gallery->alt }}"
+                                                alt="Picture 1">
                                         </li>
                                     @endforeach
                                 </ul>
@@ -97,15 +92,15 @@
                                         </h5>
                                         <div class="text-xs text-gray-500">{{ $lastNews->user->full_name }}</div>
                                         @if ($lastNews->video)
-                                        <div
-                                        class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                <path stroke-linecap="round"
-                                                    d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
-                                            </svg>
-                                            <span>+ ویدئو</span>
-                                        </div>
+                                            <div
+                                                class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round"
+                                                        d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                                                </svg>
+                                                <span>+ ویدئو</span>
+                                            </div>
                                         @endif
                                         @if ($lastNews->gallerizable->isNotEmpty())
                                             <div
@@ -140,10 +135,9 @@
 @endsection
 
 @section('script')
+    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+
     <script>
         new Viewer(document.getElementById('images'));
     </script>
-
-
-
 @endsection

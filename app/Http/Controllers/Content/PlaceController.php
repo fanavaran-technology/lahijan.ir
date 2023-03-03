@@ -7,7 +7,7 @@ use App\Models\Content\Place;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class placeController extends Controller
+class PlaceController extends Controller
 {
     /**
      * Display a listing of the resource.

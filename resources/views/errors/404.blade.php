@@ -1,6 +1,6 @@
 @extends('errors.layouts.app' )
 
-@section('title' , '404'))
+@section('title' , 'صفحه مورد نظر یافت نشد'))
 
 @section('content')
 <selection class="flex min-h-screen justify-center">

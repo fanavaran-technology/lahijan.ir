@@ -1,6 +1,6 @@
 @extends('errors.layouts.app' )
 
-@section('title' , '500'))
+@section('title' , 'خطای سرور داخلی'))
 
 @section('content')
 <selection class="flex min-h-screen justify-center">
