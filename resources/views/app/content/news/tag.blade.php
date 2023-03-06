@@ -11,10 +11,12 @@
         </section>
         <div class="ml-4 text-gray-500 mt-4">پر استفاده ترین تگ ها </div>
         <section class="my-4 flex flex-wrap items-center">
-            @foreach ($mostUsedTags as $mostUseTag)
+            @forelse ($mostUsedTags as $mostUseTag)
                 <a href="{{ $mostUseTag->publicPath() }}"
                     class="p-1.5 border border-blue-100 ml-2 text-sm text-blue-400 bg-white hover:bg-white rounded">#{{ $mostUseTag->title }}</a>
-            @endforeach
+            @empty
+                <p class="text-gray-400">هیچ تگی وجود ندارد</p>
+            @endforelse
         </section>
         <!-- news -->
         <section class="grid grid-cols-12 gap-6 mt-4">

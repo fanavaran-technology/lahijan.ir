@@ -1,7 +1,6 @@
 @extends('app.layouts.app', ['title' => "$news->title"])
 
 @section('head-tag')
-    {{-- video --}}
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
 @endsection
 
@@ -43,11 +42,10 @@
                             </section>
                         </section>
                         @if ($news->video)
-                            <video id="news-video" class="video-js vjs-theme-forest"  data-setup="{}" controls preload="auto" width="540"
-                                height="220" poster="{{ asset($news->image) }}">
+                            <video id="news-video" class="video-js vjs-theme-forest rounded-lg"  data-setup="{}" controls preload="auto" width="540"
+                                height="220"  >
                                 <source src="{{ asset($news->video->video) }}" type="video/mp4" />
                             </video>
-
                         @else
                             <img src="{{ asset($news->image) }}" class="w-full lg:w-2/6 h-5/6 object-cover rounded-lg"
                                 alt="{{ $news->title }}">
