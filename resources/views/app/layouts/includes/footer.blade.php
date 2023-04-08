@@ -1,4 +1,4 @@
-<footer class="relative overflow-x-hidden h-auto mt-28 bg-[#000601] bg-opacity-[83%] md:bg-transparent">
+<footer class="relative footer overflow-x-hidden h-auto mt-28 bg-[#000601] bg-opacity-[83%] md:bg-transparent">
     <div class="container mt-8">
         <!-- contact us -->
         <secion class="flex justify-evenly space-y-2 flex-wrap py-2 sm:py-6 border-b footer-border">

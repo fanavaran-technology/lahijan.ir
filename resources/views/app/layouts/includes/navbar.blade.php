@@ -1,5 +1,5 @@
 <nav
-class="{{ Route::currentRouteName() == 'home' ? 'sm:absolute' : 'border-b' }} font-vazir  z-40 w-full lg:bg-black lg:bg-opacity-70 md:bg-black bg-[#000601] bg-opacity-[83%]  md:bg-opacity-70 border-gray-200 px-2 md:px-4 py-2.5">
+class="{{ Route::currentRouteName() == 'home' ? 'sm:absolute' : 'border-b' }} font-vazir top-nav  z-40 w-full lg:bg-black lg:bg-opacity-70 md:bg-black bg-[#000601] bg-opacity-[83%]  md:bg-opacity-70 border-gray-200 px-2 md:px-4 py-2.5">
 <div class="container flex flex-wrap items-center justify-between mx-auto">
   <div class="flex items-center">
     <a href="{{ route('home') }}">

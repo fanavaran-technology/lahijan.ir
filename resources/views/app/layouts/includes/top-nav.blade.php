@@ -1,6 +1,6 @@
 <section x-data="{searchModal : false }" x-show="searchModal" x-transition x-cloak
     @open-search-modal.window="if ($event.detail.id == 'searchModal') searchModal = true"
-    class="z-50 fixed w-screen h-screen flex items-center justify-center bg-gray-900 bg-opacity-80">
+    class="z-50 top-nav fixed w-screen h-screen flex items-center justify-center bg-gray-900 bg-opacity-80">
     <!-- close search -->
     <section class="absolute top-0 left-0 cursor-pointer flex flex-col items-center mt-4 ml-6 sm:ml-8 z-50"
         @click="searchModal = false">
@@ -15,7 +15,7 @@
         <div></div>
     </form>
 </section>
-<div class="md:flex hidden h-auto p-4  bg-black">
+<div class="md:flex top-nav hidden h-auto p-4  bg-black">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <span class="text-white z-40 mr-2 font-bold text-center items-center">
             تیتر جدید ترین خبر : <span class="font-normal text-sm">

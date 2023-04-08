@@ -22,8 +22,6 @@ class Slider extends Model
         return route('sliders' , $this->url);
     }
 
-
-
     // scopes
     public function scopeWherePublished($query)
     {
@@ -36,8 +34,6 @@ class Slider extends Model
         str_contains($url, request()->root()) ?
             $this->attributes['url'] = str_replace(request()->root(), '', $url) : $this->attributes['url'] = $url;
     }
-
-
 
 
 }

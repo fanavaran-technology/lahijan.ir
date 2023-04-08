@@ -1,5 +1,6 @@
 @extends('app.layouts.app', ['title' => 'شهرداری لاهیجان | آرشیو اخبار'])
 
+
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/datepicker/datepicker.min.css') }}">
 @endsection

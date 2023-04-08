@@ -12,12 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class ChangePasswordController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request , User $user): RedirectResponse
     {
         $this->validation['password'] = ['required', 'confirmed', Rules\Password::defaults()];
@@ -62,5 +56,7 @@ class ChangePasswordController extends Controller
 
         return back()->with('toast-success' , 'کلمه عبور تغییر یافت.'); 
     }
+
+    
 
 }

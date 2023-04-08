@@ -43,6 +43,7 @@ Route::prefix('shafaf')->group(function () {
     Route::get('/salaries/{salarySubject:slug}', [ClarificationController::class, 'showSalary'])->name('clarification.salary.show');
     Route::get('/contracts', [ClarificationController::class, 'contract'])->name('clarification.contract');
     Route::get('/contracts/{contract:slug}', [ClarificationController::class, 'showContract'])->name('clarification.contract.show');
+    Route::get('/news', [ClarificationController::class, 'news'])->name('clarification.news');
 });
 
 // admin routes
