@@ -4,6 +4,7 @@ use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
 use App\Http\Controllers\Admin\Clarification\SalaryController;
+use App\Http\Controllers\Communication\CommunicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -135,3 +136,4 @@ Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
+Route::resource('communications', CommunicationController::class)->only('create' , 'store');

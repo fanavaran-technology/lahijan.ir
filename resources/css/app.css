@@ -71,3 +71,14 @@ input:checked:hover~.image-wrapper>div {
     font-family: iransans !important;
 }
   
+.custom-input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 transition-all ease-in-out text-sm rounded-2xl focus:outline-none focus:ring-0 focus:border-blue-500 block w-full p-3
+}
+
+.custom-label {
+    @apply block mb-2 text-sm font-medium text-gray-600
+}
+
+.error-input {
+    border: solid 1px rgb(239 68 68 / var(--tw-text-opacity)) !important
+}
