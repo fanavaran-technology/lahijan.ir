@@ -1,5 +1,5 @@
 <section class="flex items-center justify-center flex-wrap gap-3 mt-10">
-    <a href="#!" onclick="launch_toast()"
+    <a href="{{ route('communications.create') }}"
         class="w-40 h-40  hover:bg-green-100 transition duration-500  rounded-xl bg-white shadow-md flex flex-col items-center justify-center">
         <svg class="w-28 h-28" viewBox="0 0 192 189" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">

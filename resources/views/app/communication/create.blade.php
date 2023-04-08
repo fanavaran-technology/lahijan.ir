@@ -91,7 +91,6 @@
 
 
 @section('script')
-    <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script>
         function renderEditor(key) {
             let editor_config = {
@@ -140,6 +139,4 @@
     <script>
         renderEditor('#editor')
     </script>
-
-    <script>
-    @endsection
+@endsection

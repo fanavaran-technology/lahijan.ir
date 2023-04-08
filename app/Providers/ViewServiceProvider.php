@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Communication;
 use App\Models\Content\Menu;
 use App\Models\Content\News;
 use Illuminate\Support\ServiceProvider;
@@ -39,6 +40,16 @@ class ViewServiceProvider extends ServiceProvider
             $view->with(
                 [
                     'menus' => $menus,
+                ]
+            );
+        });
+
+        view()->composer('admin.*', function ($view) {
+            $communications = Communication::where('response', null)->take(10)->get();
+
+            $view->with(
+                [
+                    'communications' => $communications,
                 ]
             );
         });

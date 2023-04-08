@@ -16,13 +16,19 @@ class Communication extends Model
         'description',
         'type',
         'address',
+        'response'
     ];
 
     const REQUEST_TYPES = [
         'انتقاد یا پیشنهاد',
         'درخواست',
-        'ثبت شکایت',
+        'شکایت',
         'تقدیر و تشکر'
     ];
+
+    public function getType()
+    {
+        return self::REQUEST_TYPES[(int) $this->type];
+    }
 
 }

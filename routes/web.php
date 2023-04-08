@@ -4,7 +4,7 @@ use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
 use App\Http\Controllers\Admin\Clarification\SalaryController;
-use App\Http\Controllers\Communication\CommunicationController;
+use App\Http\Controllers\Communication\CommunicationController as AppCommunicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
+use App\Http\Controllers\Admin\Communication\CommunicationController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
@@ -97,9 +98,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');
 
         Route::post('file-import', [PerssonelController::class, 'fileImport'])->name('file-import');
-
-
     });
+
+    Route::resource('communications', CommunicationController::class)->except('store', 'show', 'create');
 
     // user module routes
     Route::prefix('user')->as('user.')->group(function () {
@@ -136,4 +137,4 @@ Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
-Route::resource('communications', CommunicationController::class)->only('create' , 'store');
+Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
