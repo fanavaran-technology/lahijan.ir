@@ -1,29 +1,32 @@
 <?php
 
-use App\Http\Controllers\Clarification\ClarificationController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
 use App\Http\Controllers\Admin\Clarification\SalaryController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Content\HomeController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\User\RoleController;
-use App\Http\Controllers\Admin\User\UserController;
+use App\Http\Controllers\Admin\Content\BannerTheaterController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\PageController;
-use App\Http\Controllers\Admin\User\ProfileController;
 use App\Http\Controllers\Admin\Content\PlaceController;
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
+use App\Http\Controllers\Admin\Content\SliderController;
+use App\Http\Controllers\Admin\Content\TheaterController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
+use App\Http\Controllers\Admin\User\ProfileController;
+use App\Http\Controllers\Admin\User\RoleController;
+use App\Http\Controllers\Admin\User\UserController;
+use App\Http\Controllers\Clarification\ClarificationController;
+use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Content\NewsController as PublicNewsController;
-use App\Http\Controllers\Content\SearchController as PublicSearchController;
-use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
-use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
-use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 use App\Http\Controllers\Content\PageController as PublicPageController;
+use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
+use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
+use App\Http\Controllers\Content\SearchController as PublicSearchController;
+use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
+use Illuminate\Support\Facades\Route;
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +63,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
             'public-calls' => PublicCallController::class,
             'sliders' => SliderController::class,
             'pages' => PageController::class,
+            'theater' => TheaterController::class,
+            'banner-theater' => BannerTheaterController::class,
         ], ['except' => 'show']);
 
         // news gallery routes
@@ -83,6 +88,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         // change page status route
         Route::get('pages/{page}/is_draft', [PageController::class, 'is_draft'])->name('pages.is_draft');
         Route::get('pages/{page}/is_quick_access', [PageController::class, 'isQuickAccess'])->name('pages.is_quick_access');
+        // change theater status route
+        Route::get('theater/{theater}/status', [TheaterController::class, 'status'])->name('theater.status');
+        Route::get('banner-theater/{theater}/status', [BannerTheaterController::class, 'status'])->name('banner-theater.status');
+
+
+
 
     });
 
@@ -130,6 +141,8 @@ Route::get('tags/{tag:title}', [PublicNewsController::class, 'tag'])->name('news
 Route::resource('public-calls', indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index', 'show');
 
 Route::resource('places', PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index', 'show');
+
+Route::resource('theaters', PublicTheaterController::class)->parameters(['theaters' => 'theater:slug'])->only('index', 'show');
 
 Route::get('search', PublicSearchController::class)->name('search');
 

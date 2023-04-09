@@ -21,6 +21,10 @@
         </section>
     </section>
 
+    <div class="md:py-10 px-20">
+        @include('app.includes.theater')
+    </div>
+
     @include('app.includes.statistics')
 
     @include('app.includes.title', ['title' => 'اماکن گردشگری'])

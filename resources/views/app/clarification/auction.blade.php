@@ -1,4 +1,4 @@
-@extends('app.clarification.layouts.app', ['title' => 'سامانه شفاف سازی - حقوق و دستمزد کارکنان'])
+@extends('app.clarification.layouts.app', ['title' => 'سامانه شفاف سازی - مناقصه و مزایده'])
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/datepicker/datepicker.min.css') }}">

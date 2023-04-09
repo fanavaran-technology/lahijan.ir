@@ -173,7 +173,7 @@ class PlaceController extends Controller
         $gallery->delete();
 
         $user = auth()->user()->full_name;
-        
+
         Log::warning("{$user} تصویری رااز گالری تصاویر خبر حذف کرد.");
 
         return back()->with('cute-success', 'تصویر حذف گردید.');

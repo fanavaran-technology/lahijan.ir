@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Content;
 
+use App\Models\Content\BannerTheater;
 use App\Models\Content\News;
 use App\Models\Content\Place;
 use App\Models\Content\Slider;
@@ -25,7 +26,9 @@ class HomeController extends Controller
 
         $places = Place::latest()->take(6)->where('status' , 1)->get();
 
-        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news'));
+        $bannerTheater = BannerTheater::latest()->take(1)->where('status' , 1)->get();
+
+        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news' , 'bannerTheater' ));
 
     }
 

@@ -30,7 +30,7 @@
               <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
             </svg>
           </a>
-          @endcan  
+          @endcan
         </div>
       </div>
       <ul class="navbar-nav flex-fill w-100 mb-2">
@@ -162,7 +162,28 @@
           </ul>
         </li>
         @endcan
-            @can('manage_clarification')
+            @can('manage_theater')
+            <li class="nav-item dropdown @active('admin.content.theater') active @endactive">
+                <a href="#Theater" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                        <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    </svg>
+                    <span class="ml-3 item-text">تئاتر خیابانی</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="Theater">
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('admin.content.theater.index') }}"><span class="ml-1 item-text">همه تئاتر </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('admin.content.theater.create') }}"><span class="ml-1 item-text">تئاتر جدید</span></a>
+                    </li>
+                </ul>
+            </li>
+            @endcan
+
+        @can('manage_clarification')
         <p class="text-muted text-sm nav-heading mt-2 mb-1">
           <small>سامانه شفاف سازی</small>
         </p>

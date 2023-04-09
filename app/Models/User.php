@@ -7,6 +7,7 @@ use App\Models\ACL\Role;
 use App\Models\Content\News;
 use App\Models\ACL\Permission;
 use App\Models\Content\Page;
+use App\Models\Content\Theater;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Content\PublicCall;
 use Illuminate\Support\Facades\Hash;
@@ -29,15 +30,17 @@ class User extends Authenticatable
     protected $fillable = [
         'full_name' ,
         'username' ,
-        'password', 
+        'password',
         'email' ,
         'mobile' ,
         'profile_photo' ,
         'email_verified_at',
         'mobile_verified_at' ,
         'is_staff' ,
-        'is_block' 
+        'is_block'
     ];
+
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -80,11 +83,16 @@ class User extends Authenticatable
     public function news()
     {
         return $this->hasMany(News::class);
-    } 
+    }
 
     public function publicCalls()
     {
-        return $this->hasMany(PublicCall::class);
+        return $this->hasMany(PublicCall::class );
+    }
+
+    public function theaters()
+    {
+        return $this->hasMany(Theater::class );
     }
 
     public function pages()
