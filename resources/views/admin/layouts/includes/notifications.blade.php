@@ -3,109 +3,33 @@
     <div class="modal-dialog modal-sm overflow-auto" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="defaultModalLabel">اعلانات</h5>
+                <h5 class="modal-title" id="defaultModalLabel">پیام های کاربران</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body " style="height: 100%; overflow:auto">
                 <div class="list-group list-group-flush my-n3 ">
-
+                    @foreach($communications as $communication)
                     <div class="list-group-item bg-transparent">
                         <div class="row align-items-center">
                             <div class="col-auto">
                             </div>
                             <div class="col">
-                                <small><strong>کامنت جدید</strong></small>
-                                <div class="my-0 text-muted small">در بسیاری از کوچه های شهر چاله های عمیقی وجود دارد
+                                <small><strong>{{ $communication->subject }}</strong></small>
+                                <div class="my-0 text-muted small">
+                                    {{ jalaliDate($communication->created_at) }}
                                 </div>
                                 <small class="badge badge-pill badge-light text-muted">2m ago</small>
                             </div>
                         </div>
                     </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col">
-                                <small><strong>خبر جدید</strong></small>
-                                <div class="my-0 text-muted small">بازید شهردار لاهیجان از مقبره چهار پادشاخه</div>
-                                <small class="badge badge-pill badge-light text-muted">1h ago</small>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                     <!-- / .row -->
                 </div> <!-- / .list-group -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success text-white btn-block" data-dismiss="modal">حذف
-                    همه</button>
+                <a href="{{ route('admin.communications.index') }}" class="btn btn-primary text-white btn-block">دیدن همه</a>
             </div>
         </div>
     </div>

@@ -1,31 +1,43 @@
 <?php
 
+
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
 use App\Http\Controllers\Admin\Clarification\SalaryController;
 use App\Http\Controllers\Admin\Content\BannerTheaterController;
+
+use App\Http\Controllers\Admin\Clarification\InvestmentCategoryController;
+use App\Http\Controllers\Admin\Clarification\InvestmentController;
+use App\Http\Controllers\Clarification\ClarificationController;
+use App\Http\Controllers\Communication\CommunicationController as AppCommunicationController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Content\HomeController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\User\RoleController;
+use App\Http\Controllers\Admin\User\UserController;
+
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
+
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\TheaterController;
-use App\Http\Controllers\Admin\SettingController;
+
+
+use App\Http\Controllers\Admin\Communication\CommunicationController;
+
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Admin\User\ProfileController;
-use App\Http\Controllers\Admin\User\RoleController;
-use App\Http\Controllers\Admin\User\UserController;
-use App\Http\Controllers\Clarification\ClarificationController;
-use App\Http\Controllers\Content\HomeController;
+
 use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\PageController as PublicPageController;
 use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
-use Illuminate\Support\Facades\Route;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -101,15 +113,17 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::resources([
             'perssonels' => PerssonelController::class,
             'salaries' => SalaryController::class,
-            'contracts' => ContractController::class
+            'contracts' => ContractController::class,
+            'investments' => InvestmentController::class,
+            'investments/categories' => InvestmentCategoryController::class,
         ], ['except' => 'show']);
 
         Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');
 
         Route::post('file-import', [PerssonelController::class, 'fileImport'])->name('file-import');
-
-
     });
+
+    Route::resource('communications', CommunicationController::class)->except('store', 'show', 'create');
 
     // user module routes
     Route::prefix('user')->as('user.')->group(function () {
@@ -148,3 +162,4 @@ Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
+Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');

@@ -35,8 +35,5 @@ class Theater extends Model
         return route('theaters.show' , $this->slug);
     }
 
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
+
 }

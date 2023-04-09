@@ -62,6 +62,7 @@ class Permission extends Model
         'set_user_permission_role'  =>       'دسترسی دادن به نقش ها' ,
         'setting_manage'            =>       'دسترسی به تنظیمات' ,
         'manage_clarification'      =>       'دسترسی به بخش شفاف سازی' ,
+        'manage_communication'      =>       'دیدن و پاسخ به پیام های شهروندان' ,
         'log'                       =>       'دسترسی به لاگ ها' ,
         'manage_theater'            =>       'دسترسی به تئاتر' ,
     ];
