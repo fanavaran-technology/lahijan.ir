@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Clarification\InvestmentCategoryController;
+use App\Http\Controllers\Admin\Clarification\InvestmentController;
 use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
@@ -92,7 +94,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::resources([
             'perssonels' => PerssonelController::class,
             'salaries' => SalaryController::class,
-            'contracts' => ContractController::class
+            'contracts' => ContractController::class,
+            'investments' => InvestmentController::class,
+            'investments/categories' => InvestmentCategoryController::class,
         ], ['except' => 'show']);
 
         Route::get('perssonels/{perssonel}/disable', [PerssonelController::class, 'disable'])->name('perssonels.disable');

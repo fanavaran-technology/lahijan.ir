@@ -7,6 +7,7 @@
         placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
+      @can('manage_communication')
       <li class="nav-item nav-notif">
         <a class="nav-link text-muted my-2 mx-3" href="./#" data-toggle="modal" data-target=".modal-notif">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope-paper" viewBox="0 0 16 16">
@@ -17,6 +18,7 @@
           @endif
         </a>
       </li>
+      @endcan
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-muted pr-0 mx-2" href="#" id="navbarDropdownMenuLink" role="button"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
