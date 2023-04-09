@@ -11,6 +11,12 @@ use Illuminate\View\View;
 
 class CommunicationController extends Controller
 {
+
+    public function __construct() 
+    {
+        $this->middleware('can:manage_communication');
+    }
+
     /**
      * Display a listing of the resource.
      *

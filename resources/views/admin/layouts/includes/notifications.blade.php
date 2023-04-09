@@ -29,7 +29,7 @@
                 </div> <!-- / .list-group -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success text-white btn-block" data-dismiss="modal">دیدن همه</button>
+                <a href="{{ route('admin.communications.index') }}" class="btn btn-primary text-white btn-block">دیدن همه</a>
             </div>
         </div>
     </div>
