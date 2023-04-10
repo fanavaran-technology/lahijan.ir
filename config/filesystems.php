@@ -38,7 +38,7 @@ return [
 
         'images' => [
             'driver' => 'local',
-            'root' => public_path('images/content'),
+            'root' => 'images/content',
             'url' => '/images/content',
         ],
 
