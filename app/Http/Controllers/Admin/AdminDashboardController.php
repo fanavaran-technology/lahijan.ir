@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ACL\Permission;
+use App\Models\Content\BannerTheater;
 use App\Models\Setting;
+use Database\Seeders\BannerTheaterSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\SettingSeeder;
 use Illuminate\Contracts\View\View;
@@ -31,6 +33,12 @@ class AdminDashboardController extends Controller
             $settingSeed = new SettingSeeder;
             $settingSeed->run();
             Log::info("تنظیمات پیش فرض اعمال شد.");
+        }
+
+        if (BannerTheater::all()->isEmpty()) {
+            $bannerTheater = new BannerTheaterSeeder();
+            $bannerTheater->run();
+            Log::info("بنر تئاتر پیش فرض ساخته شد");
         }
 
         return view('admin.index');
