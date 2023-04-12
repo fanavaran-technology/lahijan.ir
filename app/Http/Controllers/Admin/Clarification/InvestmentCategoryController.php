@@ -24,7 +24,7 @@ class InvestmentCategoryController extends Controller
         $allCatgeories = InvestmentCategory::query();
 
         if ($searchString = request('search'))
-            $allCatgeories->where('subject', "LIKE" , "%{$searchString}%");
+            $allCatgeories->where('title', "LIKE" , "%{$searchString}%");
 
         $allCatgeories = $allCatgeories->latest()->paginate(15);
 

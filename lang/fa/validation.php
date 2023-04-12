@@ -239,6 +239,9 @@ return [
         'amount.*'        =>   'مبلغ',
         'contractor'      =>   'پیمانکار',
         'detail'          =>   'موافقتنامه و مفاد قرارداد',
-        'response'        =>   'پاسخ'
+        'response'        =>   'پاسخ',
+        'position'        =>   'موقعیت',
+        'investor_task'   =>   'آورده سرمایه گذار',
+        'municipality_task'=>  'آورده شهرداری'
     ],
 ];
