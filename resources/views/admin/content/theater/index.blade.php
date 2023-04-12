@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">اسلایدر
+            <h2 class="h3 mb-0 page-title">تئاتر
                 <span class="text-sm text-muted">({{ $theaters->count() }})</span>
             </h2>
         </div>

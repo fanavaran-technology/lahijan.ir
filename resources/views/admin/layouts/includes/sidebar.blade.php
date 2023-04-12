@@ -252,6 +252,28 @@ active
                             </ul>
                         </li>
                     @endcan
+
+                        <li class="nav-item dropdown @active('admin.content.council-members') active @endactive">
+                            <a href="#council" data-toggle="collapse" aria-expanded="false"
+                               class="dropdown-toggle nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
+                                    <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
+                                </svg>
+                                <span class="ml-3 item-text">اعضا شورا شهر</span>
+                            </a>
+                            <ul class="collapse list-unstyled pl-4 w-100" id="council">
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('admin.content.council-members.index') }}"><span
+                                            class="ml-1 item-text">همه اعضا شورا شهر </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('admin.content.council-members.create') }}"><span
+                                            class="ml-1 item-text">عضو جدید</span></a>
+                                </li>
+                            </ul>
+                        </li>
+
                     @can('manage_communication')
                         <li class="nav-item d-flex justify-content-between align-items-center">
                             <a href="{{ route('admin.communications.index') }}" aria-expanded="false"
@@ -271,7 +293,11 @@ active
                         </li>
 
                 @endcan
-                @can('manage_clarification')
+
+
+
+
+                    @can('manage_clarification')
                     <p class="text-muted text-sm nav-heading mt-2 mb-1">
                         <small>سامانه شفاف سازی</small>
                     </p>

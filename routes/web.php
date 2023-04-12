@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\Clarification\ContractController;
 use App\Http\Controllers\Admin\Clarification\PerssonelController;
 use App\Http\Controllers\Admin\Clarification\SalaryController;
 use App\Http\Controllers\Admin\Content\BannerTheaterController;
-
+use App\Http\Controllers\Admin\Content\CouncilMemberController;
 use App\Http\Controllers\Admin\Clarification\InvestmentCategoryController;
 use App\Http\Controllers\Admin\Clarification\InvestmentController;
 use App\Http\Controllers\Clarification\ClarificationController;
@@ -16,28 +16,23 @@ use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\User\RoleController;
 use App\Http\Controllers\Admin\User\UserController;
-
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\NewsController;
 use App\Http\Controllers\Admin\Content\PageController;
 use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
-
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\TheaterController;
-
-
 use App\Http\Controllers\Admin\Communication\CommunicationController;
-
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Admin\User\ProfileController;
-
 use App\Http\Controllers\Content\NewsController as PublicNewsController;
 use App\Http\Controllers\Content\PageController as PublicPageController;
 use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
+use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -77,6 +72,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
             'pages' => PageController::class,
             'theater' => TheaterController::class,
             'banner-theater' => BannerTheaterController::class,
+            'council-members' => CouncilMemberController::class,
         ], ['except' => 'show']);
 
         // news gallery routes
@@ -162,4 +158,10 @@ Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
+//Route::get('council', PublicCouncilMemberController::class)->name('council');
+
+Route::resource('council-member', PublicCouncilMemberController::class )->only('show');
+
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
+
+

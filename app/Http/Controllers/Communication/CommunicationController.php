@@ -42,7 +42,7 @@ class CommunicationController extends Controller
                 'address'=> $inputs['address']
             ]);
         });
-        
+
         $type = Communication::REQUEST_TYPES[(int) $inputs['type']];
 
         return to_route('communications.create')->with('toast-success' , "با تشکر از مشارکت شما ، {$type} ثبت گردید.");

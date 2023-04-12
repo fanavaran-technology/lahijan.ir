@@ -52,12 +52,12 @@
                             <div class="col-md-12">
                                 <div class="form-row">
                                     <div class="form-group col-lg-6 my-2">
-                                        <label for="first_name" class="input-title mr-3">نام و نام خانوادگی :</label>
+                                        <label for="first_name" class="input-title mr-3">نام :</label>
                                         <input type="text" name="first_name" value="{{ old('first_name') }}"
                                             placeholder="نام " class="form-control custom-focus" id="first_name">
                                     </div>
                                     <div class="form-group col-lg-6 my-2">
-                                        <label for="last_name" class="input-title mr-3">نام و نام خانوادگی :</label>
+                                        <label for="last_name" class="input-title mr-3"> نام خانوادگی :</label>
                                         <input type="text" name="last_name" value="{{ old('last_name') }}"
                                                placeholder=" نام خانوادگی" class="form-control custom-focus" id="last_name">
                                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\TheaterRequest;
 use App\Http\Services\Image\ImageService;
+use App\Models\Content\BannerTheater;
 use App\Models\Content\Theater;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,11 @@ class TheaterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BannerTheater $bannerTheater)
     {
-        $theaters = Theater::all();
-        return view('admin.content.theater.index' , compact('theaters'));
+        $theaters = Theater::query();
+        $theaters = $theaters->latest()->paginate(15);
+        return view('admin.content.theater.index' , compact('theaters' , 'bannerTheater'));
     }
 
     /**
@@ -137,4 +139,5 @@ class TheaterController extends Controller
             return response()->json(['status' => false]);
         }
     }
+
 }
