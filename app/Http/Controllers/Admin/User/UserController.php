@@ -156,7 +156,7 @@ class UserController extends Controller
     {
 
         if ($user->news->isNotEmpty() && $user->publicCalls->isNotEmpty()) {
-            return to_route('admin.content.menus.index')->with('toast-error', 'حذف این کاربر امکانپذیر نیست.');
+            return to_route('admin.content.users.index')->with('toast-error', 'حذف این کاربر امکانپذیر نیست.');
         }
 
         $user->delete();

@@ -331,9 +331,7 @@ active
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown @active('admin.clarification.investments')
-active
-@endactive">
+                    <li class="nav-item dropdown @active('admin.clarification.investments') active @endactive @active('admin.clarification.categories') active @endactive">
                         <a href="#investment" data-toggle="collapse" aria-expanded="false"
                            class="dropdown-toggle nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

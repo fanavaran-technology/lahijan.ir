@@ -1,17 +1,16 @@
-@extends('admin.layouts.app', ['title' => 'همه دسته بندی ها'])
+@extends('admin.layouts.app', ['title' => 'پروژه های سرمایه گذاری'])
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">دسته بندی ها
-                <span class="text-sm text-muted">({{ $allCatgeories->total() }})</span>
+            <h2 class="h3 mb-0 page-title">پروژه های سرمایه گذاری
+                <span class="text-sm text-muted">({{ $investments->total() }})</span>
             </h2>
         </div>
-        @can('create_category')
-            <div class="col-auto">
-                <a href="{{ route('admin.clarification.categories.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
-            </div>
-        @endcan
+        <div class="col-auto">
+            <a href="{{ route('admin.clarification.investments.create') }}" type="button"
+                class="btn btn-primary px-4">ایجاد</a>
+        </div>
         <div class="col-12">
 
             <div class="row my-4">
@@ -44,18 +43,20 @@
                                         @endrequest
                                     </div>
                                     <th>#</th>
-                                    <th>عنوان دسته بندی</th>
+                                    <th>عنوان پروژه </th>
+                                    <th>دسته بندی</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
-                                @forelse($allCatgeories as $category)
+                                @forelse($investments as $investment)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <small>{{ Str::limit($category->title, 120, '...') }}</small>
+                                            <small>{{ Str::limit($investment->title, 120, '...') }}</small>
                                         </td>
+                                        <td>{{ $investment->category->title }}</td>
                                         <td>
-                                            <a href="{{ route('admin.clarification.categories.edit', $category->id) }}"
+                                            <a href="{{ route('admin.clarification.investments.edit', $investment->id) }}"
                                                 class="text-decoration-none text-primary mr-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -65,11 +66,12 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
                                             </a>
-                                            <form action="{{ route('admin.clarification.categories.destroy', $category->id) }}"
+                                            <form
+                                                action="{{ route('admin.clarification.investments.destroy', $investment->id) }}"
                                                 class="d-inline" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" x-data="{{ $category->id }}"
+                                                <button type="submit" x-data="{{ $investment->id }}"
                                                     class="delete border-none bg-transparent text-decoration-none text-danger mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -83,11 +85,11 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <p class="text-center text-muted">هیچ دسته یندی وجود ندارد.</p>
+                                    <p class="text-center text-muted">هیچ پروژه ای وجود ندارد</p>
                                 @endforelse
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $allCatgeories->appends($_GET)->render() }}
+                                {{ $investments->appends($_GET)->render() }}
                             </section>
                         </div>
                     </div> <!-- simple table -->
