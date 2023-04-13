@@ -24,7 +24,7 @@ class InvestmentController extends Controller
         $investments = Investment::query();
 
         if ($searchString = request('search'))
-            $investments->where('title', "LIKE" , "%{$searchString}%");
+            $investments->where('title', "LIKE", "%{$searchString}%");
 
         $investments = $investments->latest()->paginate(15);
 
@@ -50,19 +50,25 @@ class InvestmentController extends Controller
      */
     public function store(InvestmentRequest $request, ImageService $imageService): RedirectResponse
     {
-        
-        DB::transaction(function () use($request, $imageService) {
+
+        DB::transaction(function () use ($request, $imageService) {
             $inputs = $request->all();
-            
+
             // save image
             if ($request->hasFile('image')) {
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "clarification" . DIRECTORY_SEPARATOR . "investments");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-            Investment::create($inputs); 
+            if ($request->hasFile('file')) {
+                $file = $request->file("file");
+                $ext = $file->extension();
+                $inputs['file'] = "docs/" . $file->storeAs('/investments', time() . '.' . $ext, ['disk' => 'docs']);
+            }
+
+            Investment::create($inputs);
         });
-        
+
         return to_route('admin.clarification.investments.index')->with('toast-success', 'پروژه جدید اضافه گردید');
     }
 
@@ -75,7 +81,7 @@ class InvestmentController extends Controller
      */
     public function edit(Investment $investment): View
     {
-        $categories = InvestmentCategory::all();    
+        $categories = InvestmentCategory::all();
         return view('admin.clarification.investment.edit', compact('investment', 'categories'));
     }
 
@@ -88,9 +94,9 @@ class InvestmentController extends Controller
      */
     public function update(InvestmentRequest $request, Investment $investment, ImageService $imageService): RedirectResponse
     {
-        DB::transaction(function () use($request, $imageService, $investment) {
+        DB::transaction(function () use ($request, $imageService, $investment) {
             $inputs = $request->all();
-            
+
             // save image
             if ($request->hasFile('image')) {
                 if (!empty($investment->image))
@@ -100,7 +106,16 @@ class InvestmentController extends Controller
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 
-            $investment->update($inputs); 
+            if ($request->hasFile('file')) {
+                if (!empty($investment->file))
+                    $imageService->deleteImage($investment->file);
+
+                $file = $request->file("file");
+                $ext = $file->extension();
+                $inputs['file'] = "docs/" . $file->storeAs('/investments', time() . '.' . $ext, ['disk' => 'docs']);
+            }
+
+            $investment->update($inputs);
         });
 
         return to_route('admin.clarification.investments.index')->with('toast-success', 'پروژه ویرایش شد');

@@ -48,6 +48,12 @@ return [
             'url' => '/videos',
         ],
 
+        'docs' => [
+            'driver' => 'local',
+            'root' => 'docs',
+            'url' => '/docs',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

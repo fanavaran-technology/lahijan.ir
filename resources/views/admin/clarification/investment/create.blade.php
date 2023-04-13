@@ -143,6 +143,12 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div>
+                            <label for="start_date_view" class="input-title">
+                                فایل آگهی (PDF)
+                            </label>
+                            <input type="file" name="file">
+                        </div>
                         <div class="mt-2">
                             <label for="start_date_view" class="input-title">
                                 تاریخ شروع

@@ -60,8 +60,8 @@
                                         <select type="text" name="type" value="{{ old('type') }}"
                                                 class="form-control @error('type') error-input @enderror custom-focus" id="type">
                                             <option value="">سمت شوار را انتخاب کنید</option>
-                                        @foreach ($types as $key => $type)
-                                                <option value="{{ $key }}">{{ $type }}</option>
+                                            @foreach ($types as $key => $type)
+                                                <option value="{{ $key }}" @selected(old('type') == $key)>{{ $type }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -111,7 +111,7 @@
                                 </svg>
                             </label>
                             <input id="file" name="image" type="file" onchange="loadFile(event)">
-                            <img src="{{ asset('images/avatars/profile.jpg') }}" id="output">
+                            <img src="{{ asset('images/default/avatar.png') }}" id="output">
                         </div>
 
 

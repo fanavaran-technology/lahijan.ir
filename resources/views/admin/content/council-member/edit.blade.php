@@ -62,7 +62,7 @@
                                             class="form-control @error('type') error-input @enderror custom-focus" id="type">
                                             <option value="">سمت شوار را انتخاب کنید</option>
                                         @foreach ($types as $key => $type)
-                                                <option value="{{ $key }}" >{{ $type }}</option>
+                                                <option value="{{ $key }}" @selected(old('type', $councilMember->type) == $key) >{{ $type }}</option>
                                             @endforeach
                                         </select>
                                     </div>

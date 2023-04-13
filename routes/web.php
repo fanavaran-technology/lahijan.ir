@@ -152,16 +152,12 @@ Route::resource('public-calls', indexPublicCallController::class)->parameters(['
 
 Route::resource('places', PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index', 'show');
 
+Route::get('council-member', [PublicCouncilMemberController::class, 'show'] )->name('council-member.show');
+
 Route::resource('theaters', PublicTheaterController::class)->parameters(['theaters' => 'theater:slug'])->only('index', 'show');
 
 Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
-//Route::get('council', PublicCouncilMemberController::class)->name('council');
-
-Route::resource('council-member', PublicCouncilMemberController::class )->only('show');
-
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
-
-
