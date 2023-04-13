@@ -33,6 +33,7 @@ use App\Http\Controllers\Content\PublicCallController as indexPublicCallControll
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
 use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
+use App\Http\Controllers\Clarification\InvestmentController as AppInvestmentController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -49,11 +50,16 @@ require __DIR__ .'/auth.php';
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
+    
     Route::get('/salaries', [ClarificationController::class, 'salary'])->name('clarification.salary');
     Route::get('/salaries/{salarySubject:slug}', [ClarificationController::class, 'showSalary'])->name('clarification.salary.show');
+    
     Route::get('/contracts', [ClarificationController::class, 'contract'])->name('clarification.contract');
     Route::get('/contracts/{contract:slug}', [ClarificationController::class, 'showContract'])->name('clarification.contract.show');
+    
     Route::get('/news', [ClarificationController::class, 'news'])->name('clarification.news');
+
+    Route::resource('investments', AppInvestmentController::class)->parameters(['investments' => 'investment:slug'])->only('index', 'show');
 });
 
 // admin routes

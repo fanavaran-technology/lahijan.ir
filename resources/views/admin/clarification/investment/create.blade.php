@@ -191,7 +191,6 @@
             $('#start_date_view').persianDatepicker({
                 altField: '#start_date',
                 format: 'YYYY/MM/DD',
-                minDate: "today",
             })
         });
 
@@ -199,7 +198,6 @@
             $('#end_date_view').persianDatepicker({
                 altField: '#end_date',
                 format: 'YYYY/MM/DD',
-                minDate: "today",
             })
         });
     </script>
