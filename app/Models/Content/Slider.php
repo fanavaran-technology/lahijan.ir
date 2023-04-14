@@ -22,6 +22,12 @@ class Slider extends Model
         return route('sliders' , $this->url);
     }
 
+    // accessors
+    public function getPublishStatusAttribute()
+    {
+        return $this->published_at <= now() ? 'منتشر شده' : jalaliDate($this->published_at, "%Y/%m/%d H:i:s");
+    }
+
     // scopes
     public function scopeWherePublished($query)
     {

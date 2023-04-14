@@ -79,7 +79,7 @@
                                             <small>{{ Str::limit($slider->alt, 60, '...') }}</small>
                                         </td>
                                         <td>
-                                            منتشر شده
+                                            <td>{{ $slider->publishStatus }}</td>
                                         </td>
                                         <td>
                                             {{ jalaliDate($slider->published_at) }}
