@@ -34,7 +34,11 @@ use App\Http\Controllers\Content\PublicCallController as indexPublicCallControll
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
 use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
+
 use App\Http\Controllers\Content\MayorController as PublicMayorController;
+
+use App\Http\Controllers\Clarification\InvestmentController as AppInvestmentController;
+
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -51,11 +55,16 @@ require __DIR__ .'/auth.php';
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
+
     Route::get('/salaries', [ClarificationController::class, 'salary'])->name('clarification.salary');
     Route::get('/salaries/{salarySubject:slug}', [ClarificationController::class, 'showSalary'])->name('clarification.salary.show');
+
     Route::get('/contracts', [ClarificationController::class, 'contract'])->name('clarification.contract');
     Route::get('/contracts/{contract:slug}', [ClarificationController::class, 'showContract'])->name('clarification.contract.show');
+
     Route::get('/news', [ClarificationController::class, 'news'])->name('clarification.news');
+
+    Route::resource('investments', AppInvestmentController::class)->parameters(['investments' => 'investment:slug'])->only('index', 'show');
 });
 
 // admin routes
@@ -157,13 +166,14 @@ Route::resource('public-calls', indexPublicCallController::class)->parameters(['
 
 Route::resource('places', PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index', 'show');
 
+Route::get('council-member', [PublicCouncilMemberController::class, 'show'] )->name('council-member.show');
+
 Route::resource('theaters', PublicTheaterController::class)->parameters(['theaters' => 'theater:slug'])->only('index', 'show');
 
 Route::get('search', PublicSearchController::class)->name('search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
-//Route::get('council', PublicCouncilMemberController::class)->name('council');
 
 Route::resource('council-member', PublicCouncilMemberController::class )->only('show');
 
@@ -171,5 +181,5 @@ Route::resource('communications', AppCommunicationController::class)->only('crea
 
 Route::resource('mayor', PublicMayorController::class )->only('show');
 
-
+Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
 

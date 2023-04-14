@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Content;
 use App\Http\Controllers\Controller;
 use App\Models\Content\CouncilMember;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CouncilMemberController extends Controller
 {
@@ -13,7 +14,7 @@ class CouncilMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(): View
     {
         $bossCouncil = CouncilMember::where('type' , 0)->get();
 

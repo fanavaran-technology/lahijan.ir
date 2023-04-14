@@ -32,7 +32,8 @@ class InvestmentRequest extends FormRequest
             "municipality_task"=> "required|min:2|max:300",
             "start_date" => "required",
             "end_date" => "required",
-            'image' => $this->isMethod('post') ? 'required|image|max:3072|min:1' : 'nullable|image|max:3072|min:1'
+            'image' => $this->isMethod('post') ? 'required|image|max:3072|min:1' : 'nullable|image|max:3072|min:1',
+            'file' => "nullable|min:2|max:512|mimes:pdf",
         ];
     }
 }

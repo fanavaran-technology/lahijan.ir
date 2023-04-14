@@ -143,6 +143,12 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div>
+                            <label for="start_date_view" class="input-title">
+                                فایل آگهی (PDF)
+                            </label>
+                            <input type="file" name="file">
+                        </div>
                         <div class="mt-2">
                             <label for="start_date_view" class="input-title">
                                 تاریخ شروع
@@ -185,7 +191,6 @@
             $('#start_date_view').persianDatepicker({
                 altField: '#start_date',
                 format: 'YYYY/MM/DD',
-                minDate: "today",
             })
         });
 
@@ -193,7 +198,6 @@
             $('#end_date_view').persianDatepicker({
                 altField: '#end_date',
                 format: 'YYYY/MM/DD',
-                minDate: "today",
             })
         });
     </script>

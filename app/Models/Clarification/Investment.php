@@ -2,12 +2,13 @@
 
 namespace App\Models\Clarification;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Investment extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'title',
@@ -21,6 +22,20 @@ class Investment extends Model
         'start_date',
         'end_date',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    public function publicPath()
+    {
+        return route('investments.show' , $this->slug);
+    }
 
     public function category() 
     {

@@ -101,6 +101,9 @@
                                     کلمه عبور</a>
                                 @endif
                             </div>
+                            <section class="my-3 w-full flex flex-col items-center">
+                                @recaptcha
+                            </section>
                             <div class="flex justify-center">
                                 <button type="submit" class="w-60 mt-3 justify-center items-center text-green-500 hover:text-white  hover:bg-green-500 border-2 rounded-full border-green-500  focus:ring-4 py-2 px-12 text-sm font-semibold
                                  text-center">ورود</button>
