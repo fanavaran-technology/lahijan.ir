@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class MayorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_mayor');
+    }
     /**
      * Display a listing of the resource.
      *

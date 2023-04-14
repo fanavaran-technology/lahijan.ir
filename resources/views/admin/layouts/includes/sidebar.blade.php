@@ -253,6 +253,7 @@ active
                         </li>
                     @endcan
 
+                        @can('manage_council')
                         <li class="nav-item dropdown @active('admin.content.council-members') active @endactive">
                             <a href="#council" data-toggle="collapse" aria-expanded="false"
                                class="dropdown-toggle nav-link">
@@ -273,7 +274,9 @@ active
                                 </li>
                             </ul>
                         </li>
+                        @endcan
 
+                        @can('manage_mayor')
                         <li class="nav-item dropdown @active('admin.content.mayors') active @endactive">
                             <a href="#mayor" data-toggle="collapse" aria-expanded="false"
                                class="dropdown-toggle nav-link">
@@ -295,8 +298,7 @@ active
                                 </li>
                             </ul>
                         </li>
-
-
+                        @endcan
                     @can('manage_communication')
                         <li class="nav-item d-flex justify-content-between align-items-center">
                             <a href="{{ route('admin.communications.index') }}" aria-expanded="false"

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Log;
 
 class CouncilMemberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_council');
+    }
     /**
      * Display a listing of the resource.
      *

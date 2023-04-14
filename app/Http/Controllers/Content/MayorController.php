@@ -15,12 +15,7 @@ class MayorController extends Controller
      */
     public function show()
     {
-//        $mayors = Mayor::max('birthdate');
-//        $maxBirthdate = DB::table('table_name')->max('birthdate');
-
         $mayors = Mayor::where('status' , 1)->orderBy('birthdate', 'asc')->get();
-
-
         return view('app.content.mayor.index' , compact('mayors'));
     }
 
