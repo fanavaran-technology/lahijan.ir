@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\Content\PlaceController;
 use App\Http\Controllers\Admin\Content\PublicCallController;
 use App\Http\Controllers\Admin\Content\SliderController;
 use App\Http\Controllers\Admin\Content\TheaterController;
+use App\Http\Controllers\Admin\Content\MayorController;
 use App\Http\Controllers\Admin\Communication\CommunicationController;
 use App\Http\Controllers\Admin\User\ChangePasswordController;
 use App\Http\Controllers\Admin\User\ProfileController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Content\PublicCallController as indexPublicCallControll
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
 use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
+use App\Http\Controllers\Content\MayorController as PublicMayorController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -73,6 +75,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
             'theater' => TheaterController::class,
             'banner-theater' => BannerTheaterController::class,
             'council-members' => CouncilMemberController::class,
+            'mayors' => MayorController::class,
         ], ['except' => 'show']);
 
         // news gallery routes
@@ -99,6 +102,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         // change theater status route
         Route::get('theater/{theater}/status', [TheaterController::class, 'status'])->name('theater.status');
         Route::get('banner-theater/{theater}/status', [BannerTheaterController::class, 'status'])->name('banner-theater.status');
+        // change mayor status route
+        Route::get('mayors/{mayor}/status', [MayorController::class, 'status'])->name('mayor.status');
 
 
 
@@ -163,5 +168,8 @@ Route::get('/{page:slug}', PublicPageController::class)->name('page');
 Route::resource('council-member', PublicCouncilMemberController::class )->only('show');
 
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
+
+Route::resource('mayor', PublicMayorController::class )->only('show');
+
 
 

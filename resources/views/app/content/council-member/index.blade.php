@@ -50,14 +50,3 @@
     </section>
 @endsection
 
-@section('script')
-    <script src="{{ asset('assets/app/plugins/datepicker/datepicker.min.js') }}"></script>
-    <script>
-        jalaliDatepicker.startWatch({
-            maxDate: 'today',
-            selector: ".datepicker",
-            time: false
-        });
-    </script>
-
-@endsection

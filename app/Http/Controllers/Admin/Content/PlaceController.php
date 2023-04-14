@@ -71,7 +71,7 @@ class PlaceController extends Controller
                 $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'places');
                 $result = $imageService->save($request->file('image'));
                 if ($result === false) {
-                    return redirect()->route('admin.content.banner.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
+                    return redirect()->route('admin.content.places.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
                 }
                 $inputs['image'] = $result;
             }
