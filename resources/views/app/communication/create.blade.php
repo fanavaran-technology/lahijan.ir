@@ -81,6 +81,12 @@
                         @enderror
                     </section>
                 </section>
+                <section class="my-3 w-full flex flex-col items-center">
+                    @recaptcha
+                    @error('g-recaptcha-response')
+                        <div class="text-red-500 mt-2 text-center font-bold text-xs">{{ $message }}</div>
+                    @enderror
+                </section>
                 <section class="flex justify-center py-4">
                     <button type="submit"
                         class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">ثبت</button>

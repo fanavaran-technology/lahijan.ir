@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Communication;
+use App\Rules\Recaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -26,6 +27,7 @@ class CommunicationRequest extends FormRequest
     public function rules()
     {
         return [
+            'g-recaptcha-response' => ['required' , new Recaptcha],
             'full_name'=> 'required|min:2|max:150',
             'subject'=> 'required|min:2|max:300',
             'type'=> ['required', Rule::in(array_keys(Communication::REQUEST_TYPES))],

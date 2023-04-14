@@ -33,5 +33,12 @@ class BladeServiceProvider extends ServiceProvider
             return request($param);
         });
 
+        Blade::directive('recaptcha' , function() {
+            return '
+                <script src="https://www.google.com/recaptcha/api.js?hl={{ app()->getLocale() }}" async defer></script>
+                <section class="g-recaptcha" data-sitekey="{{ env("GOOGLE_RECAPTCHA_SITE_KEY") }}"></section>
+            ';
+        });
+
     }
 }
