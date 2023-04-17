@@ -302,7 +302,7 @@ active
 
 
 
-{{--                    @can('manage_communication')--}}
+                    @can('manage_mayor_speech')
                         <li class="nav-item d-flex justify-content-between align-items-center">
                             <a href="{{ route('admin.content.mayor-speech.index') }}" aria-expanded="false"
                                class="nav-link @active('admin.communications')
@@ -316,7 +316,7 @@ active
                             </a>
                         </li>
 
-{{--                @endcan--}}
+                @endcan
 
                     @can('manage_communication')
                         <li class="nav-item d-flex justify-content-between align-items-center">

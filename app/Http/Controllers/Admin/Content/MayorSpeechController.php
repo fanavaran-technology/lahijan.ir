@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Log;
 
 class MayorSpeechController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage_mayor_speech');
+    }
     /**
      * Display a listing of the resource.
      *

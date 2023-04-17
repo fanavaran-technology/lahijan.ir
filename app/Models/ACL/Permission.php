@@ -67,6 +67,7 @@ class Permission extends Model
         'manage_theater'            =>       'دسترسی به تئاتر' ,
         'manage_mayor'              =>       'دسترسی به شهرداران' ,
         'manage_council'            =>       'دسترسی به اعضا شورا' ,
+        'manage_mayor_speech'       =>       'دسترسی به سخن شهردار' ,
     ];
 
 }
