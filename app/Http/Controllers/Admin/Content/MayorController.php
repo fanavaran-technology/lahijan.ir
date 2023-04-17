@@ -120,7 +120,7 @@ class MayorController extends Controller
             Log::info("شهردار با عنوان {$mayor->full_name} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
-        return to_route('admin.content.mayors.index')->with('toast-success' , 'تغییرات روی مکان گردشگری اعمال شد.');
+        return to_route('admin.content.mayors.index')->with('toast-success' , 'تغییرات روی شهراردان پیشین اعمال شد.');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Models\Content\BannerTheater;
+use App\Models\Content\MayorSpeech;
 use App\Models\Content\News;
 use App\Models\Content\Place;
 use App\Models\Content\Slider;
@@ -31,7 +32,9 @@ class HomeController extends Controller
 
         $bannerTheater = BannerTheater::latest()->take(1)->where('status' , 1)->get();
 
-        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news' , 'bannerTheater' ));
+        $mayorSpeech = MayorSpeech::latest()->take(1)->where('status' , 1)->get();
+
+        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news' , 'bannerTheater' , 'mayorSpeech' ));
 
     }
 
