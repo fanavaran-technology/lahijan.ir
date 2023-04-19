@@ -85,7 +85,6 @@
                                         <h5 class="flex-1 font-bold pl-3 md:text-xs lg:text-sm text-gray-600">
                                             {{ $lastNews->title }}
                                         </h5>
-                                        <div class="text-xs text-gray-500">{{ $lastNews->user->full_name }}</div>
                                         @if ($lastNews->video)
                                             <div
                                                 class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">

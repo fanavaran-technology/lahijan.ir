@@ -14,15 +14,7 @@
                 <h5 class="text-gray-900 text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
                {{-- <p class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{!! Str::limit($news->body, 210, '...') !!}</p> --}}
 
-                <section class="flex justify-between items-center mt-3">
-                    <div class="flex flex-col sm:flex-row justify-center items-center mt-4 sm:space-x-4">
-                        <img class="w-10 h-10 rounded-full object-cover"
-                            src="{{ $news->user->profile_photo }}" alt="">
-                        <div class="font-medium ">
-                            <div class="text-xs sm:text-sm text-gray-600 mx-2 text-center">{{ $news->user->full_name }}</div>
-                            <div class="text-gray-500 text-xs mx-2" style="font-family: iransans;">{{ jalaliDate($news->published_at) }}</div>
-                        </div>
-                    </div>
+                <section class="flex justify-end items-center mt-3">
                     <a href="{{ $news->publicPath() }}" class="flex items-center">
                         <span
                             class="text-green-600 text-sm sm:text-base transition-all hover:text-green-700 hover:mx-2">بیشتر
