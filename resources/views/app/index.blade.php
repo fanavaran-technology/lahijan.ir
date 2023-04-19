@@ -21,11 +21,15 @@
         </section>
     </section>
 
+    @include('app.includes.mayor-speech')
+
+
+
+    @include('app.includes.statistics')
+
     <div class="md:py-10 px-20">
         @include('app.includes.theater')
     </div>
-
-    @include('app.includes.statistics')
 
     @include('app.includes.title', ['title' => 'اماکن گردشگری'])
     @include('app.includes.places')

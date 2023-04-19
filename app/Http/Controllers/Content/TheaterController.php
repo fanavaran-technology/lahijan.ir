@@ -7,7 +7,11 @@ use App\Models\Content\News;
 use App\Models\Content\Theater;
 use Illuminate\Http\Request;
 
-class TheaterController extends Controller
+class
+
+
+
+TheaterController extends Controller
 {
     /**
      * Display a listing of the resource.

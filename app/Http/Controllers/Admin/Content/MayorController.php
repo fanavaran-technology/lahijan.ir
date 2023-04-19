@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Log;
 
 class MayorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_mayor');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -115,7 +120,7 @@ class MayorController extends Controller
             Log::info("شهردار با عنوان {$mayor->full_name} توسط {$request->user()->full_name} ویرایش شد.");
         });
 
-        return to_route('admin.content.mayors.index')->with('toast-success' , 'تغییرات روی مکان گردشگری اعمال شد.');
+        return to_route('admin.content.mayors.index')->with('toast-success' , 'تغییرات روی شهراردان پیشین اعمال شد.');
     }
 
 

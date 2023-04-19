@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Slider extends Model
 {
     use HasFactory , SoftDeletes;
+    
     protected $fillable = [
         'alt' ,
         'image' ,
@@ -20,6 +21,12 @@ class Slider extends Model
     public function publicPath()
     {
         return route('sliders' , $this->url);
+    }
+
+    // accessors
+    public function getPublishStatusAttribute()
+    {
+        return $this->published_at <= now() ? 'منتشر شده' : jalaliDate($this->published_at, "%Y/%m/%d H:i:s");
     }
 
     // scopes

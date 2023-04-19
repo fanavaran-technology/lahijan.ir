@@ -253,6 +253,7 @@ active
                         </li>
                     @endcan
 
+                        @can('manage_council')
                         <li class="nav-item dropdown @active('admin.content.council-members') active @endactive">
                             <a href="#council" data-toggle="collapse" aria-expanded="false"
                                class="dropdown-toggle nav-link">
@@ -273,7 +274,9 @@ active
                                 </li>
                             </ul>
                         </li>
+                        @endcan
 
+                        @can('manage_mayor')
                         <li class="nav-item dropdown @active('admin.content.mayors') active @endactive">
                             <a href="#mayor" data-toggle="collapse" aria-expanded="false"
                                class="dropdown-toggle nav-link">
@@ -295,7 +298,25 @@ active
                                 </li>
                             </ul>
                         </li>
+                        @endcan
 
+
+
+                    @can('manage_mayor_speech')
+                        <li class="nav-item d-flex justify-content-between align-items-center">
+                            <a href="{{ route('admin.content.mayor-speech.index') }}" aria-expanded="false"
+                               class="nav-link @active('admin.communications')
+active
+@endactive">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                                </svg>
+                                <span class="ml-3 item-text">سخن شهردار</span><span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                @endcan
 
                     @can('manage_communication')
                         <li class="nav-item d-flex justify-content-between align-items-center">
