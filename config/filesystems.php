@@ -40,6 +40,7 @@ return [
             'driver' => 'local',
             'root' => 'images/content',
             'url' => '/images/content',
+            'visibility' => 'public',
         ],
 
         'videos' => [
