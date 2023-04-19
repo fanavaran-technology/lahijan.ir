@@ -18,7 +18,7 @@ class NewsController extends Controller
      */
     public function index(): View
     {
-        $allNews = News::query();
+        $allNews = News::query()->wherePublished();
 
         if ($dateFilter = $this->dateFilter()) {
             $allNews->where('created_at' , '>=' , $dateFilter['start_date'])->where('created_at' , '<=' , $dateFilter['end_date']);
