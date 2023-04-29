@@ -29,6 +29,21 @@
                     <article class="py-6 text-gray-600 text-sm lg:text-base leading-8 lg:leading-10">
                         {!! $place->description !!}
                     </article>
+                    <section>
+                        @if ($place->gallerizable->isNotEmpty())
+                            <section class="my-4 sm:my-8">
+                                <ul id="images" class="grid grid-cols-4 gap-2">
+                                    @foreach ($place->gallerizable as $gallery)
+                                        <li class="col-span-4 sm:col-span-2 lg:col-span-1">
+                                            <img class="object-cover w-full h-48 lg:h-32"
+                                                src="{{ asset($gallery->image) }}" alt="{{ $gallery->alt }}"
+                                                alt="Picture 1">
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </section>
+                        @endif
+                    </section>
                 </section>
             </section>
             <aside class="col-span-12 md:col-span-3 mx-4 md:mx-2 space-y-4">

@@ -22,7 +22,7 @@
 
                 <span class="text-gray-700 text-xs sm:text-sm mt-4">تاریخچه شهر</span>
             </a>
-            <a href="#"
+            <a href="{{ route('communications.create') }}" target="_blank"
                 class="w-28 sm:w-32 transition-all delay-100 hover:bg-gray-50 hover:shadow-lg h-32 hover:skew-y-2 p-4 flex flex-col items-center justify-center rounded-xl shadow">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-600"
                     fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">

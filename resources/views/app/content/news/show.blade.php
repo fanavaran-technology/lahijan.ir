@@ -129,10 +129,10 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('assets/app/plugins/viewer/js/viewer.min.js') }}"></script>
     <script>
         new Viewer(document.getElementById('images'));
     </script>
-
 
 @endsection
 
