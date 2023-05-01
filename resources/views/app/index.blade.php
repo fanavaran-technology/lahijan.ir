@@ -6,7 +6,7 @@
     <section class="container mt-5">
 
         <!-- section title -->
-        @include('app.includes.title', ['title' => 'خدمات پر کاربرد'])
+        @include('app.includes.title', ['title' => 'دسترسی سریع'])
         <!-- start useful services -->
         @include('app.includes.useful-services')
 

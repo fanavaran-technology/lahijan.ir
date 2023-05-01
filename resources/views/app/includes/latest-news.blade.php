@@ -11,7 +11,9 @@
                     alt="" />
             </a>
             <div>
-                <h5 class="text-gray-900 text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
+                <a href="{{ $news->publicPath() }}">
+                    <h5 class="text-gray-900 text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
+                </a>
                {{-- <p class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{!! Str::limit($news->body, 210, '...') !!}</p> --}}
 
                 <section class="flex justify-end items-center mt-3">

@@ -15,7 +15,7 @@
             <section class="flex flex-col space-y-2">
                 <a href="{{ $publicCell->publicPath() }}" class="font-bold text-sm text-gray-700">{{ $publicCell->title }}</a>
                 <a class="text-xs text-justify md:w-60 sm:w-20 text-gray-600">
-                     {!! Str::limit($publicCell->description, 150, '...') !!}
+                     {!!  Str::limit($publicCell->description, 150, '...') !!}
                 </a>
             </section>
             <img src="{{ asset($publicCell->image) }}" class=" flex h-32 min-w-[5rem] rounded-xl">
