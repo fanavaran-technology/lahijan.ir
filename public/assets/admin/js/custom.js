@@ -56,6 +56,7 @@ function renderEditor(key)
             {name: 'history', items: [ 'undo', 'redo' ]},
             {name: 'fullscreen', items: [ "fullscreen" ]},
         ],
+        image_advtab: true,
         file_picker_callback (callback, value, meta) {
           let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
           let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight

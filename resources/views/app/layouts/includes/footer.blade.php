@@ -15,8 +15,8 @@
                 </div>
                 <!-- phone -->
                 <div class="flex items-center">
-                    <a href="tel:0214733243"
-                        class="dir-ltr text-gray-400 text-xs sm:text-sm mx-2 text-center">۰۲۱-۷۷۳۷۳۲۴</a>
+                    <a href="tel:013422330030"
+                        class="dir-ltr text-gray-400 text-xs sm:text-sm mx-2 text-center">۰۱۳-۴۲۲۳۳۰۰۳۰</a>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-500">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +26,7 @@
             </div>
             <!-- phone -->
             <div class="hidden sm:flex items-center">
-                <a href="tel:0214733243" class="dir-ltr text-gray-400 mx-2">۰۱۳-۴۲۲۳۳۰۰۳۰</a>
+                <a href="tel:013422330030" class="dir-ltr text-gray-400 mx-2">۰۱۳-۴۲۲۳۳۰۰۳۰</a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 text-green-500">
                     <path stroke-linecap="round" stroke-linejoin="round"

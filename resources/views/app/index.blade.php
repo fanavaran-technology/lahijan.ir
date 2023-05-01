@@ -41,9 +41,9 @@
     <script>
       $.appear("#ws-counter", {});
       $('#ws-counter').on("appear", function(){
-        document.getElementById("counter1").innerHTML = 140;
-        document.getElementById("counter2").innerHTML = 88;
-        document.getElementById("counter3").innerHTML = 1131;
+        document.getElementById("counter1").innerHTML = 101073;
+        document.getElementById("counter2").innerHTML = 1428;
+        document.getElementById("counter3").innerHTML = 181;
       });
     </script>
 

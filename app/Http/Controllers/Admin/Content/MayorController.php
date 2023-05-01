@@ -9,6 +9,8 @@ use App\Models\Content\Mayor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MayorController extends Controller
 {
@@ -22,7 +24,7 @@ class MayorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $mayors = Mayor::query();
         $mayors = $mayors->latest()->paginate(15);
@@ -34,7 +36,7 @@ class MayorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.content.mayor.create');
     }
@@ -45,7 +47,7 @@ class MayorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MayorRequest $request , ImageService $imageService)
+    public function store(MayorRequest $request , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use ($request , $imageService) {
             $inputs = $request->all();
@@ -80,7 +82,7 @@ class MayorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mayor $mayor)
+    public function edit(Mayor $mayor): View
     {
         return view('admin.content.mayor.edit' , compact('mayor'));
     }
@@ -92,7 +94,7 @@ class MayorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MayorRequest $request, Mayor $mayor , ImageService $imageService)
+    public function update(MayorRequest $request, Mayor $mayor , ImageService $imageService): RedirectResponse
     {
         DB::transaction(function () use($request , $mayor , $imageService) {
             $inputs = $request->all();
@@ -130,7 +132,7 @@ class MayorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mayor $mayor)
+    public function destroy(Mayor $mayor): RedirectResponse
     {
 
         $mayor->delete();

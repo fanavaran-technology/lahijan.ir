@@ -32,10 +32,8 @@
                            class="form-control custom-input-size custom-focus" id="title">
                 </div>
 
-                <div class="form-group col-md-12 my-2">
-                    <input type="text" @error('description') autofocus="autofocus" @enderror name="description" value="{{ old('description' , $mayorSpeech->description) }}"
-                           placeholder="سخن شهردار"
-                           class="form-control custom-input-size custom-focus" id="title">
+                <div class="form-group col-md-12 my-2 mt-4">
+                    <textarea  class="form-control custom-input-size custom-focus" @error('description') autofocus="autofocus" @enderror name="description" cols="5" rows="5">{{ old('description' , $mayorSpeech->description) }}</textarea>
                 </div>
 
             </div>

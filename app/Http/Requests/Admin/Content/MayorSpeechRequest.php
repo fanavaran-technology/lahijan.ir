@@ -25,7 +25,7 @@ class MayorSpeechRequest extends FormRequest
     {
         return [
             'full_name'            => 'required|min:2|max:150',
-            'description'          => 'required|min:2|max:300',
+            'description'          => 'required|min:2|max:1000',
             'image'                => 'nullable|image|mimes:png,jpg,jpeg,gif|max:3072|min:1',
             'status'               => 'nullable|in:0,1',
         ];
