@@ -7,7 +7,7 @@
     <title>{{ $title ?? '<بدون عنوان>' }}</title>
 </head>
 
-<body class="font-vazir bg-gray-50">
+<body class="font-vazir bg-gray-50 overflow-x-hidden">
 
 
     @include('app.layouts.includes.top-nav')

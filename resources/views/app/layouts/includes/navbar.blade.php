@@ -3,7 +3,7 @@ class="{{ Route::currentRouteName() == 'home' ? 'sm:absolute' : 'border-b' }} fo
 <div class="container flex flex-wrap items-center justify-between mx-auto">
   <div class="flex items-center">
     <a href="{{ route('home') }}">
-      <img src="{{ asset(Setting::getValue('logo')) }}" alt="لوگوی سایت" class="h-20 whitespace-nowrap">
+      <img src="{{ asset(Setting::getValue('logo')) }}" alt="لوگوی سایت" class="h-16 md:h-[5.5rem]  whitespace-nowrap">
     </a>
   </div>
   <div class="flex md:order-2">
