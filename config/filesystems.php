@@ -47,12 +47,14 @@ return [
             'driver' => 'local',
             'root' => 'videos',
             'url' => '/videos',
+            'visibility' => 'public'
         ],
 
         'docs' => [
             'driver' => 'local',
             'root' => 'docs',
             'url' => '/docs',
+            'visibility' => 'public'
         ],
 
         'public' => [

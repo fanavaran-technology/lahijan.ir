@@ -18,19 +18,19 @@
             <a href="{{ route('admin.content.news.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
         @if ($news->video)
-        <form action="{{ route('admin.content.news.destroy-video', $news->id) }}" method="post"
-            class="text-center mx-2">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn mb-3 btn-outline-danger">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                    class="bi bi-camera-video-off" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z" />
-                </svg>
-                <span class="ml-2">حذف ویدئو</span>
-            </button>
-        </form>
+            <form action="{{ route('admin.content.news.destroy-video', $news->id) }}" method="post"
+                class="text-center mx-2">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn mb-3 btn-outline-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                        class="bi bi-camera-video-off" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z" />
+                    </svg>
+                    <span class="ml-2">حذف ویدئو</span>
+                </button>
+            </form>
         @endif
     </div>
     @if ($errors->any())
@@ -44,6 +44,108 @@
         id="form">
         @csrf
         @method('PUT')
+        {{-- gallery modal --}}
+        <!-- Modal -->
+        <div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-images" viewBox="0 0 16 16">
+                                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                <path
+                                    d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                            </svg>
+                            گالری تصاویر
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">آپلود
+                                    تصاویر</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">تصاویر
+                                    فعلی</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                aria-labelledby="home-tab">
+                                <div class="p-4">
+                                    <div class="input-group" style="direction:ltr !important">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01">آپلود</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" id="galleryUploads" name="galleries[]"
+                                                accept=".jpg, .jpeg, .png, gif" multiple class="custom-file-input"
+                                                id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label" for="inputGroupFile01">انتخاب فایل ها</label>
+                                        </div>
+                                    </div>
+                                    <div class="preview-images d-flex row m-4">
+                                        <div class="p-2 d-block text-secondary">هنوز تصویری اضافه نشده است</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row my-4">
+                                    <!-- Small table -->
+                                    <div class="col-md-12">
+                                        <div class="card shadow">
+                                            <div class="card-body table-responsive">
+                                                <!-- table -->
+                                                <table class="table table-striped" id="table-id">
+                                                    <thead>
+                                                        <div class="d-flex justify-content-between py-2">
+                                                            <h6 class="font-bold">گالری تصاویر خبر ( {{ $news->title }} ) </h6>
+                                                            <a href="{{ route('admin.content.news.index-gallery', $news->id) }}">مدیریت تصاویر</a>
+                                                        </div>
+                                                        <th>#</th>
+                                                        <th>alt تصویر</th>
+                                                        <th>عکس</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @forelse($news->gallerizable as $image)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>
+                                                                <small>{{ $image->alt ?? 'هیچ توضیحی وجود ندارد' }}</small>
+                                                            </td>
+                                                            <td>
+                                                                <img src="{{ asset($image->image) }}" alt="{{ $image->alt }}" class="rounded-lg" height="70" width="120">
+                                                            </td>
+                                                        </td>
+                                                        </tr>
+                                                    @empty
+                                                        <p class="text-center text-muted">هیچ عکسی وجود ندارد.</p>
+                                                    @endforelse
+                                                </table>
+                    
+                    
+                                            </div>
+                                        </div> <!-- simple table -->
+                                    </div> <!-- end section -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">تایید</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end gallery modal --}}
         <div class="row">
             <div class="col-12 col-md-9 position-sticky">
                 <div class="row">
@@ -72,8 +174,8 @@
                     <div class="card-header" onclick="openCard(this)">
                         <div class="row d-flex justify-content-between px-2">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-collection-play" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-collection-play" viewBox="0 0 16 16">
                                     <path
                                         d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1zm2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848l-4-2.5z" />
                                     <path
@@ -82,8 +184,8 @@
                                 <span class="ml-1">چند رسانه ای</span>
                             </div>
                             <span class="card-dropdown-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-caret-down" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
                                     <path
                                         d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
                                 </svg>
@@ -139,6 +241,22 @@
                                 style="width: 100%; height: auto"></video>
 
                             <input type="hidden" name="video" value="{{ old('video') }}">
+                            <label for="" class="input-title mt-3">
+                                گالری تصاویر
+                            </label>
+                            <div class="text-center">
+                                <button type="button" data-toggle="modal" data-target="#galleryModal"
+                                    class="btn btn-outline-success w-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                        <path
+                                            d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                                    </svg>
+                                    <span class="ml-2">آپلود تصاویر</span>
+                                    <span id="image_count"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -393,6 +511,102 @@
                 successToast('ویدئو اضافه شد.')
             } else
                 errorToast('فایل انتخابی باید یک ویدئو باشد.')
+        }
+    </script>
+
+    <script>
+        var imageInput = document.querySelector('#galleryUploads');
+        var preview = document.querySelector('.preview-images');
+
+        imageInput.style.opacity = 0;
+        imageInput.addEventListener('change', updateImageDisplay);
+
+        function updateImageDisplay() {
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            var curFiles = imageInput.files;
+            if (curFiles.length === 0) {
+                var para = document.createElement('p');
+                para.classList.add('text-wrap');
+                para.textContent = 'هیچ تصویری برای آپلود انتخاب نشده است.';
+                preview.appendChild(para);
+            } else if (curFiles.length > 20) {
+                errorToast('تعداد تصاویر نباید بیشتر از 20 باشد');
+            } else {
+                var list = document.createElement('ol');
+                preview.appendChild(list);
+                for (var i = 0; i < curFiles.length; i++) {
+                    var listItem = document.createElement('li');
+                    listItem.classList.add('row')
+                    var para = document.createElement('p');
+                    if (validFileType(curFiles[i])) {
+                        successToast("فایل " + curFiles[i].name + " اضافه شد.");
+                        para.textContent = 'اندازه فایل ' + returnFileSize(curFiles[i]
+                            .size);
+                        var image = document.createElement('img');
+                        image.classList.add('col-md-4')
+                        image.src = window.URL.createObjectURL(curFiles[i]);
+                        image.style.height = "8rem";
+                        image.style.objectFit = 'cover';
+                        image.classList.add('mb-3')
+
+                        var imageInfoContent = document.createElement('div');
+
+
+                        var altInput = document.createElement('input');
+                        altInput.id = `alt-${i}`;
+                        altInput.name = `alts[]`;
+                        altInput.placeholder = "توضیح تصویر";
+                        altInput.classList.add('form-control');
+                        altInput.style.width = "12rem";
+
+                        imageInfoContent.appendChild(para);
+                        imageInfoContent.appendChild(altInput)
+
+                        listItem.appendChild(image);
+                        listItem.appendChild(imageInfoContent);
+
+                    } else {
+                        para.textContent = 'اسم فایل : ' + curFiles[i].name +
+                            ': فایل نامعتبر است لطفا دوباره انتخاب نمایید';
+                        listItem.appendChild(para);
+                    }
+
+                    list.appendChild(listItem);
+
+                    imageCountTag = document.querySelector('#image_count');
+                    imageCountTag.innerHTML = `(${curFiles.length})`
+                }
+            }
+        }
+        var fileTypes = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/webp',
+            'image/gif'
+        ]
+
+        function validFileType(file) {
+            for (var i = 0; i < fileTypes.length; i++) {
+                if (file.type === fileTypes[i]) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function returnFileSize(number) {
+            if (number < 1024) {
+                return number + 'bytes';
+            } else if (number > 1024 && number < 1048576) {
+                return (number / 1024).toFixed(1) + 'KB';
+            } else if (number > 1048576) {
+                return (number / 1048576).toFixed(1) + 'MB';
+            }
         }
     </script>
 @endsection

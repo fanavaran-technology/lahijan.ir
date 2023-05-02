@@ -18,8 +18,8 @@ use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -94,6 +94,9 @@ class NewsController extends Controller
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
 
             $news = $request->user()->news()->create($inputs);
+            
+            if ($request->has('galleries')) 
+                $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
 
             // add tags
             if ($request->filled('tags')) {
@@ -153,6 +156,9 @@ class NewsController extends Controller
             }
 
             $news->update($inputs);
+
+            if ($request->has('galleries')) 
+                $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
 
             // add tags
             if ($request->filled('tags')) {
@@ -323,5 +329,27 @@ class NewsController extends Controller
     {
         $news->update(['video_id' => null]);
         return back()->with('toast-success', 'ویدئو از خبر حذف گردید.');
+    }
+
+    public function addImagesToGallery(News $news, array $galleries, array $alts): void
+    {
+        $imageService = new ImageService;
+        $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news" . DIRECTORY_SEPARATOR . $news->id);
+
+        $images = [];
+
+        foreach($galleries as $key => $gallery) {
+            $imageService->setImageName(Str::random(16));
+            $image = $imageService->save($gallery);
+            array_push($images, [
+                'image'             => $image,
+                'alt'               => $alts[$key],
+                'gallerizable_type' => get_class($news),
+                'gallerizable_id'   => $news->id
+            ]);
+        }
+
+        $news->gallerizable()->createMany($images);
+
     }
 }
