@@ -9,7 +9,6 @@ use App\Models\Content\Place;
 use App\Models\Content\Slider;
 use App\Models\Content\PublicCall;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

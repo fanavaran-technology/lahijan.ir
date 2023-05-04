@@ -70,20 +70,6 @@
                             </h5>
                         </a>
                         <section class="flex justify-between items-center">
-                            @if ($result->user)
-                            <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-4">
-                                <img class="w-10 h-10 rounded-full object-cover"
-                                    src="{{ asset($result->user->profile_image) }}" alt="">
-                                <div class="font-medium">
-                                    <div class="text-xs sm:text-sm text-gray-600 mx-2 text-center">
-                                        {{ $result->user->full_name }}
-                                    </div>
-                                    <div class="text-gray-500 text-xs mx-2">
-                                        {{ jalaliDate($result->created_at, '%d %B، %Y') }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
                             <a href="{{ $result->publicPath() }}" class="flex items-center">
                                 <span
                                     class="text-green-600 text-sm sm:text-base transition-all hover:text-green-700 hover:mx-2">بیشتر

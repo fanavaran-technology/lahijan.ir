@@ -26,6 +26,49 @@
     @endif
     <form action="{{ route('admin.content.news.store') }}" method="post" enctype="multipart/form-data" id="form">
         @csrf
+        {{-- gallery modal --}}
+        <!-- Modal -->
+        <div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-images" viewBox="0 0 16 16">
+                                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                <path
+                                    d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                            </svg>
+                            گالری تصاویر
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group" style="direction:ltr !important">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">آپلود</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" id="galleryUploads" name="galleries[]" accept=".jpg, .jpeg, .png, gif"
+                                    multiple class="custom-file-input" id="inputGroupFile01"
+                                    aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01">انتخاب فایل ها</label>
+                            </div>
+                        </div>
+                        <div class="preview-images d-flex row m-4">
+                            <div class="p-2 d-block">هنوز تصویری اضافه نشده است</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">تایید</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end gallery modal --}}
         <div class="row">
             <div class="col-12 col-md-9 position-sticky">
                 <div class="row">
@@ -111,10 +154,27 @@
                                     role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                                     style="width: 75%; height: 100%">75%</div>
                             </div>
-                            <video id="videoPreview" src="{{ old('video') ? URL::to('/') . '/'. old('video'): '' }}" controls class="{{ @old('video') ? 'block' :'d-none' }} mt-3"
+                            <video id="videoPreview" src="{{ old('video') ? URL::to('/') . '/' . old('video') : '' }}"
+                                controls class="{{ @old('video') ? 'block' : 'd-none' }} mt-3"
                                 style="width: 100%; height: auto"></video>
 
                             <input type="hidden" name="video" value="{{ old('video') }}">
+                        </div>
+                        <label for="" class="input-title mt-3">
+                            گالری تصاویر
+                        </label>
+                        <div class="text-center">
+                            <button type="button" data-toggle="modal" data-target="#galleryModal"
+                                class="btn btn-outline-success w-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                                    <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                    <path
+                                        d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                                </svg>
+                                <span class="ml-2">آپلود تصاویر</span>
+                                <span id="image_count">(0)</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -188,7 +248,8 @@
                         <div class="form-group mt-2 custom-control custom-checkbox ">
                             <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender'))
                                 class="custom-control-input" id="is_auction_tender">
-                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا مناقصه است</label>
+                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا
+                                مناقصه است</label>
                         </div>
                         <div class="form-group custom-control custom-checkbox ">
                             <input type="checkbox" name="is_draft" value="1" @checked(old('is_draft'))
@@ -215,7 +276,6 @@
     <script src="{{ asset('assets/admin/plugins/tagify/tagify.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.js') }}"></script>
-
     <script>
         renderEditor('#editor')
 
@@ -231,7 +291,6 @@
             }
         })
     </script>
-
     <script>
         $(document).ready(function() {
             $('#published_at_view').persianDatepicker({
@@ -311,7 +370,7 @@
             response = JSON.parse(response)
             $('#videoPreview').removeClass('d-none');
             $('#videoPreview').attr('src', response.path);
-            url = response.path.replace(location.origin , '' ,response.path).substring(1);
+            url = response.path.replace(location.origin, '', response.path).substring(1);
             $('input[name=video]').attr('value', url);
             progress.find('.progress-bar').removeClass('bg-primary');
             progress.find('.progress-bar').addClass('bg-success');
@@ -354,14 +413,110 @@
             if (validFileType) {
                 const videoPreview = document.querySelector('#videoPreview');
                 videoPreview.classList.remove('d-none');
-                videoPreview.setAttribute('src' , $url);
+                videoPreview.setAttribute('src', $url);
                 videoPreview.value = $url;
-                $url = $url.replace(location.host , '' , $url).substring(1);
+                $url = $url.replace(location.host, '', $url).substring(1);
                 document.querySelector('input[name=video]').value = $url;
                 successToast('ویدئو اضافه شد.')
-            }
-            else
+            } else
                 errorToast('فایل انتخابی باید یک ویدئو باشد.')
+        }
+    </script>
+
+    <script>
+        var imageInput = document.querySelector('#galleryUploads');
+        var preview = document.querySelector('.preview-images');
+
+        imageInput.style.opacity = 0;
+        imageInput.addEventListener('change', updateImageDisplay);
+
+        function updateImageDisplay() {
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            var curFiles = imageInput.files;
+            if (curFiles.length === 0) {
+                var para = document.createElement('p');
+                para.classList.add('text-wrap');
+                para.textContent = 'هیچ تصویری برای آپلود انتخاب نشده است.';
+                preview.appendChild(para);
+            } else if (curFiles.length > 20) {
+                errorToast('تعداد تصاویر نباید بیشتر از 20 باشد');
+            } 
+            else {
+                var list = document.createElement('ol');
+                preview.appendChild(list);
+                for (var i = 0; i < curFiles.length; i++) {
+                    var listItem = document.createElement('li');
+                    listItem.classList.add('row')
+                    var para = document.createElement('p');
+                    if (validFileType(curFiles[i])) {
+                        successToast("فایل " + curFiles[i].name + " اضافه شد.");
+                        para.textContent = 'اندازه فایل ' + returnFileSize(curFiles[i]
+                            .size);
+                        var image = document.createElement('img');
+                        image.classList.add('col-md-4')
+                        image.src = window.URL.createObjectURL(curFiles[i]);
+                        image.style.height = "8rem";
+                        image.style.objectFit = 'cover';
+                        image.classList.add('mb-3')
+
+                        var imageInfoContent = document.createElement('div');
+
+
+                        var altInput = document.createElement('input');
+                        altInput.id = `alt-${i}`;
+                        altInput.name = `alts[]`;
+                        altInput.placeholder = "توضیح تصویر";
+                        altInput.classList.add('form-control');
+                        altInput.style.width = "12rem";
+
+                        imageInfoContent.appendChild(para);
+                        imageInfoContent.appendChild(altInput)
+
+                        listItem.appendChild(image);
+                        listItem.appendChild(imageInfoContent);
+
+                    } else {
+                        para.textContent = 'اسم فایل : ' + curFiles[i].name +
+                            ': فایل نامعتبر است لطفا دوباره انتخاب نمایید';
+                        listItem.appendChild(para);
+                    }
+
+                    list.appendChild(listItem);
+
+                    imageCountTag = document.querySelector('#image_count');
+                    imageCountTag.innerHTML = `(${curFiles.length})`
+                }
+            }
+        }
+        var fileTypes = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/webp',
+            'image/gif'
+        ]
+
+        function validFileType(file) {
+            for (var i = 0; i < fileTypes.length; i++) {
+                if (file.type === fileTypes[i]) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function returnFileSize(number) {
+            if (number < 1024) {
+                return number + 'bytes';
+            } else if (number > 1024 && number < 1048576) {
+                return (number / 1024).toFixed(1) + 'KB';
+            } else if (number > 1048576) {
+                return (number / 1048576).toFixed(1) + 'MB';
+            }
         }
     </script>
 @endsection

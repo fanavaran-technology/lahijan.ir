@@ -17,13 +17,10 @@
                 @include('app.includes.public-calls')
                 @include('app.includes.virtual-tour')
                 @include('app.includes.quick-access')
+                @include('app.includes.mayor-speech')
             </section>
         </section>
     </section>
-
-    @include('app.includes.mayor-speech')
-
-
 
     @include('app.includes.statistics')
 
