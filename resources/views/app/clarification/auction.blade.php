@@ -45,15 +45,6 @@
                    </a>
                    <section class="flex justify-between items-center">
                        <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-4">
-                           <img class="w-10 h-10 rounded-full object-cover"
-                                src="{{ asset($news->user->profile_image) }}" alt="">
-                           <div class="font-medium">
-                               <div class="text-xs sm:text-sm text-gray-600 mx-2 text-center">
-                                   {{ $news->user->full_name }}
-                               </div>
-                               <div class="text-gray-500 text-xs mx-2 font-sans">{{ jalaliDate($news->created_at, '%d %B، %Y') }}
-                               </div>
-                           </div>
                        </div>
                        <a href="{{ $news->publicPath() }}" class="flex items-center">
                             <span

@@ -21,9 +21,6 @@
             </div>
             <section class="flex justify-between items-center mt-3">
                 <div class="flex flex-col sm:flex-row justify-center items-center mt-4 sm:space-x-4">
-                    <div class="font-medium ">
-                        <div class="text-gray-500 text-xs mb-5 mr-3 mx-2" style="font-family: iransans;">{{ jalaliDate($place->published_at) }}</div>
-                    </div>
                 </div>
                 <a href="{{ $place->publicPath() }}" class="flex items-center ml-3 mb-3 bottom-2">
                         <span
