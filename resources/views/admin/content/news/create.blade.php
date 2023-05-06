@@ -14,6 +14,7 @@
             <h2 class="h3 mb-0 section-heading">افزودن خبر جدید</h2>
         </div>
         <div class="col-auto mb-3">
+        <div class="col-auto mb-3">
             <a href="{{ route('admin.content.news.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
     </div>
@@ -443,7 +444,7 @@
                 preview.appendChild(para);
             } else if (curFiles.length > 20) {
                 errorToast('تعداد تصاویر نباید بیشتر از 20 باشد');
-            } 
+            }
             else {
                 var list = document.createElement('ol');
                 preview.appendChild(list);

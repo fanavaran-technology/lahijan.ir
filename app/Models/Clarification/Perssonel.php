@@ -13,6 +13,8 @@ class Perssonel extends Model
         'first_name',
         'last_name',
         'job' ,
+        'birthday' ,
+        'employment' ,
         'is_disable',
     ];
 

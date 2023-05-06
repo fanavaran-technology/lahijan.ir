@@ -7,7 +7,7 @@
                 <img src="{{ asset($mayor->image) }}" alt="pic"
                     class="h-44 w-44 rounded-full border-2 object-cover border-gray-200 shadow-lg" />
             </div>
-            <div class="flex-col w-full md:mr-4 mr-1 pb-5 text-gray-300 text-center mt-4">
+            <div class="flex-col w-full  mr-1 pb-5 text-gray-300 text-center mt-4">
                 <div class="text-indigo-500 text-xl md:text-2xl lg:text-3xl">سخن شهردار</div>
                 <div class="md:pt-4 pt-1 md:text-2xl text-gray-700 text-center font-bold mt-3">
                     {{ $mayor->full_name }}</div>

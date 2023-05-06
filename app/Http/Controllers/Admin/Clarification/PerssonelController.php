@@ -58,6 +58,14 @@ class PerssonelController extends Controller
     public function store(PerssonelRequest $request): RedirectResponse
     {
         $inputs = $request->all();
+
+        $birthday = substr($inputs['birthday'], 0, -3);
+        $inputs['birthday'] = date('Y-m-d H:i:s', $birthday);
+
+        $employment = substr($inputs['employment'], 0, -3);
+        $inputs['employment'] = date('Y-m-d H:i:s', $employment);
+
+
         $perssonel = Perssonel::create($inputs);
 
         Log::info("کارمند با نام {$perssonel->full_name} توسط {$request->user()->full_name} ایجاد شد.");
@@ -86,6 +94,12 @@ class PerssonelController extends Controller
     public function update(PerssonelRequest $request, Perssonel $perssonel): RedirectResponse
     {
         $inputs = $request->all();
+
+        $birthday = substr($inputs['birthday'], 0, -3);
+        $inputs['birthday'] = date('Y-m-d H:i:s', $birthday);
+
+        $employment = substr($inputs['employment'], 0, -3);
+        $inputs['employment'] = date('Y-m-d H:i:s', $employment);
 
         $perssonel->update($inputs);
 
@@ -131,8 +145,8 @@ class PerssonelController extends Controller
 
     public function fileImport(Request $request)
     {
-        return back()->with('toast-error' , 'این بخش در دسترس نیست');
-        // Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
-        // return back();
+//        return back()->with('toast-error' , 'این بخش در دسترس نیست');
+         Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
+         return back();
     }
 }

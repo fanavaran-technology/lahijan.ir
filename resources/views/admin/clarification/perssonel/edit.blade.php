@@ -53,15 +53,22 @@
                             <div class="col-md-12">
                                 <div class="form-row">
                                     <div class="form-group col-lg-6 my-2">
-                                        <label for="first_name" class="input-title mr-3">نام و نام خانوادگی :</label>
+                                        <label for="first_name" class="input-title mr-3">نام :</label>
                                         <input type="text" name="first_name" value="{{ old('first_name' , $perssonel->first_name) }}"
-                                            placeholder="نام و نام خانوادگی" class="form-control custom-focus" id="first_name">
+                                            placeholder="نام" class="form-control custom-focus" id="first_name">
+                                    </div>
+                                    <div class="form-group col-lg-6 my-2">
+                                        <label for="last_name" class="input-title mr-3"> نام خانوادگی :</label>
+                                        <input type="text" name="last_name" value="{{ old('last_name' , $perssonel->last_name) }}"
+                                               placeholder="نام خانوادگی " class="form-control custom-focus" id="last_name">
                                     </div>
                                     <div class="form-group col-lg-6 my-2">
                                         <label for="job" class="input-title mr-3">سمت کارمند :</label>
                                         <input type="text" name="job" value="{{ old('job' , $perssonel->job) }}"
                                                placeholder="سمت کارمند" class="form-control custom-focus" id="job">
                                     </div>
+
+
                                 </div>
                             </div> <!-- /. col -->
                         </div>
@@ -98,6 +105,18 @@
                                 class="custom-control-input" id="is_disable">
                             <label class="custom-control-label input-title" for="is_disable"> کارمند غبرفعال باشد</label>
                         </div>
+
+                        <label for="published_at_view" class="input-title">
+                            تاریخ تولد
+                        </label>
+                        <input type="hidden" name="birthday" id="birthday" value="{{ old('birthday') }}">
+                        <input id="birthday_view" class="form-control custom-focus" value="{{ old('birthday' , $perssonel->birthday) }}">
+
+                        <label for="published_at_view" class="input-title mt-2">
+                            تاریخ استخدام
+                        </label>
+                        <input type="hidden" name="employment" id="employment" value="{{ old('employment') }}">
+                        <input id="employment_view" class="form-control custom-focus" value="{{ old('employment' , $perssonel->employment) }}">
                     </div>
                     <div class="card-footer d-flex justify-content-between px-2">
                         <button type="submit" id="save-btn" class="btn btn-primary ml-2">ویرایش</button>
@@ -115,15 +134,30 @@
 
     <script>
         $(document).ready(function() {
-            $('#employeement_date_view').persianDatepicker({
-                altField: '#employeement_date',
+            $('#birthday_view').persianDatepicker({
+                altField: '#birthday',
                 format: 'YYYY/MM/DD',
+                timePicker: {
+                    enabled: false,
+                    meridiem: {
+                        enabled: true
+                    }
+                }
             })
         });
+    </script>
+
+    <script>
         $(document).ready(function() {
-            $('#birth_date_view').persianDatepicker({
-                altField: '#birth_date',
+            $('#employment_view').persianDatepicker({
+                altField: '#employment',
                 format: 'YYYY/MM/DD',
+                timePicker: {
+                    enabled: false,
+                    meridiem: {
+                        enabled: true
+                    }
+                }
             })
         });
     </script>

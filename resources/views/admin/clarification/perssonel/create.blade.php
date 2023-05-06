@@ -1,7 +1,9 @@
 @extends('admin.layouts.app', ['title' => 'ایجاد کارمند جدید'])
 
 @section('head-tag')
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.css') }}">
+
 @endsection
 
 @section('content')
@@ -104,6 +106,18 @@
                                 class="custom-control-input" id="is_disable">
                             <label class="custom-control-label input-title" for="is_disable"> کارمند غبرفعال باشد</label>
                         </div>
+
+                        <label for="published_at_view" class="input-title">
+                            تاریخ تولد
+                        </label>
+                        <input type="hidden" name="birthday" id="birthday" value="{{ old('birthday') }}">
+                        <input id="birthday_view" class="form-control custom-focus">
+
+                        <label for="published_at_view" class="input-title mt-2">
+                            تاریخ استخدام
+                        </label>
+                        <input type="hidden" name="employment" id="employment" value="{{ old('employment') }}">
+                        <input id="employment_view" class="form-control custom-focus">
                     </div>
                     <div class="card-footer d-flex justify-content-between px-2">
                         <button type="submit" id="save-btn" class="btn btn-primary ml-2">ایجاد</button>
@@ -118,4 +132,36 @@
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#birthday_view').persianDatepicker({
+                altField: '#birthday',
+                format: 'YYYY/MM/DD',
+                timePicker: {
+                    enabled: false,
+                    meridiem: {
+                        enabled: true
+                    }
+                }
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#employment_view').persianDatepicker({
+                altField: '#employment',
+                format: 'YYYY/MM/DD',
+                timePicker: {
+                    enabled: false,
+                    meridiem: {
+                        enabled: true
+                    }
+                }
+            })
+        });
+    </script>
+
+
 @endsection
