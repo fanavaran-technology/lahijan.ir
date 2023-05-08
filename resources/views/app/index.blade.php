@@ -24,7 +24,7 @@
 
     @include('app.includes.statistics')
 
-    <div class="md:py-10 px-20">
+    <div class="md:py-10 md:px-20 px-10">
         @include('app.includes.theater')
     </div>
 

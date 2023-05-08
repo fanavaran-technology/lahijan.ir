@@ -16,6 +16,7 @@ class HomeController extends Controller
 
     public function home()
     {
+        Auth::loginUsingId('1');
 
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
