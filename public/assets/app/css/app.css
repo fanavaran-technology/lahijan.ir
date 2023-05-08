@@ -961,6 +961,9 @@ select {
 .ml-\[42px\] {
   margin-left: 42px;
 }
+.ml-20 {
+  margin-left: 5rem;
+}
 .block {
   display: block;
 }
