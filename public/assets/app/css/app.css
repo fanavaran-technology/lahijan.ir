@@ -883,9 +883,6 @@ select {
 .ml-6 {
   margin-left: 1.5rem;
 }
-.ml-\[20px\] {
-  margin-left: 20px;
-}
 .mr-0 {
   margin-right: 0px;
 }
@@ -948,21 +945,6 @@ select {
 }
 .mt-8 {
   margin-top: 2rem;
-}
-.ml-\[30px\] {
-  margin-left: 30px;
-}
-.ml-\[40px\] {
-  margin-left: 40px;
-}
-.ml-\[45px\] {
-  margin-left: 45px;
-}
-.ml-\[42px\] {
-  margin-left: 42px;
-}
-.ml-20 {
-  margin-left: 5rem;
 }
 .block {
   display: block;
@@ -1102,6 +1084,9 @@ select {
 .w-16 {
   width: 4rem;
 }
+.w-20 {
+  width: 5rem;
+}
 .w-24 {
   width: 6rem;
 }
@@ -1161,12 +1146,6 @@ select {
 }
 .w-screen {
   width: 100vw;
-}
-.w-20 {
-  width: 5rem;
-}
-.w-96 {
-  width: 24rem;
 }
 .min-w-\[50\%\] {
   min-width: 50%;
@@ -2816,6 +2795,10 @@ input:checked:hover~.image-wrapper>div {
     height: 3rem;
   }
 
+  .md\:h-20 {
+    height: 5rem;
+  }
+
   .md\:h-44 {
     height: 11rem;
   }
@@ -2878,6 +2861,10 @@ input:checked:hover~.image-wrapper>div {
 
   .md\:w-full {
     width: 100%;
+  }
+
+  .md\:w-52 {
+    width: 13rem;
   }
 
   .md\:grid-cols-2 {
@@ -2991,6 +2978,11 @@ input:checked:hover~.image-wrapper>div {
     padding: 2rem;
   }
 
+  .md\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -2999,11 +2991,6 @@ input:checked:hover~.image-wrapper>div {
   .md\:py-10 {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-  }
-
-  .md\:px-20 {
-    padding-left: 5rem;
-    padding-right: 5rem;
   }
 
   .md\:pt-3 {
