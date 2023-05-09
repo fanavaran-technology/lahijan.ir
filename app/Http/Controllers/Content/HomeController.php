@@ -16,7 +16,6 @@ class HomeController extends Controller
 
     public function home()
     {
-
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
         $news = [
