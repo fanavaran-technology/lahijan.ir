@@ -15,8 +15,8 @@
                 </div>
                 <!-- phone -->
                 <div class="flex items-center">
-                    <a href="tel:013422330030"
-                        class="dir-ltr text-gray-400 text-xs sm:text-sm mx-2 text-center">۰۱۳-۴۲۲۳۳۰۰۳۰</a>
+                    <a href="tel:01342236071"
+                        class="dir-ltr text-gray-400 text-xs sm:text-sm mx-2 text-center">۰۱۳-۴۲۲۳۶۰۷۱</a>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-500">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +26,7 @@
             </div>
             <!-- phone -->
             <div class="hidden sm:flex items-center">
-                <a href="tel:013422330030" class="dir-ltr text-gray-400 mx-2">۰۱۳-۴۲۲۳۳۰۰۳۰</a>
+                <a href="tel:01342236071" class="dir-ltr text-gray-400 mx-2">۰۱۳-۴۲۲۳۶۰۷۱</a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 text-green-500">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -44,8 +44,8 @@
                         </svg>
                     </a>
                 </section>
-                <section href="#" class="border p-2 border-white border-opacity-20 rounded-xl">
-                    <a href="">
+                <section class="border p-2 border-white border-opacity-20 rounded-xl">
+                    <a href="https://t.me/lahijan_municipality" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 sm:w-5 h-4 sm:h-5 text-green-500"
                             fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
                             <path
@@ -62,8 +62,8 @@
                         </svg>
                     </a>
                 </section>
-                <section href="#" class="border p-2 border-white border-opacity-20 rounded-xl">
-                    <a href="">
+                <section class="border p-2 border-white border-opacity-20 rounded-xl">
+                    <a href="https://instagram.com/shahrdarilahijan" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 sm:w-5 h-4 sm:h-5 text-green-500"
                             fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
                             <path
