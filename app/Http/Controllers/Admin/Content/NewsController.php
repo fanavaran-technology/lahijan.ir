@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class NewsController extends Controller
+class   NewsController extends Controller
 {
 
     public function __construct()
@@ -90,12 +90,12 @@ class NewsController extends Controller
             }
 
             // attach video to news
-            if ($request->filled('video')) 
+            if ($request->filled('video'))
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
 
             $news = $request->user()->news()->create($inputs);
-            
-            if ($request->has('galleries')) 
+
+            if ($request->has('galleries'))
                 $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
 
             // add tags
@@ -157,7 +157,7 @@ class NewsController extends Controller
 
             $news->update($inputs);
 
-            if ($request->has('galleries')) 
+            if ($request->has('galleries'))
                 $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
 
             // add tags
@@ -245,7 +245,7 @@ class NewsController extends Controller
         $user = auth()->user()->full_name;
 
         Log::warning("{$user} تصویری رااز گالری تصاویر خبر حذف کرد.");
-        
+
         return back()->with('cute-success', 'تصویر حذف گردید.');
     }
 
@@ -325,7 +325,7 @@ class NewsController extends Controller
         ];
     }
 
-    public function destroyVideo(News $news) 
+    public function destroyVideo(News $news)
     {
         $news->update(['video_id' => null]);
         return back()->with('toast-success', 'ویدئو از خبر حذف گردید.');
