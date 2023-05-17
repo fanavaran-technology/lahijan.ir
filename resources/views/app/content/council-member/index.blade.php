@@ -36,7 +36,7 @@
                                     <span>{{ $councilMember->full_name }}</span>
                                 </div>
                                 <div class="flex font-bold group-hover:text-white text-md justify-center transition duration-500 ease-in-out transform">
-                                    <span>{{ App\Models\Content\CouncilMember::REQUEST_TYPES[(int) $boss->type]}} </span>
+                                    <span>{{ App\Models\Content\CouncilMember::REQUEST_TYPES[(int) $councilMember->type]}} </span>
                                 </div>
                             </div>
                         </div>
