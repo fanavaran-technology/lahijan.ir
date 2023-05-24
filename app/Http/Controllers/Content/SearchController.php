@@ -16,7 +16,7 @@ class SearchController extends Controller
         'news'          =>  News::class,
         'public_calls'  =>  PublicCall::class,
         'places'        =>  Place::class,
-        'pages'          =>  Page::class
+        'pages'         =>  Page::class
     ];
 
     /**

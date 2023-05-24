@@ -173,7 +173,6 @@ active
                             </ul>
                         </li>
                     @endcan
-                    @can('manage_sliders')
                         <li class="nav-item dropdown @active('admin.content.sliders')
 active
 @endactive">
@@ -184,18 +183,25 @@ active
                                 <span class="ml-3 item-text">اسلایدر</span>
                             </a>
                             <ul class="collapse list-unstyled pl-4 w-100" id="slider">
+                                @can('manage_sliders')
                                 <li class="nav-item">
                                     <a class="nav-link pl-3" href="{{ route('admin.content.sliders.index') }}"><span
-                                            class="ml-1 item-text">همه اسلایدر </span>
+                                            class="ml-1 item-text">همه اسلایدر شهرداری</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link pl-3" href="{{ route('admin.content.sliders.create') }}"><span
-                                            class="ml-1 item-text">اسلایدر جدید</span></a>
+                                            class="ml-1 item-text">اسلایدر جدید شهرداری</span></a>
                                 </li>
+                                @endcan
+                                @can('manage_fire_sliders')
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('admin.content.fire-sliders.index') }}"><span
+                                            class="ml-1 item-text">اسلایدر آتش نشانی</span></a>
+                                </li>
+                                @endcan
                             </ul>
                         </li>
-                    @endcan
 
                         @can('manage_theater')
                             <li class="nav-item dropdown @active('admin.content.theater') active @endactive">

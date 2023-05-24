@@ -1,9 +1,24 @@
-<div class="bg-gray-900 bottom-0 flex flex-col bottom-0 left-0  justify-center  rounded-tr-[40px] h-24 ">
-    <p class="text-white z-30 flex justify-center mt-4 mb-2 ">تمامی حقوق این وبسایت محفوظ است
+<div class="bg-[#FF0035] bottom-0 flex flex-col bottom-0 left-0 justify-center md:items-stretch items-center rounded-tr-[40px] h-full">
+    <div class="flex flex-col md:flex-row mr-14">
+        <ul class="list-disc container mt-7 space-y-1">
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">شهرداری لاهیجان</li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">سامانه شفاف سازی </li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">سامانه بررسی شکایات </li>
+        </ul>
+        <ul class="list-disc container mt-7 space-y-1 md:mr-36">
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">عوارض خودرد </li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">تاریخچه شهر </li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">اعضا شورا شهر </li>
+        </ul>
+        <ul class="list-disc container mt-7 space-y-1">
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">ارتباط با ما</li>
+        </ul>
+    </div>
 
+    <p class="text-white z-30 flex justify-center mt-4 mb-2">تمامی حقوق این وبسایت محفوظ است
     </p>
-    <div class="flex h-14 bg-green-600 bottom-0 mx-auto content-center w-80 justify-center rounded-t-2xl">
-        <!-- socital media -->
+    <div class="flex h-14 bg-white bottom-0 mx-auto content-center w-80 justify-center rounded-t-2xl">
+        <!-- social media -->
         <div class="flex  justify-center space-x-3 mt-2 space-x-reverse items-center">
             <section href="#" class="border p-2 border-gray-900 border-opacity-100 rounded-xl">
                 <a href="">
@@ -35,5 +50,4 @@
         </div>
     </div>
 </div>
-<div class="h-2 bg-green-600"></div>
-</div>
+<div class="h-2 bg-white"></div>

@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\Clarification\InvestmentCategoryController;
 use App\Http\Controllers\Admin\Clarification\InvestmentController;
 use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Communication\CommunicationController as AppCommunicationController;
+use App\Http\Controllers\FireStation\FireStationController;
+use App\Http\Controllers\FireStation\FireSliderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -84,6 +87,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
             'council-members' => CouncilMemberController::class,
             'mayors' => MayorController::class,
             'mayor-speech' => MayorSpeechController::class,
+            'fire-sliders' => FireSliderController::class,
         ], ['except' => 'show']);
 
         // news gallery routes
@@ -99,6 +103,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::delete('places/destroy-gallery/{gallery}', [PlaceController::class, 'destroyGallery'])->name('places.destroy-gallery');
         // change slider status route
         Route::get('sliders/{slider}/status', [SliderController::class, 'status'])->name('sliders.status');
+        Route::get('fire-sliders/{fireSlider}/status', [FireSliderController::class, 'status'])->name('fire-sliders.status');
         Route::get('places/{place}/status', [PlaceController::class, 'status'])->name('places.status');
         Route::get('public-calls/{publicCall}/status', [PublicCallController::class, 'status'])->name('publicCalls.status');
         Route::get('menus/{menu}/status', [MenuController::class, 'status'])->name('menus.status');
@@ -113,9 +118,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         // change mayor status route
         Route::get('mayors/{mayor}/status', [MayorController::class, 'status'])->name('mayor.status');
         Route::get('mayor-speech/{mayor}/status', [MayorSpeechController::class, 'status'])->name('mayor.status');
-
-
-
 
     });
 
@@ -160,6 +162,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
 Route::resource('news', PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index', 'show');
+
 Route::get('tags/{tag:title}', [PublicNewsController::class, 'tag'])->name('news.tag');
 
 Route::resource('public-calls', indexPublicCallController::class)->parameters(['public-calls' => 'public-calls:slug'])->only('index', 'show');
@@ -167,6 +170,11 @@ Route::resource('public-calls', indexPublicCallController::class)->parameters(['
 Route::resource('places', PublicPlaceController::class)->parameters(['places' => 'place:slug'])->only('index', 'show');
 
 Route::get('council-member', [PublicCouncilMemberController::class, 'show'] )->name('council-member.show');
+
+//Fire Station
+Route::get('fire-station' , [FireStationController::class , 'index'])->name('fire-station.index');
+Route::get('fire-station/{news}' , [FireStationController::class , 'show'])->name('fire-station.show');
+
 
 Route::resource('theaters', PublicTheaterController::class)->parameters(['theaters' => 'theater:slug'])->only('index', 'show');
 
@@ -181,6 +189,6 @@ Route::resource('communications', AppCommunicationController::class)->only('crea
 
 Route::resource('mayor', PublicMayorController::class )->only('show');
 
-
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
+
 

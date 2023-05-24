@@ -33,7 +33,7 @@ class SliderController extends Controller
         if ($searchString = request('search'))
             $sliders->where('alt', "LIKE" , "%{$searchString}%");
 
-        if (request('status')) 
+        if (request('status'))
             $sliders->wherePublished();
 
         $sliders = $sliders->latest()->paginate(15);
@@ -60,7 +60,7 @@ class SliderController extends Controller
     {
         DB::transaction(function () use($request , $imageService) {
             $inputs = $request->all();
-            
+
             $publishedAt = substr($inputs['published_at'], 0, -3);
                 $inputs['published_at'] = date('Y-m-d H:i:s', $publishedAt);
 
@@ -114,7 +114,7 @@ class SliderController extends Controller
                 if (!empty($slider->image))
                     $imageService->deleteImage($slider->image);
 
-                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "sliders");
+                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "slider");
                 $inputs['image'] = $imageService->save($inputs['image']);
             }
 

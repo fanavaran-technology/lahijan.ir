@@ -4,14 +4,12 @@
     <div class="row justify-content-center">
         <div class="col">
             <h2 class="h3 mb-0 page-title">اسلایدر
-                <span class="text-sm text-muted">({{ $sliders->total() }})</span>
+                <span class="text-sm text-muted">({{ $fireSliders->total() }})</span>
             </h2>
         </div>
-        @can('create_slider')
             <div class="col-auto">
-                <a href="{{ route('admin.content.sliders.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
+                <a href="{{ route('admin.content.fire-sliders.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
             </div>
-        @endcan
         <div class="col-12">
 
             <div class="row my-4">
@@ -65,41 +63,40 @@
                                     </div>
                                     <th>#</th>
                                     <th>عناوین</th>
-                                    <th>وضعیت انتشار</th>
                                     <th>تاریخ انتشار</th>
+                                    <th>وضعیت انتشار</th>
                                     <th>فعال / غیرفعال</th>
                                     <th>عکس اسلایدر</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
-                                @forelse($sliders as $slider)
+                                @forelse($fireSliders as $slider)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <small>{{ Str::limit($slider->alt, 60, '...') }}</small>
                                         </td>
-                                        <td>
-                                            {{ $slider->publishStatus }}
-                                        </td>
+
                                         <td>
                                             {{ jalaliDate($slider->published_at) }}
                                         </td>
+
+                                            <td>
+                                                {{ $slider->publishStatus }}
+                                            </td>
                                         <td>
-                                            @can('edit_slider')
                                             <label>
                                                 <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})"
-                                                    data-url="{{ route('admin.content.sliders.status', $slider->id) }}"
+                                                    data-url="{{ route('admin.content.fire-sliders.status', $slider->id) }}"
                                                     type="checkbox" @if ($slider->status === 1) checked @endif>
                                             </label>
-                                            @endcan
                                         </td>
                                         <td>
                                             <img src="{{ asset($slider->image) }}" alt="" width="100"
                                                 height="50">
                                         </td>
                                         <td>
-                                            @can('edit_slider')
-                                                <a href="{{ route('admin.content.sliders.edit', $slider->id) }}"
+                                                <a href="{{ route('admin.content.fire-sliders.edit', $slider->id) }}"
                                                     class="text-decoration-none text-primary mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -109,9 +106,7 @@
                                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                     </svg>
                                                 </a>
-                                            @endcan
-                                            @can('delete_slider')
-                                                <form action="{{ route('admin.content.sliders.destroy', $slider->id) }}"
+                                                <form action="{{ route('admin.content.fire-sliders.destroy', $slider->id) }}"
                                                     class="d-inline" method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -126,7 +121,6 @@
                                                         </svg>
                                                         </a>
                                                 </form>
-                                            @endcan
                                         </td>
                                     </tr>
                                 @empty

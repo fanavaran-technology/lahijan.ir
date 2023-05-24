@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => ' ویرایش اسلایدر'])
+@extends('admin.layouts.app', ['title' => ' ویرایش اسلایدر آتش نشانی'])
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
@@ -15,7 +15,7 @@
             <h2 class="h3 mb-0 page-title">ویرایش اسلایدر</h2>
         </div>
         <div class="col-auto mb-3">
-            <a href="{{ route('admin.content.sliders.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
+            <a href="{{ route('admin.content.fire-sliders.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.content.sliders.update', $slider->id) }}" method="post" enctype="multipart/form-data"
+    <form action="{{ route('admin.content.fire-sliders.update', $fireSlider->id) }}" method="post" enctype="multipart/form-data"
         id="form">
         @csrf
         {{ method_field('put') }}
@@ -38,7 +38,7 @@
                     <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-12 my-2">
-                                <input type="text" name="alt" value="{{ old('alt', $slider->alt) }}"
+                                <input type="text" name="alt" value="{{ old('alt', $fireSlider->alt) }}"
                                     placeholder="alt تصویر را اینجا وارد کنید"
                                     class="form-control custom-input-size custom-focus" id="title">
 
@@ -47,7 +47,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 my-2">
                                 <input type="text" name="url"
-                                    value="{{ old('url', filter_var($slider->url , FILTER_VALIDATE_URL) ? $slider->url : URL::to('/').$slider->url) }}"
+                                    value="{{ old('url', filter_var($fireSlider->url , FILTER_VALIDATE_URL) ? $fireSlider->url : URL::to('/').$fireSlider->url) }}"
                                     placeholder="URL تصویر را اینجا وارد کنید"
                                     class="form-control url custom-input-size custom-focus" id="title">
                             </div>
@@ -61,7 +61,7 @@
                                     </svg>
                                 </label>
                                 <input id="file" name="image" type="file" onchange="loadFile(event)" />
-                                <img src="{{ asset($slider->image) }}"
+                                <img src="{{ asset($fireSlider->image) }}"
                                     id="output">
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group custom-control custom-checkbox ">
-                            <input type="checkbox" name="status" value="1" @checked(old('status', $slider->status))
+                            <input type="checkbox" name="status" value="1" @checked(old('status', $fireSlider->status))
                                 class="custom-control-input" id="status">
                             <label class="custom-control-label input-title" for="status">وضعیت اسلایدر</label>
                         </div>
@@ -104,7 +104,7 @@
                             تعیین زمان انتشار
                         </label>
                         <input type="hidden" name="published_at" id="published_at"
-                            value="{{ old('published_at', $slider->published_at) }}">
+                            value="{{ old('published_at', $fireSlider->published_at) }}">
                         <input id="published_at_view" class="form-control custom-focus">
                     </div>
                     <div class="card-footer d-flex justify-content-between px-2">

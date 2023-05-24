@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Content;
 
 use App\Models\Content\BannerTheater;
+use App\Models\Content\FireSlider;
 use App\Models\Content\MayorSpeech;
 use App\Models\Content\News;
 use App\Models\Content\Place;
@@ -16,6 +17,7 @@ class HomeController extends Controller
 
     public function home()
     {
+
 
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
@@ -33,6 +35,7 @@ class HomeController extends Controller
 
         $mayorSpeech = MayorSpeech::latest()->take(1)->where('status' , 1)->get();
 
-        return view('app.index', compact('sliders' ,'publicCells' , 'places' , 'news' , 'bannerTheater' , 'mayorSpeech'));
+
+        return view('app.index', compact('sliders'  ,'publicCells' , 'places' , 'news' , 'bannerTheater' , 'mayorSpeech' ));
     }
 }

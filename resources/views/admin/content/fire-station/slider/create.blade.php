@@ -1,24 +1,21 @@
-@extends('admin.layouts.app', ['title' => ' ویرایش اسلایدر'])
+@extends('admin.layouts.app', ['title' => ' اسلایدر آتش نشانی جدید'])
 
 @section('head-tag')
-    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/custom.css') }}">
-
-    <!-- tinymce -->
-    <script src="{{ asset('assets/admin/plugins/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 @endsection
 
 @section('content')
     <div class="d-flex justify-content-between">
         <div class="col mb-2">
-            <h2 class="h3 mb-0 page-title">ویرایش اسلایدر</h2>
+            <h2 class="h3 mb-0 page-title">ایجاد اسلایدر آتش نشانی</h2>
         </div>
-        <div class="col-auto mb-3">
-            <a href="{{ route('admin.content.sliders.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
-        </div>
-    </div>
 
+        <div class="col-auto mb-3">
+            <a href="{{ route('admin.content.fire-sliders.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
+        </div>
+
+    </div>
     @if ($errors->any())
         <div class="alert alert-danger d-flex flex-column" role="alert">
             @foreach ($errors->all() as $error)
@@ -27,10 +24,8 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.content.sliders.update', $slider->id) }}" method="post" enctype="multipart/form-data"
-        id="form">
+    <form action="{{ route('admin.content.fire-sliders.store') }}" method="post" enctype="multipart/form-data" id="form">
         @csrf
-        {{ method_field('put') }}
         <div class="row">
             <div class="col-12 col-md-9 position-sticky">
                 <div class="row">
@@ -38,17 +33,16 @@
                     <div class="col-md-12">
                         <div class="form-row">
                             <div class="form-group col-md-12 my-2">
-                                <input type="text" name="alt" value="{{ old('alt', $slider->alt) }}"
-                                    placeholder="alt تصویر را اینجا وارد کنید"
+                                <input type="text" @error('alt') autofocus="autofocus" @enderror name="alt" value="{{ old('alt') }}"
+                                    placeholder="توضیحی درمورد تصویر بنویسید"
                                     class="form-control custom-input-size custom-focus" id="title">
-
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 my-2">
                                 <input type="text" name="url"
-                                    value="{{ old('url', filter_var($slider->url , FILTER_VALIDATE_URL) ? $slider->url : URL::to('/').$slider->url) }}"
-                                    placeholder="URL تصویر را اینجا وارد کنید"
+                                    value="{{ old('url', request('url') ?? URL::to('/')) }}"
+                                    placeholder="آدرس را وارد نمایید"
                                     class="form-control url custom-input-size custom-focus" id="title">
                             </div>
                         </div>
@@ -61,7 +55,7 @@
                                     </svg>
                                 </label>
                                 <input id="file" name="image" type="file" onchange="loadFile(event)" />
-                                <img src="{{ asset($slider->image) }}"
+                                <img src="{{ asset('images/content/news/no-photo.png') }}"
                                     id="output">
                             </div>
                         </div>
@@ -96,15 +90,14 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group custom-control custom-checkbox ">
-                            <input type="checkbox" name="status" value="1" @checked(old('status', $slider->status))
+                            <input type="checkbox" name="status" value="1" @checked(old('status'))
                                 class="custom-control-input" id="status">
-                            <label class="custom-control-label input-title" for="status">وضعیت اسلایدر</label>
+                            <label class="custom-control-label input-title" for="status">اسلاید فعال باشد</label>
                         </div>
                         <label for="published_at_view" class="input-title">
                             تعیین زمان انتشار
                         </label>
-                        <input type="hidden" name="published_at" id="published_at"
-                            value="{{ old('published_at', $slider->published_at) }}">
+                        <input type="hidden" name="published_at" id="published_at" value="{{ old('published_at') }}">
                         <input id="published_at_view" class="form-control custom-focus">
                     </div>
                     <div class="card-footer d-flex justify-content-between px-2">
@@ -118,27 +111,21 @@
 
 @section('script')
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/tagify/tagify.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.js') }}"></script>
 
     <script>
-        renderEditor('#editor')
-
-
-        let input = document.querySelector('input[name=tags]')
-        // init Tagify script on the above inputs
-        new Tagify(input, {
-            dropdown: {
-                position: "input",
-                enabled: 0 // always opens dropdown when input gets focus
-            }
-        })
-
         $(document).ready(function() {
             $('#published_at_view').persianDatepicker({
+                altField: '#published_at',
                 format: 'YYYY/MM/DD',
-                altField: '#published_at'
+                minDate: "today",
+                timePicker: {
+                    enabled: true,
+                    meridiem: {
+                        enabled: true
+                    }
+                }
             })
         });
     </script>

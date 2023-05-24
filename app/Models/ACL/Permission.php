@@ -34,10 +34,10 @@ class Permission extends Model
         'edit_public_cell'          =>       'مجاز به ویرایش فراخوان عمومی' ,
         'create_public_cell'        =>       'مجاز به ساخت فراخوان عمومی' ,
         'delete_public_cell'        =>       'مجاز به حذف فراخوان عمومی' ,
-        'manage_sliders'            =>       'مدیریت اسلایدر',
-        'edit_slider'               =>       'مجاز به ویرایش اسلایدر ها' ,
-        'delete_slider'             =>       'مجاز به حذف اسلایدر ها' ,
-        'create_slider'             =>       'مجاز به ساخت اسلایدر ها' ,
+        'manage_sliders'            =>       'مدیریت اسلایدر شهرداری',
+        'edit_slider'               =>       'مجاز به ویرایش اسلایدر شهرداری ها' ,
+        'delete_slider'             =>       'مجاز به حذف اسلایدر شهرداری ها' ,
+        'create_slider'             =>       'مجاز به ساخت اسلایدر شهرداری ها' ,
         'manage_pages'              =>       'مدیریت صفحات',
         'edit_page'                 =>       'مجاز به ویرایش صفحات' ,
         'delete_page'               =>       'مجاز به حذف صفحات' ,
@@ -68,6 +68,7 @@ class Permission extends Model
         'manage_mayor'              =>       'دسترسی به شهرداران' ,
         'manage_council'            =>       'دسترسی به اعضا شورا' ,
         'manage_mayor_speech'       =>       'دسترسی به سخن شهردار' ,
+        'manage_fire_sliders'       =>       'دسترسی به اسلایدر آتش نشانی' ,
     ];
 
 }
