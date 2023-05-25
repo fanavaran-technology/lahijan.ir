@@ -1,4 +1,4 @@
-@extends('app.fireStation.layouts.app', ['title' => "$news->title"])
+@extends('app.fire-station.layouts.app', ['title' => "$news->title"])
 @section('content')
 
     <section class="mt-5 min-h-screen">

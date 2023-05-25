@@ -1,9 +1,9 @@
-<div class="swiper mySwiper relative mt-12 -z-30">
-    <div class="swiper-wrapper border-b-4  border-red-700  w-full h-[300px] md:h-[500px] lg:h-[500px] sm:h-[400px] object-center">
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper w-full h-[300px] md:h-[500px] lg:h-[500px] sm:h-[400px] object-center">
         @foreach($fireSliders as $slider)
-        <div class="swiper-slide">
-            <a href="#"><img class="" src="{{ asset($slider->image) }}" alt=""></a>
-        </div>
+            <div class="swiper-slide">
+                <a href="{{ $slider->url }}"><img class="" src="{{ $slider->image }}" alt=""></a>
+            </div>
         @endforeach
     </div>
 
