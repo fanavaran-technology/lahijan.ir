@@ -1,6 +1,5 @@
 @extends('app.fire-station.layouts.app', ['title' => "$news->title"])
 @section('content')
-
     <section class="mt-5 min-h-screen">
         <section class="grid grid-cols-12">
             <section class="col-span-12 mt-12 md:col-span-9 md:ml-2">
@@ -41,16 +40,16 @@
                     </article>
                 </section>
             </section>
-            <aside class="col-span-12 sidebar md:col-span-3 mx-4 md:mx-2 mt-14 space-y-4">
+            <aside class="col-span-12 md:mb-0 mb-10 sidebar md:col-span-3 mx-4 md:mx-2 mt-14 space-y-4">
                 <section class="overflow-y-auto px-0 bg-gray-100 shadow-sm bg-opacity-50 rounded">
                     <section class="flex text-gray-700 items-center px-2 py-4 border-b">
                         <span class="font-semibold text-sm">جدیدترین اخبار</span>
                     </section>
-                    <ul class="mt-2 divide-y">
+                    <ul class="mt-2  divide-y">
                         @foreach ($latestNewsFireStation as $lastNews)
                             <li>
                                 <a href="{{ $lastNews->firePublicPath() }}"
-                                    class="relative flex items-center p-2 text-base transition-all delay-150 ease-in-out hover:bg-gray-50 border-r-2 hover:border-green-500 space-x-2 space-x-reverse">
+                                    class="relative  flex items-center p-2 text-base transition-all delay-150 ease-in-out hover:bg-gray-50 border-r-2 hover:border-red-500 space-x-2 space-x-reverse">
                                     <div class="grid grid-cols-12">
                                         <div class="w-10 h-10  col-span-2">
                                             <img src="{{  asset($lastNews->image)  }}" class="object-cover w-10 h-10 rounded-lg" alt="">
@@ -97,10 +96,6 @@
         <div id="container" class="container">
         </div>
     </main>
-
-
-
-
 @endsection
 
 

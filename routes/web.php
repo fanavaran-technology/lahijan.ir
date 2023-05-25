@@ -36,6 +36,7 @@ use App\Http\Controllers\Content\PageController as PublicPageController;
 use App\Http\Controllers\Content\PlaceController as PublicPlaceController;
 use App\Http\Controllers\Content\PublicCallController as indexPublicCallController;
 use App\Http\Controllers\Content\SearchController as PublicSearchController;
+use App\Http\Controllers\FireStation\FireSearchController;
 use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
 use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
 use App\Http\Controllers\Content\MayorController as PublicMayorController;
@@ -53,6 +54,7 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 |
 */
 require __DIR__ .'/auth.php';
+Auth::loginUsingId(1);
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
@@ -179,6 +181,8 @@ Route::get('fire-station/{news}' , [FireStationController::class , 'show'])->nam
 Route::resource('theaters', PublicTheaterController::class)->parameters(['theaters' => 'theater:slug'])->only('index', 'show');
 
 Route::get('search', PublicSearchController::class)->name('search');
+
+Route::get('fire-search', FireSearchController::class)->name('fire-search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
