@@ -65,38 +65,38 @@
                                     <th>عناوین</th>
                                     <th>تاریخ انتشار</th>
                                     <th>وضعیت انتشار</th>
-{{--                                    <th>فعال / غیرفعال</th>--}}
+                                    <th>فعال / غیرفعال</th>
                                     <th>عکس اسلایدر</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
-                                @forelse($fireSliders as $slider)
+                                @forelse($fireSliders as $fireSlider)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <small>{{ Str::limit($slider->alt, 60, '...') }}</small>
+                                            <small>{{ Str::limit($fireSlider->alt, 60, '...') }}</small>
                                         </td>
 
                                         <td>
-                                            {{ jalaliDate($slider->published_at) }}
+                                            {{ jalaliDate($fireSlider->published_at) }}
                                         </td>
 
                                             <td>
-                                                {{ $slider->publishStatus }}
+                                                {{ $fireSlider->publishStatus }}
                                             </td>
-{{--                                        <td>--}}
-{{--                                            <label>--}}
-{{--                                                <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})"--}}
-{{--                                                    data-url="{{ route('admin.content.fire-sliders.status', $slider->id) }}"--}}
-{{--                                                    type="checkbox" @if ($slider->status === 1) checked @endif>--}}
-{{--                                            </label>--}}
-{{--                                        </td>--}}
                                         <td>
-                                            <img src="{{ asset($slider->image) }}" alt="" width="100"
+                                            <label>
+                                                <input id="{{ $fireSlider->id }}" onchange="changeStatus({{ $fireSlider->id }})"
+                                                    data-url="{{ route('admin.content.fire-sliders.status', $fireSlider->id) }}"
+                                                    type="checkbox" @if ($fireSlider->status === 1) checked @endif>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <img src="{{ asset($fireSlider->image) }}" alt="" width="100"
                                                 height="50">
                                         </td>
                                         <td>
-                                                <a href="{{ route('admin.content.fire-sliders.edit', $slider->id) }}"
+                                                <a href="{{ route('admin.content.fire-sliders.edit', $fireSlider->id) }}"
                                                     class="text-decoration-none text-primary mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -106,11 +106,11 @@
                                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                     </svg>
                                                 </a>
-                                                <form action="{{ route('admin.content.fire-sliders.destroy', $slider->id) }}"
+                                                <form action="{{ route('admin.content.fire-sliders.destroy', $fireSlider->id) }}"
                                                     class="d-inline" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" x-data="{{ $slider->id }}"
+                                                    <button type="submit" x-data="{{ $fireSlider->id }}"
                                                         class="delete border-none bg-transparent text-decoration-none text-danger mr-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
