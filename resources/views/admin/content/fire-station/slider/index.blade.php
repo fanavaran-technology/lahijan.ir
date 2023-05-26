@@ -65,7 +65,7 @@
                                     <th>عناوین</th>
                                     <th>تاریخ انتشار</th>
                                     <th>وضعیت انتشار</th>
-                                    <th>فعال / غیرفعال</th>
+{{--                                    <th>فعال / غیرفعال</th>--}}
                                     <th>عکس اسلایدر</th>
                                     <th>عملیات</th>
                                     </tr>
@@ -84,13 +84,13 @@
                                             <td>
                                                 {{ $slider->publishStatus }}
                                             </td>
-                                        <td>
-                                            <label>
-                                                <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})"
-                                                    data-url="{{ route('admin.content.fire-sliders.status', $slider->id) }}"
-                                                    type="checkbox" @if ($slider->status === 1) checked @endif>
-                                            </label>
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            <label>--}}
+{{--                                                <input id="{{ $slider->id }}" onchange="changeStatus({{ $slider->id }})"--}}
+{{--                                                    data-url="{{ route('admin.content.fire-sliders.status', $slider->id) }}"--}}
+{{--                                                    type="checkbox" @if ($slider->status === 1) checked @endif>--}}
+{{--                                            </label>--}}
+{{--                                        </td>--}}
                                         <td>
                                             <img src="{{ asset($slider->image) }}" alt="" width="100"
                                                 height="50">
