@@ -1,17 +1,24 @@
 <div class="bg-[#FF0035] bottom-0 flex flex-col bottom-0 left-0 justify-center md:items-stretch items-center rounded-tr-[40px] h-full">
     <div class="flex flex-col md:flex-row mr-14">
         <ul class="list-disc container mt-7 space-y-1">
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">شهرداری لاهیجان</li>
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">سامانه شفاف سازی </li>
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">سامانه بررسی شکایات </li>
+            <li  class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="{{ route('home') }}">شهرداری لاهیجان</a></li>
+            <li href="" class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="shafaf">سامانه شفاف سازی</a></li>
+            <li href="" class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="{{ route('communications.create') }}">سامانه بررسی شکایات</a></li>
         </ul>
         <ul class="list-disc container mt-7 space-y-1 md:mr-36">
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">عوارض خودرد </li>
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">تاریخچه شهر </li>
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">اعضا شورا شهر </li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="https://Cartax.ir/toll">عوارض خودرد</a></li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="#">تاریخچه شهر</a></li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="council-member">اعضا شورا شهر</a></li>
         </ul>
         <ul class="list-disc container mt-7 space-y-1">
-            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">ارتباط با ما</li>
+            <li class="cursor-pointer text-white hover:text-black transition duration-100 ease-in-out">
+            <a href="#">ارتباط با ما</a></li>
         </ul>
     </div>
 
@@ -21,7 +28,7 @@
         <!-- social media -->
         <div class="flex  justify-center space-x-3 mt-2 space-x-reverse items-center">
             <section href="#" class="border p-2 border-gray-900 border-opacity-100 rounded-xl">
-                <a href="">
+                <a href="https://t.me/lahijan_municipality">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 sm:w-5 h-4 sm:h-5 text-gray-900" fill="currentColor"
                          class="bi bi-telegram" viewBox="0 0 16 16">
                         <path
@@ -39,7 +46,7 @@
                 </a>
             </section>
             <section href="#" class="border p-2 border-gray-900 border-opacity-100 rounded-xl">
-                <a href="">
+                <a href="https://instagram.com/shahrdarilahijan">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 sm:w-5 h-4 sm:h-5 text-gray-900" fill="currentColor"
                          class="bi bi-instagram" viewBox="0 0 16 16">
                         <path

@@ -1,4 +1,4 @@
-<div class="swiper mySwiper">
+<div class="swiper mySwiper mt-12">
     <div class="swiper-wrapper w-full h-[300px] md:h-[500px] lg:h-[500px] sm:h-[400px] object-center">
         @foreach($fireSliders as $slider)
             <div class="swiper-slide">
