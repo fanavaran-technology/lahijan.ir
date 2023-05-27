@@ -1,14 +1,14 @@
     <div class="p-2 border-b border-[#FF0035]  bg-gray-0">
         <div class="flex flex-col md:flex-row md:justify-between">
             <div class="flex justify-between md:hidden w-full md:w-auto">
-                <img src="{{ asset('images/2.png') }}" class="w-40" alt="">
-                <img src="{{ asset('images/3.png') }}" class="h-12 md:mr-2" alt="">
+                <img src="{{ asset('images/fire-station/2.png') }}" class="w-40" alt="">
+                <img src="{{ asset('images/fire-station/3.png') }}" class="h-12 md:mr-2" alt="">
             </div>
             <div class="order-first md:flex hidden">
-                <img src="{{ asset('images/2.png') }}" class="w-40" alt="">
+                <img src="{{ asset('images/fire-station/2.png') }}" class="w-40" alt="">
             </div>
             <div class="md:order-last md:flex hidden">
-                <img src="{{ asset('images/3.png') }}" class="h-12" alt="">
+                <img src="{{ asset('images/fire-station/3.png') }}" class="h-12" alt="">
             </div>
 
             <form action="{{ route('fire-search') }}" method="get">

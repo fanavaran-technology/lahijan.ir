@@ -5,9 +5,14 @@
 
     @include('app.fire-station.layouts.includes.slider')
 
+    <section class="flex flex-col items-center  mt-16">
+        <div class="font-shabnam relative font-bold text-gray-700 text-base md:text-lg">اخبار آتش نشانی</div>
+        <div class="w-12 h-1 bg-[#FF0035] absolute mt-[12px] mr-[185px] rounded"></div>
+        <div class="w-12 h-1 bg-[#FF0035] absolute mt-[12px] ml-[185px] rounded"></div>
+    </section>
 
     <!-- Create By Joker Banny -->
-    <div class="min-h-screen  flex justify-center items-center mt-20">
+    <div class="min-h-screen  flex justify-center items-center mt-10">
         <div class="md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0">
             @foreach($fireStations as $fireStation)
             <div
