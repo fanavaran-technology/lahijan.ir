@@ -69,6 +69,7 @@ class Permission extends Model
         'manage_council'            =>       'دسترسی به اعضا شورا' ,
         'manage_mayor_speech'       =>       'دسترسی به سخن شهردار' ,
         'manage_fire_sliders'       =>       'دسترسی به اسلایدر آتش نشانی' ,
+        'manage_fire_news'          =>       'دسترسی به اخبار آتش نشانی' ,
     ];
 
 }

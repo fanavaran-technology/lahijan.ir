@@ -61,10 +61,10 @@ active
                     <small>بخش محتوا</small>
                 </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-                    @can('manage_news')
+                    @canany(['manage_news', 'manage_fire_news'])  
                         <li class="nav-item dropdown @active('admin.content.news')
-active
-@endactive">
+                        active
+                        @endactive">
                             <a href="#news" data-toggle="collapse" aria-expanded="false"
                                class="dropdown-toggle nav-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -88,7 +88,7 @@ active
                                 </li>
                             </ul>
                         </li>
-                    @endcan
+                    @endcanany
                     @can('manage_places')
                         <li class="nav-item dropdown @active('admin.content.places')
 active
