@@ -7,11 +7,10 @@
                 <span class="text-sm text-muted">({{ $allCatgeories->total() }})</span>
             </h2>
         </div>
-        @can('create_category')
+
             <div class="col-auto">
                 <a href="{{ route('admin.clarification.categories.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
             </div>
-        @endcan
         <div class="col-12">
 
             <div class="row my-4">
@@ -96,8 +95,6 @@
         </div> <!-- .row -->
     </div>
 @endsection
-
-
 @section('script')
     @include('admin.alerts.confirm')
 @endsection
