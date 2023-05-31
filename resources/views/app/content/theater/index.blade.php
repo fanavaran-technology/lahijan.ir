@@ -7,7 +7,7 @@
 @section('content')
     <section class="container mt-5 min-h-screen">
         <section class="text-xl sm:text-2xl md:text-2xl font-bold mt-10 text-gray-700">
-            تئاتر های شهری
+            جشنواره های تئاتر خیابانی لاهیجان
         </section>
         <!-- news -->
         <section class="grid grid-cols-12 gap-6">

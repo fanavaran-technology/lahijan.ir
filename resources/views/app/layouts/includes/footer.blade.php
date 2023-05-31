@@ -98,16 +98,19 @@
                 <h4 class="text-gray-400 font-bold"> خدمات پرکاربرد</h4>
                 <ul class="w-full list-inside text-gray-400 my-6 space-y-3">
                     <li>
-                        <a class="text-sm" href="">سامانه شفافیت</a>
+                        <a class="text-sm" href="https://www.lahijan.ir/%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7-%D8%A8%D8%A7-%D9%85%D8%A7">ارتباط با ما</a>
                     </li>
                     <li>
-                        <a class="text-sm" href="">بررسی شکایات</a>
+                        <a class="text-sm" href="shafaf">سامانه شفافیت</a>
                     </li>
                     <li>
-                        <a class="text-sm" href="">سخن شهردار</a>
+                        <a class="text-sm" href="communications/create">بررسی شکایات</a>
                     </li>
                     <li>
-                        <a class="text-sm" href="">عوارض خودرو</a>
+                        <a class="text-sm" href="#mayor">سخن شهردار</a>
+                    </li>
+                    <li>
+                        <a class="text-sm" href="https://cartax.ir/toll/">عوارض خودرو</a>
                     </li>
                 </ul>
 

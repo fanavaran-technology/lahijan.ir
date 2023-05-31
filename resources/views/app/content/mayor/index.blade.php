@@ -4,7 +4,7 @@
 @section('content')
     <section class="container mt-5 min-h-screen">
         <div class="container my-7">
-            <p class="text-gray-800 text-xl text-center underline font-bold">شهرداران لاهیجان</p>
+            <p class="text-gray-800 text-xl text-center underline font-bold">شهرداران پیشین لاهیجان</p>
         </div>
 
         <div class="grid grid-cols-12 justify-items-center gap-4">

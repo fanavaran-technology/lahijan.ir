@@ -33,24 +33,24 @@
                 <div class="col-md-9">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="general-setting">
-{{--                            <div class="card-body media align-items-center">--}}
-{{--                                <div class="media-body ml-4">--}}
-{{--                                    <div class="profile-pic">--}}
-{{--                                        <label class="-label d-flex flex-column justify-content-center align-items-center"--}}
-{{--                                            for="file">--}}
-{{--                                            تغییر لوگو--}}
-{{--                                        </label>--}}
-{{--                                        <input id="file" name="settings[logo]" type="file"--}}
-{{--                                            onchange="loadFile(event)" />--}}
-{{--                                        <img src="{{ asset(Setting::getValue('logo')) }}" id="output">--}}
-{{--                                    </div>--}}
+                            <div class="card-body media align-items-center">
+                                <div class="media-body ml-4">
+                                    <div class="profile-pic">
+                                        <label class="-label d-flex flex-column justify-content-center align-items-center"
+                                            for="file">
+                                            تغییر لوگو
+                                        </label>
+                                        <input id="file" name="settings[logo]" type="file"
+                                            onchange="loadFile(event)" />
+                                        <img src="{{ asset(Setting::getValue('logo')) }}" id="output">
+                                    </div>
 
-{{--                                    <div class="text-light text-center small mt-1">پسوند های مجاز JPG, webp , GPEG یا PNG.--}}
-{{--                                        حداکثر--}}
-{{--                                        سایز--}}
-{{--                                        آپلود 1 مگابایت</div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                                    <div class="text-light text-center small mt-1">پسوند های مجاز JPG, webp , GPEG یا PNG.
+                                        حداکثر
+                                        سایز
+                                        آپلود 1 مگابایت</div>
+                                </div>
+                            </div>
                             <hr class="border-light m-0">
 
                             <div class="card-body">

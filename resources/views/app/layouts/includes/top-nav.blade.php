@@ -19,14 +19,13 @@
     <div class="container flex flex-wrap items-center justify-between mx-auto">
         <span class="text-white z-40 mr-2 font-bold text-center items-center">
             عنوان آخرین اخبار : <span class="font-normal text-sm">
-                <div id="featured-slider" class="mt-2 text-right ">
+                <div id="featured-slider" class="mt-[5px] text-right ">
                     <div id="slider" class="ml-10">
                         @foreach ($latestNews as $news )
                         <div class="slide">
                             <a href="{{ $news->publicPath() }}">{{ Str::limit($news->title, 70,'...')  }}</a>
                         </div>
                         @endforeach
-
                     </div>
                 </div>
             </span>

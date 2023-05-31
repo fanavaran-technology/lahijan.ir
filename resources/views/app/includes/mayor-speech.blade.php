@@ -1,5 +1,5 @@
 @foreach ($mayorSpeech as $mayor)
-    <div style="margin-top: 3rem !important">
+    <div id="mayor" style="margin-top: 3rem !important">
         <div
         class="rounded-md border bg-gradient-to-r bg-white  border-indigo-500 border-dotted shadow-sm transition duration-500 ease-in-out transform hover:-translate-x-0.5 hover:shadow-md">
         <div class="px-4 leading-none">

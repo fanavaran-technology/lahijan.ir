@@ -55,6 +55,7 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 */
 require __DIR__ .'/auth.php';
 
+
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
 
@@ -172,6 +173,8 @@ Route::resource('places', PublicPlaceController::class)->parameters(['places' =>
 
 Route::get('council-member', [PublicCouncilMemberController::class, 'show'] )->name('council-member.show');
 
+Route::get('mayors', [PublicMayorController::class, 'show'] )->name('mayors.show');
+
 //Fire Station
 Route::get('fire-station' , [FireStationController::class , 'index'])->name('fire-station.index');
 Route::get('fire-station/{news}' , [FireStationController::class , 'show'])->name('fire-station.show');
@@ -186,12 +189,9 @@ Route::get('fire-search', FireSearchController::class)->name('fire-search');
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
 
-Route::resource('council-member', PublicCouncilMemberController::class )->only('show');
 
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
 
-Route::resource('mayor', PublicMayorController::class )->only('show');
 
-Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
 
 

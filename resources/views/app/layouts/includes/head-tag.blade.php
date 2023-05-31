@@ -1,9 +1,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{{ asset("assets/app/css/print.css") }}" rel="stylesheet" media="print">
 <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
 <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet"/>
 
-<link href="{{ asset("assets/app/css/print.css") }}" rel="stylesheet" media="print">
 <!-- City -->
 <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"/>
 

@@ -59,7 +59,7 @@
 
                 <span class="text-gray-700 text-xs sm:text-sm mt-4">روابط عمومی</span>
             </a>
-            
+
            <a href="council-member"
                 class="w-28 sm:w-32 transition-all delay-100 hover:bg-gray-50 hover:shadow-lg h-32 hover:skew-y-2 p-4 flex flex-col items-center justify-center rounded-xl shadow">
                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 838 845">
