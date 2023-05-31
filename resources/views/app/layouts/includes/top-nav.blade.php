@@ -16,10 +16,11 @@
     </form>
 </section>
 <div class="md:flex top-nav hidden h-auto p-4  bg-black">
-    <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <span class="text-white z-40 mr-2 font-bold text-center items-center">
-            عنوان آخرین اخبار : <span class="font-normal text-sm">
-                <div id="featured-slider" class="mt-[5px] text-right ">
+    <div class="container mt-1 flex flex-wrap items-center justify-between mx-auto">
+        <span class="text-white z-40 mr-2  font-bold text-center items-center">
+            <p class="">عنوان آخرین اخبار :</p>
+            <span class="font-normal text-sm">
+                <div id="featured-slider" class="mt-2 text-right ">
                     <div id="slider" class="ml-10">
                         @foreach ($latestNews as $news )
                         <div class="slide">
