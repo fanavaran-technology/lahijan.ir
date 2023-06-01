@@ -70,12 +70,6 @@ class PageController extends Controller
             $this->saveKeywords($page, $keywords);
         }
 
-        if ($request->filled('keywords')) {
-            $keywords = explode(',', $request->tags);
-            $this->saveTags($page, $keywords);
-        } else if ($page->tags)
-            $page->keywords()->detach();
-
         $user = auth()->user()->full_name;
 
         Log::info("صفحه با عنوان {$page->title} توسط {$user} ایجاد شد.");
