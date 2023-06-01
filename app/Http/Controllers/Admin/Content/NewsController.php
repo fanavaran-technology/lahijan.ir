@@ -21,14 +21,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class   NewsController extends Controller
+class NewsController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('can:manage_news');
-        $this->middleware('can:edit_news')->only('edit', 'update');
-        $this->middleware('can:create_news')->only('store', 'create');
         $this->middleware('can:delete_news')->only('destroy');
     }
 
@@ -39,26 +36,35 @@ class   NewsController extends Controller
      */
     public function index(): View
     {
-        $allNews = News::query();
+        if (auth()->user()->canany(['manage_news', 'manage_fire_news'])) {
+            $allNews = News::query();
 
-        if ($searchString = request('search'))
-            $allNews->where('title', "LIKE", "%{$searchString}%");
+            if ($searchString = request('search'))
+                $allNews->where('title', "LIKE", "%{$searchString}%");
 
-        if (request('firestation'))
-            $allNews->where('is_fire_station', 1);
+            if (auth()->user()->cannot('manage_news')) {
+                $allNews->where('is_fire_station', 1);
+            }
 
-        if (request('draft'))
-            $allNews->where('is_draft', 1);
+            if (request('firestation'))
+                $allNews->where('is_fire_station', 1);
 
-        if (request('status'))
-            $allNews->wherePublished();
+            if (request('draft'))
+                $allNews->where('is_draft', 1);
 
-        if (request('pin'))
-            $allNews->where('is_pined', 1);
+            if (request('status'))
+                $allNews->wherePublished();
 
-        $allNews = $allNews->orderBy('id', 'DESC')->paginate(10);
+            if (request('pin'))
+                $allNews->where('is_pined', 1);
 
-        return view('admin.content.news.index', compact('allNews'));
+            $allNews = $allNews->orderBy('id', 'DESC')->paginate(10);
+
+            return view('admin.content.news.index', compact('allNews'));
+        }
+
+        return abort(403);
+
     }
 
     /**
@@ -68,8 +74,12 @@ class   NewsController extends Controller
      */
     public function create(): View
     {
-        $videos = Video::all();
-        return view('admin.content.news.create', compact('videos'));
+        if (auth()->user()->canany(['manage_news', 'manage_fire_news'])) {
+            $videos = Video::all();
+            return view('admin.content.news.create', compact('videos'));
+        }
+
+        return abort(403);
     }
 
     /**
@@ -80,34 +90,41 @@ class   NewsController extends Controller
      */
     public function store(NewsRequest $request, ImageService $imageService): RedirectResponse
     {
-        DB::transaction(function () use ($request, $imageService) {
-            $inputs = $request->all();
+        if (auth()->user()->canany(['manage_news', 'manage_fire_news'])) {
+            DB::transaction(function () use ($request, $imageService) {
+                $inputs = $request->all();
 
-            // save image
-            if ($request->hasFile('image')) {
-                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
-                $inputs['image'] = $imageService->save($inputs['image']);
-            }
+                // save image
+                if ($request->hasFile('image')) {
+                    $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
+                    $inputs['image'] = $imageService->save($inputs['image']);
+                }
 
-            // attach video to news
-            if ($request->filled('video'))
-                $inputs['video_id'] = $this->attachVideo($inputs['video']);
+                // attach video to news
+                if ($request->filled('video'))
+                    $inputs['video_id'] = $this->attachVideo($inputs['video']);
 
-            $news = $request->user()->news()->create($inputs);
+                if (auth()->user()->cannot('manage_news'))
+                    $inputs['is_fire_station'] = 1;
 
-            if ($request->has('galleries'))
-                $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
+                $news = $request->user()->news()->create($inputs);
 
-            // add tags
-            if ($request->filled('tags')) {
-                $tags = explode(',', $request->tags);
-                $this->saveTags($news, $tags);
-            }
+                if ($request->has('galleries'))
+                    $this->addImagesToGallery($news, $inputs['galleries'], $inputs['alts']);
 
-            Log::info("خبر با عنوان {$news->title} توسط {$request->user()->full_name} ایجاد شد.");
-        });
+                // add tags
+                if ($request->filled('tags')) {
+                    $tags = explode(',', $request->tags);
+                    $this->saveTags($news, $tags);
+                }
 
-        return to_route('admin.content.news.index')->with('toast-success', 'خبر جدیدی اضافه گردید.');
+                Log::info("خبر با عنوان {$news->title} توسط {$request->user()->full_name} ایجاد شد.");
+            });
+
+            return to_route('admin.content.news.index')->with('toast-success', 'خبر جدیدی اضافه گردید.');
+        }
+
+        return abort(403);
     }
 
     /**
@@ -118,9 +135,18 @@ class   NewsController extends Controller
      */
     public function edit(News $news): View
     {
-        $tags = Tag::all()->pluck('title')->implode(',');
+        if (auth()->user()->canany(['manage_news', 'manage_fire_news'])) {
 
-        return view('admin.content.news.edit', compact('news', 'tags'));
+            if (auth()->user()->cannot('manage_news') && $news->is_fire_station == 0) {
+                return abort(403);
+            }
+
+            $tags = Tag::all()->pluck('title')->implode(',');
+
+            return view('admin.content.news.edit', compact('news', 'tags'));
+        }
+
+        return abort(403);
     }
 
     /**
@@ -155,6 +181,9 @@ class   NewsController extends Controller
                 $inputs['video_id'] = $this->attachVideo($inputs['video']);
             }
 
+            if (auth()->user()->cannot('manage_news'))
+                    $inputs['is_fire_station'] = 1;
+                    
             $news->update($inputs);
 
             if ($request->has('galleries'))
@@ -338,14 +367,14 @@ class   NewsController extends Controller
 
         $images = [];
 
-        foreach($galleries as $key => $gallery) {
+        foreach ($galleries as $key => $gallery) {
             $imageService->setImageName(Str::random(16));
             $image = $imageService->save($gallery);
             array_push($images, [
-                'image'             => $image,
-                'alt'               => $alts[$key],
+                'image' => $image,
+                'alt' => $alts[$key],
                 'gallerizable_type' => get_class($news),
-                'gallerizable_id'   => $news->id
+                'gallerizable_id' => $news->id
             ]);
         }
 

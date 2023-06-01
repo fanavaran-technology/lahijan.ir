@@ -8,6 +8,7 @@ use App\Models\Communication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CommunicationController extends Controller
 {
@@ -32,7 +33,7 @@ class CommunicationController extends Controller
     {
         $inputs = $request->all();
 
-        DB::transaction(function () use($inputs) {
+        DB::transaction(function () use($inputs, $request) {
             Communication::create([
                 'full_name'=> $inputs['full_name'],
                 'subject'=> $inputs['subject'],
@@ -41,6 +42,8 @@ class CommunicationController extends Controller
                 'description'=> $inputs['description'],
                 'address'=> $inputs['address']
             ]);
+
+            Log::info("{$inputs['full_name']} فرمی ارسال کرد. آی پی : {$request->ip()}");
         });
 
         $type = Communication::REQUEST_TYPES[(int) $inputs['type']];

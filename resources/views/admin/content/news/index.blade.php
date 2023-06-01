@@ -7,8 +7,8 @@
                 <span class="text-sm text-muted">({{ $allNews->total() }})</span>
             </h2>
         </div>
-        @can('create_news')
-            <div class="col-auto">
+        @canany(['create_news', 'manage_fire_news'])
+        <div class="col-auto">
                 <a href="{{ route('admin.content.news.create') }}" type="button" class="btn btn-primary px-4">ایجاد</a>
             </div>
         @endcan
@@ -31,7 +31,7 @@
                                             <input type="checkbox" class="custom-control-input" onclick="filterAction(this)"
                                                 data-filter="firestation"
                                                 data-action="{{ request()->fullUrlWithQuery(['firestation' => 1]) }}"
-                                                @checked(request('firestation') == 1) id="firestation">
+                                                @checked(request('firestation') == 1) @cannot('manage_news') checked disabled @endcannot id="firestation">
                                             <label class="custom-control-label" for="firestation">اخبار آتش نشانی</label>
                                         </div>
                                         <div class="ml-3 mt-2 custom-control custom-checkbox">
@@ -159,7 +159,7 @@
                                             <small>{{ Str::limit($news->title, 60, '...') }}</small>
                                         </td>
                                         <td>
-                                            @can('edit_news')
+                                            @canany(['edit_news', 'manage_fire_news'])
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" id="draft{{ $news->id }}"
                                                         onchange="changeStatus({{ $news->id }} , 'draft')"
@@ -168,10 +168,10 @@
                                                     <label class="custom-control-label"
                                                         for="draft{{ $news->id }}"></label>
                                                 </div>
-                                            @endcan
+                                            @endcanany
                                         </td>
                                         <td>
-                                            @can('edit_news')
+                                            @canany(['edit_news', 'manage_fire_news'])
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="custom-control-input" id="pined{{ $news->id }}"
                                                         onchange="changeStatus({{ $news->id }} , 'pined')"
@@ -180,7 +180,7 @@
                                                     <label class="custom-control-label"
                                                         for="pined{{ $news->id }}"></label>
                                                 </div>
-                                            @endcan
+                                            @endcanany
                                         </td>
 
                                         <td>{{ $news->publishStatus }}</td>
@@ -243,7 +243,7 @@
                                                     </svg>
                                                 </a>
 
-                                                @can('edit_news')
+                                                @canany(['edit_news', 'manage_fire_news'])
                                                     <a href="{{ route('admin.content.news.edit', $news->id) }}"
                                                         class="text-decoration-none text-primary mr-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -255,8 +255,8 @@
                                                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                         </svg>
                                                     </a>
-                                                @endcan
-                                                @can('delete_news')
+                                                @endcanany
+                                                @canany(['delete_news', 'manage_fire_news'])
                                                     <form action="{{ route('admin.content.news.destroy', $news->id) }}"
                                                         class="d-inline" method="post">
                                                         @csrf
@@ -273,7 +273,7 @@
                                                             </svg>
                                                             </a>
                                                     </form>
-                                                @endcan
+                                                @endcanany
                                             </div>
                                         </td>
                                     </tr>
