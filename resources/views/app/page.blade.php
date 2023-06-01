@@ -1,6 +1,7 @@
 @extends('app.layouts.app', ['title' => "$page->title"])
 
 @section('head-tag')
+    <meta name="keywords" content="{{ $page->keywords ? $page->keywords->pluck('title')->join(',') : '' }}">
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
 @endsection
 

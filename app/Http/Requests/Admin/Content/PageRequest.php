@@ -24,9 +24,10 @@ class PageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'           => 'required|max:120|min:2|regex:/^[ا-یa-zA-Z0-9\-۰-۹ء-ي., ]+$/u',
+            'title'           => 'required|max:120|min:2',
             'body'            => 'required|max:5000|min:5',
             'is_draft'        => 'numeric|in:0,1',
+            'keywords'        => 'nullable',
             'is_quick_access' => 'numeric|in:0,1',
         ];
     }

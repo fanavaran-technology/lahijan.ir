@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Content;
 
+use App\Models\Content\Keyword;
 use App\Models\Content\Page;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,6 +65,17 @@ class PageController extends Controller
                 
         $page = auth()->user()->pages()->create($inputs);
 
+        if ($request->filled('keywords')) {
+            $keywords = explode(',', $request->keywords);
+            $this->saveKeywords($page, $keywords);
+        }
+
+        if ($request->filled('keywords')) {
+            $keywords = explode(',', $request->tags);
+            $this->saveTags($page, $keywords);
+        } else if ($page->tags)
+            $page->keywords()->detach();
+
         $user = auth()->user()->full_name;
 
         Log::info("صفحه با عنوان {$page->title} توسط {$user} ایجاد شد.");
@@ -79,7 +91,9 @@ class PageController extends Controller
      */
     public function edit(Page $page): View
     {
-        return view('admin.content.page.edit' , compact('page'));
+        $keywords = Keyword::all()->pluck('title')->implode(',');
+
+        return view('admin.content.page.edit' , compact('page',     'keywords'));
     }
 
     /**
@@ -97,6 +111,12 @@ class PageController extends Controller
         $inputs['is_quick_access'] = $inputs['is_quick_access'] ?? 0; 
 
         $page->update($inputs);
+
+        if ($request->filled('keywords')) {
+            $keywords = explode(',', $request->keywords);
+            $this->saveKeywords($page, $keywords);
+        } else if ($page->keywords)
+            $page->keywords()->detach();
         
         Log::info("صفحه با عنوان {$page->title} توسط {$request->user()->full_name} ویرایش شد.");
         
@@ -132,6 +152,20 @@ class PageController extends Controller
         }
     }
 
+    public function saveKeywords(Page $page, array $keywords): void
+    {
+        # remove all page tags
+        $page->keywords()->detach();
+
+        collect($keywords)->map(function ($item) use ($page) {
+            # create tag
+            $keyword = Keyword::firstOrCreate([
+                'title' => trim($item)
+            ]);
+
+            $page->keywords()->attach($keyword);
+        });
+    }
 
     public function isQuickAccess(Page $page)
     {

@@ -1,6 +1,7 @@
 @extends('admin.layouts.app', ['title' => 'نوشتن صفحه جدید'])
 
 @section('head-tag')
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
     <!-- tinymce -->
     <script src="{{ asset('assets/admin/plugins/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 @endsection
@@ -47,7 +48,37 @@
                 </div> <!-- /. end-section -->
             </div>
             <div class="col-12 col-md-3 my-2 px-0">
-            
+                <div class="card">
+                    <div class="card-header" onclick="openCard(this)">
+                        <div class="row d-flex justify-content-between px-2">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z" />
+                                    <path
+                                        d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z" />
+                                </svg>
+                                <span class="ml-1">کلمات کلیدی</span>
+                            </div>
+                            <span class="card-dropdown-button" onclick="openCard(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <label for="" class="input-title">
+                            کلمات کلیدی را با enter جدا کنید
+                        </label>
+                        <input type="hidden" name="keywords">
+                        <input id="tags_input" value="{{ old('keywords') }}" class='tagify--outside'
+                            placeholder='کلمه کلیدی را وارد کنید'>
+                    </div>
+                </div>
                 <div class="card mt-2">
                     <div class="card-header" onclick="openCard(this)">
                         <div class="row d-flex justify-content-between px-2">
@@ -95,11 +126,42 @@
 
 @section('script')
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/tagify/tagify.min.js') }}"></script>
 
     <script>
         renderEditor('#editor')
 
         copyToSlug(document.querySelector('input[name=title]'))
+    </script>
+
+    <script>
+        let input = document.querySelector('#tags_input')
+        // init Tagify script on the above inputs
+        new Tagify(input, {
+            dropdown: {
+                position: "input",
+                enabled: 0 // always opens dropdown when input gets focus
+            }
+        })
+    </script>
+    <script>
+        const newsForm = document.querySelector("#form");
+
+        newsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            tagsvalues = document.getElementsByClassName('tagify__tag');
+
+            tagsList = []
+            for (tagEle of tagsvalues)
+                tagsList.push(tagEle.title)
+
+            tagInput = document.querySelector('input[name=keywords]');
+
+            tagInput.value = tagsList.join(',');
+
+            newsForm.submit();
+        });
     </script>
 
 @endsection
