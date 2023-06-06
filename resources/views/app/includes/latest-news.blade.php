@@ -7,7 +7,7 @@
         @foreach($news['latestNews'] as $news)
         <section class="rounded-lg bg-white p-1 sm:p-4 md:p-6 shadow transition-all hover:shadow-lg mt-4">
             <a href="#!">
-                <img class="rounded-lg w-full md:h-60 object-cover" src="{{ asset($news->image) }}"
+                <img class="rounded-lg w-full md:h-60" src="{{ asset($news->image) }}"
                     alt="" />
             </a>
             <div>
