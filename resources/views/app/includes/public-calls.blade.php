@@ -1,4 +1,4 @@
-<section class="bg-white rounded-lg pb-4">
+{{-- <section class="bg-white rounded-lg pb-4">
     <section class="p-4">
         <div class="flex space-x-2 space-x-reverse border-b pb-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -27,4 +27,4 @@
     </section>
 
 
-</section>
+</section> --}}

@@ -12,7 +12,7 @@
 
         <section class="grid grid-cols-12 mt-24 gap-4 md:gap-8">
             @include('app.includes.latest-news')
-            <section class="col-span-12 md:col-span-5 space-y-3">
+            <section class="col-span-12 md:col-span-5 space-y-10">
                 @include('app.includes.tab')
                 @include('app.includes.public-calls')
                 @include('app.includes.virtual-tour')
