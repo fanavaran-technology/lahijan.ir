@@ -32,7 +32,8 @@
         <section class="grid grid-cols-12">
             <section class="col-span-12 md:col-span-9 md:ml-2">
                 <section class="my-4 bg-gray-50 bg-opacity-50 p-4 md:p-8 text-gray-700 shadow-sm rounded">
-                    <section class="w-full bg-gray-100 rounded-lg p-2.5 flex flex-wrap justify-center sm:justify-between items-center">
+                    <section
+                        class="w-full bg-gray-100 rounded-lg p-2.5 flex flex-wrap justify-center sm:justify-between items-center">
                         <div>
                             <div class="text-gray-600 flex items-center space-x-2 space-x-reverse">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
@@ -42,7 +43,7 @@
                                 </svg>
                                 <span class="text-sm hidden sm:block">لینک کوتاه خبر</span>
                                 <p class="text-xs mr-3 text-gray-400 cursor-pointer hover:text-green-500" id="short_link"
-                                    onclick="copyLink()">
+                                    onclick="copyContent()">
                                     {{ route('news.show-id', $news->id) }}</p>
                             </div>
                         </div>
@@ -65,13 +66,17 @@
                                 </a>
                                 <a href="http://twitter.com/share?text={{ route('news.show', $news) }}"
                                     data-action="share/whatsapp/share" target="_blank">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                                      </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                        fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                                    </svg>
                                 </a>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6 text-yellow-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                                </svg>                                  
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                                    stroke="currentColor" class="w-6 h-6 text-yellow-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                                </svg>
                             </div>
                         </div>
                         <div>
@@ -222,12 +227,14 @@
         });
     </script>
     <script>
-        function copyLink() {
-            // Get the text field
-            let copyText = document.getElementById("short_link");
-
-            // Copy the text inside the text field
-            navigator.clipboard.writeText(copyText.innerHTML);
+        let text = document.getElementById('short_link').innerHTML;
+        const copyContent = async () => {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Content copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
         }
     </script>
     <script src="{{ asset('assets/app/plugins/viewer/js/viewer.min.js') }}"></script>
