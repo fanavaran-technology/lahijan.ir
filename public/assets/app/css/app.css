@@ -971,8 +971,8 @@ select {
 .mt-\[12px\] {
   margin-top: 12px;
 }
-.mt-\[5px\] {
-  margin-top: 5px;
+.mt-20 {
+  margin-top: 5rem;
 }
 .block {
   display: block;
@@ -1341,6 +1341,21 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+.space-y-20 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(5rem * var(--tw-space-y-reverse));
+}
+.space-y-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
 }
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 1;
@@ -1848,8 +1863,17 @@ select {
 .pt-6 {
   padding-top: 1.5rem;
 }
-.pb-1 {
-  padding-bottom: 0.25rem;
+.pt-20 {
+  padding-top: 5rem;
+}
+.pb-7 {
+  padding-bottom: 1.75rem;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+.pb-20 {
+  padding-bottom: 5rem;
 }
 .text-left {
   text-align: left;

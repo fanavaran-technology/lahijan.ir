@@ -7,15 +7,21 @@
         @foreach($news['latestNews'] as $news)
         <section class="rounded-lg bg-white p-1 sm:p-4 md:p-6 shadow transition-all hover:shadow-lg mt-4">
             <a href="#!">
-                <img class="rounded-lg w-full md:h-60" src="{{ asset($news->image) }}"
+                <img class="rounded-lg w-full object-cover md:h-60" src="{{ asset($news->image) }}"
                     alt="" />
             </a>
             <div>
-                <a href="{{ $news->publicPath() }}">
-                    <h5 class="text-gray-900 text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
-                </a>
-               {{-- <p class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{!! Str::limit($news->body, 210, '...') !!}</p> --}}
-
+                <section class="flex flex-col space-y-2">
+                    <a href="{{ $news->publicPath() }}">
+                        <h5 class="text-gray-900  text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
+                    </a>
+                   {{-- <p style="font-family: iransans" class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{!! Str::limit($news->body, 210, '...') !!}</p> --}}
+                   {{-- <a class="text-xs text-justify md:w-auto sm:w-20 text-gray-600">
+                    {!!  Str::limit($news->body
+                    , 200, '...') !!}
+               </a> --}}
+                </section>
+             
                 <section class="flex justify-end items-center mt-3">
                     <a href="{{ $news->publicPath() }}" class="flex items-center">
                         <span
