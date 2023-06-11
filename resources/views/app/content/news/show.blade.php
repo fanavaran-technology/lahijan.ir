@@ -33,7 +33,7 @@
             <section class="col-span-12 md:col-span-9 md:ml-2">
                 <section class="my-4 bg-gray-50 bg-opacity-50 p-4 md:p-8 text-gray-700 shadow-sm rounded">
                     <section
-                        class="w-full bg-gray-100 rounded-lg p-2.5 flex flex-wrap justify-center sm:justify-between items-center">
+                        class="w-full bg-gray-100 rounded-lg p-2.5 flex flex-wrap justify-center sm:justify-between items-center mb-4">
                         <div>
                             <div class="text-gray-600 flex items-center space-x-2 space-x-reverse">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
@@ -42,9 +42,10 @@
                                         d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
                                 </svg>
                                 <span class="text-sm hidden sm:block">لینک کوتاه خبر</span>
-                                <p class="text-xs mr-3 text-gray-400 cursor-pointer hover:text-green-500" id="short_link"
-                                    onclick="copyContent()">
-                                    {{ route('news.show-id', $news->id) }}</p>
+                                <input type="text"
+                                    class="text-xs mr-3 text-gray-400 border-none cursor-pointer focus:border-none focus:ring-0 p-0 bg-gray-100 hover:text-green-500"
+                                    id="short_link" onclick="copyContent()" style="direction: ltr" readonly
+                                    value="{{ route('news.show-id', $news->id) }}">
                             </div>
                         </div>
                         <div class="mr-4 sm:mr-auto">
@@ -227,14 +228,18 @@
         });
     </script>
     <script>
-        let text = document.getElementById('short_link').innerHTML;
         const copyContent = async () => {
-            try {
-                await navigator.clipboard.writeText(text);
-                console.log('Content copied to clipboard');
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
+            var copyText = document.getElementById("short_link");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard
+                .writeText(copyText.value)
+                .then(() => {
+                    console.log("successfully copied");
+                })
+                .catch((err) => {
+                    console.log("something went wrong", err);
+                });
         }
     </script>
     <script src="{{ asset('assets/app/plugins/viewer/js/viewer.min.js') }}"></script>
