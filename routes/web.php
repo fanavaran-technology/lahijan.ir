@@ -164,6 +164,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
 Route::get("/", [HomeController::class, 'home'])->name('home');
 
 Route::resource('news', PublicNewsController::class)->parameters(['news' => 'news:slug'])->only('index', 'show');
+Route::get('{news}/news', [PublicNewsController::class, 'showId'])->name('news.show-id');
 
 Route::get('tags/{tag:title}', [PublicNewsController::class, 'tag'])->name('news.tag');
 

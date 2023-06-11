@@ -8,6 +8,7 @@ use App\Models\Content\Tag;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Morilog\Jalali\Jalalian;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class NewsController extends Controller
 {
@@ -48,6 +49,16 @@ class NewsController extends Controller
         $latestNews = News::latest()->take(10)->get()->except($news->id);
         return view('app.content.news.show' , compact('news' , 'latestNews'));
     }
+
+
+    public function showId($id)
+    {
+        $news = News::findOrFail($id);
+        if ($news) 
+            return to_route('news.show', $news);
+        
+        abort(404);
+    }  
 
     private function dateFilter() 
     {
