@@ -28,6 +28,7 @@ class NewsRequest extends FormRequest
         if ($this->isMethod('post')) {
             return [
                 'title' => 'required|min:2|max:200',
+                'summery' => 'nullable|min:2|max:300',
                 'body' => 'required',
                 'image' => 'required|image|max:3072|min:1',
                 'published_at' => 'required',
@@ -43,6 +44,7 @@ class NewsRequest extends FormRequest
 
         return [
             'title' => 'required|min:2|max:200',
+            'summery' => 'nullable|min:2|max:300',
             'body' => 'required',
             'image' => 'nullable|image|max:3072|min:1',
             'published_at' => 'required',
@@ -56,11 +58,12 @@ class NewsRequest extends FormRequest
         ];
     }
 
-    public function attributes() 
+    public function attributes()
     {
         return [
             'galleries.*' => 'تصویر گالری',
-            'alts.*' => 'توضیح تصویر' 
+            'summery'     => 'خلاصه اخبار',
+            'alts.*'      => 'توضیح تصویر'
         ];
     }
 }

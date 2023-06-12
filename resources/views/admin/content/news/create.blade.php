@@ -86,6 +86,15 @@
                                 <span class="slug-box"></span>
                             </div>
                             <div class="form-group col-md-12 my-2">
+                                <input type="text" name="summery" value="{{ old('summery') }}"
+                                       placeholder="خلاصه اخبار را اینجا وارد کنید"
+                                       class="form-control custom-input-size custom-focus" id="title">
+                            </div>
+                            <div class="col-12 slug d-flex">
+                                <span class="text-red-500">کمتر از 200 کارکتر باشد</span>
+                                <span class="slug-box"></span>
+                            </div>
+                            <div class="form-group col-md-12 my-2">
                                 <textarea name="body" class="" id="editor">{{ old('body') }}</textarea>
                             </div>
                         </div>

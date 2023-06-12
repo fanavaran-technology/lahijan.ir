@@ -1103,9 +1103,6 @@ select {
 .w-10 {
   width: 2.5rem;
 }
-.w-11\/12 {
-  width: 91.666667%;
-}
 .w-12 {
   width: 3rem;
 }
@@ -1174,18 +1171,6 @@ select {
 }
 .w-screen {
   width: 100vw;
-}
-.w-10\/12 {
-  width: 83.333333%;
-}
-.w-8\/12 {
-  width: 66.666667%;
-}
-.w-\[32px\] {
-  width: 32px;
-}
-.w-48 {
-  width: 12rem;
 }
 .min-w-\[50\%\] {
   min-width: 50%;

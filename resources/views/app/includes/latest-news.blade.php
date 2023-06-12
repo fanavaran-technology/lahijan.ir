@@ -15,13 +15,10 @@
                     <a href="{{ $news->publicPath() }}">
                         <h5 class="text-gray-900  text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
                     </a>
-                   {{-- <p style="font-family: iransans" class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{!! Str::limit($news->body, 210, '...') !!}</p> --}}
-                   {{-- <a class="text-xs text-justify md:w-auto sm:w-20 text-gray-600">
-                    {!!  Str::limit($news->body
-                    , 200, '...') !!}
-               </a> --}}
+                    <p style="font-family: iransans" class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{{ Str::limit($news->summery, 150, '...') }}</p>
+
                 </section>
-             
+
                 <section class="flex justify-end items-center mt-3">
                     <a href="{{ $news->publicPath() }}" class="flex items-center">
                         <span
