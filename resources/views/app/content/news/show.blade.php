@@ -144,8 +144,8 @@
                     </section>
                 </section>
             </section>
-            <aside class="col-span-12 sidebar md:col-span-3 mx-4 md:mx-2 space-y-4">
-                <section class="overflow-y-auto px-0 bg-gray-100 shadow-sm bg-opacity-50 rounded">
+            <aside class=" col-span-12 sidebar md:col-span-3 mx-4 md:mx-2 space-y-4">
+                <section class="overflow-y-auto sidebar-show px-0 bg-gray-100 shadow-sm bg-opacity-50 rounded">
                     <section class="flex text-gray-700 items-center px-2 py-4 border-b">
                         <span class="font-semibold text-sm">جدیدترین اخبار</span>
                     </section>

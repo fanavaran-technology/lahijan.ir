@@ -7,6 +7,7 @@
 <!-- City -->
 <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"/>
 
+<link rel="stylesheet" href="{{ asset("assets/app/css/style.css") }}">
 <link rel="stylesheet" href="{{ asset("assets/app/css/slider.css") }}">
 
 <link rel="icon" href="{{ asset(Setting::getValue('logo')) }}">
