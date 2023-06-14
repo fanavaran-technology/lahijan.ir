@@ -15,8 +15,7 @@
                     <a href="{{ $news->publicPath() }}">
                         <h5 class="text-gray-900  text-base md:text-lg lg:text-xl font-medium mt-3">{{ $news->title }}</h5>
                     </a>
-                    <p style="font-family: iransans" class="text-gray-600 text-sm lg:text-base mt-2 mb-4" >{{ Str::limit($news->summery, 150, '...') }}</p>
-
+                    <p style="font-family: iransans" class="text-gray-500 text-xs leading-6 mt-2 mb-4" >{{ Str::limit($news->summery, 300, '...') }}</p>
                 </section>
 
                 <section class="flex justify-end items-center mt-3">
