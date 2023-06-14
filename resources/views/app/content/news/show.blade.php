@@ -204,10 +204,6 @@
         <div id="container" class="container">
         </div>
     </main>
-
-
-
-
 @endsection
 
 @section('script')
