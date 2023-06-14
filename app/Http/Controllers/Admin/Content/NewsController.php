@@ -94,12 +94,6 @@ class NewsController extends Controller
             DB::transaction(function () use ($request, $imageService) {
                 $inputs = $request->all();
 
-                // save image
-                if ($request->hasFile('image')) {
-                    $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
-                    $inputs['image'] = $imageService->save($inputs['image']);
-                }
-
                 // attach video to news
                 if ($request->filled('video'))
                     $inputs['video_id'] = $this->attachVideo($inputs['video']);
@@ -156,19 +150,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, News $news, ImageService $imageService): RedirectResponse
+    public function update(NewsRequest $request, News $news): RedirectResponse
     {
-        DB::transaction(function () use ($request, $news, $imageService) {
+        DB::transaction(function () use ($request, $news) {
             $inputs = $request->all();
-
-            // save image
-            if ($request->hasFile('image')) {
-                if (!empty($news->image['directory']))
-                    $imageService->deleteImage($news->image);
-
-                $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "news");
-                $inputs['image'] = $imageService->save($inputs['image']);
-            }
 
             // update check inputs
             $inputs['is_draft'] = $inputs['is_draft'] ?? 0;

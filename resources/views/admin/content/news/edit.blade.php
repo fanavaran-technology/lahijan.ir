@@ -107,8 +107,11 @@
                                                 <table class="table table-striped" id="table-id">
                                                     <thead>
                                                         <div class="d-flex justify-content-between py-2">
-                                                            <h6 class="font-bold">گالری تصاویر خبر ( {{ $news->title }} ) </h6>
-                                                            <a href="{{ route('admin.content.news.index-gallery', $news->id) }}">مدیریت تصاویر</a>
+                                                            <h6 class="font-bold">گالری تصاویر خبر ( {{ $news->title }} )
+                                                            </h6>
+                                                            <a
+                                                                href="{{ route('admin.content.news.index-gallery', $news->id) }}">مدیریت
+                                                                تصاویر</a>
                                                         </div>
                                                         <th>#</th>
                                                         <th>alt تصویر</th>
@@ -122,9 +125,11 @@
                                                                 <small>{{ $image->alt ?? 'هیچ توضیحی وجود ندارد' }}</small>
                                                             </td>
                                                             <td>
-                                                                <img src="{{ asset($image->image) }}" alt="{{ $image->alt }}" class="rounded-lg" height="70" width="120">
+                                                                <img src="{{ asset($image->image) }}"
+                                                                    alt="{{ $image->alt }}" class="rounded-lg"
+                                                                    height="70" width="120">
                                                             </td>
-                                                        </td>
+                                                            </td>
                                                         </tr>
                                                     @empty
                                                         <p class="text-center text-muted">هیچ عکسی وجود ندارد.</p>
@@ -162,13 +167,12 @@
                                 <span class="slug-box"></span>
                             </div>
                             <div class="form-group col-md-12 my-2">
-                                <input type="text" name="summery" value="{{ old('summery', $news->summery) }}"
-                                       placeholder="خلاصه اخبار را اینجا وارد کنید"
-                                       class="form-control custom-input-size custom-focus" id="title">
+                                <textarea type="text" name="summery"
+                                    placeholder="خلاصه اخبار را اینجا وارد کنید"
+                                    class="form-control custom-input-size custom-focus" id="summery">{{ old('summery', $news->summery) }}</textarea>
                             </div>
                             <div class="col-12 slug d-flex">
-                                <span class="text-red-500">کمتر از 200 کارکتر باشد</span>
-                                <span class="slug-box"></span>
+                                <span class="text-red-500">حداکثر 300 کاراکتر</span>
                             </div>
                             <div class="form-group col-md-12 my-2">
                                 <textarea name="body" id="editor">{{ old('body', $news->body) }}</textarea>
@@ -205,9 +209,13 @@
                         <label for="" class="input-title">
                             تغییر تصویر شاخص
                         </label>
-                        <div class="form-group inputDnD">
-                            <input type="file" class="form-control-file" name="image" id="inputFile"
-                                onchange="readUrl(this)" data-title="کلیک کنید یا تصویر را بکشید">
+                        <div class="input-group mb-2">
+                            <input type="text" id="image_label" class="form-control" name="image"
+                                aria-label="Image" aria-describedby="button-image" value="{{ old('image', $news->image) }}" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    id="button-image">انتخاب</button>
+                            </div>
                         </div>
                         <label for="" class="input-title d-block">
                             تصویر فعلی
@@ -332,17 +340,18 @@
                         </div>
                         <div class="form-group mt-2 custom-control custom-checkbox ">
                             <input type="checkbox" name="is_fire_station" value="1" @checked(old('is_fire_station', $news->is_fire_station))
-                                class="custom-control-input" id="is_fire_station" @cannot('manage_news') checked disabled @endcannot>
+                                class="custom-control-input" id="is_fire_station" @cannot('manage_news') checked disabled
+                                @endcannot>
                             <label class="custom-control-label input-title" for="is_fire_station">این خبر مربوط به آتش
                                 نشانی است</label>
                         </div>
                         @can('manage_news')
-                        <div class="form-group mt-2 custom-control custom-checkbox ">
-                            <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender', $news->is_auction_tender))
-                                class="custom-control-input" id="is_auction_tender">
-                            <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا
-                                مناقصه است</label>
-                        </div>
+                            <div class="form-group mt-2 custom-control custom-checkbox ">
+                                <input type="checkbox" name="is_auction_tender" value="1" @checked(old('is_auction_tender', $news->is_auction_tender))
+                                    class="custom-control-input" id="is_auction_tender">
+                                <label class="custom-control-label input-title" for="is_auction_tender">این یک مزایده یا
+                                    مناقصه است</label>
+                            </div>
                         @endcan
                         <div class="form-group custom-control custom-checkbox ">
                             <input type="checkbox" name="is_draft" value="1" @checked(old('is_draft', $news->is_draft))
@@ -509,19 +518,39 @@
             event.preventDefault();
             window.open('/file-manager/fm-button/?leftDisk=videos', 'fm', 'width=800,height=400');
         });
+    </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.getElementById('button-image').addEventListener('click', (event) => {
+                event.preventDefault();
+                inputId = 'image_label';
+                window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
+            });
+        });
+
+        // set file link
         function fmSetLink($url) {
-            const validFileType = $url.split('.')[1] === 'mp4';
-            if (validFileType) {
-                const videoPreview = document.querySelector('#videoPreview');
-                videoPreview.classList.remove('d-none');
-                videoPreview.setAttribute('src', $url);
-                videoPreview.value = $url;
-                $url = $url.replace(location.host, '', $url).substring(1);
-                document.querySelector('input[name=video]').value = $url;
-                successToast('ویدئو اضافه شد.')
-            } else
-                errorToast('فایل انتخابی باید یک ویدئو باشد.')
+
+            const fileType = $url.split('/')[1];
+
+            if (fileType == 'images') {
+                document.getElementById('image_label').value = $url;
+            } else {
+                const validFileType = $url.split('.')[1] === 'mp4';
+                if (validFileType) {
+                    const videoPreview = document.querySelector('#videoPreview');
+                    videoPreview.classList.remove('d-none');
+                    videoPreview.setAttribute('src', $url);
+                    videoPreview.value = $url;
+                    $url = $url.replace(location.host, '', $url).substring(1);
+                    document.querySelector('input[name=video]').value = $url;
+                    successToast('ویدئو اضافه شد.')
+                } else
+                    errorToast('فایل انتخابی باید یک ویدئو باشد.')
+            }
+
         }
     </script>
 
