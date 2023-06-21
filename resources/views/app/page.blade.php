@@ -35,16 +35,15 @@
                     <section class="flex text-gray-700 items-center px-2 py-4 border-b">
                         <span class="font-semibold text-sm">جدیدترین اخبار</span>
                     </section>
-                    <ul class="mt-2 divide-y">
+                    <ul class="divide-y">
                         @foreach ($latestNewsPage as $lastNews)
-                            <li class="mb-2">
+                            <li class="">
                                 <a href="{{ $lastNews->publicPath() }}"
                                    class="relative flex items-center p-2 text-base transition-all delay-150 ease-in-out hover:bg-gray-50 border-r-2 hover:border-green-500 space-x-2 space-x-reverse">
                                     <div class="space-y-2">
                                         <h5 class="flex-1 font-bold pl-3 md:text-xs lg:text-sm text-gray-600">
                                             {{ $lastNews->title }}
                                         </h5>
-                                        <div class="text-xs text-gray-500">{{ $lastNews->user->full_name }}</div>
                                         @if ($lastNews->video)
                                             <div
                                                 class="text-xs px-1 bg-indigo-400 text-gray-100 py-0.5 rounded absolute bottom-2 left-2 space-x-1 space-x-reverse flex">
