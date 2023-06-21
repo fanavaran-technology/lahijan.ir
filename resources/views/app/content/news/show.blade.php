@@ -2,29 +2,6 @@
 
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
-
-    <style>
-        .tippy-box[data-theme~='indigo'] {
-            color: azure;
-            background-color: rgb(35, 194, 48);
-        }
-
-        .tippy-box[data-theme~='indigo'][data-placement^='top']>.tippy-arrow::before {
-            border-top-color: rgb(35, 194, 48);
-        }
-
-        .tippy-box[data-theme~='indigo'][data-placement^='bottom']>.tippy-arrow::before {
-            border-bottom-color: rgb(35, 194, 48);
-        }
-
-        .tippy-box[data-theme~='indigo'][data-placement^='left']>.tippy-arrow::before {
-            border-left-color: rgb(35, 194, 48);
-        }
-
-        .tippy-box[data-theme~='indigo'][data-placement^='right']>.tippy-arrow::before {
-            border-right-color: rgb(35, 194, 48);
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -113,6 +90,11 @@
                                         class="p-1 ml-2 text-sm text-gray-600 bg-white hover:bg-white border border-gray-300 rounded">#{{ $tag->title }}</a>
                                 @endforeach
                             </section>
+                            @if ($news->summery)
+                            <section class="bg-gray-100 text-sm leading-6 p-2 rounded">
+                                {{ $news->summery }}
+                            </section>
+                            @endif
                         </section>
                         @if ($news->video)
                             <video id="news-video" class="video-js vjs-theme-forest rounded-lg" data-setup="{}" controls
