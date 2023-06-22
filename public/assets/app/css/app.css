@@ -747,15 +747,6 @@ select {
 .top-\[30\%\] {
   top: 30%;
 }
-.top-20 {
-  top: 5rem;
-}
-.top-32 {
-  top: 8rem;
-}
-.top-40 {
-  top: 10rem;
-}
 .z-10 {
   z-index: 10;
 }
@@ -1180,6 +1171,9 @@ select {
 }
 .w-screen {
   width: 100vw;
+}
+.w-48 {
+  width: 12rem;
 }
 .min-w-\[50\%\] {
   min-width: 50%;
@@ -1858,6 +1852,9 @@ select {
 }
 .pt-6 {
   padding-top: 1.5rem;
+}
+.pt-8 {
+  padding-top: 2rem;
 }
 .text-left {
   text-align: left;
@@ -2714,6 +2711,10 @@ input:checked:hover~.image-wrapper>div {
     height: 400px;
   }
 
+  .sm\:h-32 {
+    height: 8rem;
+  }
+
   .sm\:w-10 {
     width: 2.5rem;
   }
@@ -3389,9 +3390,4 @@ input:checked:hover~.image-wrapper>div {
   .xl\:p-0 {
     padding: 0px;
   }
-}
-
-.sidebar{
-  position: sticky;
-  top: 30px;
 }
