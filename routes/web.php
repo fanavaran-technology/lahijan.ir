@@ -55,7 +55,6 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 */
 require __DIR__ .'/auth.php';
 
-Auth::loginUsingId(1);
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
@@ -70,6 +69,7 @@ Route::prefix('shafaf')->group(function () {
 
     Route::resource('investments', AppInvestmentController::class)->parameters(['investments' => 'investment:slug'])->only('index', 'show');
 });
+
 
 // admin routes
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function () {
@@ -195,7 +195,7 @@ Route::get('/{page:slug}', PublicPageController::class)->name('page');
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
 
 
-                  
+
 
 
 

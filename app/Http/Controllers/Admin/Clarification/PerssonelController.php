@@ -145,8 +145,8 @@ class PerssonelController extends Controller
 
     public function fileImport(Request $request)
     {
-        return back()->with('toast-error' , 'این بخش در دسترس نیست');
-//         Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
-//         return back();
+//        return back()->with('toast-error' , 'این بخش در دسترس نیست');
+         Excel::import(new PerssonelImport, $request->file('file')->store('temp'));
+         return back();
     }
 }
