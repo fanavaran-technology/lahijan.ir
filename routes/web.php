@@ -193,9 +193,3 @@ Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
 
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
-
-
-
-
-
-
