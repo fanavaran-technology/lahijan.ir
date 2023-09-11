@@ -77,6 +77,17 @@ return [
             'throw' => false,
         ],
 
+        'backup' => [
+            'driver'   => 'ftp',
+            'host'     => '176.9.65.152',
+            'port'     => 21,
+            'username' => 'cftgooqv',
+            'password' => '8M6twe1C7o',
+            'root'     => '/lahijan',
+            'passive'  => true,
+            'ssl'      => false,
+            'timeout'  => 30,
+        ],
     ],
 
     /*
