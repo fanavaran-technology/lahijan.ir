@@ -79,11 +79,11 @@ return [
 
         'backup' => [
             'driver'   => 'ftp',
-            'host'     => '',
-            'port'     => 0,
-            'username' => '',
-            'password' => '',
-            'root'     => '',
+            'host'     => env("FTP_HOST"),
+            'port'     => 21,
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'root'     => '/lahijan',
             'passive'  => true,
             'ssl'      => false,
             'timeout'  => 30,
