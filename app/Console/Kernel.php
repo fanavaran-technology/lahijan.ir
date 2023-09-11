@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('backup:run');
+        $schedule->command('php artisan backup:run');
     }
 
     /**
