@@ -8,7 +8,7 @@
             </svg>
             <span>سامانه تور مجازی</span>
         </div>
-        <a href="#!" onclick="launch_toast()" class="bg-black">
+        <a href="https://tour.lahijan.ir" target="_blank" class="bg-black">
             <img src="{{ asset('images/settings/virtual-tour.jpg') }}"
                 class="w-full h-52 sm:h-60 object-cover rounded-xl">
         </a>
