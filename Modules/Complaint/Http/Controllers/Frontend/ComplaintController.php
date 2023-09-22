@@ -14,8 +14,8 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        dd('hi');
-        // return view('complaint::index');
+        // dd('hi');
+        return view('complaint::create');
     }
 
     /**

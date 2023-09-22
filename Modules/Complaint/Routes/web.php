@@ -14,7 +14,8 @@ use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendC
 */
 
 Route::prefix('complaint')->group(function() {
-    Route::get('/form', [FrontendComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('/create', [FrontendComplaintController::class, 'index'])->name('complaints.create');
+    Route::post('/store', [FrontendComplaintController::class, 'index'])->name('complaints.store');
 });
 
 
