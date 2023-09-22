@@ -1,4 +1,6 @@
 <?php
+use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
+use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,5 +14,10 @@
 */
 
 Route::prefix('complaint')->group(function() {
-    Route::get('/', 'ComplaintController@index');
+    Route::get('/form', [FrontendComplaintController::class, 'index'])->name('complaints.index');
+});
+
+
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
+    Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
 });

@@ -50,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Complaint', '/Routes/web.php'));
+
     }
 
     /**
