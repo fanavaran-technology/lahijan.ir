@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: [
         "./resources/views/app/**/*.blade.php",
+        "./Modules/Complaint/Resources/**/*.blade.php",
     ],
 
     theme: {
