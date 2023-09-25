@@ -441,6 +441,87 @@ active
                 </li>
             @endcan
 
+            @can('manage_clarification')
+                    <p class="text-muted text-sm nav-heading mt-2 mb-1">
+                        <small>سامانه شکایت</small>
+                    </p>
+                    <li class="nav-item dropdown @active('admin.clarification.expert')
+active
+@endactive">
+                        <a href="#expert" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-wallet2" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+                            </svg>
+                            <span class="ml-3 item-text">کارشناس</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="expert">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.perssonels.index') }}"><span
+                                        class="ml-1 item-text">کارشناس جدید</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.clarification.salaries.index') }}"><span
+                                        class="ml-1 item-text">کارشناسان</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        class="nav-item dropdown @active('admin.clarification.contracts')
+active
+@endactive @active('admin.clarification.complaint')
+active
+@endactive">
+                        <a href="#complaint" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-journal-text" viewBox="0 0 16 16">
+                                <path
+                                    d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                            </svg>
+                            <span class="ml-3 item-text">شکایات</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="complaint">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('complaints.index') }}"><span
+                                        class="ml-1 item-text">همه شکایت ها</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown @active('admin.clarification.department') active @endactive @active('admin.clarification.categories') active @endactive">
+                        <a href="#department" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" width="18" height="18">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/>
+                            </svg>
+                            <span class="ml-3 item-text">دپارتمان</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="department">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.investments.index') }}"><span
+                                        class="ml-1 item-text">همه دپارتمان ها</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.categories.index') }}"><span
+                                        class="ml-1 item-text">دپارتمان جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+
 
             @can('manage_users')
                 <p class="text-muted text-sm nav-heading mt-2 mb-1">
@@ -470,6 +551,7 @@ active
                     </ul>
                 </li>
             @endcan
+
             @can('manage_roles')
                 <li class="nav-item dropdown @active('admin.user.roles')
 active

@@ -5,6 +5,8 @@ namespace Modules\Complaint\Http\Controllers\Frontend;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Complaint\Entities\Complaint;
+use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
@@ -14,7 +16,7 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        // dd('hi');
+//         dd('hi');
         return view('complaint::create');
     }
 
@@ -34,7 +36,18 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+
+        $randomNumber = rand(111111111, 999999999);
+        while ( Complaint::where('tracking_code', $randomNumber)->exists())
+        {
+            $randomNumber = rand(111111111, 999999999);
+        }
+        $inputs['tracking_code'] = $randomNumber;
+
+        Complaint::create($inputs);
+
+
     }
 
     /**

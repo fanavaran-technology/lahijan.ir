@@ -24,6 +24,7 @@ class CreateComplaintsTable extends Migration
             $table->string('alley')->nullable();
             $table->string('deadend')->nullable();
             $table->string('builing_name')->nullable()->comment('نام مجتمع');
+            $table->string('postal_code')->nullable();
             $table->string('tracking_code');
             $table->longText("description");
             $table->foreignId('reference_id')->nullable()->constrained('users');

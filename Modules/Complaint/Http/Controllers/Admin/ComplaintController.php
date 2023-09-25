@@ -5,6 +5,7 @@ namespace Modules\Complaint\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Complaint\Entities\Complaint;
 
 class ComplaintController extends Controller
 {
@@ -14,8 +15,11 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        dd('admin');
-        return view('complaint::index');
+        $complaints = Complaint::query();
+
+        $complaints = $complaints->latest()->paginate(10);
+
+        return view('complaint::index'  , compact('complaints'));
     }
 
     /**
