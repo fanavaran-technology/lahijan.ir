@@ -38,20 +38,16 @@
                                     @endrequest
                                 </div>
                                 <th>#</th>
-                                <th>نام و نام خانوادگی</th>
-                                <th>شکایت</th>
+                                <th>عنوان شکایت</th>
                                 </tr>
                                 </thead>
                                 @forelse($complaints as $complaint)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <small>{!! Str::limit($complaint->description, 100, '...') !!}</small>
+                                            <small>{{ $complaints->subject }}</small>
                                         </td>
-
                                         <td>
-
-
                                             <form
                                                 action=""
                                                 class="d-inline" method="post">
