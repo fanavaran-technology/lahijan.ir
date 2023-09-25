@@ -2,9 +2,11 @@
 
 namespace Modules\Complaint\Http\Controllers\Frontend;
 
+use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
@@ -34,7 +36,7 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -47,34 +49,21 @@ class ComplaintController extends Controller
         return view('complaint::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('complaint::edit');
-    }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function upload(Request $request, ImageService $imageService)
     {
-        //
-    }
+        $request->validate([
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024', // محدودیت نوع و اندازه فایل
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $uploadedFiles = $request->file('file');
+
+        $imageService->setImageName(Str::random(24));
+
+        $image = $imageService->save($uploadedFiles);
+
+
+
+        return response()->json(['path' => $image]);
     }
 }
