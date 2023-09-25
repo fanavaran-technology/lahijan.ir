@@ -58,7 +58,7 @@
                         {{-- first name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                            <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
+                                <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
@@ -393,6 +393,37 @@
                                 </svg>
                                 <span>شرح شکایت</span>
                             </section>
+                            <section class="col-span-full mb-3">
+                                <div class="relative w-full group">
+                                    <input type="text" name="subject" value="{{ old('subject') }}" autofocus
+                                        class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                        placeholder=" " />
+
+                                    <label
+                                        class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">موضوع شکایت
+                                        *
+                                    </label>
+
+                                    <fieldset
+                                        class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
+                                        group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                        <legend
+                                            class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
+                                            موضوع شکایت * </legend>
+                                    </fieldset>
+
+                                    <fieldset
+                                        class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
+                                        group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                        <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">موضوع
+                                            شکایت *</legend>
+                                    </fieldset>
+                                </div>
+                                @error('subject')
+                                    <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                                @enderror
+                            </section>
                             <textarea name="description" id="editor" cols="30" rows="10">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
@@ -504,7 +535,7 @@
             items.push(path);
 
             files.value = items;
-            
+
             console.log(files.value);
         });
     </script>

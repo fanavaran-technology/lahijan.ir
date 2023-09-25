@@ -60,9 +60,8 @@ class ComplaintController extends Controller
 
         $imageService->setImageName(Str::random(24));
 
+        $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
         $image = $imageService->save($uploadedFiles);
-
-
 
         return response()->json(['path' => $image]);
     }
