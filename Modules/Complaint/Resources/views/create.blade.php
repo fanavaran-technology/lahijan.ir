@@ -54,20 +54,22 @@
                         <span>اطلاعات هویتی</span>
                     </section>
 
-                    <section class="grid grid-cols-12 gap-2.5 mt-4 space-y-3 space-y-reverse">
+                    <section class="grid grid-cols-12 gap-2.5 mt-4">
                         {{-- first name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                                <input type="text" autofocus name="first_name"
+                                <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام </label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
+                                    *
+                                </label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -75,7 +77,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام *</legend>
                                 </fieldset>
@@ -91,12 +93,15 @@
                                 <input type="text" name="last_name" value="{{ old('last_name') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
+
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام خانوادگی </label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">
+                                    نام خانوادگی *
+                                </label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -104,7 +109,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام خانوادگی *
                                     </legend>
@@ -123,11 +128,12 @@
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد ملی</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد
+                                    ملی *</label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -135,7 +141,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کد ملی *
                                     </legend>
@@ -149,15 +155,16 @@
                         {{-- phone number --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                                <input type="number" name="phone_number"
+                                <input type="number" name="phone_number" value="{{ old('phone_number') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شماره تلفن</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شماره
+                                    تلفن *</label>
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -165,7 +172,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">شماره تلفن *
                                     </legend>
@@ -180,8 +187,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                          </svg>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
                         <span>آدرس</span>
                     </section>
 
@@ -189,16 +197,17 @@
                         {{-- main st --}}
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-full group">
-                                <input type="text" name="main_st"
+                                <input type="text" name="main_st" value="{{ old('main_st') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان اصلی</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
+                                    اصلی *</label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -206,7 +215,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان اصلی *
                                     </legend>
@@ -220,16 +229,17 @@
                         {{-- aux.. st --}}
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-1/ group">
-                                <input type="text" name="auxiliary_st"
+                                <input type="text" name="auxiliary_st" value="{{ old('auxiliary_st') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان فرعی</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
+                                    فرعی</label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -237,7 +247,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان فرعی
                                     </legend>
@@ -251,16 +261,16 @@
                         {{-- alley --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                                <input type="text" name="alley"
+                                <input type="text" name="alley" value="{{ old('alley') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کوچه</label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -268,7 +278,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کوچه</legend>
                                 </fieldset>
@@ -281,16 +291,17 @@
                         {{-- deadend --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
-                                <input type="text" name="deadend"
+                                <input type="text" name="deadend" value="{{ old('deadend') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">بن بست</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">بن
+                                    بست</label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
@@ -298,7 +309,7 @@
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">بن بست
                                     </legend>
@@ -312,20 +323,25 @@
                         {{-- corporate name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                                <input type="text" name="builing_name"
+                                <input type="text" name="builing_name" value="{{ old('builing_name') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام مجتمع</label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
+                                    مجتمع</label>
+
+                                <fieldset
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
+                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         نام مجتمع</legend>
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام مجتمع
                                     </legend>
@@ -338,25 +354,25 @@
 
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
-
                                 <input type="number" name="number_plate" value="{{ old('number_plate') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">پلاک </label>
+                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">پلاک
+                                </label>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible 
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        کد پستی</legend>
+                                        پلاک</legend>
                                 </fieldset>
 
                                 <fieldset
-                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                    class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> پلاک</legend>
                                 </fieldset>
@@ -385,7 +401,8 @@
 
                                     <label
                                         class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
-                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">موضوع شکایت
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">موضوع
+                                        شکایت
                                         *
                                     </label>
 

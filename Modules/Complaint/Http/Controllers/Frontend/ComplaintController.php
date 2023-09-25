@@ -6,23 +6,11 @@ use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-<<<<<<< HEAD
 use Modules\Complaint\Entities\Complaint;
-=======
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-//         dd('hi');
-        return view('complaint::create');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +28,6 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $inputs = $request->all();
 
         $randomNumber = rand(111111111, 999999999);
@@ -51,11 +38,6 @@ class ComplaintController extends Controller
         $inputs['tracking_code'] = $randomNumber;
 
         Complaint::create($inputs);
-
-
-=======
-        dd($request->all());
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
     }
 
     /**
@@ -72,7 +54,7 @@ class ComplaintController extends Controller
     public function upload(Request $request, ImageService $imageService)
     {
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024', // محدودیت نوع و اندازه فایل
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024',
         ]);
 
         $uploadedFiles = $request->file('file');
