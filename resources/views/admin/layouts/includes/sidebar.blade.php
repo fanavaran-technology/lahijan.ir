@@ -148,9 +148,8 @@ active
                 </li>
             @endcan
             @can('manage_menus')
-                <li class="nav-item dropdown @active('admin.content.menus')
-active
-@endactive">
+
+                <li class="nav-item dropdown @active('admin.content.menus') active @endactive">
                     <a href="#menu" data-toggle="collapse" aria-expanded="false"
                        class="dropdown-toggle nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -173,17 +172,16 @@ active
                     </ul>
                 </li>
             @endcan
-            <li class="nav-item dropdown @active('admin.content.sliders')
-active
-@endactive">
-                <a href="#slider" data-toggle="collapse" aria-expanded="false"
-                   class="dropdown-toggle nav-link">
-                    <i class="fe fe-layers
-          fe-16"></i>
-                    <span class="ml-3 item-text">اسلایدر</span>
-                </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="slider">
-                    @can('manage_sliders')
+
+            @can('manage_sliders')
+
+                <li class="nav-item dropdown @active('admin.content.sliders') active @endactive">
+                    <a href="#slider" data-toggle="collapse" aria-expanded="false"
+                       class="dropdown-toggle nav-link">
+                        <i class="fe fe-layers fe-16"></i>
+                        <span class="ml-3 item-text">اسلایدر</span>
+                    </a>
+                    <ul class="collapse list-unstyled pl-4 w-100" id="slider">
                         <li class="nav-item">
                             <a class="nav-link pl-3" href="{{ route('admin.content.sliders.index') }}"><span
                                     class="ml-1 item-text">همه اسلایدر شهرداری</span>
@@ -193,255 +191,257 @@ active
                             <a class="nav-link pl-3" href="{{ route('admin.content.sliders.create') }}"><span
                                     class="ml-1 item-text">اسلایدر جدید شهرداری</span></a>
                         </li>
+                        @can('manage_fire_sliders')
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.fire-sliders.index') }}"><span
+                                        class="ml-1 item-text">اسلایدر آتش نشانی</span></a>
+                            </li>
+                        @endcan
+                    </ul>
                     @endcan
-                    @can('manage_fire_sliders')
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.fire-sliders.index') }}"><span
-                                    class="ml-1 item-text">اسلایدر آتش نشانی</span></a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
 
-            @can('manage_theater')
-                <li class="nav-item dropdown @active('admin.content.theater') active @endactive">
-                    <a href="#Theater" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                            <path
-                                d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        </svg>
-                        <span class="ml-3 item-text">تئاتر خیابانی</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="Theater">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.theater.index') }}"><span
-                                    class="ml-1 item-text">همه تئاتر </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.theater.create') }}"><span
-                                    class="ml-1 item-text">تئاتر جدید</span></a>
-                        </li>
-                    </ul>
                 </li>
-            @endcan
+
+                @can('manage_theater')
+                    <li class="nav-item dropdown @active('admin.content.theater') active @endactive">
+                        <a href="#Theater" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                <path
+                                    d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            </svg>
+                            <span class="ml-3 item-text">تئاتر خیابانی</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="Theater">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.theater.index') }}"><span
+                                        class="ml-1 item-text">همه تئاتر </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.theater.create') }}"><span
+                                        class="ml-1 item-text">تئاتر جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
 
-            @can('manage_pages')
-                <li class="nav-item dropdown @active('admin.content.pages')
+                @can('manage_pages')
+                    <li class="nav-item dropdown @active('admin.content.pages')
 active
 @endactive">
-                    <a href="#page" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
-                            <path
-                                d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V5.5zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
-                            <path
-                                d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                        </svg>
-                        <span class="ml-3 item-text">صفحه ها</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="page">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.pages.index') }}"><span
-                                    class="ml-1 item-text">همه صفحات </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.pages.create') }}"><span
-                                    class="ml-1 item-text">صفحه جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                        <a href="#page" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-file-earmark-medical" viewBox="0 0 16 16">
+                                <path
+                                    d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V5.5zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
+                                <path
+                                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                            </svg>
+                            <span class="ml-3 item-text">صفحه ها</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="page">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.pages.index') }}"><span
+                                        class="ml-1 item-text">همه صفحات </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.pages.create') }}"><span
+                                        class="ml-1 item-text">صفحه جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
-            @can('manage_council')
-                <li class="nav-item dropdown @active('admin.content.council-members') active @endactive">
-                    <a href="#council" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-hammer" viewBox="0 0 16 16">
-                            <path
-                                d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
-                        </svg>
-                        <span class="ml-3 item-text">اعضا شورا شهر</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="council">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.council-members.index') }}"><span
-                                    class="ml-1 item-text">همه اعضا شورا شهر </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.council-members.create') }}"><span
-                                    class="ml-1 item-text">عضو جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                @can('manage_council')
+                    <li class="nav-item dropdown @active('admin.content.council-members') active @endactive">
+                        <a href="#council" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-hammer" viewBox="0 0 16 16">
+                                <path
+                                    d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
+                            </svg>
+                            <span class="ml-3 item-text">اعضا شورا شهر</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="council">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.council-members.index') }}"><span
+                                        class="ml-1 item-text">همه اعضا شورا شهر </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.content.council-members.create') }}"><span
+                                        class="ml-1 item-text">عضو جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
-            @can('manage_mayor')
-                <li class="nav-item dropdown @active('admin.content.mayors') active @endactive">
-                    <a href="#mayor" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-building" viewBox="0 0 16 16">
-                            <path
-                                d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
-                            <path
-                                d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
-                        </svg>
-                        <span class="ml-3 item-text">شهردارارن پیشن</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="mayor">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.mayors.index') }}"><span
-                                    class="ml-1 item-text">همه شهردارارن </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.content.mayors.create') }}"><span
-                                    class="ml-1 item-text">شهردار جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                @can('manage_mayor')
+                    <li class="nav-item dropdown @active('admin.content.mayors') active @endactive">
+                        <a href="#mayor" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-building" viewBox="0 0 16 16">
+                                <path
+                                    d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+                                <path
+                                    d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
+                            </svg>
+                            <span class="ml-3 item-text">شهردارارن پیشن</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="mayor">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.mayors.index') }}"><span
+                                        class="ml-1 item-text">همه شهردارارن </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.content.mayors.create') }}"><span
+                                        class="ml-1 item-text">شهردار جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
 
 
-            @can('manage_mayor_speech')
-                <li class="nav-item d-flex justify-content-between align-items-center">
-                    <a href="{{ route('admin.content.mayor-speech.index') }}" aria-expanded="false"
-                       class="nav-link @active('admin.communications')
+                @can('manage_mayor_speech')
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <a href="{{ route('admin.content.mayor-speech.index') }}" aria-expanded="false"
+                           class="nav-link @active('admin.communications')
 active
 @endactive">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-mic" viewBox="0 0 16 16">
-                            <path
-                                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
-                            <path
-                                d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
-                        </svg>
-                        <span class="ml-3 item-text">سخن شهردار</span><span class="sr-only">(current)</span>
-                    </a>
-                </li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-mic" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                <path
+                                    d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                            </svg>
+                            <span class="ml-3 item-text">سخن شهردار</span><span class="sr-only">(current)</span>
+                        </a>
+                    </li>
 
-            @endcan
+                @endcan
 
-            @can('manage_communication')
-                <li class="nav-item d-flex justify-content-between align-items-center">
-                    <a href="{{ route('admin.communications.index') }}" aria-expanded="false"
-                       class="nav-link @active('admin.communications')
+                @can('manage_communication')
+                    <li class="nav-item d-flex justify-content-between align-items-center">
+                        <a href="{{ route('admin.communications.index') }}" aria-expanded="false"
+                           class="nav-link @active('admin.communications')
 active
 @endactive">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5"
-                             stroke="currentColor" width="18" height="18">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"/>
-                        </svg>
-                        <span class="ml-3 item-text">امور شهروندان</span><span class="sr-only">(current)</span>
-                    </a>
-                    <a href="#"
-                       class="badge badge-pill font-sans badge-primary mr-2">{{ $communications->count() }}</a>
-                </li>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke-width="1.5"
+                                 stroke="currentColor" width="18" height="18">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"/>
+                            </svg>
+                            <span class="ml-3 item-text">امور شهروندان</span><span class="sr-only">(current)</span>
+                        </a>
+                        <a href="#"
+                           class="badge badge-pill font-sans badge-primary mr-2">{{ $communications->count() }}</a>
+                    </li>
 
-            @endcan
-
-
+                @endcan
 
 
-            @can('manage_clarification')
-                <p class="text-muted text-sm nav-heading mt-2 mb-1">
-                    <small>سامانه شفاف سازی</small>
-                </p>
-                <li class="nav-item dropdown @active('admin.clarification.perssonels')
+
+
+                @can('manage_clarification')
+                    <p class="text-muted text-sm nav-heading mt-2 mb-1">
+                        <small>سامانه شفاف سازی</small>
+                    </p>
+                    <li class="nav-item dropdown @active('admin.clarification.perssonels')
 active
 @endactive">
-                    <a href="#shafaf" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-wallet2" viewBox="0 0 16 16">
-                            <path
-                                d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
-                        </svg>
-                        <span class="ml-3 item-text">حقوق و دستمزد</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="shafaf">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3"
-                               href="{{ route('admin.clarification.perssonels.index') }}"><span
-                                    class="ml-1 item-text">ثبت اطلاعات کارکنان</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.clarification.salaries.index') }}"><span
-                                    class="ml-1 item-text">ثبت حقوق و دستمزد</span></a>
-                        </li>
-                    </ul>
-                </li>
-                <li
-                    class="nav-item dropdown @active('admin.clarification.contracts')
+                        <a href="#shafaf" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-wallet2" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+                            </svg>
+                            <span class="ml-3 item-text">حقوق و دستمزد</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="shafaf">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.perssonels.index') }}"><span
+                                        class="ml-1 item-text">ثبت اطلاعات کارکنان</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.clarification.salaries.index') }}"><span
+                                        class="ml-1 item-text">ثبت حقوق و دستمزد</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        class="nav-item dropdown @active('admin.clarification.contracts')
 active
 @endactive @active('admin.clarification.salaries')
 active
 @endactive">
-                    <a href="#contracts" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-journal-text" viewBox="0 0 16 16">
-                            <path
-                                d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                            <path
-                                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                            <path
-                                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                        </svg>
-                        <span class="ml-3 item-text">قرارداد ها</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="contracts">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.clarification.contracts.index') }}"><span
-                                    class="ml-1 item-text">همه قرارداد ها</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3"
-                               href="{{ route('admin.clarification.contracts.create') }}"><span
-                                    class="ml-1 item-text">قرارداد جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown @active('admin.clarification.investments') active @endactive @active('admin.clarification.categories') active @endactive">
-                    <a href="#investment" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" width="18" height="18">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/>
-                        </svg>
-                        <span class="ml-3 item-text">پروژه های سرمایه گذاری</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="investment">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3"
-                               href="{{ route('admin.clarification.investments.index') }}"><span
-                                    class="ml-1 item-text">همه پروژه ها</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3"
-                               href="{{ route('admin.clarification.categories.index') }}"><span
-                                    class="ml-1 item-text">دسته بندی پروژه ها</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                        <a href="#contracts" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-journal-text" viewBox="0 0 16 16">
+                                <path
+                                    d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                <path
+                                    d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                <path
+                                    d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                            </svg>
+                            <span class="ml-3 item-text">قرارداد ها</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="contracts">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.clarification.contracts.index') }}"><span
+                                        class="ml-1 item-text">همه قرارداد ها</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.contracts.create') }}"><span
+                                        class="ml-1 item-text">قرارداد جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown @active('admin.clarification.investments') active @endactive @active('admin.clarification.categories') active @endactive">
+                        <a href="#investment" data-toggle="collapse" aria-expanded="false"
+                           class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" width="18" height="18">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/>
+                            </svg>
+                            <span class="ml-3 item-text">پروژه های سرمایه گذاری</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="investment">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.investments.index') }}"><span
+                                        class="ml-1 item-text">همه پروژه ها</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.categories.index') }}"><span
+                                        class="ml-1 item-text">دسته بندی پروژه ها</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
-            @can('manage_clarification')
+                @can('manage_complaint')
                     <p class="text-muted text-sm nav-heading mt-2 mb-1">
                         <small>سامانه شکایت</small>
                     </p>
@@ -523,62 +523,62 @@ active
                 @endcan
 
 
-            @can('manage_users')
-                <p class="text-muted text-sm nav-heading mt-2 mb-1">
-                    <small>بخش کاربران و دسترسی ها </small>
-                </p>
-                <li class="nav-item dropdown @active('admin.user.users')
+                @can('manage_users')
+                    <p class="text-muted text-sm nav-heading mt-2 mb-1">
+                        <small>بخش کاربران و دسترسی ها </small>
+                    </p>
+                    <li class="nav-item dropdown @active('admin.user.users')
 active
 @endactive">
-                    <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-people" viewBox="0 0 16 16">
-                            <path
-                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
-                        </svg>
-                        <span class="ml-3 item-text">کاربران</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="users">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.user.users.index') }}"><span
-                                    class="ml-1 item-text">همه کاربران </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.user.users.create') }}"><span
-                                    class="ml-1 item-text">کاربر جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                        <a href="#users" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-people" viewBox="0 0 16 16">
+                                <path
+                                    d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                            </svg>
+                            <span class="ml-3 item-text">کاربران</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="users">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.user.users.index') }}"><span
+                                        class="ml-1 item-text">همه کاربران </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.user.users.create') }}"><span
+                                        class="ml-1 item-text">کاربر جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
 
-            @can('manage_roles')
-                <li class="nav-item dropdown @active('admin.user.roles')
+                @can('manage_roles')
+                    <li class="nav-item dropdown @active('admin.user.roles')
 active
 @endactive">
-                    <a href="#roles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-shield-exclamation" viewBox="0 0 16 16">
-                            <path
-                                d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                            <path
-                                d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z"/>
-                        </svg>
-                        <span class="ml-3 item-text">سطوح دسترسی</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="roles">
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.user.roles.index') }}"><span
-                                    class="ml-1 item-text">همه نقش ها </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pl-3" href="{{ route('admin.user.roles.create') }}"><span
-                                    class="ml-1 item-text">نقش جدید</span></a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                        <a href="#roles" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-shield-exclamation" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                                <path
+                                    d="M7.001 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z"/>
+                            </svg>
+                            <span class="ml-3 item-text">سطوح دسترسی</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100" id="roles">
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.user.roles.index') }}"><span
+                                        class="ml-1 item-text">همه نقش ها </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('admin.user.roles.create') }}"><span
+                                        class="ml-1 item-text">نقش جدید</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
         </ul>
 
     </nav>

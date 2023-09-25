@@ -6,10 +6,9 @@ use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-<<<<<<< HEAD
+
 use Modules\Complaint\Entities\Complaint;
-=======
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
+
 use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
@@ -20,7 +19,7 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-//         dd('hi');
+
         return view('complaint::create');
     }
 
@@ -40,7 +39,7 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
+
         $inputs = $request->all();
 
         $randomNumber = rand(111111111, 999999999);
@@ -53,9 +52,6 @@ class ComplaintController extends Controller
         Complaint::create($inputs);
 
 
-=======
-        dd($request->all());
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
     }
 
     /**

@@ -21,12 +21,18 @@ class Complaint extends Model
         'builing_name',
         'postal_code',
         'tracking_code',
+        'subject',
         'description',
         'is_answered',
         'answer',
         'referenced_at',
         'answered_at'
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
 
 

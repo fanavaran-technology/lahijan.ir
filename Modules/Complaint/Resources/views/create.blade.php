@@ -31,12 +31,12 @@
                 <section class="md:w-8/12 bg-white shadow-sm p-3 my-3 md:my-8 mx-1.5 sm:mx-3 md:mx-auto rounded-3xl">
                     @if ($message = session('toast-success'))
                         <div class="flex p-4 mb-4 text-sm rounded-lg bg-low-dark text-green-400 border border-green-400"
-                            role="alert">
+                             role="alert">
                             <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 ml-3" fill="currentColor"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                    clip-rule="evenodd"></path>
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                      clip-rule="evenodd"></path>
                             </svg>
                             <span class="sr-only">Info</span>
                             <div>
@@ -47,39 +47,26 @@
 
                     <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                  d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                         </svg>
                         <span>اطلاعات هویتی</span>
                     </section>
 
-<<<<<<< HEAD
-                    <section class="grid grid-cols-12 gap-2.5 mt-4 space-y-3 space-y-reverse">
-                        {{-- first name --}}
-                        <section class="col-span-full md:col-span-6 lg:col-span-3">
-                            <div class="relative w-full group">
-                                <input type="text" autofocus name="first_name"
-=======
                     <section class="grid grid-cols-12 gap-2.5 mt-4">
                         {{-- first name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-                            <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام </label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
                                     *
                                 </label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -96,7 +83,7 @@
                                 </fieldset>
                             </div>
                             @error('first_name')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
@@ -104,18 +91,14 @@
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="text" name="last_name" value="{{ old('last_name') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
+
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام خانوادگی </label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">
                                     نام خانوادگی *
                                 </label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -133,7 +116,7 @@
                                 </fieldset>
                             </div>
                             @error('last_name')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
@@ -141,18 +124,13 @@
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="number" name="national_code" value="{{ old('national_code') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد ملی</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد
                                     ملی *</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -170,30 +148,21 @@
                                 </fieldset>
                             </div>
                             @error('national_code')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         {{-- phone number --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-<<<<<<< HEAD
-                                <input type="number" name="phone_number"
-=======
                                 <input type="number" name="phone_number" value="{{ old('phone_number') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شماره تلفن</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شماره
                                     تلفن *</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
@@ -210,22 +179,17 @@
                                 </fieldset>
                             </div>
                             @error('phone_number')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
                     </section>
                     <section class="my-4 flex items-center space-x-2 space-x-reverse text-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-<<<<<<< HEAD
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                          </svg>
-=======
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                         </svg>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
                         <span>آدرس</span>
                     </section>
 
@@ -233,23 +197,14 @@
                         {{-- main st --}}
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-full group">
-<<<<<<< HEAD
-                                <input type="text" name="main_st"
-=======
                                 <input type="text" name="main_st" value="{{ old('main_st') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان اصلی</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
                                     اصلی *</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -267,30 +222,21 @@
                                 </fieldset>
                             </div>
                             @error('main_st')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         {{-- aux.. st --}}
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-1/ group">
-<<<<<<< HEAD
-                                <input type="text" name="auxiliary_st"
-=======
                                 <input type="text" name="auxiliary_st" value="{{ old('auxiliary_st') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان فرعی</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
                                     فرعی</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -308,20 +254,16 @@
                                 </fieldset>
                             </div>
                             @error('auxiliary_st')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         {{-- alley --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-<<<<<<< HEAD
-                                <input type="text" name="alley"
-=======
                                 <input type="text" name="alley" value="{{ old('alley') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -342,30 +284,21 @@
                                 </fieldset>
                             </div>
                             @error('alley')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         {{-- deadend --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
-<<<<<<< HEAD
-                                <input type="text" name="deadend"
-=======
                                 <input type="text" name="deadend" value="{{ old('deadend') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">بن بست</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">بن
                                     بست</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -383,30 +316,21 @@
                                 </fieldset>
                             </div>
                             @error('deadend')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         {{-- corporate name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
-<<<<<<< HEAD
-                                <input type="text" name="builing_name"
-=======
                                 <input type="text" name="builing_name" value="{{ old('builing_name') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام مجتمع</label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
                                     مجتمع</label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -424,29 +348,20 @@
                                 </fieldset>
                             </div>
                             @error('builing_name')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
 
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
-<<<<<<< HEAD
-                                <input type="number" name="postal_code"
-=======
-                                <input type="number" name="number_plate" value="{{ old('number_plate') }}"
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                <input type="number" name="postal_code" value="{{ old('postal_code') }}"
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
-<<<<<<< HEAD
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">پلاک </label>
-=======
-                                    class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">پلاک
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد پستی
                                 </label>
->>>>>>> bad449666a8428bf354abe1194dfbc03373f29be
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
@@ -459,11 +374,11 @@
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> پلاک</legend>
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> کد پستی</legend>
                                 </fieldset>
                             </div>
-                            @error('number_plate')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @error('postal_code')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
                     </section>
@@ -472,15 +387,47 @@
                         <section class="col-span-full">
                             <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                 </svg>
                                 <span>شرح شکایت</span>
                             </section>
+                            <section class="col-span-full mb-3">
+                                <div class="relative w-full group">
+                                    <input type="text" name="subject" value="{{ old('subject') }}" autofocus
+                                           class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                           placeholder=" " />
+
+                                    <label
+                                        class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">موضوع
+                                        شکایت
+                                        *
+                                    </label>
+
+                                    <fieldset
+                                        class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
+                                        group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                        <legend
+                                            class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
+                                            موضوع شکایت * </legend>
+                                    </fieldset>
+
+                                    <fieldset
+                                        class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
+                                        group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                        <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">موضوع
+                                            شکایت *</legend>
+                                    </fieldset>
+                                </div>
+                                @error('subject')
+                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                                @enderror
+                            </section>
                             <textarea name="description" id="editor" cols="30" rows="10">{{ old('description') }}</textarea>
                             @error('description')
-                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
                     </section>
@@ -490,9 +437,9 @@
                         <section class="col-span-full">
                             <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
+                                          d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
                                 </svg>
                                 <span>مستندات (در صورت لزوم)</span>
                             </section>
@@ -512,11 +459,11 @@
 
                             </div>
                             <button type="button" id="upload-button"
-                                class="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 mt-2 px-4 rounded inline-flex items-center space-x-2 space-x-reverse">
+                                    class="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 mt-2 px-4 rounded inline-flex items-center space-x-2 space-x-reverse">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                     stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                                 </svg>
                                 <span>آپلود</span>
                             </button>
@@ -526,12 +473,12 @@
                     <section class="my-8 w-full flex flex-col items-center">
                         @recaptcha
                         @error('g-recaptcha-response')
-                            <div class="text-red-500 mt-2 text-center font-bold text-xs">{{ $message }}</div>
+                        <div class="text-red-500 mt-2 text-center font-bold text-xs">{{ $message }}</div>
                         @enderror
                     </section>
                     <section class="flex justify-center py-4">
                         <button type="submit" id="submit-button"
-                            class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">ثبت</button>
+                                class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">ثبت</button>
                     </section>
                 </section>
         </form>
@@ -589,7 +536,7 @@
             items.push(path);
 
             files.value = items;
-            
+
             console.log(files.value);
         });
     </script>
@@ -603,9 +550,9 @@
                 plugins: 'directionality table fullscreen',
                 language: 'fa',
                 toolbar: [{
-                        name: 'styles',
-                        items: ['styleselect']
-                    },
+                    name: 'styles',
+                    items: ['styleselect']
+                },
                     {
                         name: 'formatting',
                         items: ['bold', 'italic', 'underline']
