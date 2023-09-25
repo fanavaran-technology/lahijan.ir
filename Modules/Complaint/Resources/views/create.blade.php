@@ -354,13 +354,13 @@
 
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
-                                <input type="number" name="number_plate" value="{{ old('number_plate') }}"
+                                <input type="number" name="postal_code" value="{{ old('postal_code') }}"
                                     class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
                                     placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none 
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">پلاک
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد پستی
                                 </label>
 
                                 <fieldset
@@ -368,16 +368,16 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        پلاک</legend>
+                                        کد پستی</legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible 
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> پلاک</legend>
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> کد پستی</legend>
                                 </fieldset>
                             </div>
-                            @error('number_plate')
+                            @error('postal_code')
                                 <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
                             @enderror
                         </section>
