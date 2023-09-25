@@ -12,7 +12,6 @@
             </div>
         @endcan
         <div class="col-12">
-
             <div class="row my-4">
                 <!-- Small table -->
                 <div class="col-md-12">

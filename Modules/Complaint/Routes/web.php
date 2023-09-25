@@ -1,6 +1,7 @@
 <?php
 use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
 use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendComplaintController;
+use Modules\Complaint\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,19 @@ use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendC
 |
 */
 
+
+
+//admin complaint
+Route::prefix('complaint')->group(function() {
+    Route::get('/index', [AdminComplaintController::class, 'index'])->name('complaints.index');
+    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('complaints.store');
+});
+
 Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::get('/create', [FrontendComplaintController::class, 'index'])->name('create');
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
+
 
 });
 
