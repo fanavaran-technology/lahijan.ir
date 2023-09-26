@@ -23,10 +23,6 @@ class Complaint extends Model
         'tracking_code',
         'subject',
         'description',
-        'is_answered',
-        'answer',
-        'referenced_at',
-        'answered_at'
     ];
 
     public function getFullNameAttribute()
@@ -34,6 +30,23 @@ class Complaint extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
+
+    // relationships
+    public function files() 
+    {
+        return $this->hasMany(ComplaintFile::class);
+    }
+
+    public static function generateTrackingCode()
+    {
+        $randomNumber = rand(111111111, 999999999);
+
+        while (Complaint::where('tracking_code', $randomNumber)->exists()) {
+            $randomNumber = rand(111111111, 999999999);
+        }
+
+        return $randomNumber;
+    }
 
 
 }

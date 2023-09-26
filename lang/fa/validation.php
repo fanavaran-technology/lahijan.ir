@@ -242,6 +242,13 @@ return [
         'response'        =>   'پاسخ',
         'position'        =>   'موقعیت',
         'investor_task'   =>   'آورده سرمایه گذار',
-        'municipality_task'=>  'آورده شهرداری'
+        'municipality_task'=>  'آورده شهرداری',
+        'postal_code'      => 'کد پستی',
+        'main_st'          => 'خیابان اصلی', 
+        'subject'         => 'موضوع',
+        'auxiliary_st'    => 'خیابان فرعی',
+        'alley'           => 'کوچه',
+        'deadend'         => 'بن بست',
+        'builing_name'    => 'نام مجتمع',        
     ],
 ];
