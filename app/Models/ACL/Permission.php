@@ -70,6 +70,7 @@ class Permission extends Model
         'manage_mayor_speech'       =>       'دسترسی به سخن شهردار' ,
         'manage_fire_sliders'       =>       'دسترسی به اسلایدر آتش نشانی' ,
         'manage_fire_news'          =>       'دسترسی به اخبار آتش نشانی' ,
+        'manage_complaint'          =>       'دسترسی به سامانه شکایت' ,
     ];
 
 }

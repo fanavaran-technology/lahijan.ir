@@ -13,13 +13,18 @@ class ComplaintController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+
+    public function __construct()
+    {
+        $this->middleware('can:manage_complaint');
+    }
     public function index()
     {
         $complaints = Complaint::query();
 
         $complaints = $complaints->latest()->paginate(10);
 
-        return view('complaint::index'  , compact('complaints'));
+        return view('complaint::admin.index'  , compact('complaints'));
     }
 
     /**

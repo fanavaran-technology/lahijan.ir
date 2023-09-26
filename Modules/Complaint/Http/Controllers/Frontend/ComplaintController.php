@@ -6,11 +6,29 @@ use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+<<<<<<< HEAD
+
 use Modules\Complaint\Entities\Complaint;
+
+=======
+use Modules\Complaint\Entities\Complaint;
+>>>>>>> 422deeb8fa909b6575fa4b9e214be3b497fdca3c
 use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
+<<<<<<< HEAD
+    /**
+     * Display a listing of the resource.
+     * @return Renderable
+     */
+    public function index()
+    {
+
+        return view('complaint::create');
+    }
+=======
+>>>>>>> 422deeb8fa909b6575fa4b9e214be3b497fdca3c
 
     /**
      * Show the form for creating a new resource.
@@ -28,6 +46,10 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 422deeb8fa909b6575fa4b9e214be3b497fdca3c
         $inputs = $request->all();
 
         $randomNumber = rand(111111111, 999999999);
@@ -38,6 +60,11 @@ class ComplaintController extends Controller
         $inputs['tracking_code'] = $randomNumber;
 
         Complaint::create($inputs);
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 422deeb8fa909b6575fa4b9e214be3b497fdca3c
     }
 
     /**
