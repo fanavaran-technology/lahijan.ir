@@ -472,7 +472,7 @@ active
                     <li
                         class="nav-item dropdown @active('admin.clarification.contracts')
 active
-@endactive @active('admin.clarification.complaint')
+@endactive @active('admin.complaint.index')
 active
 @endactive">
                         <a href="#complaint" data-toggle="collapse" aria-expanded="false"
@@ -490,7 +490,7 @@ active
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="complaint">
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="{{ route('complaints.index') }}"><span
+                                <a class="nav-link pl-3" href="{{ route('complaints.create') }}"><span
                                         class="ml-1 item-text">همه شکایت ها</span>
                                 </a>
                             </li>

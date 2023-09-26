@@ -15,10 +15,8 @@ use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendC
 
 Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
-    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
-    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware('throttle:2,1');
-
-
+    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:3,10');
+    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware('throttle:60,10');
 });
 
 
