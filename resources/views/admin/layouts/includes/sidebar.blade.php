@@ -458,6 +458,12 @@ active
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="expert">
                             <li class="nav-item">
+                                <a class="nav-link pl-3"
+                                   href="{{ route('admin.clarification.perssonels.index') }}"><span
+                                        class="ml-1 item-text">کارشناس جدید</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link pl-3" href="{{ route('admin.clarification.salaries.index') }}"><span
                                         class="ml-1 item-text">کارشناسان</span></a>
                             </li>

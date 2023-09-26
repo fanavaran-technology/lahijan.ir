@@ -12,23 +12,82 @@
         input[type=number] {
             direction: ltr !important;
         }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
     </style>
 @endsection
 
 @section('content')
     <section class="min-h-screen wrapper">
+        {{--Modal--}}
+        <div dir="rtl"
+            class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+            <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+                <div
+                    class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                         viewBox="0 0 18 18">
+                        <path
+                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                    </svg>
+                    <span class="text-sm">(Esc)</span>
+                </div>
+
+                <!-- Add margin if you want to see some of the overlay behind the modal-->
+                <div class="modal-content py-4 text-left px-6">
+                    <!--Title-->
+                    <div class="flex justify-between items-center pb-3">
+                        <p class="text-2xl font-bold mr-32">پیگیری شکایت !</p>
+                        <div class="modal-close cursor-pointer z-50">
+                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18"
+                                 height="18" viewBox="0 0 18 18">
+                                <path
+                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!--Body-->
+                    <div>
+                        <label for="first_name" class="block mb-2 text-right text-sm font-medium text-gray-900">کد پیگیری خود را وارد نمایید</label>
+                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="کد پیگیری" required>
+                    </div>
+
+
+                    <!--Footer-->
+                    <div class="flex justify-end pt-2">
+                        <button
+                            class="px-4 bg-green-300 hover:bg-green-500 p-3 rounded-lg text-black  mr-2">
+                            نمایش
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{--End Modal--}}
+
         <form action="{{ route('complaints.store') }}" method="post" id="complaint_form">
             @csrf
 
             <section class="min-h-screen">
-                <section class="text-center my-14">
+                <section class="text-center mt-14 mb-7">
                     <h1
                         class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
                         فرم ثبت <span class="underline underline-offset-3 decoration-4 decoration-blue-400">شکایات</span>
                     </h1>
-                    <div class="text-xs my-3 sm:text-sm text-gray-600">شما می توانید انتقادات پیشنهادات ، شکایات و درخواست
-                        هایتان را ثبت بفرمایید</div>
+                    <div class="text-xs my-3 sm:text-sm text-gray-600">شما می توانید انتقادات پیشنهادات ، شکایات و
+                        درخواست
+                        هایتان را ثبت بفرمایید
+                    </div>
                 </section>
+                <div class=" flex justify-end items-center mx-auto w-8/12 ">
+                    <a class="modal-open flex justify-center w-40 cursor-pointer bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded-lg">پیگیری شکایت</a>
+                </div>
                 <section class="md:w-8/12 bg-white shadow-sm p-3 my-3 md:my-8 mx-1.5 sm:mx-3 md:mx-auto rounded-3xl">
                     <div id="alert-success"
                         class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 hidden suc-alert"
@@ -75,13 +134,15 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        نام * </legend>
+                                        نام *
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام *</legend>
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام *
+                                    </legend>
                                 </fieldset>
                             </div>
                             <span class="text-red-500 font-bold text-xs er-first_name"></span>
@@ -105,13 +166,15 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        نام خانوادگی *</legend>
+                                        نام خانوادگی *
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام خانوادگی *
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام
+                                        خانوادگی *
                                     </legend>
                                 </fieldset>
                             </div>
@@ -135,7 +198,8 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        کد ملی *</legend>
+                                        کد ملی *
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
@@ -164,13 +228,15 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        شماره تلفن *</legend>
+                                        شماره تلفن *
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">شماره تلفن *
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">شماره تلفن
+                                        *
                                     </legend>
                                 </fieldset>
                             </div>
@@ -206,13 +272,15 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        خیابان اصلی *</legend>
+                                        خیابان اصلی *
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان اصلی *
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان اصلی
+                                        *
                                     </legend>
                                 </fieldset>
                             </div>
@@ -236,7 +304,8 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        خیابان فرعی</legend>
+                                        خیابان فرعی
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
@@ -265,13 +334,15 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        کوچه</legend>
+                                        کوچه
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                     group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
-                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کوچه</legend>
+                                    <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کوچه
+                                    </legend>
                                 </fieldset>
                             </div>
                             <span class="text-red-500 font-bold text-xs er-alley"></span>
@@ -294,7 +365,8 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        بن بست</legend>
+                                        بن بست
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
@@ -324,7 +396,8 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        نام مجتمع</legend>
+                                        نام مجتمع
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
@@ -355,7 +428,8 @@
                                     group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                        کد پستی</legend>
+                                        کد پستی
+                                    </legend>
                                 </fieldset>
 
                                 <fieldset
@@ -397,14 +471,16 @@
                                         group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
                                         <legend
                                             class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
-                                            موضوع شکایت * </legend>
+                                            موضوع شکایت *
+                                        </legend>
                                     </fieldset>
 
                                     <fieldset
                                         class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
                                         group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
                                         <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">موضوع
-                                            شکایت *</legend>
+                                            شکایت *
+                                        </legend>
                                     </fieldset>
                                 </div>
                                 <span class="text-red-500 font-bold text-xs er-subject"></span>
@@ -564,6 +640,48 @@
         }
 
     </script>
+    <script>
+        var openmodal = document.querySelectorAll('.modal-open')
+        for (var i = 0; i < openmodal.length; i++) {
+            openmodal[i].addEventListener('click', function (event) {
+                event.preventDefault()
+                toggleModal()
+            })
+        }
+
+        const overlay = document.querySelector('.modal-overlay')
+        overlay.addEventListener('click', toggleModal)
+
+        var closemodal = document.querySelectorAll('.modal-close')
+        for (var i = 0; i < closemodal.length; i++) {
+            closemodal[i].addEventListener('click', toggleModal)
+        }
+
+        document.onkeydown = function (evt) {
+            evt = evt || window.event
+            var isEscape = false
+            if ("key" in evt) {
+                isEscape = (evt.key === "Escape" || evt.key === "Esc")
+            } else {
+                isEscape = (evt.keyCode === 27)
+            }
+            if (isEscape && document.body.classList.contains('modal-active')) {
+                toggleModal()
+            }
+        };
+
+
+        function toggleModal() {
+            const body = document.querySelector('body')
+            const modal = document.querySelector('.modal')
+            modal.classList.toggle('opacity-0')
+            modal.classList.toggle('pointer-events-none')
+            body.classList.toggle('modal-active')
+        }
+
+
+    </script>
+
 
     <script>
         var acceptedFiles = ".jpg, .jpeg, .png, .gif";
@@ -598,13 +716,13 @@
             },
         });
 
-        document.getElementById("upload-button").addEventListener("click", function() {
+        document.getElementById("upload-button").addEventListener("click", function () {
             myDropzone.processQueue();
         });
 
         let items = [];
 
-        myDropzone.on("success", function(file, response) {
+        myDropzone.on("success", function (file, response) {
             const path = response.path;
 
             const files = document.getElementById('files');
@@ -665,4 +783,5 @@
     <script>
         renderEditor('#editor')
     </script>
+
 @endsection
