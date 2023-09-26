@@ -1,6 +1,7 @@
 <?php
 use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
 use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendComplaintController;
+use Modules\Complaint\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +14,23 @@ use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendC
 |
 */
 
+
+
+//admin complaint
+Route::prefix('complaint')->group(function() {
+    Route::get('/index', [AdminComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('/edit/{complaint}', [AdminComplaintController::class, 'edit'])->name('complaints.edit');
+});
+
 Route::prefix('complaint')->as('complaints.')->group(function() {
-    Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
+    Route::get('/create', [FrontendComplaintController::class, 'index'])->name('create');
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
-    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware('throttle:2,1');
+    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
 
 
 });
 
 
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
-    // admin routes
     Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
 });

@@ -5,6 +5,7 @@ namespace Modules\Complaint\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 
 class ComplaintController extends Controller
@@ -61,9 +62,9 @@ class ComplaintController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Complaint $complaint): View
     {
-        return view('complaint::edit');
+        return view('complaint::admin.edit' , compact('complaint'));
     }
 
     /**
