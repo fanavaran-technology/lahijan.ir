@@ -6,10 +6,10 @@ use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendC
 //Route department
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
     Route::get('departement', [DepartementController::class, 'index'])->name('departements.index');
-    Route::get('/create', [DepartementController::class, 'create'])->name('departements.create');
-    Route::post('/store', [DepartementController::class, 'store'])->name('departements.store');
-    Route::get('/edit/{departement}', [DepartementController::class, 'edit'])->name('departements.edit');
-    Route::put('/update/{departement}', [DepartementController::class, 'update'])->name('departements.update');
+    Route::get('departement/create', [DepartementController::class, 'create'])->name('departements.create');
+    Route::post('departement/store', [DepartementController::class, 'store'])->name('departements.store');
+    Route::get('departement/edit/{departement}', [DepartementController::class, 'edit'])->name('departements.edit');
+    Route::put('departement/update/{departement}', [DepartementController::class, 'update'])->name('departements.update');
 });
 
 //Route complaint
@@ -21,5 +21,5 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
 
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
     Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
-    Route::get('/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
+    Route::get('complaint/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
 });
