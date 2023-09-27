@@ -25,7 +25,7 @@ class ComplaintController extends Controller
 
         $complaints = $complaints->latest()->paginate(10);
 
-        return view('complaint::admin.index'  , compact('complaints'));
+        return view('complaint::admin.complaint.index'  , compact('complaints'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ComplaintController extends Controller
      */
     public function edit(Complaint $complaint): View
     {
-        return view('complaint::admin.edit' , compact('complaint'));
+        return view('complaint::admin.complaint.edit' , compact('complaint'));
     }
 
     /**

@@ -490,7 +490,7 @@ active
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="complaint">
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="{{ route('complaints.index') }}"><span
+                                <a class="nav-link pl-3" href="{{ route('admin.complaints.index') }}"><span
                                         class="ml-1 item-text">همه شکایت ها</span>
                                 </a>
                             </li>
@@ -509,13 +509,13 @@ active
                         <ul class="collapse list-unstyled pl-4 w-100" id="department">
                             <li class="nav-item">
                                 <a class="nav-link pl-3"
-                                   href="{{ route('admin.clarification.investments.index') }}"><span
+                                   href="{{ route('admin.departements.index') }}"><span
                                         class="ml-1 item-text">همه دپارتمان ها</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link pl-3"
-                                   href="{{ route('admin.clarification.categories.index') }}"><span
+                                   href=""><span
                                         class="ml-1 item-text">دپارتمان جدید</span></a>
                             </li>
                         </ul>

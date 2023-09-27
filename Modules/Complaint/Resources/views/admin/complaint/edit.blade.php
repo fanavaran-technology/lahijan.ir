@@ -11,7 +11,7 @@
             <h2 class="h3 mb-0 section-heading">جزئیات پیام</h2>
         </div>
         <div class="col-auto mb-3">
-            <a href="{{ route('complaints.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
+            <a href="{{ route('admin.complaints.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
     </div>
     <div class="row">

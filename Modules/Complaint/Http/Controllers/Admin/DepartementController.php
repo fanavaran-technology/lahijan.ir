@@ -1,12 +1,15 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers;
+namespace Modules\Complaint\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
+use Modules\Complaint\Entities\Complaint;
+use Modules\Complaint\Entities\Departement;
 
-class ComplaintController extends Controller
+class DepartementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,12 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        return view('complaint::index');
+        $departements = Departement::query();
+
+        $departements = $departements->latest()->paginate(10);
+
+
+        return view('complaint::admin.department.index' , compact('departements'));
     }
 
     /**
@@ -23,7 +31,7 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-        return view('complaint::create');
+        return view('complaint::admin.department.create');
     }
 
     /**
@@ -33,7 +41,10 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+        Departement::create($inputs);
+        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
+
     }
 
     /**
@@ -51,9 +62,9 @@ class ComplaintController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Departement $departement): View
     {
-        return view('complaint::edit');
+        return view('complaint::admin.department.edit' , compact('departement'));
     }
 
     /**
@@ -62,9 +73,12 @@ class ComplaintController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Departement $departement)
     {
-        //
+        $inputs = $request->all();
+        $departement->update($inputs);
+        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان ویرایش شد.');
+
     }
 
     /**
