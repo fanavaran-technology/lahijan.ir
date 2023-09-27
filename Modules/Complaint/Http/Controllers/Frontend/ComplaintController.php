@@ -6,33 +6,22 @@ use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
-
 use Modules\Complaint\Entities\Complaint;
-
-
 use Illuminate\Support\Str;
+use Modules\Complaint\Entities\ComplaintFile;
+use Modules\Complaint\Http\Requests\Frontend\ComplaintRequest;
+use Illuminate\Support\Facades\DB;
 
 class ComplaintController extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-        return view('complaint::create');
-    }
-
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
     public function create()
-    {
-        return view('complaint::create');
+    {        
+        return view('complaint::frontend.create');
     }
 
     /**
@@ -40,21 +29,23 @@ class ComplaintController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(ComplaintRequest $request)
     {
-
         $inputs = $request->all();
+        $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
-        $randomNumber = rand(111111111, 999999999);
-        while ( Complaint::where('tracking_code', $randomNumber)->exists())
-        {
-            $randomNumber = rand(111111111, 999999999);
-        }
-        $inputs['tracking_code'] = $randomNumber;
+        DB::transaction(function () use($request, $inputs) {
 
-        Complaint::create($inputs);
+            $complaint = Complaint::create($inputs);
 
+            if ($request->filled('files')) {
+                $complaint->files()->create([
+                    'files' => explode(',', $inputs['files']),
+                ]);
+            }
+        });
 
+        return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
     }
 
     /**

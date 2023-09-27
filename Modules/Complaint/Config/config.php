@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'name' => 'Complaint'
+    'name'   => 'Complaint',
+    'locale' => 'fa'
 ];

@@ -14,7 +14,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
 
 //Route complaint
 Route::prefix('complaint')->as('complaints.')->group(function() {
-    Route::get('/create', [FrontendComplaintController::class, 'index'])->name('create');
+    Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
 });

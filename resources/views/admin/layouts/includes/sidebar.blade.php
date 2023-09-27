@@ -472,7 +472,7 @@ active
                     <li
                         class="nav-item dropdown @active('admin.clarification.contracts')
 active
-@endactive @active('admin.clarification.complaint')
+@endactive @active('admin.complaint.index')
 active
 @endactive">
                         <a href="#complaint" data-toggle="collapse" aria-expanded="false"
