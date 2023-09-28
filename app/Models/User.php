@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Complaint\Entities\Departement;
 
 class User extends Authenticatable
 {
@@ -112,5 +113,10 @@ class User extends Authenticatable
     public function getProfileImageAttribute()
     {
         return $this->profile_photo ?? self::DEFAULT_PROFILE_PHOTO;
+    }
+
+    public function departements()
+    {
+        return $this->belongsToMany(Departement::class);
     }
 }

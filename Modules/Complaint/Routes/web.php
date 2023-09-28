@@ -10,6 +10,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::post('departement/store', [DepartementController::class, 'store'])->name('departements.store');
     Route::get('departement/edit/{departement}', [DepartementController::class, 'edit'])->name('departements.edit');
     Route::put('departement/update/{departement}', [DepartementController::class, 'update'])->name('departements.update');
+    Route::delete('departement/destroy/{departement}', [DepartementController::class, 'destroy'])->name('departements.destroy');
 });
 
 //Route complaint

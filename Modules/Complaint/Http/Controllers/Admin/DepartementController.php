@@ -2,7 +2,9 @@
 
 namespace Modules\Complaint\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
@@ -17,12 +19,14 @@ class DepartementController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+
         $departements = Departement::query();
 
         $departements = $departements->latest()->paginate(10);
 
 
-        return view('complaint::admin.department.index' , compact('departements'));
+        return view('complaint::admin.department.index' , compact('departements' , 'users'));
     }
 
     /**
@@ -31,7 +35,8 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        return view('complaint::admin.department.create');
+        $users = User::all();
+        return view('complaint::admin.department.create', compact('users'));
     }
 
     /**
@@ -42,9 +47,17 @@ class DepartementController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        Departement::create($inputs);
-        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
+        $title = $request->input('title');
+        if (Departement::where('title', $title)->exists()){
+            return to_route('admin.departements.create')->with('cute-success' , 'دپارتمان یا این نام وجود دارد.');
+        }else{
+            $departements = Departement::create($inputs);
+        }
 
+        $inputs['users'] = $inputs['users'] ?? [];
+        $departements->users()->sync($inputs['users']);
+
+        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
     }
 
     /**
@@ -64,7 +77,8 @@ class DepartementController extends Controller
      */
     public function edit(Departement $departement): View
     {
-        return view('complaint::admin.department.edit' , compact('departement'));
+        $users = User::all();
+        return view('complaint::admin.department.edit' , compact('departement' , 'users'));
     }
 
     /**
@@ -77,6 +91,10 @@ class DepartementController extends Controller
     {
         $inputs = $request->all();
         $departement->update($inputs);
+
+        $inputs['users'] = $inputs['users'] ?? [];
+        $departement->users()->sync($inputs['users']);
+
         return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان ویرایش شد.');
 
     }
@@ -86,8 +104,13 @@ class DepartementController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Departement $departement): RedirectResponse
     {
-        //
+        $departement->users()->detach();
+        $departement->delete();
+
+
+        return back()->with('cute-success', 'دپارتمان حذف گردید.');
+
     }
 }

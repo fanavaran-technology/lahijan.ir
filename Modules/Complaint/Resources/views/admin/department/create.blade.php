@@ -3,8 +3,7 @@
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.css') }}">
-
-
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -35,7 +34,7 @@
                         <div class="row d-flex justify-content-between px-2">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                    class="bi bi-person-vcard" viewBox="0 0 16 16">
                                     <path
                                         d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z" />
                                     <path
@@ -45,7 +44,7 @@
                             </div>
                             <span class="card-dropdown-button caret-up">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-caret-down" viewBox="0 0 16 16">
+                                    class="bi bi-caret-down" viewBox="0 0 16 16">
                                     <path
                                         d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
                                 </svg>
@@ -60,14 +59,27 @@
                                     <div class="form-group col-lg-6 my-2">
                                         <label for="full_name" class="input-title mr-3">عنوان :</label>
                                         <input type="text" name="title" value="{{ old('title') }}"
-                                               placeholder=" عنوان را وارد کنید" class="form-control custom-focus" id="title">
+                                            placeholder=" عنوان را وارد کنید" class="form-control custom-focus"
+                                            id="title">
                                     </div>
                                     <div class="form-group col-lg-6 my-2">
                                         <label for="place_birth" class="input-title mr-3">توضیحات :</label>
                                         <input type="text" name="description" value="{{ old('description') }}"
-                                               placeholder="توضیحات" class="form-control custom-focus" id="description">
+                                            placeholder="توضیحات" class="form-control custom-focus" id="description">
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="tags">کارابران</label>
+                                    <select multiple class="form-control form-control-sm" id="select_users"
+                                            name="users[]">
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}"
+                                            >{{ $user->full_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="mt-3">
                                     <button type="submit" id="save-btn" class="btn btn-primary ml-2">ذخیره</button>
                                 </div>
@@ -79,4 +91,19 @@
             </div>
         </div> <!-- .row -->
     </form>
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+
+    <script>
+        var select_users = $('#select_users');
+        select_users.select2({
+            placeholder: 'لطفا کاربران مورد نظر را وارد نمایید',
+            multiple: true,
+            tags : true
+        })
+    </script>
+    @include('admin.alerts.confirm')
+
 @endsection
