@@ -12,6 +12,7 @@
         input[type=number] {
             direction: ltr !important;
         }
+
         .modal {
             transition: opacity 0.25s ease;
         }
@@ -20,74 +21,18 @@
 
 @section('content')
     <section class="min-h-screen wrapper">
-        {{--Modal--}}
-        <div dir="rtl"
-            class="modal opacity-0 pointer-events-none z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
-            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-            <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
-                <div
-                    class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-                    <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                         viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                    <span class="text-sm">(Esc)</span>
-                </div>
-
-                <!-- Add margin if you want to see some of the overlay behind the modal-->
-                <div class="modal-content py-4 text-left px-6">
-                    <!--Title-->
-                    <div class="flex justify-between items-center pb-3">
-                        <p class="text-2xl font-bold mr-32">پیگیری شکایت !</p>
-                        <div class="modal-close cursor-pointer z-50">
-                            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18"
-                                 height="18" viewBox="0 0 18 18">
-                                <path
-                                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!--Body-->
-                    <div>
-                        <label for="first_name" class="block mb-2 text-right text-sm font-medium text-gray-900">کد پیگیری خود را وارد نمایید</label>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="کد پیگیری" required>
-                    </div>
-
-
-                    <!--Footer-->
-                    <div class="flex justify-end pt-2">
-                        <button
-                            class="px-4 bg-green-300 hover:bg-green-500 p-3 rounded-lg text-black  mr-2">
-                            نمایش
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        {{--End Modal--}}
-
         <form action="{{ route('complaints.store') }}" method="post" id="complaint_form">
             @csrf
 
             <section class="min-h-screen">
-                <section class="text-center mt-14 mb-7">
-                    <h1
-                        class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
-                        فرم ثبت <span class="underline underline-offset-3 decoration-4 decoration-blue-400">شکایات</span>
-                    </h1>
-                    <div class="text-xs my-3 sm:text-sm text-gray-600">شما می توانید انتقادات پیشنهادات ، شکایات و
-                        درخواست
-                        هایتان را ثبت بفرمایید
+                <section class="text-center md:w-8/12 mx-3 md:mx-auto mt-14 flex flex-wrap justify-between items-center">
+                        <h1
+                            class="text-xl font-shabnam font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
+                            فرم ثبت شکایات
+                        </h1>
                     </div>
+                    <a href="{{ route('complaints.tracking.index') }}" class="focus:outline-none text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-xs px-5 py-2.5">پیگیری شکایت</a>
                 </section>
-                <div class=" flex justify-end items-center mx-auto w-8/12 ">
-                    <a class="modal-open flex justify-center w-40 cursor-pointer bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 px-4 rounded-lg">پیگیری شکایت</a>
-                </div>
                 <section class="md:w-8/12 bg-white shadow-sm p-3 my-3 md:my-8 mx-1.5 sm:mx-3 md:mx-auto rounded-3xl">
                     <div id="alert-success"
                         class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 hidden suc-alert"
@@ -106,7 +51,7 @@
                         </div>
                     </div>
 
-                    <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
+                    <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -125,13 +70,13 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">نام
                                     *
                                 </label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         نام *
@@ -140,7 +85,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام *
                                     </legend>
                                 </fieldset>
@@ -157,13 +102,13 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">
                                     نام خانوادگی *
                                 </label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         نام خانوادگی *
@@ -172,7 +117,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام
                                         خانوادگی *
                                     </legend>
@@ -190,12 +135,12 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">کد
                                     ملی *</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         کد ملی *
@@ -204,7 +149,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کد ملی *
                                     </legend>
                                 </fieldset>
@@ -221,11 +166,11 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شماره
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">شماره
                                     تلفن *</label>
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         شماره تلفن *
@@ -234,7 +179,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">شماره تلفن
                                         *
                                     </legend>
@@ -243,7 +188,7 @@
                             <span class="text-red-500 font-bold text-xs er-phone_number"></span>
                         </section>
                     </section>
-                    <section class="my-4 flex items-center space-x-2 space-x-reverse text-blue-500">
+                    <section class="my-4 flex items-center space-x-2 space-x-reverse text-rose-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -264,12 +209,12 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">خیابان
                                     اصلی *</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         خیابان اصلی *
@@ -278,7 +223,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان اصلی
                                         *
                                     </legend>
@@ -296,12 +241,12 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">خیابان
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">خیابان
                                     فرعی</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         خیابان فرعی
@@ -310,7 +255,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">خیابان فرعی
                                     </legend>
                                 </fieldset>
@@ -327,11 +272,11 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کوچه</label>
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">کوچه</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         کوچه
@@ -340,7 +285,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">کوچه
                                     </legend>
                                 </fieldset>
@@ -357,12 +302,12 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">بن
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">بن
                                     بست</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         بن بست
@@ -371,7 +316,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">بن بست
                                     </legend>
                                 </fieldset>
@@ -388,12 +333,12 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">نام
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">نام
                                     مجتمع</label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         نام مجتمع
@@ -402,7 +347,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">نام مجتمع
                                     </legend>
                                 </fieldset>
@@ -419,13 +364,13 @@
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">کد
+                                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">کد
                                     پستی
                                 </label>
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                    group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                    group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                     <legend
                                         class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                         کد پستی
@@ -434,7 +379,7 @@
 
                                 <fieldset
                                     class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                    group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-red-700">
+                                    group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-red-700">
                                     <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap"> کد پستی
                                     </legend>
                                 </fieldset>
@@ -445,7 +390,7 @@
 
                     <section class="grid grid-cols-12 gap-2.5">
                         <section class="col-span-full">
-                            <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
+                            <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -461,14 +406,14 @@
 
                                     <label
                                         class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">موضوع
+                                        peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">موضوع
                                         شکایت
                                         *
                                     </label>
 
                                     <fieldset
                                         class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                        group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                        group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                         <legend
                                             class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                             موضوع شکایت *
@@ -477,7 +422,7 @@
 
                                     <fieldset
                                         class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                        group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                        group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                         <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">موضوع
                                             شکایت *
                                         </legend>
@@ -492,14 +437,14 @@
 
                                     <label
                                         class="absolute right-[9px] text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
-                                        peer-placeholder-shown:top-8 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-blue-500">شرح
+                                        peer-placeholder-shown:top-8 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">شرح
                                         شکایت
                                         *
                                     </label>
 
                                     <fieldset
                                         class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] invisible peer-placeholder-shown:visible
-                                        group-focus-within:!border-blue-500 group-focus-within:border-2 group-hover:border-gray-700">
+                                        group-focus-within:!border-rose-500 group-focus-within:border-2 group-hover:border-gray-700">
                                         <legend
                                             class="mr-2 px-0 text-sm transition-all duration-300 invisible max-w-[0.01px] group-focus-within:max-w-full group-focus-within:px-1 whitespace-nowrap">
                                             شرح شکایت * </legend>
@@ -507,7 +452,7 @@
 
                                     <fieldset
                                         class="inset-0 absolute border border-gray-300 rounded pointer-events-none mt-[-9px] visible peer-placeholder-shown:invisible
-                                        group-focus-within:border-2 group-focus-within:!border-blue-500 group-hover:border-gray-700">
+                                        group-focus-within:border-2 group-focus-within:!border-rose-500 group-hover:border-gray-700">
                                         <legend class="mr-2 text-sm invisible px-1 max-w-full whitespace-nowrap">شرح
                                             شکایت *</legend>
                                     </fieldset>
@@ -521,7 +466,7 @@
                     {{-- file upload --}}
                     <section class="grid grid-cols-12 gap-2.5">
                         <section class="col-span-full">
-                            <section class="my-6 flex items-center space-x-2 space-x-reverse text-blue-500">
+                            <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -565,9 +510,22 @@
                     </section>
                     <section class="flex justify-center py-4">
                         <button type="submit" id="submit-button"
-                            class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">ثبت</button>
+                            class="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">
+                            ثبت
+                            <svg aria-hidden="true" role="status"
+                                class="inline w-4 h-4 mr-3 text-white animate-spin hidden" viewBox="0 0 100 101"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                    fill="#E5E7EB" />
+                                <path
+                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
                     </section>
                 </section>
+            </section>
         </form>
 
     </section>
@@ -578,11 +536,14 @@
 
     <script>
         const complaintForm = document.querySelector('#complaint_form');
+        const submitBtn = document.querySelector('#submit-button');
 
         let errors = {};
         complaintForm.addEventListener('submit', (e) => {
             const formData = new FormData(complaintForm);
             e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.childNodes[1].classList.remove('hidden');
 
             if (Object.keys(errors) !== 0) {
                 for (error in errors) {
@@ -600,17 +561,20 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    submitBtn.disabled = false;
+                    submitBtn.childNodes[1].classList.add('hidden');
                     if (data.success) {
                         grecaptcha.reset();
                         myDropzone.removeAllFiles(true);
                         document.querySelector('.suc-alert').classList.remove('hidden');;
                         document.querySelector('.suc-mes-title').textContent = data.title;
                         document.querySelector('.suc-mes-desc').textContent = data.message;
-                        document.querySelector('.wrapper').scrollIntoView({behavior : 'smooth'});
+                        document.querySelector('.wrapper').scrollIntoView({
+                            behavior: 'smooth'
+                        });
                         clearFormElements(complaintForm);
-                        return ;
+                        return;
                     }
-
                     grecaptcha.reset();
                     errors = data.errors;
                     let firstKey = Object.keys(errors)[0];
@@ -629,8 +593,9 @@
             for (let i = 0; i < elements.length; i++) {
                 const element = elements[i];
 
-                if (element.type === 'text' || element.type === 'textarea' || element.type === 'number' || element.type === 'hidden') {
-                    element.value = ''; 
+                if (element.type === 'text' || element.type === 'textarea' || element.type === 'number' || element.type ===
+                    'hidden') {
+                    element.value = '';
                 } else if (element.type === 'checkbox' || element.type === 'radio') {
                     element.checked = false;
                 } else if (element.tagName === 'SELECT') {
@@ -638,50 +603,7 @@
                 }
             }
         }
-
     </script>
-    <script>
-        var openmodal = document.querySelectorAll('.modal-open')
-        for (var i = 0; i < openmodal.length; i++) {
-            openmodal[i].addEventListener('click', function (event) {
-                event.preventDefault()
-                toggleModal()
-            })
-        }
-
-        const overlay = document.querySelector('.modal-overlay')
-        overlay.addEventListener('click', toggleModal)
-
-        var closemodal = document.querySelectorAll('.modal-close')
-        for (var i = 0; i < closemodal.length; i++) {
-            closemodal[i].addEventListener('click', toggleModal)
-        }
-
-        document.onkeydown = function (evt) {
-            evt = evt || window.event
-            var isEscape = false
-            if ("key" in evt) {
-                isEscape = (evt.key === "Escape" || evt.key === "Esc")
-            } else {
-                isEscape = (evt.keyCode === 27)
-            }
-            if (isEscape && document.body.classList.contains('modal-active')) {
-                toggleModal()
-            }
-        };
-
-
-        function toggleModal() {
-            const body = document.querySelector('body')
-            const modal = document.querySelector('.modal')
-            modal.classList.toggle('opacity-0')
-            modal.classList.toggle('pointer-events-none')
-            body.classList.toggle('modal-active')
-        }
-
-
-    </script>
-
 
     <script>
         var acceptedFiles = ".jpg, .jpeg, .png, .gif";
@@ -716,13 +638,13 @@
             },
         });
 
-        document.getElementById("upload-button").addEventListener("click", function () {
+        document.getElementById("upload-button").addEventListener("click", function() {
             myDropzone.processQueue();
         });
 
         let items = [];
 
-        myDropzone.on("success", function (file, response) {
+        myDropzone.on("success", function(file, response) {
             const path = response.path;
 
             const files = document.getElementById('files');
@@ -732,56 +654,4 @@
             files.value = items;
         });
     </script>
-
-    {{-- render editor --}}
-    <script>
-        function renderEditor(key) {
-            let editor_config = {
-                selector: key,
-                relative_urls: false,
-                plugins: 'directionality table fullscreen',
-                language: 'fa',
-                toolbar: [{
-                        name: 'styles',
-                        items: ['styleselect']
-                    },
-                    {
-                        name: 'formatting',
-                        items: ['bold', 'italic', 'underline']
-                    },
-                    {
-                        name: 'alignment',
-                        items: ['alignright', 'aligncenter', 'alignleft', 'alignjustify', "format"]
-                    },
-                    {
-                        name: 'indentation',
-                        items: ['outdent', 'indent']
-                    },
-                    {
-                        name: 'table',
-                        items: ['table']
-                    },
-                    {
-                        name: 'direction',
-                        items: ['rtl', 'ltr']
-                    },
-                    {
-                        name: 'history',
-                        items: ['undo', 'redo']
-                    },
-                    {
-                        name: 'fullscreen',
-                        items: ["fullscreen"]
-                    },
-                ],
-            };
-
-            tinymce.init(editor_config);
-        }
-    </script>
-    
-    <script>
-        renderEditor('#editor')
-    </script>
-
 @endsection

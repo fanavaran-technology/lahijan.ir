@@ -2,6 +2,7 @@
 use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
 use \Modules\Complaint\Http\Controllers\Admin\DepartementController;
 use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendComplaintController;
+use Modules\Complaint\Http\Controllers\Frontend\TrackingController;
 
 //Route department
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
@@ -18,9 +19,7 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
+    Route::get('/traking', [TrackingController::class, 'index'])->name('tracking.index');
+    Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
 });
 
-Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
-    Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
-    Route::get('complaint/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
-});
