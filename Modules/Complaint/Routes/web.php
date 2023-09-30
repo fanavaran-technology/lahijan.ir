@@ -23,3 +23,8 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
 });
 
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
+    Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('complaint/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
+});
+
