@@ -11,6 +11,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::post('departement/store', [DepartementController::class, 'store'])->name('departements.store');
     Route::get('departement/edit/{departement}', [DepartementController::class, 'edit'])->name('departements.edit');
     Route::put('departement/update/{departement}', [DepartementController::class, 'update'])->name('departements.update');
+    Route::delete('departement/destroy/{departement}', [DepartementController::class, 'destroy'])->name('departements.destroy');
 
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::resource('complaints', ComplaintController::class);
@@ -23,5 +24,10 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
     Route::get('/traking', [TrackingController::class, 'index'])->name('tracking.index');
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+});
+
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
+    Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
+    Route::get('complaint/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
 });
 

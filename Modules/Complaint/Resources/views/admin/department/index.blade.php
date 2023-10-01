@@ -63,7 +63,7 @@
                                                 </svg>
                                             </a>
                                             <form
-                                                action=""
+                                                action="{{ route('admin.departements.destroy' , $departement->id) }}"
                                                 class="d-inline" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -93,5 +93,8 @@
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div>
+    @include('admin.alerts.confirm')
+
 @endsection
+
 

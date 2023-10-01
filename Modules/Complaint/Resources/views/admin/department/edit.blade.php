@@ -3,6 +3,7 @@
 @section('head-tag')
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/tagify/tagify.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/jalalidatepicker/persian-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -66,6 +67,22 @@
                                         <input type="text" name="description" value="{{ old('description' , $departement->description) }}"
                                                placeholder="توضیحات" class="form-control custom-focus" id="description">
                                     </div>
+
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="tags">کارابران</label>
+                                    <select multiple class="form-control form-control-sm" id="select_users"
+                                            name="users[]">
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}" @foreach ($departement->users as $user_role)
+                                                @if($user_role->id === $user->id)
+                                                    selected
+                                                @endif
+                                                @endforeach>{{ $user->full_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mt-3">
                                     <button type="submit" id="save-btn" class="btn btn-primary ml-2">ذخیره</button>
@@ -80,3 +97,17 @@
     </form>
 @endsection
 
+@section('script')
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+
+    <script>
+        var select_users = $('#select_users');
+        select_users.select2({
+            placeholder: 'لطفا کاربران مورد نظر را وارد نمایید',
+            multiple: true,
+            tags : true
+        })
+    </script>
+    @include('admin.alerts.confirm')
+
+@endsection

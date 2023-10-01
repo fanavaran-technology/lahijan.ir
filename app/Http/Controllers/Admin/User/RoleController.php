@@ -64,7 +64,6 @@ class RoleController extends Controller
         Log::info("نقش با عنوان {$role->title} توسط {$request->user()->full_name} ایجاد شد.");
 
         return to_route('admin.user.roles.index')->with('toast-success' , 'نقش جدید ایجاد شد');
-
     }
     /**
      * Show the form for editing the specified resource.
