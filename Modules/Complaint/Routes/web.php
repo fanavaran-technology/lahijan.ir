@@ -11,6 +11,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::post('departement/store', [DepartementController::class, 'store'])->name('departements.store');
     Route::get('departement/edit/{departement}', [DepartementController::class, 'edit'])->name('departements.edit');
     Route::put('departement/update/{departement}', [DepartementController::class, 'update'])->name('departements.update');
+
+    Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
+    Route::resource('complaints', ComplaintController::class);
 });
 
 //Route complaint

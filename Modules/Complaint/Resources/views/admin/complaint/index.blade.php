@@ -1,9 +1,13 @@
-@extends('admin.layouts.app', ['title' => 'همه پیام های ارسال شده'])
+@extends('admin.layouts.app', ['title' => 'شکایات'])
+
+@section('head-tag')
+    <script src="{{ asset('assets/admin/plugins/cookup/cookup.js') }}"></script>
+@endsection
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">شکایات های ارسال شده
+            <h2 class="h3 mb-0 page-title">شکایات
             </h2>
         </div>
         <div class="col-12">
@@ -11,78 +15,81 @@
                 <!-- Small table -->
                 <div class="col-md-12">
                     <div class="card shadow">
-                        <div class="card-body table-responsive">
+                        <div class="card-body">
+                            <div class="cookup-listens">
+                                <div class="row py-2 d-flex justify-content-center">
+                                    <input name="search" autocomplete="off"
+                                        oninput="cookUp({'url' : requestUrl, 'params': {search: this.value} }, dataKeys)"
+                                        class="col-md-4 form-control custom-focus form-group" type="text"
+                                        placeholder="جستجو کنید ...">
+                                </div>
+                                <div class="form-row flex justify-content-center flex-wrap mb-4">
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": ""}' id="all-complaints">
+                                        <label class="custom-control-label" for="all-complaints">همه شکایات </label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" checked name="filter" class="custom-control-input"
+                                            data-params='{"filter": "not-referenced-complaints"}'
+                                            id="not-referenced-complaints">
+                                        <label class="custom-control-label" for="not-referenced-complaints">شکایات ارجاع
+                                            نشده</label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": "referenced-complaints"}' id="referenced-complaints">
+                                        <label class="custom-control-label" for="referenced-complaints">شکایات ارجاع
+                                            شده</label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": "waiting-answer"}' id="waiting-answer">
+                                        <label class="custom-control-label" for="waiting-answer">در انتظار پاسخ
+                                        </label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": "invalid-complaints"}' id="invalid-complaints">
+                                        <label class="custom-control-label" for="invalid-complaints">شکایات برگشتی
+                                        </label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": "answered-complaints"}' id="answered-complaints">
+                                        <label class="custom-control-label" for="answered-complaints">شکایات بررسی
+                                            شده</label>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- table -->
                             <table class="table table-striped" id="table-id">
                                 <thead>
-                                <div class="form-row py-2">
-                                    <form action="">
-                                        <input name="search" class="col-md-3 form-control custom-focus form-group"
-                                               type="text" placeholder="عنوان را جستجو و enter کنید">
-                                    </form>
-
-                                </div>
-                                <div class="row w-100 mb-4 ml-1">
-                                    @request('search')
-                                    <h5>
-                                                <span class="badge bg-light text-dark border mr-2">
-                                                    جستجو : {{ request('search') }}
-                                                    <svg style="cursor:pointer" class="ml-4" onclick="removeFilter('search')"
-                                                         xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                         fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                    </svg>
-                                                </span>
-                                    </h5>
-                                    @endrequest
-                                </div>
-                                <th>#</th>
-                                <th>نام و نام خانوادگی</th>
-                                <th>عنوان شکایت</th>
-                                <th>عملیات</th>
-                                </tr>
-                                </thead>
-                                @forelse($complaints as $complaint)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            {{ $complaint->fullName }}
-                                        </td>
-                                        <td>
-                                            {{ $complaint->subject }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.complaints.edit' , $complaint->id) }}" class="text-decoration-none text-info mr-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
-                                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
-                                                </svg>
-                                            </a>
-                                            <form
-                                                action=""
-                                                class="d-inline" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" x-data=""
-                                                        class="delete border-none bg-transparent text-decoration-none text-danger mr-3">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                        <path fill-rule="evenodd"
-                                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                                    </svg>
-                                                    </a>
-                                            </form>
-                                        </td>
+                                    <th>#</th>
+                                    <th>نام</th>
+                                    <th>نام خانوادگی</th>
+                                    <th>عنوان شکایت</th>
+                                    <th>پاسخ دهنده</th>
+                                    <th>وضعیت</th>
+                                    <th>عملیات</th>
                                     </tr>
-                                @empty
-                                    <p class="text-center text-muted">هیچ پیامی وجود ندارد.</p>
-                                @endforelse
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                <td colspan="6" class="d-none loading">
+                                    <div class="d-flex justify-content-center align-items-center text-primary">
+                                        <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="ml-2">در حال خواندن اطلاعات ...</div>
+                                    </div>
+                                </td>
                             </table>
                             <section class="d-flex justify-content-center">
-                                {{ $complaints->appends($_GET)->render() }}
+                                <ul class="pagination cookup-listens">
+
+                                </ul>
                             </section>
                         </div>
                     </div> <!-- simple table -->
@@ -92,3 +99,36 @@
     </div>
 @endsection
 
+
+@section('script')
+    <script></script>
+
+    <script>
+        var requestUrl = "{{ route('admin.complaints.fetch') }}";
+        var dataKeys = ['first_name', 'last_name', 'subject', 'reference' ,'status_label'];
+
+        var request = {
+            url: "{{ route('admin.complaints.fetch') }}",
+            params: {
+                filter: 'not-referenced-complaints'
+            }
+        }
+
+        cookUp(request, dataKeys);
+
+        const cookUpElements = document.querySelectorAll('.cookup-listens');
+
+        cookUpElements.forEach(element => {
+            element.addEventListener('click', (event) => {
+                const item = event.target;
+                if (item.hasAttribute('data-params')) {
+                    const params = item.getAttribute('data-params');
+                    cookUp({
+                        url: requestUrl,
+                        params: JSON.parse(params)
+                    }, dataKeys);
+                }
+            })
+        });
+    </script>
+@endsection
