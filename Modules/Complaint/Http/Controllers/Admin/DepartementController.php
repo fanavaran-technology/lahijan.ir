@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\Departement;
+use Modules\Complaint\Http\Requests\DepartmentRequest;
 
 class DepartementController extends Controller
 {
@@ -22,6 +23,9 @@ class DepartementController extends Controller
         $users = User::all();
 
         $departements = Departement::query();
+
+        if ($searchString = request('search'))
+            $departements->where('title', "LIKE", "%{$searchString}%");
 
         $departements = $departements->latest()->paginate(10);
 
@@ -44,7 +48,7 @@ class DepartementController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
         $inputs = $request->all();
         $title = $request->input('title');
@@ -87,8 +91,10 @@ class DepartementController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, Departement $departement)
+    public function update(DepartmentRequest $request, Departement $departement)
     {
+
+
         $inputs = $request->all();
         $departement->update($inputs);
 

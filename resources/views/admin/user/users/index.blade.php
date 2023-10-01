@@ -42,6 +42,8 @@
                                             <label class="custom-control-label" for="block">کاربران مسدود</label>
                                         </div>
                                     </div>
+
+
                                     <div class="row w-100 mb-4 ml-1">
                                         @request('search')
                                             <h5>
@@ -195,7 +197,7 @@
             var element = $("#" + id)
             var url = element.attr('data-url')
             var elementValue = !element.prop('checked');
-    
+
             $.ajax({
                 url : url,
                 type : "GET",

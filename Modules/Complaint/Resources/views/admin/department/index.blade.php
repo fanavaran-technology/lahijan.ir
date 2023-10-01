@@ -42,7 +42,7 @@
                                 </div>
                                 <th>#</th>
                                 <th>نام و نام خانوادگی</th>
-                                <th>عنوان شکایت</th>
+                                <th>نام دپارتمان</th>
                                 <th>عملیات</th>
                                 </tr>
                                 </thead>
@@ -53,7 +53,13 @@
                                             {{ $departement->title }}
                                         </td>
                                         <td>
-                                            {{ $departement->description }}
+                                            @forelse ($departement->users as $user)
+                                                <div>
+                                                    {{ $user->full_name }}
+                                                </div>
+                                            @empty
+                                                <small class="text-danger">دسترسی یافت نشد</small>
+                                            @endforelse
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.departements.edit' , $departement->id) }}" class="text-decoration-none text-info mr-3">
