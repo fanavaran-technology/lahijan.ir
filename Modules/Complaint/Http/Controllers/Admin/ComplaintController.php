@@ -15,17 +15,50 @@ class ComplaintController extends Controller
      * @return Renderable
      */
 
+
     public function __construct()
     {
         $this->middleware('can:manage_complaint');
     }
+
     public function index()
     {
         $complaints = Complaint::query();
 
         $complaints = $complaints->latest()->paginate(10);
 
-        return view('complaint::admin.complaint.index'  , compact('complaints'));
+        return view('complaint::admin.complaint.index', compact('complaints'));
+    }
+
+    public function fetch()
+    {
+        $complaints = Complaint::query();
+
+        switch ($filter = request('filter')) {
+            case 'not-referenced-complaints':
+                $complaints->whereNull('reference_id');
+                break;
+            case 'referenced-complaints':
+                $complaints->whereNotNull('reference_id');
+                break;
+            case 'waiting-answer':
+                $complaints->whereNotNull("reference_id")->where('is_invalid', 0)->whereNull('answer');
+                break;
+            case 'invalid-complaints':
+                $complaints->where('is_invalid', 1);
+                break;
+            case 'answered-complaints':
+                $complaints->where('is_answered', 1);
+                break;
+        }
+
+        if ($search = request('search')) {
+            $complaints->where("subject", 'LIKE', "%{$search}%")->orWhere('first_name', "LIKE", "%{$search}%")->orWhere("last_name", "LIKE", "%{$search}%");
+        }
+
+        $complaints = $complaints->latest()->paginate(10);
+
+        return response()->json($complaints);
     }
 
     /**
@@ -52,9 +85,10 @@ class ComplaintController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show(Complaint $complaint)
     {
-        return view('complaint::show');
+        dd($complaint);
+        // return view('complaint::show');
     }
 
     /**
@@ -64,7 +98,7 @@ class ComplaintController extends Controller
      */
     public function edit(Complaint $complaint): View
     {
-        return view('complaint::admin.complaint.edit' , compact('complaint'));
+        return view('complaint::admin.complaint.edit', compact('complaint'));
     }
 
     /**
