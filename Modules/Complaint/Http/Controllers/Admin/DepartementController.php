@@ -105,4 +105,12 @@ class DepartementController extends Controller
 
     }
 
+    public function fetchUser(Departement $departement) {
+        
+        $departementUsers = $departement->users;
+
+        return response()->json($departementUsers);
+
+    } 
+
 }
