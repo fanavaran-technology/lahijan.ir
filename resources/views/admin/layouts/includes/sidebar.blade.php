@@ -446,7 +446,7 @@ active
                     <li class="nav-item d-flex justify-content-between align-items-center">
                         <a href="{{ route('admin.complaints.index') }}" aria-expanded="false"
                            class="nav-link w-100 @active('admin.complaints')
-activ
+active
 @endactive">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-journal-text" viewBox="0 0 16 16">
@@ -464,7 +464,7 @@ activ
                     <li
                         class="nav-item dropdown @active('admin.clarification.department')
 active
-@endactive @active('admin.clarification.categories')
+@endactive @active('admin.departement')
 active
 @endactive">
                         <a href="#department" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
