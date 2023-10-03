@@ -72,7 +72,7 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="tags">کارابران</label>
+                                    <label for="place_birth" class="input-title mr-3">کاربران :</label>
                                     <select multiple class="form-control form-control-sm" id="select_users"
                                             name="users[]">
                                         @foreach ($users as $user)
@@ -105,7 +105,8 @@
         select_users.select2({
             placeholder: 'لطفا کاربران مورد نظر را وارد نمایید',
             multiple: true,
-            tags : true
+            tags : true,
+            dir: 'rtl'
         })
     </script>
     @include('admin.alerts.confirm')

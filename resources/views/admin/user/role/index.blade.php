@@ -96,6 +96,7 @@
                                                     </svg>
                                                 </a>
                                             @endcan
+
                                             @can('delete_roles')
                                                 <form action="{{ route('admin.user.roles.destroy', $role->id) }}"
                                                     class="d-inline" method="post">
