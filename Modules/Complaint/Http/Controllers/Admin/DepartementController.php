@@ -20,17 +20,7 @@ class DepartementController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-
-        $departements = Departement::query();
-
-        if ($searchString = request('search'))
-            $departements->where('title', "LIKE", "%{$searchString}%");
-
-        $departements = $departements->latest()->paginate(10);
-
-
-        return view('complaint::admin.department.index' , compact('departements' , 'users'));
+        return view('complaint::admin.department.index');
     }
 
     /**
