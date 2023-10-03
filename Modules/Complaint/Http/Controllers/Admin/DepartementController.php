@@ -108,9 +108,16 @@ class DepartementController extends Controller
     {
         $departement->users()->detach();
         $departement->delete();
-
+        
 
         return back()->with('cute-success', 'دپارتمان حذف گردید.');
-
     }
+
+    public function fetchUser(Departement $departement) {
+        
+        $departementUsers = $departement->users;
+
+        return response()->json($departementUsers);
+
+    }   
 }

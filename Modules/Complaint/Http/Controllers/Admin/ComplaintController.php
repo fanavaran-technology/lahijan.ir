@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
+use Modules\Complaint\Entities\ComplaintUserFail;
+use Modules\Complaint\Entities\Departement;
 
 class ComplaintController extends Controller
 {
@@ -32,7 +34,7 @@ class ComplaintController extends Controller
 
     public function fetch()
     {
-        $complaints = Complaint::query();
+        $complaints = Complaint::query()->select('id', 'first_name', 'last_name', 'subject', 'reference_id', 'is_invalid', 'is_answered');
 
         switch ($filter = request('filter')) {
             case 'not-referenced-complaints':
@@ -69,16 +71,7 @@ class ComplaintController extends Controller
     {
         return view('complaint::create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Show the specified resource.
@@ -87,38 +80,31 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
-        dd($complaint);
-        // return view('complaint::show');
+        $departements = Departement::all();
+
+        $userFails = $complaint->userFails;
+
+        return view('complaint::admin.complaint.show', compact('complaint', 'departements', 'userFails'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit(Complaint $complaint): View
-    {
-        return view('complaint::admin.complaint.edit', compact('complaint'));
-    }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function referral(Request $request, Complaint $complaint) 
     {
-        //
-    }
+        $validData = $request->validate([
+            'departement_id' => 'required|exists:departements,id',
+            'reference_id' => 'required|exists:departement_user,user_id'
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        $complaint->forceFill([
+            'reference_id' => $validData['reference_id'],
+            'referenced_at' => now(),
+            'is_invalid' => 0,
+        ]);
+
+        $complaint->save();
+
+        // TODO send sms and notification
+
+        return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }
 }

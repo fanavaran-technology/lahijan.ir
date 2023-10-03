@@ -427,3 +427,50 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
   color: #ffffff;
   border-color: rgb(67 56 202);
 }
+
+.td-link {
+    font-size: .8rem;
+    text-decoration: none !important;
+    padding: 0 .4rem;
+}
+
+.hori-timeline .events {
+    border-top: 3px solid #f0f2f5;
+}
+
+.hori-timeline .events .event-list {
+    display: block;
+    position: relative;
+    text-align: center;
+    padding-top: 70px;
+    margin-right: 0;
+}
+
+.hori-timeline .events .event-list:before {
+    content: "";
+    position: absolute;
+    height: 36px;
+    border-right: 2px dashed #dee2e6;
+    top: 0;
+}
+
+.hori-timeline .events .event-list .event-date {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    width: 3.5rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 1140px) {
+    .hori-timeline .events .event-list {
+        display: inline-block;
+        width: 24%;
+        padding-top: 45px;
+    }
+
+    .hori-timeline .events .event-list .event-date {
+        top: -30px;
+    }
+}

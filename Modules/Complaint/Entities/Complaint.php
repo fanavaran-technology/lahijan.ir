@@ -26,7 +26,7 @@ class Complaint extends Model
         'description',
     ];
 
-    protected $appends = ['status_label', 'reference'];
+    protected $appends = ['full_name', 'status_label', 'reference'];
 
     public function getFullNameAttribute()
     {
@@ -37,16 +37,17 @@ class Complaint extends Model
     {
         if (isset($this->reference_id)) {
             if ($this->is_answered) {
-                return 'پاسخ داده شد';
+                return "<span class='badge badge-success'>پاسخ داده شد</span>";
             }
 
             if ($this->is_invalid) {
-                return 'در زمان مقرر پاسخ داده نشد';
+                return "<span class='badge badge-danger'>در زمان مقرر پاسخ داده نشد</span>";
             }
 
-            return 'ارجاع شده - در انتظار پاسخ';
+            return "<span class='badge badge-primary'>ارجاع شده - در انتظار پاسخ</span>";
         }
-        return 'ارجاع نشده';
+        
+        return "<span class='badge badge-warning'>ارجاع نشده</span>";
 
     }
 
@@ -63,6 +64,11 @@ class Complaint extends Model
 
     public function user() {
         return $this->belongsTo(User::class, 'reference_id');
+    }
+
+    public function userFails()
+    {
+        return $this->hasMany(ComplaintUserFail::class);
     }
 
 

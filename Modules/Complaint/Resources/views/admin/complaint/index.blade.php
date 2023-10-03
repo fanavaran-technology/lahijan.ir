@@ -19,7 +19,7 @@
                             <div class="cookup-listens">
                                 <div class="row py-2 d-flex justify-content-center">
                                     <input name="search" autocomplete="off"
-                                        oninput="cookUp({'url' : requestUrl, 'params': {search: this.value} }, dataKeys)"
+                                        oninput="cookUp({'url' : requestUrl, 'params': {search: this.value} }, show)"
                                         class="col-md-4 form-control custom-focus form-group" type="text"
                                         placeholder="جستجو کنید ...">
                                 </div>
@@ -66,8 +66,7 @@
                             <table class="table table-striped" id="table-id">
                                 <thead>
                                     <th>#</th>
-                                    <th>نام</th>
-                                    <th>نام خانوادگی</th>
+                                    <th>نام و نام خانوادگی</th>
                                     <th>عنوان شکایت</th>
                                     <th>پاسخ دهنده</th>
                                     <th>وضعیت</th>
@@ -105,16 +104,25 @@
 
     <script>
         var requestUrl = "{{ route('admin.complaints.fetch') }}";
-        var dataKeys = ['first_name', 'last_name', 'subject', 'reference' ,'status_label'];
 
         var request = {
-            url: "{{ route('admin.complaints.fetch') }}",
+            url: requestUrl,
             params: {
                 filter: 'not-referenced-complaints'
             }
         }
 
-        cookUp(request, dataKeys);
+        var show = {
+            dataKeys: ['full_name', 'subject', 'reference' ,'status_label'],
+            links: [
+                {
+                    'url' : "admin/complaints/:id",
+                    'content': 'جزئیات '
+                }
+            ]
+        }
+
+        cookUp(request, show);
 
         const cookUpElements = document.querySelectorAll('.cookup-listens');
 
@@ -126,7 +134,7 @@
                     cookUp({
                         url: requestUrl,
                         params: JSON.parse(params)
-                    }, dataKeys);
+                    }, show);
                 }
             })
         });
