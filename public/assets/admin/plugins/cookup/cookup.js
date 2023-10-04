@@ -39,15 +39,15 @@ class FetchData {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            this.#toggleLoading();
-            return response.json();
-        }).catch(error => {
-            throw new Error('An error occurred while receiving data', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                this.#toggleLoading();
+                return response.json();
+            }).catch(error => {
+                throw new Error('An error occurred while receiving data', error);
+            });
 
         return response;
     }
@@ -66,6 +66,7 @@ class ShowData {
     #lastPage;
     #keys = [];
     #links = [];
+    #deleteForm;
 
     constructor(results) {
         this.#data = results.data;
@@ -81,6 +82,10 @@ class ShowData {
 
     set links(links) {
         this.#links = links;
+    }
+
+    set deleteForm(form) {
+        this.#deleteForm = form;
     }
 
     show() {
@@ -109,6 +114,9 @@ class ShowData {
             }
 
             const linkTd = this.#setLinks(record.id);
+            if (this.#deleteForm) {
+                linkTd.innerHTML += this.#setDeleteForm(record.id);
+            }
             tr.appendChild(linkTd);
 
             count++;
@@ -158,6 +166,22 @@ class ShowData {
         return tdTag;
     }
 
+    #setDeleteForm(id) {
+        const deleteForm = `
+        <form action="${this.#deleteForm.action}/${id}" class="d-inline" method="post">
+            <input type="hidden" name="_token" value="${this.#deleteForm.token}">  
+            <input type="hidden" name="_method" value="DELETE">                                                    
+            <button type="button" onclick="deleteConfirm(this)" x-data="${id}" class="delete border-none bg-transparent text-decoration-none text-danger mr-3">حذف</button>
+            <span class="d-none">
+                <span class="mr-2 text-danger">حذف شود ؟!</span>
+                <button type="submit" class="mr-2">بله</button>
+                <button type="button" onclick="removeConfirm(this)">خیر</button>
+            </span>
+        </form>
+        `;
+        return deleteForm;
+    }
+
 
 }
 
@@ -167,5 +191,19 @@ async function cookUp(request, show) {
     const showData = new ShowData(results);
     showData.keys = show.dataKeys;
     showData.links = show.links;
+    showData.deleteForm = show.deleteForm;
     showData.show();
+}
+
+function deleteConfirm(element) {
+    const confirmElement = element.nextElementSibling;
+    confirmElement.classList.remove('d-none');
+    confirmElement.style.transform = "translateY(0)";
+    element.classList.add('d-none');
+}
+
+function removeConfirm(element) {
+    element.parentElement.classList.add('d-none');
+    const removeElementItem =  element.parentElement.previousElementSibling;
+    removeElementItem.classList.remove('d-none');
 }
