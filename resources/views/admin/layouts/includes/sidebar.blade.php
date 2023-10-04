@@ -482,7 +482,7 @@ active
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href=""><span class="ml-1 item-text">دپارتمان جدید</span></a>
+                                <a class="nav-link pl-3" href="{{ route('admin.departements.create') }}"><span class="ml-1 item-text">دپارتمان جدید</span></a>
                             </li>
                         </ul>
                     </li>

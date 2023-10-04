@@ -109,14 +109,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class);
     }
 
+    
+    public function departements()
+    {
+        return $this->belongsToMany(Departement::class);
+    }
+
     // accessor
     public function getProfileImageAttribute()
     {
         return $this->profile_photo ?? self::DEFAULT_PROFILE_PHOTO;
     }
 
-    public function departements()
+    public function hasComplaintHandlerPermission() 
     {
-        return $this->belongsToMany(Departement::class);
+        return $this->can(Departement::HANDLER_PERMISSION);
     }
+
 }

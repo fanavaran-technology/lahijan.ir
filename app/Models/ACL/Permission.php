@@ -5,6 +5,7 @@ namespace App\Models\ACL;
 use App\Models\ACL\Role;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 
 class Permission extends Model
@@ -19,6 +20,11 @@ class Permission extends Model
 
     public function users(){
         return $this->belongsToMany(User::class);
+    }
+
+    public static function getHandlerPermissionId() {
+        $handlerPermissionId = Permission::where('key', "complaint_handler")->first()->id;
+        return $handlerPermissionId;
     }
 
     const LIST_OF_PERMISSIONS = [
@@ -71,6 +77,7 @@ class Permission extends Model
         'manage_fire_sliders'       =>       'دسترسی به اسلایدر آتش نشانی' ,
         'manage_fire_news'          =>       'دسترسی به اخبار آتش نشانی' ,
         'manage_complaint'          =>       'دسترسی به سامانه شکایت' ,
+        'complaint_handler'         =>       'متصدی شکایت',
     ];
 
 }

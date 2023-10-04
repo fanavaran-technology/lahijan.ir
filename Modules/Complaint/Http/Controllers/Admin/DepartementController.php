@@ -2,6 +2,7 @@
 
 namespace Modules\Complaint\Http\Controllers\Admin;
 
+use App\Models\ACL\Permission;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +12,7 @@ use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Http\Requests\DepartmentRequest;
+use Illuminate\Support\Facades\DB;
 
 class DepartementController extends Controller
 {
@@ -20,7 +22,8 @@ class DepartementController extends Controller
      */
     public function index()
     {
-        return view('complaint::admin.department.index');
+        $users = User::where('is_staff', 1)->get();
+        return view('complaint::admin.department.index', compact('users'));
     }
 
     /**
@@ -29,7 +32,10 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::whereHas('permissions', function ($permission) {
+            return $permission->where('key', Departement::HANDLER_PERMISSION);
+        })->get();
+
         return view('complaint::admin.department.create', compact('users'));
     }
 
@@ -41,12 +47,16 @@ class DepartementController extends Controller
     public function store(DepartmentRequest $request): RedirectResponse
     {
         $inputs = $request->all();
-        $departements = Departement::create($inputs);
+        
+        DB::transaction(function () use ($inputs) {
+            $departements = Departement::create($inputs);
 
-        $inputs['users'] = $inputs['users'] ?? [];
-        $departements->users()->sync($inputs['users']);
+            $inputs['users'] = $inputs['users'] ?? [];
 
-        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
+            $departements->users()->sync($inputs['users']);
+        });
+
+        return to_route('admin.departements.index')->with('toast-success', 'دپارتمان جدید ایجاد شد.');
     }
 
     /**
@@ -56,8 +66,11 @@ class DepartementController extends Controller
      */
     public function edit(Departement $departement): View
     {
-        $users = User::all();
-        return view('complaint::admin.department.edit' , compact('departement' , 'users'));
+        $users = User::whereHas('permissions', function ($permission) {
+            return $permission->where('key', Departement::HANDLER_PERMISSION);
+        })->get();
+
+        return view('complaint::admin.department.edit', compact('departement', 'users'));
     }
 
     /**
@@ -72,9 +85,15 @@ class DepartementController extends Controller
         $departement->update($inputs);
 
         $inputs['users'] = $inputs['users'] ?? [];
+
+        foreach($inputs['users'] as $userId) {
+            $user = User::findOrFail($userId);
+            $user->permissions()->sync(Permission::getHandlerPermissionId());
+        }
+
         $departement->users()->sync($inputs['users']);
 
-        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان ویرایش شد.');
+        return to_route('admin.departements.index')->with('toast-success', 'دپارتمان ویرایش شد.');
 
     }
 
@@ -87,7 +106,7 @@ class DepartementController extends Controller
     {
         $departement->users()->detach();
         $departement->delete();
-        
+
 
         return back()->with('cute-success', 'دپارتمان حذف گردید.');
     }
@@ -95,22 +114,35 @@ class DepartementController extends Controller
     public function fetch()
     {
         $departements = Departement::query()->select('id', 'title', 'description');
-        
+
         if ($search = request('search')) {
             $departements->where("title", 'LIKE', "%{$search}%")->orWhere('description', "LIKE", "%{$search}%");
         }
-        
+
         $departements = $departements->latest()->paginate(10);
         return response()->json($departements);
 
     }
 
-    public function fetchUser(Departement $departement) {
-        
+    public function fetchUser(Departement $departement)
+    {
         $departementUsers = $departement->users;
 
         return response()->json($departementUsers);
+    }
 
-    } 
+    public function setHandlerPermission(Request $request)
+    {
+        $validData = $request->validate([
+            'user_id.*' => 'exists:users,id'
+        ]);
+
+
+        $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
+
+        $handlerPermission->users()->sync($validData['user_id']);
+
+        return to_route('admin.departements.index')->with('toast-success', 'متصدیان با موفقیت اضافه شدند.');
+    }
 
 }

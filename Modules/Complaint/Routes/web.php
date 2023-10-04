@@ -14,7 +14,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::delete('departement/destroy/{departement}', [DepartementController::class, 'destroy'])->name('departements.destroy');
     Route::get('departement/fetch', [DepartementController::class, 'fetch'])->name('departements.fetch');
     Route::get('departement/{departement}/fetch-user', [DepartementController::class, 'fetchUser'])->name('departements.fetch-user');
-
+    Route::post('departement/complaint-hander', [DepartementController::class, 'setHandlerPermission'])->name('departements.handler-permission');
 
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
@@ -28,10 +28,5 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
     Route::get('/traking', [TrackingController::class, 'index'])->name('tracking.index');
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
-});
-
-Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
-    Route::get('complaint', [ComplaintController::class, 'index'])->name('complaints.index');
-    Route::get('complaint/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit');
 });
 
