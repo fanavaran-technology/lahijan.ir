@@ -1,0 +1,5 @@
+{
+    "send_sms_operator": true,
+    "send_sms_plaintiff": false,
+    "confirm_referrer": false
+}

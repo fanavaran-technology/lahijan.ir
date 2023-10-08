@@ -18,6 +18,9 @@
     "autoload": {
         "psr-4": {
             "Modules\\Complaint\\": ""
-        }
+        },
+        "files" : [
+            "Modules/Complaint/Http/helpers.php"
+        ]
     }
 }

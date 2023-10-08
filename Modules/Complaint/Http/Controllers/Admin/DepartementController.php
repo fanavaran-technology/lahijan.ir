@@ -16,13 +16,18 @@ use Illuminate\Support\Facades\DB;
 
 class DepartementController extends Controller
 {
+    public function __construct() 
+    {
+        $this->middleware('can:manage_complaint');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        $users = User::where('is_staff', 1)->get();
+        $users = User::where('is_staff', 1)->get()->except(auth()->user()->id);
         return view('complaint::admin.department.index', compact('users'));
     }
 
@@ -104,11 +109,13 @@ class DepartementController extends Controller
      */
     public function destroy(Departement $departement): RedirectResponse
     {
+        if ($departement->userFails->isNotEmpty()) {
+            return back()->with('toast-error', 'امکان حذف این دپارتمان وجود ندارد.');
+        }
         $departement->users()->detach();
-        $departement->delete();
+            $departement->delete();
 
-
-        return back()->with('cute-success', 'دپارتمان حذف گردید.');
+        return back()->with('toast-success', 'دپارتمان حذف گردید.');
     }
 
     public function fetch()

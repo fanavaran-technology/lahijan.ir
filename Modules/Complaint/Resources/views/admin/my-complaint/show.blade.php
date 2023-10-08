@@ -2,11 +2,8 @@
 
 @section('head-tag')
     <script src="{{ asset('assets/admin/plugins/cookup/cookup.js') }}" referrerpolicy="origin"></script>
-
+    <script src="{{ asset('assets/admin/plugins/tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 @endsection
-
-
-
 
 @section('content')
     <div class="row d-flex justify-content-between mb-3">
@@ -17,95 +14,10 @@
             </h2>
         </div>
         <div class="col-auto mb-3">
-            <a href="{{ route('admin.complaints.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
+            <a href="#reply-section" onclick="window.scrollToView('')" type="button" class="btn btn-primary px-4">ثبت پاسخ</a>
+            <a href="{{ route('admin.my-complaints.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
     </div>
-    @if (!$complaint->reference_id || $complaint->is_invalid)
-        <div class="card mt-4">
-            <div class="card-header">
-                <div class="row d-flex justify-content-between px-2">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                            stroke="currentColor" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 19.5l-15-15m0 0v11.25m0-11.25h11.25" />
-                        </svg>
-
-                        <span class="ml-1">ارجاع شکایت</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.complaints.referral', $complaint->id) }}" method="post" class="form-row">
-                    <div class="form-group col-md-4">
-                        @csrf
-                        <select name="departement_id" class="custom-input custom-focus form-control">
-                            <option value="">یک دپارتمان را انتخاب کنید</option>
-                            @foreach ($departements as $departement)
-                                <option value="{{ $departement->id }}">{{ $departement->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="spinner-border text-primary d-none loading" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div class="form-group col-md-4 d-none">
-                        <select name="reference_id" class="custom-input custom-focus form-control">
-                            @if (!empty($referenceUser))
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <button type="submit" id="refferal-submit" disabled class="btn btn-primary">ارجاع</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endif
-
-    @if ($complaint->reference_id)
-    <div class="row mt-4">
-        <div class="col-lg-12">
-            <h4 class="card-title mb-5">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20"
-                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-                </svg>
-
-                سوابق پاسخ
-            </h4>
-
-            <div class="hori-timeline">
-                <ul class="list-inline events">
-                    @if (!$complaint->is_invalid)
-                    <li class="list-inline-item event-list">
-                        <div class="px-4">
-                            <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle" style="border: 3px solid {{ $complaint->answer ? '#2abf3e' : 'dodgerblue' }};" />
-                            <small>{{ $complaint->answer ? 'پاسخ داده شده' : 'در انتظار پاسخ' }}</small>
-                            <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
-                        </div>
-                        <span class="small text-center d-block d-lg-inline">{{ $complaint->answered_at ? jdate()->forge($complaint->answered_at)->ago() : jdate()->forge($complaint->referenced_at)->ago() }}</span>
-                    </li>
-                    @endif
-
-                    @foreach($userFails as $userFail)
-                    <li class="list-inline-item event-list">
-                        <div class="px-4">
-                            <img src="{{ asset($userFail->user->profile_image) }}" class="event-date rounded-circle" style="border: 3px solid rgb(179, 23, 23);" />
-                            <small>پاسخی ثبت نشد</small>
-                            <h6 class="font-size-16 mt-1">{{ $userFail->user->full_name }}</h6>
-                        </div>
-                        <span class="small text-center d-block d-lg-inline">{{ jdate()->forge($userFail->created_at)->ago() }}</span>
-                    </li>
-                    @endforeach
-
-                </ul>
-            </div>
-            <!-- end card -->
-        </div>
-    </div>
-    @endif
 
     <div class="row mt-4">
 
@@ -224,18 +136,22 @@
                     </div>
                 </div>
 
-                @if ($complaint->answer) 
-                <div class="col-12 mt-4">
-                    <div class="form-row d-flex flex-column">
-                        <label for="inputFile" class="input-title" id="answer">
-                            پاسخی که کاربر {{ $complaint->user->full_name }} ثبت کرد
+                <div class="col-12" style="margin-top: 3rem">
+                    <form action="{{ route('admin.my-complaints.anwser', $complaint->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <label for="inputFile" id="reply-section" class="input-title">
+                            پاسخ
                         </label>
-                        <div class="mt-3">
-                            {!! $complaint->answer !!}
+                        <textarea name="answer" id="reply" cols="30" rows="10">{{ old('answer' , $complaint->answer) }}</textarea>
+                        @error('answer')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                        <div class="card-footer d-flex justify-content-between px-2">
+                            <button type="submit" id="save-btn" class="btn btn-lg btn-info">ثبت پاسخ</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                @endif
             </div>
         </div>
     </div>
@@ -243,28 +159,52 @@
 
 @section('script')
     <script>
-        const departementInput = document.querySelector('select[name=departement_id]');
+        function renderEditor(key) {
+            let editor_config = {
+                selector: key,
+                relative_urls: false,
+                plugins: 'directionality table fullscreen',
+                language: 'fa',
+                toolbar: [{
+                        name: 'styles',
+                        items: ['styleselect']
+                    },
+                    {
+                        name: 'formatting',
+                        items: ['bold', 'italic', 'underline']
+                    },
+                    {
+                        name: 'alignment',
+                        items: ['alignright', 'aligncenter', 'alignleft', 'alignjustify', "format"]
+                    },
+                    {
+                        name: 'indentation',
+                        items: ['outdent', 'indent']
+                    },
+                    {
+                        name: 'table',
+                        items: ['table']
+                    },
+                    {
+                        name: 'direction',
+                        items: ['rtl', 'ltr']
+                    },
+                    {
+                        name: 'history',
+                        items: ['undo', 'redo']
+                    },
+                    {
+                        name: 'fullscreen',
+                        items: ["fullscreen"]
+                    },
+                ],
+            };
 
-        departementInput.addEventListener('change', (event) => {
-            const departementId = event.currentTarget.value;
-
-            if (departementId) {
-                const url = `/admin/departement/${departementId}/fetch-user`;
-                fetch(url, {
-                    method: "get",
-                }).then(response => {
-                    return response.json();
-                }).then(data => {
-                    const referenceInput = document.querySelector('select[name=reference_id]');
-                    referenceInput.innerHTML = '';
-                    referenceInput.closest('.form-group').classList.remove('d-none');
-                    document.querySelector('#refferal-submit').disabled = false;
-                    data.forEach(user => {
-                        referenceInput.innerHTML +=
-                            `<option value="${user.id}">${user.full_name}</option>`
-                    });
-                });
-            }
-        })
+            tinymce.init(editor_config);
+        }
+    </script>
+    <script>
+        renderEditor('#reply')
     </script>
 @endsection
+

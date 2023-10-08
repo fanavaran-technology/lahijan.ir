@@ -1,6 +1,8 @@
 <?php
 use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
 use \Modules\Complaint\Http\Controllers\Admin\DepartementController;
+use Modules\Complaint\Http\Controllers\Admin\MyComplaintController;
+use Modules\Complaint\Http\Controllers\Admin\SettingController;
 use Modules\Complaint\Http\Controllers\Frontend\ComplaintController as FrontendComplaintController;
 use Modules\Complaint\Http\Controllers\Frontend\TrackingController;
 
@@ -15,7 +17,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::get('departement/fetch', [DepartementController::class, 'fetch'])->name('departements.fetch');
     Route::get('departement/{departement}/fetch-user', [DepartementController::class, 'fetchUser'])->name('departements.fetch-user');
     Route::post('departement/complaint-hander', [DepartementController::class, 'setHandlerPermission'])->name('departements.handler-permission');
-
+    
+    Route::resource('complaints/settings', SettingController::class)->only('index', 'store');
+    Route::get('my-complaints/fetch', [MyComplaintController::class, 'fetch'])->name('my-complaints.fetch');
+    Route::get('my-complaints', [MyComplaintController::class, 'index'])->name('my-complaints.index');
+    Route::get('my-complaints/{complaint}', [MyComplaintController::class, 'show'])->name('my-complaints.show');
+    Route::put('my-complaints/{complaint}/anwser', [MyComplaintController::class, 'answer'])->name('my-complaints.anwser');
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);

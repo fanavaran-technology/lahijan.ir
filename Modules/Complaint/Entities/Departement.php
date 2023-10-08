@@ -19,4 +19,9 @@ class Departement extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function userFails() 
+    {
+        return $this->hasMany(ComplaintUserFail::class);
+    }
+
 }

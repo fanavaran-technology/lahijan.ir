@@ -249,6 +249,7 @@ return [
         'auxiliary_st'    => 'خیابان فرعی',
         'alley'           => 'کوچه',
         'deadend'         => 'بن بست',
-        'builing_name'    => 'نام مجتمع',        
+        'builing_name'    => 'نام مجتمع',    
+        'answer'          => 'پاسخ',    
     ],
 ];

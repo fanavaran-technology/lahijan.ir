@@ -7,6 +7,14 @@
         placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
+      @can('complaint_handler')
+      <li class="nav-item d-flex align-items-center mr-4">
+        <a href="{{ route('admin.my-complaints.index') }}" class="btn btn-light border align-items-center">
+          <span>شکایات </span>
+          <span class="badge badge-pill bg-danger text-white">{{ $myComplaintsCount }}</span>
+        </a>
+      </li>
+      @endcan
       @can('manage_communication')
       <li class="nav-item nav-notif">
         <a class="nav-link text-muted my-2 mx-3" href="./#" data-toggle="modal" data-target=".modal-notif">

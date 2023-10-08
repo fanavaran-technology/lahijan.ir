@@ -16,6 +16,7 @@ use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Complaint\Entities\Departement;
+use Modules\Complaint\Entities\Complaint;
 
 class User extends Authenticatable
 {
@@ -126,4 +127,8 @@ class User extends Authenticatable
         return $this->can(Departement::HANDLER_PERMISSION);
     }
 
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class, 'reference_id');
+    }
 }

@@ -25,6 +25,7 @@ class ComplaintController extends Controller
 
     public function index()
     {
+
         $complaints = Complaint::query();
 
         $complaints = $complaints->latest()->paginate(10);
