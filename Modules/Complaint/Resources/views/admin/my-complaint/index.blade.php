@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => 'شکایات'])
+@extends('admin.layouts.app', ['title' => 'شکایات من'])
 
 @section('head-tag')
     <script src="{{ asset('assets/admin/plugins/cookup/cookup.js') }}"></script>
@@ -7,7 +7,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col">
-            <h2 class="h3 mb-0 page-title">شکایات
+            <h2 class="h3 mb-0 page-title">شکایات من
             </h2>
         </div>
         <div class="col-12">
@@ -19,7 +19,7 @@
                             <div class="cookup-listens">
                                 <div class="row py-2 d-flex justify-content-center">
                                     <input name="search" autocomplete="off"
-                                        oninput="cookUp({'url' : requestUrl, 'params': {search: this.value} }, show)"
+                                        oninput="cookUp({'url' : requestUrl , 'params': {search: this.value} }, show)"
                                         class="col-md-4 form-control custom-focus form-group" type="text"
                                         placeholder="جستجو کنید ...">
                                 </div>
@@ -31,34 +31,22 @@
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" checked name="filter" class="custom-control-input"
-                                            data-params='{"filter": "not-referenced-complaints"}'
-                                            id="not-referenced-complaints">
-                                        <label class="custom-control-label" for="not-referenced-complaints">شکایات ارجاع
-                                            نشده</label>
-                                    </div>
-                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                        <input type="radio" name="filter" class="custom-control-input"
-                                            data-params='{"filter": "referenced-complaints"}' id="referenced-complaints">
-                                        <label class="custom-control-label" for="referenced-complaints">شکایات ارجاع
-                                            شده</label>
-                                    </div>
-                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                        <input type="radio" name="filter" class="custom-control-input"
-                                            data-params='{"filter": "waiting-answer"}' id="waiting-answer">
-                                        <label class="custom-control-label" for="waiting-answer">در انتظار پاسخ
-                                        </label>
-                                    </div>
-                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
-                                        <input type="radio" name="filter" class="custom-control-input"
-                                            data-params='{"filter": "invalid-complaints"}' id="invalid-complaints">
-                                        <label class="custom-control-label" for="invalid-complaints">شکایات برگشتی
-                                        </label>
+                                            data-params='{"filter": "unanswered-complaints"}'
+                                            id="unanswered-complaints">
+                                        <label class="custom-control-label" for="unanswered-complaints">شکایات بدون پاسخ
+                                            </label>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "answered-complaints"}' id="answered-complaints">
-                                        <label class="custom-control-label" for="answered-complaints">شکایات بررسی
-                                            شده</label>
+                                        <label class="custom-control-label" for="answered-complaints">شکایات پاسخ داده شده
+                                            </label>
+                                    </div>
+                                    <div class="ml-3 mt-2 custom-control custom-checkbox">
+                                        <input type="radio" name="filter" class="custom-control-input"
+                                            data-params='{"filter": "invalid-complaints"}' id="invalid-complaints">
+                                        <label class="custom-control-label" for="invalid-complaints">عدم پاسخگویی در زمان مقرر
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +58,7 @@
                                     <th>عنوان شکایت</th>
                                     <th>پاسخ دهنده</th>
                                     <th>وضعیت</th>
-                                    <th>ارجاع شده در تاریخ</th>
+                                    <th>ارجاع شده در</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
@@ -104,12 +92,12 @@
     <script></script>
 
     <script>
-        var requestUrl = "{{ route('admin.complaints.fetch') }}";
+        var requestUrl = "{{ route('admin.my-complaints.fetch') }}";
 
         var request = {
             url: requestUrl,
             params: {
-                filter: 'not-referenced-complaints'
+                filter: 'unanswered-complaints'
             }
         }
 
@@ -117,8 +105,8 @@
             dataKeys: ['full_name', 'subject', 'reference' ,'status_label', 'referenced_at_label'],
             links: [
                 {
-                    'url' : "admin/complaints/:id",
-                    'content': 'جزئیات '
+                    'url' : "admin/my-complaints/:id",
+                    'content': 'نمایش '
                 }
             ]
         }

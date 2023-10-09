@@ -8,6 +8,7 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
+
         @if($notifications->count() !== 0)
             <div class="row justify-content-center text-center mr-3">
                 <div class="col-md-5">
@@ -52,6 +53,18 @@
                 </div>
             </div>
         @endif
+
+
+
+
+        @can('complaint_handler')
+            <li class="nav-item d-flex align-items-center mr-4">
+                <a href="{{ route('admin.my-complaints.index') }}" class="btn btn-light border align-items-center">
+                    <span>شکایات </span>
+                    <span class="badge badge-pill bg-danger text-white">{{ $myComplaintsCount }}</span>
+                </a>
+            </li>
+        @endcan
         @can('manage_communication')
             <li class="nav-item nav-notif">
                 <a class="nav-link text-muted my-2 mx-3" href="./#" data-toggle="modal" data-target=".modal-notif">
@@ -66,11 +79,10 @@
                 </a>
             </li>
         @endcan
-
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-muted pr-0 mx-2" href="#" id="navbarDropdownMenuLink" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="avatar avatar-sm mt-2">
+                <span class="avatar avatar-sm mt-2">
             <img src="{{ asset(auth()->user()->profile_image) }}" alt="{{ auth()->user()->full_name }}"
                  class="profile_image">
           </span>

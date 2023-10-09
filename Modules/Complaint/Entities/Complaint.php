@@ -27,7 +27,7 @@ class Complaint extends Model
         'description',
     ];
 
-    protected $appends = ['full_name', 'status_label', 'reference'];
+    protected $appends = ['full_name', 'status_label', 'reference', 'referenced_at_label'];
 
     public function getFullNameAttribute()
     {
@@ -55,6 +55,11 @@ class Complaint extends Model
     public function getReferenceAttribute()
     {
         return $this->reference_id ? $this->user->full_name : '-';
+    }
+
+    public function getReferencedAtLabelAttribute() 
+    {
+        return jalaliDate($this->referenced_at) ?? 'نا مشخص';
     }
 
     // relationships

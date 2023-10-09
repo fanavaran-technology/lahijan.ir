@@ -61,16 +61,6 @@ class ComplaintController extends Controller
 
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('complaint::show');
-    }
-
 
     public function upload(Request $request, ImageService $imageService)
     {

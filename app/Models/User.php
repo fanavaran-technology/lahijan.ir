@@ -16,6 +16,7 @@ use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Complaint\Entities\Departement;
+use Modules\Complaint\Entities\Complaint;
 
 class User extends Authenticatable
 {
@@ -109,14 +110,25 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class);
     }
 
+    
+    public function departements()
+    {
+        return $this->belongsToMany(Departement::class);
+    }
+
     // accessor
     public function getProfileImageAttribute()
     {
         return $this->profile_photo ?? self::DEFAULT_PROFILE_PHOTO;
     }
 
-    public function departements()
+    public function hasComplaintHandlerPermission() 
     {
-        return $this->belongsToMany(Departement::class);
+        return $this->can(Departement::HANDLER_PERMISSION);
+    }
+
+    public function complaints()
+    {
+        return $this->hasMany(Complaint::class, 'reference_id');
     }
 }
