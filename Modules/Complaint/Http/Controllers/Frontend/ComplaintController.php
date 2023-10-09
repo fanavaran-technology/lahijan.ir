@@ -3,14 +3,19 @@
 namespace Modules\Complaint\Http\Controllers\Frontend;
 
 use App\Http\Services\Image\ImageService;
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Notification;
 use Modules\Complaint\Entities\Complaint;
 use Illuminate\Support\Str;
 use Modules\Complaint\Entities\ComplaintFile;
+use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Http\Requests\Frontend\ComplaintRequest;
 use Illuminate\Support\Facades\DB;
+use Modules\Complaint\Notifications\NewComplaint;
+use Modules\Complaint\Notifications\NewDepartment;
 
 class ComplaintController extends Controller
 {
@@ -20,7 +25,7 @@ class ComplaintController extends Controller
      * @return Renderable
      */
     public function create()
-    {        
+    {
         return view('complaint::frontend.create');
     }
 
@@ -34,7 +39,6 @@ class ComplaintController extends Controller
         $inputs = $request->all();
         $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
-        DB::transaction(function () use($request, $inputs) {
 
             $complaint = Complaint::create($inputs);
 
@@ -43,9 +47,18 @@ class ComplaintController extends Controller
                     'files' => explode(',', $inputs['files']),
                 ]);
             }
-        });
+
+        $complaintLatest = Complaint::latest()->pluck('subject')->first();
+
+        $details = [
+            'message' => " شکایت با عنوان : {$complaintLatest} ثبت شده است " ,
+        ];
+
+        $newComplaint = Complaint::latest()->first();
+        $newComplaint->notify(new NewComplaint($details));
 
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
+
     }
 
     /**

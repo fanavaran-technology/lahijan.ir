@@ -7,10 +7,13 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Http\Requests\DepartmentRequest;
+use Modules\Complaint\Notifications\DepartemanNotification;
+use Modules\Complaint\Notifications\NewDepartment;
 
 class DepartementController extends Controller
 {
@@ -45,6 +48,7 @@ class DepartementController extends Controller
 
         $inputs['users'] = $inputs['users'] ?? [];
         $departements->users()->sync($inputs['users']);
+
 
         return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
     }
@@ -87,7 +91,7 @@ class DepartementController extends Controller
     {
         $departement->users()->detach();
         $departement->delete();
-        
+
 
         return back()->with('cute-success', 'دپارتمان حذف گردید.');
     }
@@ -95,22 +99,22 @@ class DepartementController extends Controller
     public function fetch()
     {
         $departements = Departement::query()->select('id', 'title', 'description');
-        
+
         if ($search = request('search')) {
             $departements->where("title", 'LIKE', "%{$search}%")->orWhere('description', "LIKE", "%{$search}%");
         }
-        
+
         $departements = $departements->latest()->paginate(10);
         return response()->json($departements);
 
     }
 
     public function fetchUser(Departement $departement) {
-        
+
         $departementUsers = $departement->users;
 
         return response()->json($departementUsers);
 
-    } 
+    }
 
 }

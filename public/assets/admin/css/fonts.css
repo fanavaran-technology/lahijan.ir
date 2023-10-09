@@ -45,8 +45,9 @@
     font-family: vazir-light;
     src: url("../font/vazir/Vazir-Light.ttf");
 }
-@font-face 
+@font-face
 {
     font-family: vazir-medium;
     src: url("../font/vazir/Vazir-Medium.ttf");
 }
+

@@ -5,10 +5,11 @@ namespace Modules\Complaint\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
+use Illuminate\Notifications\Notifiable;
 
 class Complaint extends Model
 {
-    use HasFactory;
+    use HasFactory , Notifiable;
 
     protected $fillable = [
         'first_name',
@@ -33,7 +34,7 @@ class Complaint extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function getStatusLabelAttribute() 
+    public function getStatusLabelAttribute()
     {
         if (isset($this->reference_id)) {
             if ($this->is_answered) {
@@ -46,7 +47,7 @@ class Complaint extends Model
 
             return "<span class='badge badge-primary'>ارجاع شده - در انتظار پاسخ</span>";
         }
-        
+
         return "<span class='badge badge-warning'>ارجاع نشده</span>";
 
     }
@@ -57,7 +58,7 @@ class Complaint extends Model
     }
 
     // relationships
-    public function files() 
+    public function files()
     {
         return $this->hasMany(ComplaintFile::class);
     }

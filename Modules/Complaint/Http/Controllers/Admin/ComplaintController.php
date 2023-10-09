@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\ComplaintUserFail;
 use Modules\Complaint\Entities\Departement;
+use Modules\Complaint\Entities\Notification;
 
 class ComplaintController extends Controller
 {
@@ -71,7 +72,7 @@ class ComplaintController extends Controller
     {
         return view('complaint::create');
     }
-    
+
 
     /**
      * Show the specified resource.
@@ -88,7 +89,7 @@ class ComplaintController extends Controller
     }
 
 
-    public function referral(Request $request, Complaint $complaint) 
+    public function referral(Request $request, Complaint $complaint)
     {
         $validData = $request->validate([
             'departement_id' => 'required|exists:departements,id',
@@ -106,5 +107,13 @@ class ComplaintController extends Controller
         // TODO send sms and notification
 
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
+    }
+
+    public function readAll()
+    {
+        $notifications = Notification::all();
+        foreach ($notifications as $notification){
+            $notification->update(['read_at' => now()]);
+        }
     }
 }

@@ -19,6 +19,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);
+    Route::post('/notification/read-all', [ComplaintController::class, 'readAll'])->name('complaints.readAll');
+
 });
 
 //Route complaint
@@ -28,6 +30,7 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
     Route::get('/traking', [TrackingController::class, 'index'])->name('tracking.index');
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+
 });
 
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function() {
