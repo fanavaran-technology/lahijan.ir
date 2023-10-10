@@ -8,17 +8,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Http\Requests\DepartmentRequest;
-
-use Modules\Complaint\Notifications\DepartemanNotification;
-use Modules\Complaint\Notifications\NewDepartment;
-
 use Illuminate\Support\Facades\DB;
-
 
 class DepartementController extends Controller
 {
@@ -64,15 +58,10 @@ class DepartementController extends Controller
 
             $inputs['users'] = $inputs['users'] ?? [];
 
-
-
-        return to_route('admin.departements.index')->with('toast-success' , 'دپارتمان جدید ایجاد شد.');
-
             $departements->users()->sync($inputs['users']);
         });
 
         return to_route('admin.departements.index')->with('toast-success', 'دپارتمان جدید ایجاد شد.');
-
     }
 
     /**
@@ -124,10 +113,7 @@ class DepartementController extends Controller
             return back()->with('toast-error', 'امکان حذف این دپارتمان وجود ندارد.');
         }
         $departement->users()->detach();
-
         $departement->delete();
-
-
 
         return back()->with('toast-success', 'دپارتمان حذف گردید.');
     }
@@ -145,20 +131,18 @@ class DepartementController extends Controller
 
     }
 
-
     public function fetchUser(Departement $departement)
     {
         $departementUsers = $departement->users;
+
         return response()->json($departementUsers);
     }
-
 
     public function setHandlerPermission(Request $request)
     {
         $validData = $request->validate([
             'user_id.*' => 'exists:users,id'
         ]);
-
 
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
 
