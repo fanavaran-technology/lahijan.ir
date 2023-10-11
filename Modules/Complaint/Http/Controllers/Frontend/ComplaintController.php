@@ -40,18 +40,18 @@ class ComplaintController extends Controller
         $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
 
-            $complaint = Complaint::create($inputs);
+        $complaint = Complaint::create($inputs);
 
-            if ($request->filled('files')) {
-                $complaint->files()->create([
-                    'files' => explode(',', $inputs['files']),
-                ]);
-            }
+        if ($request->filled('files')) {
+            $complaint->files()->create([
+                'files' => explode(',', $inputs['files']),
+            ]);
+        }
 
         $complaintLatest = Complaint::latest()->pluck('subject')->first();
 
         $details = [
-            'message' => " شکایت با عنوان : {$complaintLatest} ثبت شده است " ,
+            'message' => " شکایت با عنوان : {$complaintLatest} ثبت شده است ",
         ];
 
         $newComplaint = Complaint::latest()->first();
@@ -65,16 +65,25 @@ class ComplaintController extends Controller
     public function upload(Request $request, ImageService $imageService)
     {
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024',
+            'file' => "required|file|mimes:" . str_replace(".", "", complaintConfig('allowed-extensions')) . "|max:1024",
         ]);
 
-        $uploadedFiles = $request->file('file');
+        $uploadedFile = $request->file('file');
 
-        $imageService->setImageName(Str::random(24));
+        $fileName = $uploadedFile->getClientOriginalName();
 
-        $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
-        $image = $imageService->save($uploadedFiles);
+        if (isImageFile($fileName)) {
+            $imageService->setImageName(Str::random(24));
 
-        return response()->json(['path' => $image]);
+            $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
+            $file = $imageService->save($uploadedFile);
+        }
+        else {
+            $ext = $uploadedFile->extension();
+            $file = "docs/" . $uploadedFile->storeAs('/complaints/plaintiff', Str::random(24) . '.' . $ext, ['disk' => 'docs']);
+        }
+
+
+        return response()->json(['path' => $file]);
     }
 }

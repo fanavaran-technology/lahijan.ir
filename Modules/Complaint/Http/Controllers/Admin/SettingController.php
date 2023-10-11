@@ -10,6 +10,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Modules\Complaint\Http\Controllers\HelperController;
+use Illuminate\Support\Facades\File;
+
 
 class SettingController extends Controller
 {
@@ -38,19 +40,22 @@ class SettingController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validData = $request->validate([
-            'send_sms_operator' => 'numeric|in:0,1',
-            'send_sms_plaintiff'=> 'numeric|in:0,1',
-            'confirm_referrer'  => 'numeric|in:0,1'
+            'notifications.*' => 'numeric|in:0,1',
+            'allowed-extensions' => 'required|regex:/^(.[a-zA-Z0-9]+,)*.[a-zA-Z0-9]+$/i',
+            'max-files' => 'required|integer|min:1|max:10',
+            'max-file-size' => 'required|integer|min:1|max:10',
         ]); 
 
-        $config = json_decode(file_get_contents($this->configPath), true);
-
-        $newConfig = [];
-        foreach ($config as $key => $value) {
-            $newConfig[$key] = $request->has($key) ?  filter_var($validData[$key], FILTER_VALIDATE_BOOLEAN) : false;
+        $configs = json_decode(file_get_contents($this->configPath), true);
+        
+        foreach ($configs['notifications'] as $key => $value) {
+            $configs['notifications'][$key] = $request->input("notifications.{$key}") ? (bool) $value : false;
         }
+        unset($validData['notifications']);
 
-        file_put_contents($this->configPath, json_encode($newConfig, JSON_PRETTY_PRINT));
+        $configs = array_replace($configs, $validData);
+
+        file_put_contents($this->configPath, json_encode($configs, JSON_PRETTY_PRINT));
 
         return back()->with('toast-success', 'تغییرات با موفقیت اعمال شد.');
     }

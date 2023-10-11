@@ -250,6 +250,9 @@ return [
         'alley'           => 'کوچه',
         'deadend'         => 'بن بست',
         'builing_name'    => 'نام مجتمع',    
-        'answer'          => 'پاسخ',    
+        'answer'          => 'پاسخ',
+        'max-file-size'   => 'حداکثر حجم فایل',
+        'max-files'       => 'حداکثر تعداد فایل',
+        'allowed-extensions' => 'پسوند های مجاز'   
     ],
 ];

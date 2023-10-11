@@ -161,7 +161,9 @@ class DepartementController extends Controller
 
 
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
-
+        
+        $validData['user_id'] = $request->get('user_id') ? $request->get('user_id') : [];
+        
         $handlerPermission->users()->sync($validData['user_id']);
 
         return to_route('admin.departements.index')->with('toast-success', 'متصدیان با موفقیت اضافه شدند.');

@@ -37,6 +37,7 @@ class ComplaintServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        require_once __DIR__ . "/../Helpers/helpers.php";
         $this->app->register(RouteServiceProvider::class);
     }
 
