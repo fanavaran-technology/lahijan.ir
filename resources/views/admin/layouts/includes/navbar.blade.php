@@ -8,8 +8,8 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
-
-        @if($notifications->count() !== 0)
+        @can('manage_complaint')
+            @if($notifications->count() !== 0)
             <div class="row justify-content-center text-center mr-3">
                 <div class="col-md-5">
                     <div class="dropdown custom-dropdown">
@@ -53,9 +53,7 @@
                 </div>
             </div>
         @endif
-
-
-
+        @endcan
 
         @can('complaint_handler')
             <li class="nav-item d-flex align-items-center mr-4">
