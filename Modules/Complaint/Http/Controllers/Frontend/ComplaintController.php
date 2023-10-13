@@ -3,6 +3,7 @@
 namespace Modules\Complaint\Http\Controllers\Frontend;
 
 use App\Http\Services\Image\ImageService;
+use App\Models\ACL\Permission;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -48,17 +49,26 @@ class ComplaintController extends Controller
                 ]);
             }
 
-        $complaintLatest = Complaint::latest()->pluck('subject')->first();
-
-        $details = [
-            'message' => " شکایت با عنوان : {$complaintLatest} ثبت شده است " ,
-        ];
-
-        $newComplaint = Complaint::latest()->first();
-        $newComplaint->notify(new NewComplaint($details));
+        $this->newComplintNotifiction($complaint);
 
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
 
+    }
+
+    public function newComplintNotifiction($complaint)
+    {
+        $subject = $complaint->subject;
+
+        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+        $userIds = $userPermission->pluck('id')->toArray();
+
+        $details = [
+            'message' => " شکایت با عنوان : {$subject} ثبت شده است " ,
+        ];
+
+        $notification = new NewComplaint($details);
+
+        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
     }
 
 

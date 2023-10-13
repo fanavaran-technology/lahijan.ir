@@ -144,7 +144,9 @@ class DepartementController extends Controller
             'user_id.*' => 'exists:users,id'
         ]);
 
+
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
+        dd('hi');
 
         $handlerPermission->users()->sync($validData['user_id']);
 

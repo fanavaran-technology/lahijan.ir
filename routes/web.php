@@ -56,6 +56,7 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 require __DIR__ .'/auth.php';
 
 
+
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
 
@@ -120,7 +121,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
         Route::get('banner-theater/{theater}/status', [BannerTheaterController::class, 'status'])->name('banner-theater.status');
         // change mayor status route
         Route::get('mayors/{mayor}/status', [MayorController::class, 'status'])->name('mayor.status');
-        Route::get('mayor-speech/{mayor}/status', [MayorSpeechController::class, 'status'])->name('mayor.status');
+//        Route::get('mayor-speech/{mayor}/status', [MayorSpeechController::class, 'status'])->name('mayor.status');
 
     });
 

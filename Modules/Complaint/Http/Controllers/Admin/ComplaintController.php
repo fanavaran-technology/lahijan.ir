@@ -2,6 +2,8 @@
 
 namespace Modules\Complaint\Http\Controllers\Admin;
 
+use App\Models\ACL\Permission;
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -10,6 +12,7 @@ use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\ComplaintUserFail;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Entities\Notification;
+use Modules\Complaint\Notifications\NewComplaint;
 
 class ComplaintController extends Controller
 {
@@ -71,6 +74,7 @@ class ComplaintController extends Controller
      */
     public function create()
     {
+
         return view('complaint::create');
     }
 
@@ -82,6 +86,7 @@ class ComplaintController extends Controller
      */
     public function show(Complaint $complaint)
     {
+
         $departements = Departement::all();
 
         $userFails = $complaint->userFails;
@@ -105,16 +110,37 @@ class ComplaintController extends Controller
 
         $complaint->save();
 
+        $this->newReferrallNotifiction($complaint);
+
         // TODO send sms and notification
 
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }
 
+    public function newReferrallNotifiction($complaint)
+    {
+        $subject = $complaint->subject;
+
+        $userPermission = Permission::where("key", "complaint_handler")->first()->users()->get();
+        $userIds = $userPermission->pluck('id')->toArray();
+
+        $details = [
+            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
+        ];
+
+        $notification = new NewComplaint($details);
+
+        \Illuminate\Support\Facades\Notification::send(User::whereIn('id', $userIds)->get(), $notification);
+
+    }
+
     public function readAll()
     {
-        $notifications = Notification::all();
+        $notifications = auth()->user()->notifications;
         foreach ($notifications as $notification){
             $notification->update(['read_at' => now()]);
         }
     }
+
+
 }

@@ -8,56 +8,108 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
-        @can('manage_complaint')
-            @if($notifications->count() !== 0)
-            <div class="row justify-content-center text-center mr-3">
-                <div class="col-md-5">
-                    <div class="dropdown custom-dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-link" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                            <span class="btn__badge pulse-button bg-danger">
-                                    @if($notifications->count() !== 0)
-                                    {{$notifications->count()}}
-                                @endif
-                                </span>
-                        </a>
+        @canany(['manage_complaint' , 'complaint_handler'])
+            @can('manage_complaint')
+                @if(auth()->user()->unreadNotifications->count() !== 0 )
+                    <div class="row justify-content-center mt-3 text-center mr-5">
+                        <div class="col-md-5">
+                            <div class="dropdown custom-dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-link" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <span class="wrap-icon icon-notifications"></span>
+                                    <span class="btn__badge pulse-button bg-danger">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                            </span>
 
-                        <div class="dropdown-menu dropdown-menu-right" style="width: 330px; font-family: Vazir"
-                             aria-labelledby="dropdownMenuButton">
-                            <div class="title-wrap d-flex align-items-center">
-                                <h3 class="title font-bold fo mb-0">
-                                    <strong>{{ $notifications->count() !==0 ? 'شکایت های جدید' : 'شکایتی وجود ندارد' }}</strong>
-                                </h3>
-                                <a href="" id="all"
-                                   class="small ml-auto">{{ $notifications->count() !==0 ? 'خواندن همه' : '' }}</a>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right"
+                                     style="width: 330px; font-family: Vazir"
+                                     aria-labelledby="dropdownMenuButton">
+                                    <div class="title-wrap d-flex align-items-center">
+                                        <h3 class="title font-bold fo mb-0">
+                                            <strong>شکایت های ثبت شده</strong>
+                                        </h3>
+                                        <a href="" id="all"
+                                           class="small ml-auto">خواندن همه</a>
+                                    </div>
+
+                                    <ul class="custom-notifications">
+                                        @foreach(auth()->user()->unreadNotifications as $notification)
+                                            <li class="unread">
+                                                <a href="#" class="d-flex">
+                                                    <div class="text">
+                                                        <strong>
+                                                            {{ $notification['data']['message'] }}
+                                                        </strong>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <p class="text-center m-0 p-0 mt-2"><a
+                                            href="{{ route('admin.complaints.index') }}"
+                                            class="small">نمایش همه</a></p>
+                                </div>
                             </div>
-
-                            <ul class="custom-notifications">
-                                @foreach($notifications as $notification)
-                                    <li class="unread">
-                                        <a href="#" class="d-flex">
-                                            <div class="text">
-                                                <strong>
-                                                    {{ $notification['data']['message'] }}
-                                                </strong>
-                                            </div>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <p class="text-center m-0 p-0 mt-2"><a href="{{ route('admin.complaints.index') }}"
-                                                                   class="small">نمایش همه</a></p>
                         </div>
                     </div>
-                </div>
-            </div>
-        @endif
-        @endcan
+                @endif
+            @endcan
+
+            @can('complaint_handler')
+                @if(auth()->user()->unreadNotifications->count() !== 0 )
+
+                    <div class="row justify-content-center mt-3 text-center mr-5">
+                        <div class="col-md-5">
+                            <div class="dropdown custom-dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-link" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <span class="wrap-icon icon-notifications"></span>
+                                    <span class="btn__badge pulse-button bg-danger">
+                                {{ auth()->user()->notifications->count() }}
+                        </span>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right"
+                                     style="width: 330px; font-family: Vazir"
+                                     aria-labelledby="dropdownMenuButton">
+                                    <div class="title-wrap d-flex align-items-center">
+                                        <h3 class="title font-bold fo mb-0">
+                                            <strong>شکایت های ثبت شده</strong>
+                                        </h3>
+                                        <a href="" id="all"
+                                           class="small ml-auto">خواندن همه</a>
+                                    </div>
+
+                                    <ul class="custom-notifications">
+                                        @foreach(auth()->user()->notifications as $notification)
+                                            <li class="unread">
+                                                <a href="#" class="d-flex">
+                                                    <div class="text">
+                                                        <strong>
+                                                            {{ $notification['data']['message'] }}
+                                                        </strong>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <p class="text-center m-0 p-0 mt-2"><a
+                                            href="{{ route('admin.my-complaints.index') }}"
+                                            class="small">نمایش همه</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endcan
+
+        @endcanany
 
         @can('complaint_handler')
             <li class="nav-item d-flex align-items-center mr-4">
-                <a href="{{ route('admin.my-complaints.index') }}" class="btn btn-light border align-items-center">
+                <a href="{{ route('admin.my-complaints.index') }}"
+                   class="btn btn-light border align-items-center">
                     <span>شکایات </span>
                     <span class="badge badge-pill bg-danger text-white">{{ $myComplaintsCount }}</span>
                 </a>
@@ -65,7 +117,8 @@
         @endcan
         @can('manage_communication')
             <li class="nav-item nav-notif">
-                <a class="nav-link text-muted my-2 mx-3" href="./#" data-toggle="modal" data-target=".modal-notif">
+                <a class="nav-link text-muted my-2 mx-3" href="./#" data-toggle="modal"
+                   data-target=".modal-notif">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                          class="bi bi-envelope-paper" viewBox="0 0 16 16">
                         <path
@@ -78,7 +131,8 @@
             </li>
         @endcan
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-muted pr-0 mx-2" href="#" id="navbarDropdownMenuLink" role="button"
+            <a class="nav-link dropdown-toggle text-muted pr-0 mx-2" href="#" id="navbarDropdownMenuLink"
+               role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm mt-2">
             <img src="{{ asset(auth()->user()->profile_image) }}" alt="{{ auth()->user()->full_name }}"
@@ -86,9 +140,11 @@
           </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item text-secondary text-left" href="#">{{ auth()->user()->full_name }}</a>
+                <a class="dropdown-item text-secondary text-left"
+                   href="#">{{ auth()->user()->full_name }}</a>
                 <hr class="mb-1 mt-1">
-                <a class="dropdown-item text-secondary text-left" href="{{ route('admin.user.profile.index') }}">
+                <a class="dropdown-item text-secondary text-left"
+                   href="{{ route('admin.user.profile.index') }}">
                     <i class="fe fe-user"></i>
                     پروفایل
                 </a>

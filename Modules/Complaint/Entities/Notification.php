@@ -14,4 +14,5 @@ class Notification extends Model
     protected $casts = ['data' => 'array'];
 
 
+
 }
