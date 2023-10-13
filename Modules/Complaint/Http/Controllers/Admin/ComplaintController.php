@@ -26,12 +26,7 @@ class ComplaintController extends Controller
 
     public function index()
     {
-
-        $complaints = Complaint::query();
-
-        $complaints = $complaints->latest()->paginate(10);
-
-        return view('complaint::admin.complaint.index', compact('complaints'));
+        return view('complaint::admin.complaint.index');
     }
 
     public function fetch()
@@ -84,7 +79,7 @@ class ComplaintController extends Controller
     {
         $departements = Departement::all();
 
-        $userFails = $complaint->userFails;
+        $userFails = $complaint->userFails()->latest()->get();
 
         return view('complaint::admin.complaint.show', compact('complaint', 'departements', 'userFails'));
     }
@@ -99,6 +94,7 @@ class ComplaintController extends Controller
 
         $complaint->forceFill([
             'reference_id' => $validData['reference_id'],
+            'departement_id' => $validData['departement_id'],
             'referenced_at' => now(),
             'is_invalid' => 0,
         ]);

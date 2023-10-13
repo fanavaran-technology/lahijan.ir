@@ -2,11 +2,15 @@
 
 namespace Modules\Complaint\Http\Controllers\Admin;
 
+use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\Controller;
 use Modules\Complaint\Entities\Complaint;
+use Illuminate\Support\Str;
+use Modules\Complaint\Rules\ComplaintFilesRule;
+use Illuminate\Support\Facades\DB;
 
 class MyComplaintController extends Controller
 {
@@ -37,7 +41,9 @@ class MyComplaintController extends Controller
                 $complaints->whereNotNull('answer');
                 break;
             case 'invalid-complaints':
-                $complaints->where('is_invalid', 1);
+                $complaints->whereHas('userFails', function($userFail) {
+                    return $userFail->where('user_id', auth()->user()->id);
+                });
                 break;
         }
 
@@ -58,15 +64,26 @@ class MyComplaintController extends Controller
     public function answer(Request $request, Complaint $complaint) 
     {
         $validData = $request->validate([
-            'answer' => 'required|min:5'
+            'answer' => 'required|min:5',
+            'files'         => [new ComplaintFilesRule],
         ]);
 
-        $complaint->forceFill([
-            'answer' => $validData['answer'],
-            'is_invalid' => 0,
-            'is_answered' => 1,
-            'answered_at' => now()
-        ]);
+        DB::transaction(function () use($complaint, $validData, $request) {
+            $complaint->forceFill([
+                'answer' => $validData['answer'],
+                'is_invalid' => 0,
+                'is_answered' => 1,
+                'answered_at' => now()
+            ]);
+    
+            if ($request->filled('files')) {
+                $complaint->files()->create([
+                    'files' => explode(',', $validData['files']),
+                    'user_id' => auth()->user()->id
+                ]);
+            }
+        });
+        
 
         $complaint->save();
 

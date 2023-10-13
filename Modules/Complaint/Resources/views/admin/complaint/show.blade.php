@@ -92,7 +92,7 @@
                         @endif
 
                         @foreach ($userFails as $userFail)
-                            <li class="list-inline-item event-list">
+                            <li class="list-inline-item event-list" style="margin: 2rem 0">
                                 <div class="px-4">
                                     <img src="{{ asset($userFail->user->profile_image) }}"
                                         class="event-date rounded-circle" style="border: 3px solid rgb(179, 23, 23);" />
@@ -234,7 +234,7 @@
                             فایل های ضمیمه شده
                         </label>
                         <div class="row col-12">
-                            @foreach ($complaint->files->whereNull('user_id') as $complaintFiles)
+                            @forelse ($complaint->files->whereNull('user_id') as $complaintFiles)
                                 @foreach ($complaintFiles->files as $complaintFile)
                                     @if (isImageFile($complaintFile))
                                         <a href="{{ asset($complaintFile) }}" target="_blank"><img src="{{ asset($complaintFile) }}" style="width: 7rem; height: 7rem; margin: .5rem 1rem; object-fit:cover" alt=""></a>
@@ -251,7 +251,9 @@
                                         </a>
                                     @endif
                                 @endforeach
-                            @endforeach
+                                @empty 
+                                <p>هیچ فایلی ضمیمه نشده</p>
+                            @endforelse
                         </div>
                     </div>
                 </div>

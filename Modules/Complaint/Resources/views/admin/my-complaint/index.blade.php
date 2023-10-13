@@ -56,9 +56,7 @@
                                     <th>#</th>
                                     <th>نام شاکی</th>
                                     <th>عنوان شکایت</th>
-                                    <th>پاسخ دهنده</th>
                                     <th>وضعیت</th>
-                                    <th>ارجاع شده در</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
@@ -102,7 +100,7 @@
         }
 
         var show = {
-            dataKeys: ['full_name', 'subject', 'reference' ,'status_label', 'referenced_at_label'],
+            dataKeys: ['full_name', 'subject' ,'status_label'],
             links: [
                 {
                     'url' : "admin/my-complaints/:id",

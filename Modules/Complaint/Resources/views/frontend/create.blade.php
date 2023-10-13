@@ -634,7 +634,7 @@
             dictRemoveFileConfirmation: null,
             dictMaxFilesExceeded: "شما نمی‌توانید فایل‌های بیشتری را آپلود کنید.",
             headers: {
-                "X-CSRF-TOKEN": csrfToken
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
             },
         });
 

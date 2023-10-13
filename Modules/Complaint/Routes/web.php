@@ -23,6 +23,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::get('my-complaints', [MyComplaintController::class, 'index'])->name('my-complaints.index');
     Route::get('my-complaints/{complaint}', [MyComplaintController::class, 'show'])->name('my-complaints.show');
     Route::put('my-complaints/{complaint}/anwser', [MyComplaintController::class, 'answer'])->name('my-complaints.anwser');
+    Route::put('my-complaints/upload', [MyComplaintController::class, 'answer'])->name('my-complaints.upload');
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);

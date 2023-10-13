@@ -70,7 +70,6 @@
                                     <th>عنوان شکایت</th>
                                     <th>پاسخ دهنده</th>
                                     <th>وضعیت</th>
-                                    <th>ارجاع شده در تاریخ</th>
                                     <th>عملیات</th>
                                     </tr>
                                 </thead>
@@ -101,7 +100,6 @@
 
 
 @section('script')
-    <script></script>
 
     <script>
         var requestUrl = "{{ route('admin.complaints.fetch') }}";
@@ -114,7 +112,7 @@
         }
 
         var show = {
-            dataKeys: ['full_name', 'subject', 'reference' ,'status_label', 'referenced_at_label'],
+            dataKeys: ['full_name', 'subject', 'reference' ,'status_label'],
             links: [
                 {
                     'url' : "admin/complaints/:id",

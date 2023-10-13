@@ -46,7 +46,7 @@ class ViewServiceProvider extends ServiceProvider
 
         view()->composer('admin.*', function ($view) {
             $communications = Communication::where('response', null)->take(10)->get();
-            $myComplaintsCount = auth()->user()->complaints()->whereNull('answer')->count();
+            $myComplaintsCount = auth()->user()->complaints()->where('is_invalid', 0)->whereNull('answer')->count();
             $view->with(
                 [
                     'communications' => $communications,

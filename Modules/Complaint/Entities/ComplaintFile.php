@@ -10,7 +10,8 @@ class ComplaintFile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'files'
+        'files',
+        'user_id'
     ];
 
     protected $casts = [
