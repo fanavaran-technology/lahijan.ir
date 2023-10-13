@@ -25,6 +25,7 @@ class Complaint extends Model
         'tracking_code',
         'subject',
         'description',
+        'departement_id'
     ];
 
     protected $appends = ['full_name', 'status_label', 'reference', 'referenced_at_label'];

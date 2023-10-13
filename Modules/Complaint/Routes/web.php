@@ -35,7 +35,7 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
-    Route::get('/traking', [TrackingController::class, 'index'])->name('tracking.index');
+    Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
 });
 

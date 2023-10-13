@@ -21,21 +21,21 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function() {
-            $invalidComplaints = Complaint::whereNotNull('referenced_at')->whereNull('answered_at')->where('referenced_at',"<=", Carbon::now()->subDays(3))->get();
-            
-            foreach($invalidComplaints as $complaint) {
+        $schedule->call(function () {
+            $invalidComplaints = Complaint::whereNotNull('referenced_at')->whereNull('answered_at')->where('referenced_at', "<=", Carbon::now()->subDays((int) complaintConfig('deadline-responding')))->get();
+
+            foreach ($invalidComplaints as $complaint) {
                 $complaint->forceFill([
                     'is_invalid' => 1
                 ]);
 
                 $complaint->save();
-            }
 
-            $complaint->userFails()->create([
-                'user_id' => $complaint->reference_id,
-                'departement_id' => $complaint->departement_id 
-            ]);
+                $complaint->userFails()->create([
+                    'user_id' => $complaint->reference_id,
+                    'departement_id' => $complaint->departement_id
+                ]);
+            }
 
             // TODO : send sms and notification
 
@@ -49,12 +49,13 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
 
-    public function backupRun() {
+    public function backupRun()
+    {
         $backupJob = new BackupJob();
 
         $backupJob->run();

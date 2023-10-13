@@ -77,22 +77,19 @@
 
                 <div class="hori-timeline">
                     <ul class="list-inline events">
-                        @if (!$complaint->is_invalid)
-                            <li class="list-inline-item event-list">
-                                <div class="px-4">
-                                    <img src="{{ asset($complaint->user->profile_image) }}"
-                                        class="event-date rounded-circle"
-                                        style="border: 3px solid {{ $complaint->answer ? '#2abf3e' : 'dodgerblue' }};" />
-                                    <small>{{ $complaint->answer ? 'پاسخ داده شده' : 'در انتظار پاسخ' }}</small>
-                                    <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
-                                </div>
-                                <span
-                                    class="small text-center d-block d-lg-inline">{{ $complaint->answered_at? jdate()->forge($complaint->answered_at)->ago(): jdate()->forge($complaint->referenced_at)->ago() }}</span>
-                            </li>
-                        @endif
+                        <li class="list-inline-item event-list">
+                            <div class="px-4">
+                                <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle"
+                                    style="border: 3px solid {{ $complaint->answer ? '#2abf3e' : 'dodgerblue' }};" />
+                                <small>{{ $complaint->answer ? 'پاسخ داده شده' : 'ارجاع داده شد' }}</small>
+                                <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
+                            </div>
+                            <span
+                                class="small text-center d-block d-lg-inline">{{ $complaint->answered_at? jdate()->forge($complaint->answered_at)->format("Y/m/d ساعت H:i"): jdate()->forge($complaint->referenced_at)->format("Y/m/d ساعت H:i") }}</span>
+                        </li>
 
                         @foreach ($userFails as $userFail)
-                            <li class="list-inline-item event-list" style="margin: 2rem 0">
+                            <li class="list-inline-item event-list">
                                 <div class="px-4">
                                     <img src="{{ asset($userFail->user->profile_image) }}"
                                         class="event-date rounded-circle" style="border: 3px solid rgb(179, 23, 23);" />
@@ -100,7 +97,7 @@
                                     <h6 class="font-size-16 mt-1">{{ $userFail->user->full_name }}</h6>
                                 </div>
                                 <span
-                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($userFail->created_at)->ago() }}</span>
+                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($userFail->created_at)->format("Y/m/d ساعت H:i") }}</span>
                             </li>
                         @endforeach
 
@@ -237,21 +234,30 @@
                             @forelse ($complaint->files->whereNull('user_id') as $complaintFiles)
                                 @foreach ($complaintFiles->files as $complaintFile)
                                     @if (isImageFile($complaintFile))
-                                        <a href="{{ asset($complaintFile) }}" target="_blank"><img src="{{ asset($complaintFile) }}" style="width: 7rem; height: 7rem; margin: .5rem 1rem; object-fit:cover" alt=""></a>
+                                        <a href="{{ asset($complaintFile) }}" target="_blank"><img
+                                                src="{{ asset($complaintFile) }}"
+                                                style="width: 7rem; height: 7rem; margin: .5rem 1rem; object-fit:cover"
+                                                alt=""></a>
                                     @else
-                                        <a href="{{ asset($complaintFile) }}" target="_blank" style="width: 7rem; height: 7rem; margin: .5rem 1rem; background: #ddd" alt="">
+                                        <a href="{{ asset($complaintFile) }}" target="_blank"
+                                            style="width: 7rem; height: 7rem; margin: .5rem 1rem; background: #ddd"
+                                            alt="">
                                             <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                                                
+
                                                 <h3>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-{{ File::extension($complaintFile) }}" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                                                        fill="currentColor"
+                                                        class="bi bi-{{ File::extension($complaintFile) }}"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z" />
                                                     </svg>
                                                 </h3>
                                             </div>
                                         </a>
                                     @endif
                                 @endforeach
-                                @empty 
+                            @empty
                                 <p>هیچ فایلی ضمیمه نشده</p>
                             @endforelse
                         </div>

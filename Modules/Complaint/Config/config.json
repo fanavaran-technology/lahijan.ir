@@ -6,5 +6,6 @@
     },
     "allowed-extensions": ".jpg,.jpeg,.png,.gif,.pdf",
     "max-files": "3",
-    "max-file-size": "1"
+    "max-file-size": "1",
+    "deadline-responding": "1"
 }

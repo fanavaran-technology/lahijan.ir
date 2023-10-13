@@ -44,12 +44,12 @@ class SettingController extends Controller
             'allowed-extensions' => 'required|regex:/^(.[a-zA-Z0-9]+,)*.[a-zA-Z0-9]+$/i',
             'max-files' => 'required|integer|min:1|max:10',
             'max-file-size' => 'required|integer|min:1|max:10',
+            'deadline-responding' => 'required|integer|min:1|max:1000',
         ]); 
 
         $configs = json_decode(file_get_contents($this->configPath), true);
-        
         foreach ($configs['notifications'] as $key => $value) {
-            $configs['notifications'][$key] = $request->input("notifications.{$key}") ? (bool) $value : false;
+            $configs['notifications'][$key] = $request->input("notifications.{$key}") ? (bool) $request->input("notifications.{$key}") : false;
         }
         unset($validData['notifications']);
 
