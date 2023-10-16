@@ -27,8 +27,17 @@ class MyComplaintController extends Controller
      * @return Renderable
      */
     public function index()
-    {
-        return view('complaint::admin.my-complaint.index');
+    {   
+        $user = auth()->user();
+        $complaintsCount = [
+            'all' => $user->complaints()->count(),
+            'unanswereds' => $user->complaints()->whereNull('answer')->count(),
+            'answereds' => $user->complaints()->whereNotNull('answer')->count(),
+            'invalids' => $user->complaints()->whereHas('userFails', function($userFail) use($user) {
+                return $userFail->where('user_id', $user->id);
+            })->count(),
+        ];
+        return view('complaint::admin.my-complaint.index', ['complaintsCount' => $complaintsCount]);
     }
 
     public function fetch()

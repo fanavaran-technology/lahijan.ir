@@ -27,7 +27,16 @@ class ComplaintController extends Controller
 
     public function index()
     {
-        return view('complaint::admin.complaint.index');
+        $complaintsCount = [
+            'all' => Complaint::count(),
+            'notReferenced' => Complaint::whereNull('reference_id')->count(),
+            'referenced' => Complaint::whereNotNull('reference_id')->count(),
+            'waitingAnswer' => Complaint::whereNotNull("reference_id")->where('is_invalid', 0)->whereNull('answer')->count(),
+            'invalids' => Complaint::where('is_invalid', 1)->count(),
+            'answered' => Complaint::where('is_answered', 1)->count(),
+        ];
+
+        return view('complaint::admin.complaint.index', ['complaintsCount' => $complaintsCount]);
     }
 
     public function fetch()

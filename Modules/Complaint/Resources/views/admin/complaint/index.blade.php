@@ -28,6 +28,7 @@
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": ""}' id="all-complaints">
                                         <label class="custom-control-label" for="all-complaints">همه شکایات </label>
+                                        <span class="badge badge-pill badge-info">{{ $complaintsCount['all'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" checked name="filter" class="custom-control-input"
@@ -35,30 +36,37 @@
                                             id="not-referenced-complaints">
                                         <label class="custom-control-label" for="not-referenced-complaints">شکایات ارجاع
                                             نشده</label>
+                                        <span class="badge badge-pill badge-danger">{{ $complaintsCount['notReferenced'] }}</span>
+                                            
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "referenced-complaints"}' id="referenced-complaints">
                                         <label class="custom-control-label" for="referenced-complaints">شکایات ارجاع
                                             شده</label>
+                                        <span class="badge badge-pill badge-warning">{{ $complaintsCount['referenced'] }}</span>
+
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "waiting-answer"}' id="waiting-answer">
                                         <label class="custom-control-label" for="waiting-answer">در انتظار پاسخ
                                         </label>
+                                        <span class="badge badge-pill badge-primary">{{ $complaintsCount['waitingAnswer'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "invalid-complaints"}' id="invalid-complaints">
                                         <label class="custom-control-label" for="invalid-complaints">شکایات برگشتی
                                         </label>
+                                        <span class="badge badge-pill badge-danger">{{ $complaintsCount['invalids'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "answered-complaints"}' id="answered-complaints">
                                         <label class="custom-control-label" for="answered-complaints">شکایات بررسی
                                             شده</label>
+                                        <span class="badge badge-pill badge-success">{{ $complaintsCount['answered'] }}</span>
                                     </div>
                                 </div>
                             </div>

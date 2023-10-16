@@ -28,6 +28,7 @@
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": ""}' id="all-complaints">
                                         <label class="custom-control-label" for="all-complaints">همه شکایات </label>
+                                        <span class="badge badge-pill badge-info">{{ $complaintsCount['all'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" checked name="filter" class="custom-control-input"
@@ -35,18 +36,21 @@
                                             id="unanswered-complaints">
                                         <label class="custom-control-label" for="unanswered-complaints">شکایات بدون پاسخ
                                             </label>
+                                        <span class="badge badge-pill badge-danger">{{ $complaintsCount['unanswereds'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "answered-complaints"}' id="answered-complaints">
                                         <label class="custom-control-label" for="answered-complaints">شکایات پاسخ داده شده
                                             </label>
+                                        <span class="badge badge-pill badge-success">{{ $complaintsCount['answereds'] }}</span>
                                     </div>
                                     <div class="ml-3 mt-2 custom-control custom-checkbox">
                                         <input type="radio" name="filter" class="custom-control-input"
                                             data-params='{"filter": "invalid-complaints"}' id="invalid-complaints">
                                         <label class="custom-control-label" for="invalid-complaints">عدم پاسخگویی در زمان مقرر
                                         </label>
+                                        <span class="badge badge-pill badge-danger">{{ $complaintsCount['invalids'] }}</span>
                                     </div>
                                 </div>
                             </div>
