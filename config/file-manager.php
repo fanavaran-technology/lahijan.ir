@@ -98,8 +98,7 @@ return [
         'bmp',
         'jfif',
         'gif',
-        'pdf',
-        'dwg',
+        'pdf'
     ],
 
     /**
