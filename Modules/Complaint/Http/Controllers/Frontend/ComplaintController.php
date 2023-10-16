@@ -16,6 +16,7 @@ use Modules\Complaint\Http\Requests\Frontend\ComplaintRequest;
 use Illuminate\Support\Facades\DB;
 use Modules\Complaint\Notifications\NewComplaint;
 use Modules\Complaint\Notifications\NewDepartment;
+use Illuminate\Support\Facades\Log;
 
 class ComplaintController extends Controller
 {
@@ -48,14 +49,14 @@ class ComplaintController extends Controller
             ]);
         }
 
-        $complaintLatest = Complaint::latest()->pluck('subject')->first();
-
+        // send notification
         $details = [
-            'message' => " شکایت با عنوان : {$complaintLatest} ثبت شده است ",
+            'message' => " شکایت با عنوان : {$complaint->subject} ثبت شده است ",
         ];
 
-        $newComplaint = Complaint::latest()->first();
-        $newComplaint->notify(new NewComplaint($details));
+        $complaint->notify(new NewComplaint($details));
+
+        Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
 
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
 
@@ -83,6 +84,7 @@ class ComplaintController extends Controller
             $file = "docs/" . $uploadedFile->storeAs('/complaints/plaintiff', Str::random(24) . '.' . $ext, ['disk' => 'docs']);
         }
 
+        Log::info("کاربر با آی پی {$request->ip()} فایلی را برای یک شکایت آپلود کرد.");
 
         return response()->json(['path' => $file]);
     }

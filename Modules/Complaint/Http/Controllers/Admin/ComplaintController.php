@@ -10,6 +10,7 @@ use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\ComplaintUserFail;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Entities\Notification;
+use Illuminate\Support\Facades\Log;
 
 class ComplaintController extends Controller
 {
@@ -79,7 +80,7 @@ class ComplaintController extends Controller
     {
         $departements = Departement::all();
 
-        $userFails = $complaint->userFails()->latest()->get();
+        $userFails = $complaint->userFails()->get();
 
         return view('complaint::admin.complaint.show', compact('complaint', 'departements', 'userFails'));
     }
@@ -102,6 +103,11 @@ class ComplaintController extends Controller
         $complaint->save();
 
         // TODO send sms and notification
+        
+        $userName = auth()->user()->full_name;
+        $refferalUserName = $complaint->user->full_name;
+
+        Log::info("{$userName} شکایت {$complaint->subject} را به {$refferalUserName} ارجاع داد.");
 
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }

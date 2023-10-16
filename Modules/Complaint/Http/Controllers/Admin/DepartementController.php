@@ -13,6 +13,7 @@ use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\Departement;
 use Modules\Complaint\Http\Requests\DepartmentRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DepartementController extends Controller
 {
@@ -54,11 +55,15 @@ class DepartementController extends Controller
         $inputs = $request->all();
 
         DB::transaction(function () use ($inputs) {
-            $departements = Departement::create($inputs);
+            $departement = Departement::create($inputs);
 
             $inputs['users'] = $inputs['users'] ?? [];
 
-            $departements->users()->sync($inputs['users']);
+            $departement->users()->sync($inputs['users']);
+
+            $userName = auth()->user()->full_name;
+
+            Log::info("{$userName} دپارتمانی با عنوان {$departement->title} ایجاد کرد");
         });
 
         return to_route('admin.departements.index')->with('toast-success', 'دپارتمان جدید ایجاد شد.');
@@ -91,12 +96,16 @@ class DepartementController extends Controller
 
         $inputs['users'] = $inputs['users'] ?? [];
 
-        foreach($inputs['users'] as $userId) {
+        foreach ($inputs['users'] as $userId) {
             $user = User::findOrFail($userId);
             $user->permissions()->sync(Permission::getHandlerPermissionId());
         }
 
         $departement->users()->sync($inputs['users']);
+
+        $userName = auth()->user()->full_name;
+
+        Log::info("{$userName} دپارتمانی با عنوان {$departement->title} را ویرایش کرد");
 
         return to_route('admin.departements.index')->with('toast-success', 'دپارتمان ویرایش شد.');
 
@@ -113,6 +122,10 @@ class DepartementController extends Controller
             return back()->with('toast-error', 'امکان حذف این دپارتمان وجود ندارد.');
         }
         $departement->users()->detach();
+
+        $userName = auth()->user()->full_name;
+        Log::info("{$userName} دپارتمانی با عنوان {$departement->title} را حذف کرد");
+
         $departement->delete();
 
         return back()->with('toast-success', 'دپارتمان حذف گردید.');
@@ -145,10 +158,13 @@ class DepartementController extends Controller
         ]);
 
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
-        
+
         $validData['user_id'] = $request->get('user_id') ? $request->get('user_id') : [];
-        
+
         $handlerPermission->users()->sync($validData['user_id']);
+
+        $userName = auth()->user()->full_name;
+        Log::info("{$userName} لیست متصدیان را بروز رسانی کرد.");
 
         return to_route('admin.departements.index')->with('toast-success', 'متصدیان با موفقیت اضافه شدند.');
     }

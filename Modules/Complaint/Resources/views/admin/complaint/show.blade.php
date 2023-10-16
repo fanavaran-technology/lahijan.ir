@@ -77,16 +77,18 @@
 
                 <div class="hori-timeline">
                     <ul class="list-inline events">
+                        @if ($complaint->reference_id)
                         <li class="list-inline-item event-list">
                             <div class="px-4">
                                 <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle"
-                                    style="border: 3px solid {{ $complaint->answer ? '#2abf3e' : 'dodgerblue' }};" />
-                                <small>{{ $complaint->answer ? 'پاسخ داده شده' : 'ارجاع داده شد' }}</small>
+                                    style="border: 3px solid dodgerblue;" />
+                                <small>ارجاع داده شد</small>
                                 <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
                             </div>
                             <span
-                                class="small text-center d-block d-lg-inline">{{ $complaint->answered_at? jdate()->forge($complaint->answered_at)->format("Y/m/d ساعت H:i"): jdate()->forge($complaint->referenced_at)->format("Y/m/d ساعت H:i") }}</span>
+                                class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->referenced_at)->format("Y/m/d ساعت H:i") }}</span>
                         </li>
+                        @endif
 
                         @foreach ($userFails as $userFail)
                             <li class="list-inline-item event-list">
@@ -101,6 +103,18 @@
                             </li>
                         @endforeach
 
+                        @if ($complaint->answer)
+                        <li class="list-inline-item event-list">
+                            <div class="px-4">
+                                <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle"
+                                    style="border: 3px solid #2abf3e" />
+                                <small>پاسخ داده شد</small>
+                                <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
+                            </div>
+                            <span
+                                class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->answered_at)->format("Y/m/d ساعت H:i") }}</span>
+                        </li>
+                        @endif
                     </ul>
                 </div>
                 <!-- end card -->

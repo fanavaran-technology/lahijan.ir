@@ -2,6 +2,7 @@
 
 @section('head-tag')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('assets/app/plugins/viewer/css/viewer.min.css') }}">
 @endsection
 
 @section('content')
@@ -77,14 +78,14 @@
                 </section>
             </form>
         @else
-            <div class="bg-gray-50 flex flex-col w-full mt-8 rounded-md md:w-11/12 mx-auto">
+            <div class="bg-gray-50 flex flex-col w-full mt-8 rounded-md md:w-11/12 mx-auto overflow-hidden">
                 <div class="bg-gray-100 rounded text-black p-3">
                     <span class="text-gray-600">موضوع شکایت</span>
                     <h1 class="text-lg">{{ $complaint->subject }}</h1>
                 </div>
 
                 <div class="flex-1 overflow-y-auto p-4">
-                    <div class="flex flex-col space-y-1">
+                    <div class="flex flex-col space-y-1 overflow-hidden">
 
                         <div class="text-center my-4">
                             <span class="bg-gray-200 py-1.5 px-2 text-xs rounded-full text-gray-500">
@@ -107,7 +108,7 @@
                             <div class="flex">
                                 <div class="flex mr-0 md:mr-12 mb-4">
                                     <div class="text-gray-800 leading-9 rounded-lg md:w-8/12 w-full text-base">
-                                        <ul id="images" class="grid grid-cols-6 mt-2">
+                                        <ul id="sender" class="grid grid-cols-6 mt-2">
                                             @foreach ($complaint->files->whereNull('user_id') as $complaintFiles)
                                                 @foreach ($complaintFiles->files as $complaintFile)
                                                     @if (isImageFile($complaintFile))
@@ -124,7 +125,7 @@
                                                                 style="width: 7rem; height: 7rem; margin: .5rem 1rem; background: #ddd"
                                                                 alt="">
                                                                 <div
-                                                                    class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                                                    class="w-full h-full flex align-items-center justify-center text-red-500">
 
                                                                     <h3>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="60"
@@ -141,7 +142,6 @@
                                                     @endif
                                                 @endforeach
                                             @endforeach
-
                                         </ul>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                         @else
                             <div class="text-center">
                                 <span class="bg-gray-200 py-1.5 px-2 text-xs rounded-full text-gray-500">
-                                    23 مهر 1400
+                                    {{ jalaliDate($complaint->answered_at, 'd M Y') }}
                                 </span>
                             </div>
 
@@ -178,14 +178,14 @@
                             </div>
                             @if ($complaint->files()->whereNotNull('user_id')->get()->isNotEmpty())
                                 <div class="flex justify-end">
-                                    <div class="flex mr-0 md:ml-12 mb-4">
-                                        <div class="ml-1 text-gray-800 mr-auto leading-9 rounded-lg md:w-8/12 w-full text-base">
-                                            <ul id="images" class="grid grid-cols-6 mt-2">
-                                                @foreach ($complaint->files->whereNotNull('user_id') as $complaintFiles)
+                                    <div class="flex justify-end w-full mr-0 md:ml-12 mb-4">
+                                        <div class="text-gray-800 leading-9 rounded-lg md:w-8/12 w-full text-base">
+                                            <ul id="reciver" class="grid grid-cols-6 mt-2" dir="ltr">
+                                                @foreach ($complaint->files->whereNull('user_id') as $complaintFiles)
                                                     @foreach ($complaintFiles->files as $complaintFile)
                                                         @if (isImageFile($complaintFile))
                                                             <li
-                                                                class="col-span-2 md:col-span-2 border-2 border-green-100 rounded-md">
+                                                                class="col-span-2 md:col-span-2 border-2 border-blue-100 rounded-md">
                                                                 <img class="object-cover w-full rounded-md"
                                                                     src="{{ asset($complaintFile) }}" alt=""
                                                                     alt="Picture 1">
@@ -197,12 +197,11 @@
                                                                     style="width: 7rem; height: 7rem; margin: .5rem 1rem; background: #ddd"
                                                                     alt="">
                                                                     <div
-                                                                        class="w-100 h-100 d-flex align-items-center justify-content-center">
-
+                                                                        class="w-full h-full flex align-items-center justify-center text-red-500">
+    
                                                                         <h3>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                width="60" height="60"
-                                                                                fill="currentColor"
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="60"
+                                                                                height="60" fill="currentColor"
                                                                                 class="bi bi-{{ File::extension($complaintFile) }}"
                                                                                 viewBox="0 0 16 16">
                                                                                 <path fill-rule="evenodd"
@@ -215,7 +214,7 @@
                                                         @endif
                                                     @endforeach
                                                 @endforeach
-
+    
                                             </ul>
                                         </div>
                                     </div>
@@ -228,4 +227,12 @@
             @endif
 
         </section>
+    @endsection
+
+    @section('script')
+        <script src="{{ asset('assets/app/plugins/viewer/js/viewer.min.js') }}"></script>
+        <script>
+            new Viewer(document.getElementById('sender'));
+            new Viewer(document.getElementById('reciver'));
+        </script>
     @endsection

@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Modules\Complaint\Http\Controllers\HelperController;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Log;
 
 class SettingController extends Controller
 {
     private $configPath;
 
     public function __construct() {
+        $this->middleware('can:manage_complaint');
         $this->configPath = config('complaint.setting_path');
     }
 
@@ -57,19 +58,11 @@ class SettingController extends Controller
 
         file_put_contents($this->configPath, json_encode($configs, JSON_PRETTY_PRINT));
 
+        $userName = auth()->user()->full_name;
+
+        Log::info("{$userName} تنظیمات شکایت را بروز رسانی کرد.");
+
         return back()->with('toast-success', 'تغییرات با موفقیت اعمال شد.');
-    }
-
-    public static function isEnabled($key) 
-    {
-        $configFilePath = config('complaint.setting_path');
-        $config = json_decode(file_get_contents($configFilePath), true);
-
-        if (in_array($key, $config)) {
-            return $config[$key];
-        }
-
-        throw new Exception('Undifiend array key on complaint settings');
     }
 
 }

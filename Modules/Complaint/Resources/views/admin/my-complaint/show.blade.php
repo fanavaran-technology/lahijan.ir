@@ -15,7 +15,7 @@
             </h2>
         </div>
         <div class="col-auto mb-3">
-            <a href="#reply-section" onclick="window.scrollToView('')" type="button" class="btn btn-primary px-4">ثبت پاسخ</a>
+            <a href="#reply-section" type="button" class="btn btn-primary px-4">ثبت پاسخ</a>
             <a href="{{ route('admin.my-complaints.index') }}" type="button" class="btn btn-success px-4">بازگشت</a>
         </div>
     </div>

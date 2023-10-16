@@ -11,6 +11,8 @@ use Modules\Complaint\Entities\Complaint;
 use Illuminate\Support\Str;
 use Modules\Complaint\Rules\ComplaintFilesRule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class MyComplaintController extends Controller
 {
@@ -82,6 +84,10 @@ class MyComplaintController extends Controller
                     'user_id' => auth()->user()->id
                 ]);
             }
+
+            $userName = auth()->user()->full_name;
+
+            Log::info("{$userName} پاسخی برای شکایت {$complaint->subject} ثبت کرد.");
         });
         
 

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Http\Requests\Frontend\TrackingRequest;
+use Illuminate\Support\Facades\Log;
+
 
 class TrackingController extends Controller
 {
@@ -36,6 +38,9 @@ class TrackingController extends Controller
         $complaint = Complaint::where('tracking_code', $trackingCode)->first();
         
         session()->flash('complaint', $complaint->id);
+
+        Log::info("کاربر با آی پی {$request->ip()} شکایت {$complaint->subject} را مشاهده (پیگیری) کرد");
+
         return to_route('complaints.tracking.index');
     }   
 }

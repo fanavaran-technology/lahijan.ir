@@ -1,4 +1,5 @@
 <?php
+use GuzzleHttp\Middleware;
 use Modules\Complaint\Http\Controllers\Admin\ComplaintController;
 use \Modules\Complaint\Http\Controllers\Admin\DepartementController;
 use Modules\Complaint\Http\Controllers\Admin\MyComplaintController;
@@ -33,8 +34,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
 //Route complaint
 Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
-    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store');
-    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload');
+    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
+    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware("throttle:20,60");
     Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
 });
