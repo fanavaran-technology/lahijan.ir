@@ -197,7 +197,7 @@ return [
         App\Providers\BladeServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\PermissionServicProvider::class,
-
+        Modules\Complaint\Providers\ComplaintServiceProvider::class
     ],
 
     /*
