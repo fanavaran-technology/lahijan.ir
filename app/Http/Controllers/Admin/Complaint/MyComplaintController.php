@@ -1,15 +1,12 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Complaint;
 
-use App\Http\Services\Image\ImageService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Routing\Controller;
-use Modules\Complaint\Entities\Complaint;
-use Illuminate\Support\Str;
-use Modules\Complaint\Rules\ComplaintFilesRule;
+use App\Models\Complaint\Complaint;
+use App\Rules\Complaint\ComplaintFilesRule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -37,7 +34,7 @@ class MyComplaintController extends Controller
                 return $userFail->where('user_id', $user->id);
             })->count(),
         ];
-        return view('complaint::admin.my-complaint.index', ['complaintsCount' => $complaintsCount]);
+        return view('admin.complaint.my-complaint.index', ['complaintsCount' => $complaintsCount]);
     }
 
     public function fetch()
@@ -69,7 +66,7 @@ class MyComplaintController extends Controller
 
     public function show(Complaint $complaint)
     {
-        return view('complaint::admin.my-complaint.show', compact('complaint'));
+        return view('admin.complaint.my-complaint.show', compact('complaint'));
     }
 
     public function answer(Request $request, Complaint $complaint) 

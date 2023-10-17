@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Complaint\Entities;
+namespace App\Models\Complaint;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,8 +24,4 @@ class ComplaintFile extends Model
         return $this->belongsTo(Complaint::class);
     }
     
-    protected static function newFactory()
-    {
-        return \Modules\Complaint\Database\factories\ComplaintFileFactory::new();
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Complaint;
 
 use App\Models\ACL\Permission;
 use App\Models\User;
@@ -9,9 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
-use Modules\Complaint\Entities\Complaint;
-use Modules\Complaint\Entities\Departement;
-use Modules\Complaint\Http\Requests\DepartmentRequest;
+use App\Models\Complaint\Departement;
+use App\Http\Requests\Admin\Complaint\DepartmentRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -29,7 +28,7 @@ class DepartementController extends Controller
     public function index()
     {
         $users = User::where('is_staff', 1)->get()->except(auth()->user()->id);
-        return view('complaint::admin.department.index', compact('users'));
+        return view('admin.complaint.department.index', compact('users'));
     }
 
     /**
@@ -42,7 +41,7 @@ class DepartementController extends Controller
             return $permission->where('key', Departement::HANDLER_PERMISSION);
         })->get();
 
-        return view('complaint::admin.department.create', compact('users'));
+        return view('admin.complaint.department.create', compact('users'));
     }
 
     /**
@@ -80,7 +79,7 @@ class DepartementController extends Controller
             return $permission->where('key', Departement::HANDLER_PERMISSION);
         })->get();
 
-        return view('complaint::admin.department.edit', compact('departement', 'users'));
+        return view('admin.complaint.department.edit', compact('departement', 'users'));
     }
 
     /**
@@ -157,9 +156,7 @@ class DepartementController extends Controller
             'user_id.*' => 'exists:users,id'
         ]);
 
-
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
-        dd('hi');
 
         $validData['user_id'] = $request->get('user_id') ? $request->get('user_id') : [];
 

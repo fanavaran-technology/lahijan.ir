@@ -606,9 +606,9 @@
     </script>
 
     <script>
-        var acceptedFiles = ".jpg, .jpeg, .png, .gif";
-        var maxFilesize = 1;
-        var maxFiles = 3;
+        var acceptedFiles = "{{ complaintConfig('allowed-extensions') }}";
+        var maxFilesize = "{{ complaintConfig('max-file-size') }}";
+        var maxFiles = "{{ complaintConfig('max-files') }}";
         document.querySelector('.dz-accepted-files').textContent += acceptedFiles;
         document.querySelector('.dz-max-file-size').textContent += maxFilesize + " مگابایت";
         document.querySelector('.dz-max-files').textContent += maxFiles;
@@ -634,7 +634,7 @@
             dictRemoveFileConfirmation: null,
             dictMaxFilesExceeded: "شما نمی‌توانید فایل‌های بیشتری را آپلود کنید.",
             headers: {
-                "X-CSRF-TOKEN": csrfToken
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
             },
         });
 

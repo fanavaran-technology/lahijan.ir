@@ -1,16 +1,11 @@
 <?php
 
-namespace Modules\Complaint\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Complaint;
 
-use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Storage;
-use Modules\Complaint\Http\Controllers\HelperController;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class SettingController extends Controller
@@ -29,7 +24,7 @@ class SettingController extends Controller
     public function index()
     {
         $config = json_decode(file_get_contents($this->configPath), true);
-        return view('complaint::admin.setting', compact('config'));
+        return view('admin.complaint.setting', compact('config'));
     }
 
     /**
@@ -66,3 +61,4 @@ class SettingController extends Controller
     }
 
 }
+

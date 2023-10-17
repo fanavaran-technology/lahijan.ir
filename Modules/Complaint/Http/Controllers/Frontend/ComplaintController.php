@@ -17,6 +17,7 @@ use Modules\Complaint\Http\Requests\Frontend\ComplaintRequest;
 use Illuminate\Support\Facades\DB;
 use Modules\Complaint\Notifications\NewComplaint;
 use Modules\Complaint\Notifications\NewDepartment;
+use Illuminate\Support\Facades\Log;
 
 class ComplaintController extends Controller
 {
@@ -41,7 +42,8 @@ class ComplaintController extends Controller
         $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
 
-            $complaint = Complaint::create($inputs);
+        $complaint = Complaint::create($inputs);
+
 
             if ($request->filled('files')) {
                 $complaint->files()->create([
@@ -50,6 +52,17 @@ class ComplaintController extends Controller
             }
 
         $this->newComplintNotifiction($complaint);
+
+
+        // send notification
+        $details = [
+            'message' => " شکایت با عنوان : {$complaint->subject} ثبت شده است ",
+        ];
+
+        $complaint->notify(new NewComplaint($details));
+
+        Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
+
 
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
 
@@ -75,16 +88,26 @@ class ComplaintController extends Controller
     public function upload(Request $request, ImageService $imageService)
     {
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif|max:1024',
+            'file' => "required|file|mimes:" . str_replace(".", "", complaintConfig('allowed-extensions')) . "|max:1024",
         ]);
 
-        $uploadedFiles = $request->file('file');
+        $uploadedFile = $request->file('file');
 
-        $imageService->setImageName(Str::random(24));
+        $fileName = $uploadedFile->getClientOriginalName();
 
-        $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
-        $image = $imageService->save($uploadedFiles);
+        if (isImageFile($fileName)) {
+            $imageService->setImageName(Str::random(24));
 
-        return response()->json(['path' => $image]);
+            $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
+            $file = $imageService->save($uploadedFile);
+        }
+        else {
+            $ext = $uploadedFile->extension();
+            $file = "docs/" . $uploadedFile->storeAs('/complaints/plaintiff', Str::random(24) . '.' . $ext, ['disk' => 'docs']);
+        }
+
+        Log::info("کاربر با آی پی {$request->ip()} فایلی را برای یک شکایت آپلود کرد.");
+
+        return response()->json(['path' => $file]);
     }
 }
