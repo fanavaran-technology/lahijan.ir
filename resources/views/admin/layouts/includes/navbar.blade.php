@@ -8,7 +8,6 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
-        @canany(['manage_complaint' , 'complaint_handler'])
             @can('manage_complaint')
                 @if(auth()->user()->unreadNotifications->count() !== 0 )
                     <div class="row justify-content-center mt-3 text-center mr-5">
@@ -66,7 +65,7 @@
                                    aria-expanded="false">
                                     <span class="wrap-icon icon-notifications"></span>
                                     <span class="btn__badge pulse-button bg-danger">
-                                {{ auth()->user()->notifications->count() }}
+                                {{ auth()->user()->unreadNotifications->count() }}
                         </span>
 
                                 </a>
@@ -77,12 +76,15 @@
                                         <h3 class="title font-bold fo mb-0">
                                             <strong>شکایت های ثبت شده</strong>
                                         </h3>
-                                        <a href="" id="all"
-                                           class="small ml-auto">خواندن همه</a>
+                                        <form action="{{ route('admin.complaints.readAll') }}" method="post" >
+                                            @csrf
+                                            <button
+                                               class="small  ml-auto">خواندن همه</button>
+                                        </form>
                                     </div>
 
                                     <ul class="custom-notifications">
-                                        @foreach(auth()->user()->notifications as $notification)
+                                        @foreach(auth()->user()->unreadNotifications as $notification)
                                             <li class="unread">
                                                 <a href="#" class="d-flex">
                                                     <div class="text">
@@ -104,7 +106,6 @@
                 @endif
             @endcan
 
-        @endcanany
 
         @can('complaint_handler')
             <li class="nav-item d-flex align-items-center mr-4">
@@ -180,8 +181,21 @@
 </script>
 
 <script>
-    let notificationDropdown = document.getElementById('all');
-    notificationDropdown.addEventListener('click', function () {
+    {{--let notificationDropdown = document.getElementById('all');--}}
+    {{--notificationDropdown.addEventListener('click', function () {--}}
+    {{--    $.ajax({--}}
+    {{--        type: "POST",--}}
+    {{--        url: '/admin/notification/read-all',--}}
+    {{--        data: {_token: "{{ csrf_token() }}"},--}}
+    {{--        success: function () {--}}
+    {{--            console.log('yes');--}}
+    {{--        }--}}
+    {{--    })--}}
+    {{--});--}}
+
+
+    let notificationDropdown2 = document.getElementById('all');
+    notificationDropdown2.addEventListener('click', function () {
         $.ajax({
             type: "POST",
             url: '/admin/notification/read-all',

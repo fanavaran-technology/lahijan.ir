@@ -27,7 +27,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);
     Route::post('/notification/read-all', [ComplaintController::class, 'readAll'])->name('complaints.readAll');
-    Route::post('/notification/read-my-complaint', [ComplaintController::class, 'readMyComplaint'])->name('complaints.readMyComplaint');
+//    Route::post('/notification/read-my-complaint', [ComplaintController::class, 'readMyComplaint'])->name('complaints.readMyComplaint');
 });
 
 //Route complaint

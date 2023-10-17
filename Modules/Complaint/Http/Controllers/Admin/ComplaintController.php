@@ -11,7 +11,7 @@ use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
 use Modules\Complaint\Entities\ComplaintUserFail;
 use Modules\Complaint\Entities\Departement;
-use Modules\Complaint\Entities\Notification;
+use Illuminate\Support\Facades\Notification;
 use Modules\Complaint\Notifications\NewComplaint;
 
 class ComplaintController extends Controller
@@ -130,17 +130,27 @@ class ComplaintController extends Controller
 
         $notification = new NewComplaint($details);
 
-        \Illuminate\Support\Facades\Notification::send(User::whereIn('id', $userIds)->get(), $notification);
+        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
 
     }
 
     public function readAll()
     {
+        dd('hi');
         $notifications = auth()->user()->notifications;
         foreach ($notifications as $notification){
             $notification->update(['read_at' => now()]);
         }
     }
+
+//    public function readMyComplaint()
+//    {
+//        dd('hi');
+//        $notifications = auth()->user()->notifications;
+//        foreach ($notifications as $notification){
+//            $notification->update(['read_at' => now()]);
+//        }
+//    }
 
 
 }
