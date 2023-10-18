@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.settings.store') }}" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{ route('admin.complaints.settings.store') }}" method="post" enctype="multipart/form-data" id="form">
         @csrf
         <div class="row" style="position: relative">
             <div style="position:fixed;z-index:100;left:2rem; bottom:3rem;">
@@ -51,21 +51,16 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-lg-4">
-                                <label for="full_name" class="input-title mr-3">پسوند های مجاز آپلود</label>
-                                <input type="text" name="allowed-extensions" value="{{ $config['allowed-extensions'] }}"
-                                       placeholder="نام پسوند را وارد نماییدو با , از هم جدا کنید" dir="ltr" class="form-control custom-focus" id="full_name">
-                            </div>
-                            <div class="form-group col-lg-3">
                                 <label for="full_name" class="input-title">حداکثر حجم فایل (بر اساس مگابایت)</label>
                                 <input type="number" name="max-file-size" value="{{ $config['max-file-size'] }}"
                                        placeholder="حداکثر حجم فایل" dir="ltr" class="form-control custom-focus" id="full_name">
                             </div> 
-                            <div class="form-group col-lg-2">
+                            <div class="form-group col-lg-4">
                                 <label for="full_name" class="input-title">حداکثر تعداد فایل</label>
                                 <input type="number" name="max-files" value="{{ $config['max-files'] }}"
                                        placeholder="حداکثر تعداد فایل" dir="ltr" class="form-control custom-focus" id="full_name">
                             </div>  
-                            <div class="form-group col-lg-3">
+                            <div class="form-group col-lg-4">
                                 <label for="full_name" class="input-title">مهلت پاسخ به شکایات (بر اساس روز)</label>
                                 <input type="number" name="deadline-responding" value="{{ $config['deadline-responding'] }}"
                                        placeholder="حداکثر تعداد فایل" dir="ltr" class="form-control custom-focus" id="full_name">

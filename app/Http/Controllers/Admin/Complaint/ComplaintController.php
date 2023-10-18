@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Complaint;
 
+use App\Models\ACL\Permission;
+use App\Models\User;
+use App\Notifications\NewComplaint;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -100,14 +103,33 @@ class ComplaintController extends Controller
 
         $complaint->save();
 
+        $this->newReferrallNotifiction($complaint);
+
         // TODO send sms and notification
-        
+
         $userName = auth()->user()->full_name;
         $refferalUserName = $complaint->user->full_name;
 
         Log::info("{$userName} شکایت {$complaint->subject} را به {$refferalUserName} ارجاع داد.");
 
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
+    }
+
+    public function newReferrallNotifiction($complaint)
+    {
+        $subject = $complaint->subject;
+
+        $userPermission = Permission::where("key", "complaint_handler")->first()->users()->get();
+        $userIds = $userPermission->pluck('id')->toArray();
+
+        $details = [
+            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
+        ];
+
+        $notification = new NewComplaint($details);
+
+        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
+
     }
 
     public function readAll()

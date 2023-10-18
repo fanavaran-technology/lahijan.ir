@@ -37,7 +37,6 @@ class SettingController extends Controller
     {
         $validData = $request->validate([
             'notifications.*' => 'numeric|in:0,1',
-            'allowed-extensions' => 'required|regex:/^(.[a-zA-Z0-9]+,)*.[a-zA-Z0-9]+$/i',
             'max-files' => 'required|integer|min:1|max:10',
             'max-file-size' => 'required|integer|min:1|max:10',
             'deadline-responding' => 'required|integer|min:1|max:1000',

@@ -45,6 +45,8 @@ use App\Http\Controllers\Content\TheaterController as PublicTheaterController;
 use App\Http\Controllers\Content\CouncilMemberController as PublicCouncilMemberController;
 use App\Http\Controllers\Content\MayorController as PublicMayorController;
 use App\Http\Controllers\Clarification\InvestmentController as AppInvestmentController;
+use App\Http\Controllers\Complaint\ComplaintController as FrontendComplaintController;
+use App\Http\Controllers\Complaint\TrackingController;
 use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 /*
@@ -156,7 +158,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::get('departement/{departement}/fetch-user', [DepartementController::class, 'fetchUser'])->name('departements.fetch-user');
 
     Route::post('departement/complaint-hander', [DepartementController::class, 'setHandlerPermission'])->name('departements.handler-permission');
-    Route::resource('complaints/settings', ComplaintSettingController::class)->only('index', 'store');
+    Route::get('complaints/settings', [ComplaintSettingController::class, 'index'])->name('complaints.settings.index');
+    Route::post('complaints/settings', [ComplaintSettingController::class, 'store'])->name('complaints.settings.store');
     Route::get('my-complaints/fetch', [MyComplaintController::class, 'fetch'])->name('my-complaints.fetch');
     Route::get('my-complaints', [MyComplaintController::class, 'index'])->name('my-complaints.index');
     Route::get('my-complaints/{complaint}', [MyComplaintController::class, 'show'])->name('my-complaints.show');
@@ -217,6 +220,14 @@ Route::get('fire-search', FireSearchController::class)->name('fire-search');
 
 Route::get('/{page:slug}', PublicPageController::class)->name('page');
 
-
-
 Route::resource('communications', AppCommunicationController::class)->only('create' , 'store');
+
+Route::prefix('complaint')->as('complaints.')->group(function() {
+    Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
+    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
+    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware("throttle:20,60");
+    Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
+    Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+});
+
+

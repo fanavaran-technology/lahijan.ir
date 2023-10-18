@@ -159,7 +159,7 @@ class DepartementController extends Controller
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
 
         $validData['user_id'] = $request->get('user_id') ? $request->get('user_id') : [];
-
+        
         $handlerPermission->users()->sync($validData['user_id']);
 
         $userName = auth()->user()->full_name;
