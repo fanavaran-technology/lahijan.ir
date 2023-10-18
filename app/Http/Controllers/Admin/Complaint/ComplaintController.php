@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Complaint\Complaint;
 use App\Models\Complaint\Departement;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Log;
 
 class ComplaintController extends Controller
