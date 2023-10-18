@@ -45,6 +45,7 @@ class ComplaintController extends Controller
                 'files' => explode(',', $inputs['files']),
             ]);
         }
+
         $this->newComplintNotifiction($complaint);
 
 
