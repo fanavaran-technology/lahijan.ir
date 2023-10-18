@@ -13,7 +13,6 @@ use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Communication\CommunicationController as AppCommunicationController;
 use App\Http\Controllers\FireStation\FireStationController;
 use App\Http\Controllers\FireStation\FireSliderController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -60,8 +59,6 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 |
 */
 require __DIR__ .'/auth.php';
-
-
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
