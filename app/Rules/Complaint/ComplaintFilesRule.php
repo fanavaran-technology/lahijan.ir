@@ -28,7 +28,7 @@ class ComplaintFilesRule implements Rule
         $files = explode(',' , $value);
 
         foreach ($files as $file) {
-            if (!file_exists(public_path($file))) {
+            if (!file_exists(dirname(__DIR__). $file)) {
                 return false;
             }
         }
