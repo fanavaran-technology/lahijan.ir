@@ -26,9 +26,10 @@ class ComplaintFilesRule implements Rule
     public function passes($attribute, $value)
     {
         $files = explode(',' , $value);
-
+        $fileUploadPath = config('complaint.upload_path');
+        
         foreach ($files as $file) {
-            if (!file_exists(dirname(dirname(__DIR__))."public_html/".  $file)) {
+            if (!file_exists($fileUploadPath. $file)) {
                 return false;
             }
         }
