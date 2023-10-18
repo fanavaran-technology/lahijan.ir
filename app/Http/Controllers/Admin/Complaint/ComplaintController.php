@@ -129,7 +129,6 @@ class ComplaintController extends Controller
         $notification = new NewComplaint($details);
 
         Notification::send(User::whereIn('id', $userIds)->get(), $notification);
-
     }
 
     public function readAll()

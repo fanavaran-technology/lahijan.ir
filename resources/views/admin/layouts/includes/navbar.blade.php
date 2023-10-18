@@ -8,6 +8,8 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
+        @canany(['manage_complaint' , 'complaint_handler'])
+
             @can('manage_complaint')
                 @if(auth()->user()->unreadNotifications->count() !== 0 )
                     <div class="row justify-content-center mt-3 text-center mr-5">
@@ -105,6 +107,7 @@
                     </div>
                 @endif
             @endcan
+        @endcanany
 
 
         @can('complaint_handler')
