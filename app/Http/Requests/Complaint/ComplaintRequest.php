@@ -6,7 +6,7 @@ use App\Rules\Recaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Modules\Complaint\Rules\ComplaintFilesRule;
+use App\Rules\Complaint\ComplaintFilesRule;
 
 class ComplaintRequest extends FormRequest
 {
