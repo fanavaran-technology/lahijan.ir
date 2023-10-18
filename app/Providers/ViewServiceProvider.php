@@ -6,6 +6,7 @@ use App\Models\Communication;
 use App\Models\Content\Menu;
 use App\Models\Content\News;
 use Illuminate\Support\ServiceProvider;
+use Modules\Complaint\Entities\Notification;
 
 class ViewServiceProvider extends ServiceProvider
 {

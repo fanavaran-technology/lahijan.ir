@@ -17,6 +17,7 @@ use Modules\Complaint\Http\Controllers\Frontend\TrackingController;
 //     Route::delete('departement/destroy/{departement}', [DepartementController::class, 'destroy'])->name('departements.destroy');
 //     Route::get('departement/fetch', [DepartementController::class, 'fetch'])->name('departements.fetch');
 //     Route::get('departement/{departement}/fetch-user', [DepartementController::class, 'fetchUser'])->name('departements.fetch-user');
+//});
 
 //     Route::post('departement/complaint-hander', [DepartementController::class, 'setHandlerPermission'])->name('departements.handler-permission');
 //     Route::resource('complaints/settings', SettingController::class)->only('index', 'store');
@@ -32,6 +33,16 @@ use Modules\Complaint\Http\Controllers\Frontend\TrackingController;
 // });
 
 //Route complaint
+<<<<<<< HEAD
+//Route::prefix('complaint')->as('complaints.')->group(function() {
+//    Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
+//    Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
+//    Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware("throttle:20,60");
+//    Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
+//    Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+//});
+//
+=======
 // Route::prefix('complaint')->as('complaints.')->group(function() {
 //     Route::get('/create', [FrontendComplaintController::class, 'create'])->name('create');
 //     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
@@ -40,3 +51,4 @@ use Modules\Complaint\Http\Controllers\Frontend\TrackingController;
 //     Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
 // });
 
+>>>>>>> aece29c28047e79965d09069aa596675f02ff358

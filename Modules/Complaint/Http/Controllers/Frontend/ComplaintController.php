@@ -3,6 +3,7 @@
 namespace Modules\Complaint\Http\Controllers\Frontend;
 
 use App\Http\Services\Image\ImageService;
+use App\Models\ACL\Permission;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -43,11 +44,15 @@ class ComplaintController extends Controller
 
         $complaint = Complaint::create($inputs);
 
-        if ($request->filled('files')) {
-            $complaint->files()->create([
-                'files' => explode(',', $inputs['files']),
-            ]);
-        }
+
+            if ($request->filled('files')) {
+                $complaint->files()->create([
+                    'files' => explode(',', $inputs['files']),
+                ]);
+            }
+
+        $this->newComplintNotifiction($complaint);
+
 
         // send notification
         $details = [
@@ -58,8 +63,25 @@ class ComplaintController extends Controller
 
         Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
 
+
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
 
+    }
+
+    public function newComplintNotifiction($complaint)
+    {
+        $subject = $complaint->subject;
+
+        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+        $userIds = $userPermission->pluck('id')->toArray();
+
+        $details = [
+            'message' => " شکایت با عنوان : {$subject} ثبت شده است " ,
+        ];
+
+        $notification = new NewComplaint($details);
+
+        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
     }
 
 

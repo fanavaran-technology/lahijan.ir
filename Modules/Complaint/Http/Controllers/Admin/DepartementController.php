@@ -157,7 +157,9 @@ class DepartementController extends Controller
             'user_id.*' => 'exists:users,id'
         ]);
 
+
         $handlerPermission = Permission::where('key', Departement::HANDLER_PERMISSION)->firstOrFail();
+        dd('hi');
 
         $validData['user_id'] = $request->get('user_id') ? $request->get('user_id') : [];
 
