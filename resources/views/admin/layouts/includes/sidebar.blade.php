@@ -297,12 +297,12 @@ active
                             <path
                                 d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z" />
                         </svg>
-                        <span class="ml-3 item-text">شهردارارن پیشن</span>
+                        <span class="ml-3 item-text">شهرداران پیشن</span>
                     </a>
                     <ul class="collapse list-unstyled pl-4 w-100" id="mayor">
                         <li class="nav-item">
                             <a class="nav-link pl-3" href="{{ route('admin.content.mayors.index') }}"><span
-                                    class="ml-1 item-text">همه شهردارارن </span>
+                                    class="ml-1 item-text">همه شهرداران </span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -464,9 +464,7 @@ active
             @can('manage_complaint')
                 <li class="nav-item d-flex justify-content-between align-items-center">
                     <a href="{{ route('admin.complaints.index') }}" aria-expanded="false"
-                        class="nav-link w-100 @active('admin.complaints')
-active
-@endactive">
+                        class="nav-link w-100 @active('admin.complaints.index') active @endactive">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-journal-text" viewBox="0 0 16 16">
                             <path
@@ -481,7 +479,7 @@ active
                 </li>
 
                 <li
-                    class="nav-item dropdown @active('admin.clarification.department')
+                    class="nav-item dropdown @active('admin.department')
 active
 @endactive @active('admin.departement')
 active
@@ -508,8 +506,8 @@ active
                 </li>
 
                 <li class="nav-item d-flex justify-content-between align-items-center">
-                    <a href="{{ route('admin.settings.index') }}" aria-expanded="false"
-                        class="nav-link w-100 @active('admin.settings')
+                    <a href="{{ route('admin.complaints.settings.index') }}" aria-expanded="false"
+                        class="nav-link w-100 @active('admin.complaints.settings.index')
 active
 @endactive">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16"
