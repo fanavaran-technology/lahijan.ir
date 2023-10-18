@@ -49,14 +49,21 @@
                                         </legend>
                                     </fieldset>
                                 </div>
-                                <span class="text-red-500 font-bold text-xs er-tracking_code"></span>
+                                @error('tracking_code')
+                                <span class="text-red-500 font-bold text-xs er-tracking_code">
+                                    {{ $message }}
+                                </span>
+                                @enderror
                             </section>
                         </section>
 
                         <section class="my-8 w-full flex flex-col items-center">
                             @recaptcha
+                            @error('g-recaptcha-response')
                             <div class="text-red-500 mt-2 text-center font-bold text-xs er-g-recaptcha-response">
+                                {{ $message }}
                             </div>
+                            @enderror
                         </section>
                         <section class="flex justify-center py-4">
                             <button type="submit" id="submit-button"

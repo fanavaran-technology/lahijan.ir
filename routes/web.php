@@ -226,7 +226,7 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware("throttle:20,60");
     Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
-    Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+    Route::post('/tracking', [TrackingController::class, 'proccess'])->name('tracking.proccess')->middleware('throttle:20,60');
 });
 
 

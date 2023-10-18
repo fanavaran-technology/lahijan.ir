@@ -19,7 +19,7 @@ class TrackingRequest extends FormRequest
     {
         return [
             'tracking_code' => 'required|digits:9|exists:complaints,tracking_code',
-            'g-recaptcha-response' => ['required' , new Recaptcha],
+            'g-recaptcha-response' => ['required', new Recaptcha],
         ];
     }
 
@@ -33,7 +33,8 @@ class TrackingRequest extends FormRequest
         return true;
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'digits' => 'کد پیگیری معتبر نیست.',
             'exists' => 'کد پیگیری معتبر نیست.',
@@ -42,14 +43,4 @@ class TrackingRequest extends FormRequest
             ]
         ];
     }
-
-    protected function failedValidation(Validator $validator) 
-    {   
-        $errors = $validator->errors();
-
-        if ($validator->fails()) {
-            throw new HttpResponseException(response()->json(['success' => false, 'errors' => $errors], 422));        
-        }
-    }
 }
-

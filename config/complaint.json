@@ -4,7 +4,7 @@
         "send_sms_plaintiff": false,
         "confirm_referrer": false
     },
-    "allowed-extensions": ".jpg,.jpeg,.png,.gif,.pdf",
+    "allowed-extensions": ".jpg,.jpeg,.png,.gif",
     "max-files": "3",
     "max-file-size": "1",
     "deadline-responding": "1"
