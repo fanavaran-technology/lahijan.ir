@@ -13,7 +13,6 @@ use App\Http\Controllers\Clarification\ClarificationController;
 use App\Http\Controllers\Communication\CommunicationController as AppCommunicationController;
 use App\Http\Controllers\FireStation\FireStationController;
 use App\Http\Controllers\FireStation\FireSliderController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Admin\SettingController;
@@ -60,8 +59,6 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 |
 */
 require __DIR__ .'/auth.php';
-
-
 
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
@@ -227,7 +224,7 @@ Route::prefix('complaint')->as('complaints.')->group(function() {
     Route::post('/store', [FrontendComplaintController::class, 'store'])->name('store')->middleware('throttle:20,60');
     Route::post('/upload', [FrontendComplaintController::class, 'upload'])->name('upload')->middleware("throttle:20,60");
     Route::get('/tracking', [TrackingController::class, 'index'])->name('tracking.index');
-    Route::post('/traking', [TrackingController::class, 'proccess'])->name('tracking.proccess');
+    Route::post('/tracking', [TrackingController::class, 'proccess'])->name('tracking.proccess')->middleware('throttle:20,60');
 });
 
 

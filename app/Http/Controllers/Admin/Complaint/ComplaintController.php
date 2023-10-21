@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Complaint\Complaint;
 use App\Models\Complaint\Departement;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Log;
 
 class ComplaintController extends Controller
@@ -23,7 +23,7 @@ class ComplaintController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:manage_complaint');
+        $this->middleware('can:manage_complaint')->only('readAll');
     }
 
     public function index()
@@ -103,11 +103,12 @@ class ComplaintController extends Controller
 
         $complaint->save();
 
+        $userName = auth()->user()->full_name;
+
         $this->newReferrallNotifiction($complaint);
 
         // TODO send sms and notification
 
-        $userName = auth()->user()->full_name;
         $refferalUserName = $complaint->user->full_name;
 
         Log::info("{$userName} شکایت {$complaint->subject} را به {$refferalUserName} ارجاع داد.");
@@ -123,7 +124,7 @@ class ComplaintController extends Controller
         $userIds = $userPermission->pluck('id')->toArray();
 
         $details = [
-            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
+            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد {$userName}" ,
         ];
 
         $notification = new NewComplaint($details);
@@ -133,7 +134,7 @@ class ComplaintController extends Controller
 
     public function readAll()
     {
-        $notifications = Notification::all();
+        $notifications = auth()->user()->notifications;
         foreach ($notifications as $notification){
             $notification->update(['read_at' => now()]);
         }

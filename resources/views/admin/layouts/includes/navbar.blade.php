@@ -8,9 +8,8 @@
                placeholder="جستجو کنید..." aria-label="Search">
     </form>
     <ul class="nav">
-        @canany(['manage_complaint' , 'complaint_handler'])
 
-            @can('manage_complaint')
+             @can('manage_complaint')
                 @if(auth()->user()->unreadNotifications->count() !== 0 )
                     <div class="row justify-content-center mt-3 text-center mr-5">
                         <div class="col-md-5">
@@ -57,9 +56,8 @@
                 @endif
             @endcan
 
-            @can('complaint_handler')
+             @can('complaint_handler')
                 @if(auth()->user()->unreadNotifications->count() !== 0 )
-
                     <div class="row justify-content-center mt-3 text-center mr-5">
                         <div class="col-md-5">
                             <div class="dropdown custom-dropdown">
@@ -67,8 +65,8 @@
                                    aria-expanded="false">
                                     <span class="wrap-icon icon-notifications"></span>
                                     <span class="btn__badge pulse-button bg-danger">
-                                {{ auth()->user()->unreadNotifications->count() }}
-                        </span>
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                            </span>
 
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right"
@@ -78,11 +76,8 @@
                                         <h3 class="title font-bold fo mb-0">
                                             <strong>شکایت های ثبت شده</strong>
                                         </h3>
-                                        <form action="{{ route('admin.complaints.readAll') }}" method="post" >
-                                            @csrf
-                                            <button
-                                               class="small  ml-auto">خواندن همه</button>
-                                        </form>
+                                        <a href="" id="all"
+                                           class="small ml-auto">خواندن همه</a>
                                     </div>
 
                                     <ul class="custom-notifications">
@@ -99,7 +94,7 @@
                                         @endforeach
                                     </ul>
                                     <p class="text-center m-0 p-0 mt-2"><a
-                                            href="{{ route('admin.my-complaints.index') }}"
+                                            href="{{ route('admin.complaints.index') }}"
                                             class="small">نمایش همه</a></p>
                                 </div>
                             </div>
@@ -107,7 +102,9 @@
                     </div>
                 @endif
             @endcan
-        @endcanany
+
+
+
 
 
         @can('complaint_handler')
