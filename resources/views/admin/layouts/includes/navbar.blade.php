@@ -181,19 +181,6 @@
 </script>
 
 <script>
-    {{--let notificationDropdown = document.getElementById('all');--}}
-    {{--notificationDropdown.addEventListener('click', function () {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "POST",--}}
-    {{--        url: '/admin/notification/read-all',--}}
-    {{--        data: {_token: "{{ csrf_token() }}"},--}}
-    {{--        success: function () {--}}
-    {{--            console.log('yes');--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--});--}}
-
-
     let notificationDropdown2 = document.getElementById('all');
     notificationDropdown2.addEventListener('click', function () {
         $.ajax({

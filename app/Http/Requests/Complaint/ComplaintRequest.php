@@ -30,7 +30,7 @@ class ComplaintRequest extends FormRequest
             'postal_code'   => 'nullable|string|max:10',
             'subject'       => 'required|string|max:255',
             'description'   => 'required|string|max:5000',
-            'files'         => [new ComplaintFilesRule],
+            'files'         => 'nullable' ,[new ComplaintFilesRule]  ,
             'g-recaptcha-response' => ['required' , new Recaptcha],
         ];
     }
@@ -59,12 +59,12 @@ class ComplaintRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator) 
-    {   
+    protected function failedValidation(Validator $validator)
+    {
         $errors = $validator->errors();
 
         if ($validator->fails()) {
-            throw new HttpResponseException(response()->json(['success' => false, 'errors' => $errors], 422));        
+            throw new HttpResponseException(response()->json(['success' => false, 'errors' => $errors], 422));
         }
     }
 

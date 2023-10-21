@@ -23,7 +23,7 @@ class ComplaintController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:manage_complaint')->only('readAll');
+        $this->middleware('can:manage_complaint')->except('readAll');
     }
 
     public function index()
@@ -103,11 +103,14 @@ class ComplaintController extends Controller
 
         $complaint->save();
 
-        $userName = auth()->user()->full_name;
+        $userReferral = $complaint->reference_id;
 
-        $this->newReferrallNotifiction($complaint);
+        $this->newReferrallNotifiction($complaint , $userReferral);
 
         // TODO send sms and notification
+
+        $userName = auth()->user()->full_name;
+
 
         $refferalUserName = $complaint->user->full_name;
 
@@ -116,20 +119,17 @@ class ComplaintController extends Controller
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }
 
-    public function newReferrallNotifiction($complaint)
+    public function newReferrallNotifiction($complaint , $userReferral)
     {
         $subject = $complaint->subject;
 
-        $userPermission = Permission::where("key", "complaint_handler")->first()->users()->get();
-        $userIds = $userPermission->pluck('id')->toArray();
+        $userPermission = User::findOrFail($userReferral);
 
         $details = [
-            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد {$userName}" ,
+            'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
         ];
 
-        $notification = new NewComplaint($details);
-
-        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
+        $userPermission->notify(new \Modules\Complaint\Notifications\NewComplaint($details));
     }
 
     public function readAll()
