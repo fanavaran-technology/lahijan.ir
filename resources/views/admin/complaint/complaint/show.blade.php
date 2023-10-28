@@ -78,42 +78,67 @@
                 <div class="hori-timeline">
                     <ul class="list-inline events">
                         @if ($complaint->reference_id)
-                        <li class="list-inline-item event-list">
-                            <div class="px-4">
-                                <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle"
-                                    style="border: 3px solid dodgerblue;" />
-                                <small>ارجاع داده شد</small>
-                                <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
-                            </div>
-                            <span
-                                class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->referenced_at)->format("Y/m/d ساعت H:i") }}</span>
-                        </li>
+                            <li class="list-inline-item event-list">
+                                <div class="px-4">
+                                    <img src="{{ asset($complaint->user->profile_image) }}"
+                                        class="event-date rounded-circle" style="border: 3px solid dodgerblue;" />
+                                    <small>ارجاع داده شد</small>
+                                    <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
+                                </div>
+                                <span
+                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->referenced_at)->format('Y/m/d ساعت H:i') }}</span>
+                            </li>
                         @endif
 
                         @foreach ($userFails as $userFail)
                             <li class="list-inline-item event-list">
                                 <div class="px-4">
-                                    <img src="{{ asset($userFail->user->profile_image) }}"
-                                        class="event-date rounded-circle" style="border: 3px solid rgb(179, 23, 23);" />
+                                    <img src="{{ asset($userFail->user->profile_image) }}" class="event-date rounded-circle"
+                                        style="border: 3px solid rgb(179, 23, 23);" />
                                     <small>پاسخی ثبت نشد</small>
                                     <h6 class="font-size-16 mt-1">{{ $userFail->user->full_name }}</h6>
                                 </div>
                                 <span
-                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($userFail->created_at)->format("Y/m/d ساعت H:i") }}</span>
+                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($userFail->created_at)->format('Y/m/d ساعت H:i') }}</span>
                             </li>
                         @endforeach
 
                         @if ($complaint->answer)
-                        <li class="list-inline-item event-list">
-                            <div class="px-4">
-                                <img src="{{ asset($complaint->user->profile_image) }}" class="event-date rounded-circle"
-                                    style="border: 3px solid #2abf3e" />
-                                <small>پاسخ داده شد</small>
-                                <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
-                            </div>
-                            <span
-                                class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->answered_at)->format("Y/m/d ساعت H:i") }}</span>
-                        </li>
+                            <li class="list-inline-item event-list">
+                                <div class="px-4">
+                                    <img src="{{ asset($complaint->user->profile_image) }}"
+                                        class="event-date rounded-circle" style="border: 3px solid #2abf3e" />
+                                    <small>پاسخ داده شد</small>
+                                    <h6 class="font-size-16 mt-1">{{ $complaint->user->full_name }}</h6>
+                                </div>
+                                <span
+                                    class="small text-center d-block d-lg-inline">{{ jdate()->forge($complaint->answered_at)->format('Y/m/d ساعت H:i') }}</span>
+                            </li>
+                        @endif
+
+                        @if (complaintConfig('confirm_referrer') && $complaint->is_answered)
+                            <li class="list-inline-item event-list">
+                                <div class="px-4">
+                                    <img src="{{ asset($complaint->user->profile_image) }}"
+                                        class="event-date rounded-circle"
+                                        style="border: 3px solid {{ $complaint->is_confirm ? '#2abf3e' : 'rgb(255, 166, 0)' }}" />
+                                    <small>{{ $complaint->is_confirm ? 'پاسخ تایید شد' : 'هنوز تایید نشده' }}</small>
+                                    @if ($complaint->is_confirm)
+                                        <h6 class="font-size-16">تایید شده</h6>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-success" width="24" height="24" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    @else
+                                        <form action="{{ route('admin.complaints.confirm', $complaint->id) }}"
+                                            method="post">
+                                            @csrf
+                                            <button class="btn btn-success btn-sm my-4">تایید پاسخ</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </li>
                         @endif
                     </ul>
                 </div>

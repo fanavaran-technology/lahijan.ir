@@ -76,12 +76,15 @@ class MyComplaintController extends Controller
             'files'         => [new ComplaintFilesRule],
         ]);
 
+        
         DB::transaction(function () use($complaint, $validData, $request) {
+            $isConfirm = complaintConfig('confirm_referrer') ? 0 : 1;
             $complaint->forceFill([
                 'answer' => $validData['answer'],
                 'is_invalid' => 0,
                 'is_answered' => 1,
-                'answered_at' => now()
+                'answered_at' => now(),
+                'is_confirm' => $isConfirm
             ]);
     
             if ($request->filled('files')) {

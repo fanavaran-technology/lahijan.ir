@@ -50,9 +50,9 @@
                                     </fieldset>
                                 </div>
                                 @error('tracking_code')
-                                <span class="text-red-500 font-bold text-xs er-tracking_code">
-                                    {{ $message }}
-                                </span>
+                                    <span class="text-red-500 font-bold text-xs er-tracking_code">
+                                        {{ $message }}
+                                    </span>
                                 @enderror
                             </section>
                         </section>
@@ -60,9 +60,9 @@
                         <section class="my-8 w-full flex flex-col items-center">
                             @recaptcha
                             @error('g-recaptcha-response')
-                            <div class="text-red-500 mt-2 text-center font-bold text-xs er-g-recaptcha-response">
-                                {{ $message }}
-                            </div>
+                                <div class="text-red-500 mt-2 text-center font-bold text-xs er-g-recaptcha-response">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </section>
                         <section class="flex justify-center py-4">
@@ -111,6 +111,7 @@
                                 </div>
                             </div>
                         </div>
+
                         @if ($complaint->files()->whereNull('user_id')->get()->isNotEmpty())
                             <div class="flex">
                                 <div class="flex mr-0 md:mr-12 mb-4">
@@ -155,18 +156,7 @@
                             </div>
                         @endif
 
-                        @if (!$complaint->is_answered)
-                            <div class="flex justify-end">
-                                <div
-                                    class="bg-red-100 text-red-400 mb-4 border leading-9 p-2 rounded-lg md:w-8/12 w-full text-base">
-                                    هنوز پاسخی برای این شکایت ثبت نشده است ، با تشکر از صبر و شکیبایی شما
-                                </div>
-                                <div class="relative mr-2">
-                                    <img class="w-12 h-12 border rounded-full object-cover"
-                                        src="{{ asset('images/settings/support.png') }}" alt="">
-                                </div>
-                            </div>
-                        @else
+                        @if ($complaint->is_answered && $complaint->is_confirm)
                             <div class="text-center">
                                 <span class="bg-gray-200 py-1.5 px-2 text-xs rounded-full text-gray-500">
                                     {{ jalaliDate($complaint->answered_at, 'd M Y') }}
@@ -205,10 +195,11 @@
                                                                     alt="">
                                                                     <div
                                                                         class="w-full h-full flex align-items-center justify-center text-red-500">
-    
+
                                                                         <h3>
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="60"
-                                                                                height="60" fill="currentColor"
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="60" height="60"
+                                                                                fill="currentColor"
                                                                                 class="bi bi-{{ File::extension($complaintFile) }}"
                                                                                 viewBox="0 0 16 16">
                                                                                 <path fill-rule="evenodd"
@@ -221,12 +212,23 @@
                                                         @endif
                                                     @endforeach
                                                 @endforeach
-    
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             @endif
+                        @else
+                            <div class="flex justify-end">
+                                <div
+                                    class="bg-red-100 text-red-400 mb-4 border leading-9 p-2 rounded-lg md:w-8/12 w-full text-base">
+                                    هنوز پاسخی برای این شکایت ثبت نشده است ، با تشکر از صبر و شکیبایی شما
+                                </div>
+                                <div class="relative mr-2">
+                                    <img class="w-12 h-12 border rounded-full object-cover"
+                                        src="{{ asset('images/settings/support.png') }}" alt="">
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
