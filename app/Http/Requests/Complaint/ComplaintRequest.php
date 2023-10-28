@@ -59,12 +59,12 @@ class ComplaintRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator) 
-    {   
+    protected function failedValidation(Validator $validator)
+    {
         $errors = $validator->errors();
 
         if ($validator->fails()) {
-            throw new HttpResponseException(response()->json(['success' => false, 'errors' => $errors], 422));        
+            throw new HttpResponseException(response()->json(['success' => false, 'errors' => $errors], 422));
         }
     }
 
