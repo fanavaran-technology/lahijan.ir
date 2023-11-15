@@ -48,11 +48,9 @@ class ComplaintController extends Controller
 
         $this->newComplintNotifiction($complaint);
 
-
         Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
 
         return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
-
     }
 
     public function newComplintNotifiction($complaint)
@@ -62,13 +60,19 @@ class ComplaintController extends Controller
         $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
         $userIds = $userPermission->pluck('id')->toArray();
 
+        $expertUsers = User::whereIn('id', $userIds)->get();
+
+        $phoneNumbers = implode(",", $expertUsers->pluck('mobile')->toArray());
+
         $details = [
             'message' => " شکایت با عنوان : {$subject} ثبت شده است " ,
+            "mobile" => $phoneNumbers,
+            'sms_message' => "شکایت جدیدی در سیستم ثبت گردید - شهرداری لاهیجان",
         ];
 
         $notification = new NewComplaint($details);
 
-        Notification::send(User::whereIn('id', $userIds)->get(), $notification);
+        Notification::send($expertUsers, $notification);
     }
 
 

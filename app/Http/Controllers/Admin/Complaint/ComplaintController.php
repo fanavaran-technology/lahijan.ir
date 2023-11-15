@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Complaint;
 
 use App\Models\ACL\Permission;
 use App\Models\User;
-use App\Notifications\NewComplaint;
+use App\Notifications\Complaint\ReferenceComplaint;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -114,8 +114,6 @@ class ComplaintController extends Controller
 
         $this->newReferrallNotifiction($complaint , $userReferral);
 
-        // TODO send sms and notification
-
         $userName = auth()->user()->full_name;
 
 
@@ -145,9 +143,11 @@ class ComplaintController extends Controller
 
         $details = [
             'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
+            "sms_message" => "یک شکایت منتظر شماست. لطفاً به آن پاسخ دهید - شهرداری لاهیجان",
+            "mobile" => $userPermission->mobile
         ];
 
-        $userPermission->notify(new NewComplaint($details));
+        $userPermission->notify(new ReferenceComplaint($details));
     }
 
     public function readAll()

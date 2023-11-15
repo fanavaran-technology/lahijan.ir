@@ -76,7 +76,7 @@ Route::prefix('shafaf')->group(function () {
 
 
 // admin routes
-Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin', 'mobile.confirm'])->group(function () {
 
     Route::get('/', AdminDashboardController::class)->name('index');
 

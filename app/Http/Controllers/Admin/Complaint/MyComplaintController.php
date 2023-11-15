@@ -26,6 +26,11 @@ class MyComplaintController extends Controller
     public function index()
     {   
         $user = auth()->user();
+
+        foreach($user->notifications as $notification) {
+            $notification->update(['read_at' => now()]);
+        }
+
         $complaintsCount = [
             'all' => $user->complaints()->count(),
             'unanswereds' => $user->complaints()->whereNull('answer')->count(),

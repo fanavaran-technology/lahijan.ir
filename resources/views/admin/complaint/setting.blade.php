@@ -133,6 +133,17 @@
                                         اطلاع
                                         رسانی شاکی </label>
                                 </div>
+
+                                <div class="form-check form-check-inline col-md-5 mx-0 my-3">
+                                    <input id="send_sms_expert" name="notifications[send_sms_expert]"
+                                        value="1" data-width="100" data-off=" غیرفعال" data-on="فعال"
+                                        data-onstyle="success" data-offstyle="danger" class="form-check-input"
+                                        type="checkbox" data-toggle="toggle" data-style="mr-1"
+                                        @checked($config['notifications']['send_sms_expert'])>
+                                    <label for="send_sms_expert" class="form-check-label pr-2 pl-0">
+                                        ارسال sms به کارشناس بعد از ثبت شکایت جدید.
+                                    </label>
+                                </div>
                             </div> <!-- /. col -->
                         </div>
                     </div>
