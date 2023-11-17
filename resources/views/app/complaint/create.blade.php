@@ -1,4 +1,4 @@
-@extends('app.layouts.app', ['title' => 'شهرداری لاهیجان | فرم ثبت شکایات'])
+{{--@extends('app.layouts.app', ['title' => 'شهرداری لاهیجان | فرم ثبت شکایات'])--}}
 
 @section('head-tag')
     <meta name="csrf-token" content="{{ csrf_token() }}">
