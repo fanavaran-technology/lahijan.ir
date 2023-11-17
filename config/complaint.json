@@ -2,11 +2,13 @@
     "notifications": {
         "send_sms_operator": true,
         "send_sms_plaintiff": true,
-        "send_sms_expert": true
+        "send_sms_expert": false,
+        "send_sms_confirm_referrer": true
     },
     "confirm_referrer": true,
     "allowed-extensions": ".jpg,.jpeg,.png,.gif",
     "max-files": "3",
     "max-file-size": "1",
-    "deadline-responding": "1"
+    "deadline-responding": "1",
+    "send_sms_confirm_referrer": false
 }

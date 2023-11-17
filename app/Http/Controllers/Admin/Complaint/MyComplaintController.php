@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Complaint;
 
+use App\Models\ACL\Permission;
+use App\Models\User;
 use App\Notifications\Channels\SMSChannel;
+use App\Notifications\Complaint\ConfirmReferreComplaint;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -10,6 +13,7 @@ use App\Models\Complaint\Complaint;
 use App\Rules\Complaint\ComplaintFilesRule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Notification;
 
 
 class MyComplaintController extends Controller
@@ -100,8 +104,7 @@ class MyComplaintController extends Controller
 
             $userName = auth()->user()->full_name;
 
-            if (complaintConfig('confirm_referrer')) 
-                $this->confirm($complaint);
+            complaintConfig('confirm_referrer') ? $this->confirmReferrerNotify($complaint) : $this->confirm($complaint);
 
             Log::info("{$userName} پاسخی برای شکایت {$complaint->subject} ثبت کرد.");
         });
@@ -131,6 +134,24 @@ class MyComplaintController extends Controller
         $smsCahnnel->sendWithoutUser($details);
 
         return back()->with('toast-success', 'پاسخ متصدی تایید شد.');
+    }
+
+    private function confirmReferrerNotify(Complaint $complaint) {
+        
+        $department = $complaint->department->title;
+
+        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+
+        $userIds = $userPermission->pluck('id')->toArray();
+
+        $expertUsers = User::whereIn('id', $userIds)->get();
+
+        $details = [
+            'message' => "متصدی {$department} پاسخی ثبت کرد ، و در انتظار تایید شماست.",
+            'sms_message' => "متصدی {$department} پاسخی ثبت کرد و در انتظار تایید شماست - شهرداری لاهیجان",
+        ];
+
+        Notification::send($expertUsers, new ConfirmReferreComplaint($details));
     }
 
 }
