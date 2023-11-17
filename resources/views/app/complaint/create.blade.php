@@ -26,12 +26,12 @@
 
             <section class="min-h-screen">
                 <section class="text-center md:w-8/12 mx-3 md:mx-auto mt-14 flex flex-wrap justify-between items-center">
-                        <h1
+                        <h1tracking
                             class="text-xl font-shabnam font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
                             فرم ثبت شکایات
-                        </h1>
+                        </h1tracking>
                     </div>
-                    <a href="{{ route('complaints.tracking.index') }}" class="focus:outline-none text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-xs px-5 py-2.5">پیگیری شکایت</a>
+                    <a href="{{ route('complaints..index') }}" class="focus:outline-none text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-xs px-5 py-2.5">پیگیری شکایت</a>
                 </section>
                 <section class="md:w-8/12 bg-white shadow-sm p-3 my-3 md:my-8 mx-1.5 sm:mx-3 md:mx-auto rounded-3xl">
                     <div id="alert-success"
