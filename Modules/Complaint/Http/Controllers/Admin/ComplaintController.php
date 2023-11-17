@@ -7,9 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\View\View;
 use Modules\Complaint\Entities\Complaint;
-use Modules\Complaint\Entities\ComplaintUserFail;
 use Modules\Complaint\Entities\Departement;
 use Illuminate\Support\Facades\Notification;
 use Modules\Complaint\Notifications\NewComplaint;
@@ -119,8 +117,6 @@ class ComplaintController extends Controller
 
         $this->newReferrallNotifiction($complaint);
 
-        // TODO send sms and notification
-
         $userName = auth()->user()->full_name;
         $refferalUserName = $complaint->user->full_name;
 
@@ -154,15 +150,5 @@ class ComplaintController extends Controller
             $notification->update(['read_at' => now()]);
         }
     }
-
-//    public function readMyComplaint()
-//    {
-//        dd('hi');
-//        $notifications = auth()->user()->notifications;
-//        foreach ($notifications as $notification){
-//            $notification->update(['read_at' => now()]);
-//        }
-//    }
-
 
 }

@@ -154,6 +154,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin', 'mobile.
     Route::get('departement/fetch', [DepartementController::class, 'fetch'])->name('departements.fetch');
     Route::get('departement/{departement}/fetch-user', [DepartementController::class, 'fetchUser'])->name('departements.fetch-user');
 
+    Route::post('my-complaints/{complaint}/confirm', [MyComplaintController::class,'confirm'])->name('my-complaints.confirm');
     Route::post('departement/complaint-hander', [DepartementController::class, 'setHandlerPermission'])->name('departements.handler-permission');
     Route::get('complaints/settings', [ComplaintSettingController::class, 'index'])->name('complaints.settings.index');
     Route::post('complaints/settings', [ComplaintSettingController::class, 'store'])->name('complaints.settings.store');
@@ -165,7 +166,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin', 'mobile.
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);
-    Route::post('/complaints/{complaint}/confirm', [ComplaintController::class,'confirm'])->name('complaints.confirm');
+    // 
     Route::post('/notification/read-all', [ComplaintController::class, 'readAll'])->name('complaints.readAll');
 
     // user module routes

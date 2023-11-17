@@ -94,12 +94,15 @@ class MyComplaintController extends Controller
                 ]);
             }
 
+            if (!complaintConfig('confirm_referrer')) {
+                $this->confirm($complaint);
+            }
+
             $userName = auth()->user()->full_name;
 
             Log::info("{$userName} پاسخی برای شکایت {$complaint->subject} ثبت کرد.");
         });
         
-
         $complaint->save();
 
         return back()->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید.');

@@ -49,8 +49,8 @@ class SettingController extends Controller
         }
         unset($validData['notifications']);
         
-        $configs['confirm_referrer'] = $request->get('confirm_referrer') ? true : false;
-
+        $validData['confirm_referrer'] = (bool) $request->get('confirm_referrer');
+    
         $configs = array_replace($configs, $validData);
 
         file_put_contents($this->configPath, json_encode($configs, JSON_PRETTY_PRINT));
