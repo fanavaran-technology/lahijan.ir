@@ -30,7 +30,7 @@ class ComplaintRequest extends FormRequest
             'postal_code'   => 'nullable|string|max:10',
             'subject'       => 'required|string|max:255',
             'description'   => 'required|string|max:5000',
-            'files'         => 'nullable' ,[new ComplaintFilesRule]  ,
+            'files'         => ['nullable', new ComplaintFilesRule],
             'g-recaptcha-response' => ['required' , new Recaptcha],
         ];
     }

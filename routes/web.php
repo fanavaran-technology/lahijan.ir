@@ -76,7 +76,7 @@ Route::prefix('shafaf')->group(function () {
 
 
 // admin routes
-Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin', 'mobile.confirm'])->group(function () {
 
     Route::get('/', AdminDashboardController::class)->name('index');
 
@@ -165,6 +165,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'auth.admin'])->group(
     Route::get('/complaints/fetch', [ComplaintController::class, 'fetch'])->name('complaints.fetch');
     Route::post('/complaints/{complaint}/referral', [ComplaintController::class, 'referral'])->name('complaints.referral');
     Route::resource('complaints', ComplaintController::class);
+    Route::post('/complaints/{complaint}/confirm', [ComplaintController::class,'confirm'])->name('complaints.confirm');
     Route::post('/notification/read-all', [ComplaintController::class, 'readAll'])->name('complaints.readAll');
 
     // user module routes

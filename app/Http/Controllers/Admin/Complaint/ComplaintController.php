@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Complaint;
 
 use App\Models\ACL\Permission;
 use App\Models\User;
-use App\Notifications\NewComplaint;
+use App\Notifications\Complaint\ReferenceComplaint;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -35,6 +35,7 @@ class ComplaintController extends Controller
             'waitingAnswer' => Complaint::whereNotNull("reference_id")->where('is_invalid', 0)->whereNull('answer')->count(),
             'invalids' => Complaint::where('is_invalid', 1)->count(),
             'answered' => Complaint::where('is_answered', 1)->count(),
+            'not-confirmed' => Complaint::whereNotNull('answer')->where('is_confirm', 0)->count(),
         ];
 
         return view('admin.complaint.complaint.index', ['complaintsCount' => $complaintsCount]);
@@ -58,9 +59,15 @@ class ComplaintController extends Controller
                 $complaints->where('is_invalid', 1);
                 break;
             case 'answered-complaints':
-                $complaints->where('is_answered', 1);
+                $complaints->where('is_answered', 1)->where('is_confirm', 1);
                 break;
+            case 'not-confirmed': 
+                $complaints->where('is_answered', 1)->where('is_confirm', 0);
+                break;
+
         }
+
+
 
         if ($search = request('search')) {
             $complaints->where("subject", 'LIKE', "%{$search}%")->orWhere('first_name', "LIKE", "%{$search}%")->orWhere("last_name", "LIKE", "%{$search}%");
@@ -107,8 +114,6 @@ class ComplaintController extends Controller
 
         $this->newReferrallNotifiction($complaint , $userReferral);
 
-        // TODO send sms and notification
-
         $userName = auth()->user()->full_name;
 
 
@@ -119,6 +124,17 @@ class ComplaintController extends Controller
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }
 
+    public function confirm(Complaint $complaint) 
+    {
+        $complaint->forceFill([
+            'is_confirm' => 1
+        ]);
+
+        $complaint->save();
+
+        return back()->with('toast-success', 'پاسخ متصدی تایید شد.');
+    }
+
     public function newReferrallNotifiction($complaint , $userReferral)
     {
         $subject = $complaint->subject;
@@ -127,9 +143,11 @@ class ComplaintController extends Controller
 
         $details = [
             'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
+            "sms_message" => "یک شکایت منتظر شماست. لطفاً به آن پاسخ دهید - شهرداری لاهیجان",
+            "mobile" => $userPermission->mobile
         ];
 
-        $userPermission->notify(new \Modules\Complaint\Notifications\NewComplaint($details));
+        $userPermission->notify(new ReferenceComplaint($details));
     }
 
     public function readAll()

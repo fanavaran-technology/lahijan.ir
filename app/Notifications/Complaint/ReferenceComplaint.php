@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Complaint;
 
 use App\Notifications\Channels\SMSChannel;
-use App\Notifications\Channels\SMSGroupChannel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class NewComplaint extends Notification
+class ReferenceComplaint extends Notification
 {
     use Queueable;
     private $details;
@@ -32,7 +31,11 @@ class NewComplaint extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', SMSGroupChannel::class];
+        if (complaintConfig("notifications.send_sms_operator")) {
+            return ['database', SMSChannel::class];
+        }
+        
+        return ['database'];
     }
 
     /**
@@ -48,8 +51,8 @@ class NewComplaint extends Notification
         ];
     }
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return $this->details;
     }
 }
-

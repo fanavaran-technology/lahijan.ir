@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\ConfirmableMobileController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -16,36 +17,18 @@ Route::middleware('guest')->group(function () {
                 ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-    // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-    //             ->name('password.request');
-
-    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-    //             ->name('password.email');
-
-    // Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-    //             ->name('password.reset');
-
-    // Route::post('reset-password', [NewPasswordController::class, 'store'])
-    //             ->name('password.store');
 });
 
 Route::middleware('auth')->group(function () {
-    // Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
-    //             ->name('verification.notice');
-
-    // Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-    //             ->middleware(['signed', 'throttle:6,1'])
-    //             ->name('verification.verify');
-
-    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    //             ->middleware('throttle:6,1')
-    //             ->name('verification.send');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+
+    Route::get('confirm-mobile', [ConfirmableMobileController::class, 'create'])->name('confirm-mobile.create');
+
+    Route::post('confirm-mobile', [ConfirmableMobileController::class, 'store'])->name("confirm-mobile.store");
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 

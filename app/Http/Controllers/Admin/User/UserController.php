@@ -126,8 +126,9 @@ class UserController extends Controller
 
             [$inputs['is_staff'], $inputs['is_block']] = [$inputs['is_staff'] ?? 0, $inputs['is_block'] ?? 0];
             $user->update($inputs);
-
-            Log::info("کاربر با نام {$user->full_name} توسط {auth()->user()->full_name} ویرایش شد.");
+            
+            $currentUserFullName = auth()->user()->full_name;
+            Log::info("کاربر با نام {$user->full_name} توسط {$currentUserFullName} ویرایش شد.");
 
             if ($user->is_staff) { 
                 $request->has('roles') ? 

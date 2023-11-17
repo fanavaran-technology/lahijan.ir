@@ -40,6 +40,7 @@ class SettingController extends Controller
             'max-files' => 'required|integer|min:1|max:10',
             'max-file-size' => 'required|integer|min:1|max:10',
             'deadline-responding' => 'required|integer|min:1|max:1000',
+            'confirm_referrer' => 'numeric|in:0,1'
         ]); 
 
         $configs = json_decode(file_get_contents($this->configPath), true);
@@ -47,6 +48,8 @@ class SettingController extends Controller
             $configs['notifications'][$key] = $request->input("notifications.{$key}") ? (bool) $request->input("notifications.{$key}") : false;
         }
         unset($validData['notifications']);
+        
+        $configs['confirm_referrer'] = $request->get('confirm_referrer') ? true : false;
 
         $configs = array_replace($configs, $validData);
 
