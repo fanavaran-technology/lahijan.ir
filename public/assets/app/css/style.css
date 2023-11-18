@@ -1,93 +1,94 @@
 .shf {
-  background-image: url(../images/estakhr.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%
+    background-image: url(../images/estakhr.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%
 }
 
 .odometer.odometer-auto-theme,
 .odometer.odometer-theme-default {
-  font-family: iransans !important
+    font-family: iransans !important
 }
 
 .entext {
-  font-family: tahoma
+    font-family: tahoma
 }
 
 body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0
 }
 
 .swiper {
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover
 }
 
 .swiper-button-next {
-  font-size: 12px;
-  size: 12px
+    font-size: 12px;
+    size: 12px
 }
 
 
 /* Slider */
 .alles {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .textje {
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 .text3 li {
-  text-align: right;
-  display: inline-block;
+    text-align: right;
+    display: inline-block;
 }
 
 .text2 li {
-  text-align: left;
-  display: inline-block
+    text-align: left;
+    display: inline-block
 }
 
 .kuntext {
-  position: relative;
-  top: 0px;
-  width: 70px;
-  display: inline-block;
+    position: relative;
+    top: 0px;
+    width: 70px;
+    display: inline-block;
 }
 
 .text-animation {
-  width: 95px;
-  display: inline-flex;
+    width: 95px;
+    display: inline-flex;
 }
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #featured-slider {
-    width:700px;
+    width: 700px;
     height: 45px;
-    top:0;
+    top: 0;
     overflow: hidden;
     position: absolute;
     /* margin-top: 8px;
     margin-right: 18px; */
 }
+
 #slider {
     width: 500px;
     height: 1250px;
@@ -95,12 +96,14 @@ body {
     top: 0px;
     left: 45px;
 }
+
 #slider .slide {
     width: 700px;
     height: 250px;
     position: relative;
 }
-#slider a{
+
+#slider a {
     width: 700px;
     height: 27px;
     padding-top: 3px;
@@ -126,12 +129,14 @@ body {
 
     position: fixed;
     z-index: 1;
-    left: 0;right:0;
+    left: 0;
+    right: 0;
     bottom: 30px;
     font-size: 17px;
     white-space: nowrap;
 }
-#toast #img{
+
+#toast #img {
     width: 50px;
     height: 50px;
     border-radius: 15px 0 0 0;
@@ -142,7 +147,8 @@ body {
     background-color: #16a34a;
     color: #fff;
 }
-#toast #desc{
+
+#toast #desc {
     color: #fff;
     padding: 16px;
     overflow: hidden;
@@ -151,82 +157,142 @@ body {
 
 #toast.show {
     visibility: visible;
-    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s, stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
 }
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
 
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes expand {
-    from {min-width: 50px}
-    to {min-width: 350px}
+    from {
+        min-width: 50px
+    }
+
+    to {
+        min-width: 350px
+    }
 }
 
 @keyframes expand {
-    from {min-width: 50px}
-    to {min-width: 350px}
+    from {
+        min-width: 50px
+    }
+
+    to {
+        min-width: 350px
+    }
 }
+
 @-webkit-keyframes stay {
-    from {min-width: 350px}
-    to {min-width: 350px}
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
 }
 
 @keyframes stay {
-    from {min-width: 350px}
-    to {min-width: 350px}
+    from {
+        min-width: 350px
+    }
+
+    to {
+        min-width: 350px
+    }
 }
+
 @-webkit-keyframes shrink {
-    from {min-width: 350px;}
-    to {min-width: 50px;}
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 50px;
+    }
 }
 
 @keyframes shrink {
-    from {min-width: 350px;}
-    to {min-width: 50px;}
+    from {
+        min-width: 350px;
+    }
+
+    to {
+        min-width: 50px;
+    }
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 60px; opacity: 0;}
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 60px; opacity: 0;}
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 60px;
+        opacity: 0;
+    }
 }
 
-.sidebar-show{
-  position: sticky;
-  top: 20px;
+.sidebar-show {
+    position: sticky;
+    top: 20px;
 }
 
 .tippy-box[data-theme~='indigo'] {
-  color: azure;
-  background-color: rgb(35, 194, 48);
+    color: azure;
+    background-color: rgb(35, 194, 48);
 }
 
 .tippy-box[data-theme~='indigo'][data-placement^='top']>.tippy-arrow::before {
-  border-top-color: rgb(35, 194, 48);
+    border-top-color: rgb(35, 194, 48);
 }
 
 .tippy-box[data-theme~='indigo'][data-placement^='bottom']>.tippy-arrow::before {
-  border-bottom-color: rgb(35, 194, 48);
+    border-bottom-color: rgb(35, 194, 48);
 }
 
 .tippy-box[data-theme~='indigo'][data-placement^='left']>.tippy-arrow::before {
-  border-left-color: rgb(35, 194, 48);
+    border-left-color: rgb(35, 194, 48);
 }
 
 .tippy-box[data-theme~='indigo'][data-placement^='right']>.tippy-arrow::before {
-  border-right-color: rgb(35, 194, 48);
+    border-right-color: rgb(35, 194, 48);
 }
 
 
@@ -242,18 +308,22 @@ ul {
     font-family: 'Ubuntu', sans-serif;
     color: #444;
 }
+
 .notification-drop .item {
     padding: 10px;
     font-size: 18px;
     position: relative;
     border-bottom: 1px solid #ddd;
 }
+
 .notification-drop .item:hover {
     cursor: pointer;
 }
+
 .notification-drop .item i {
     margin-left: 10px;
 }
+
 .notification-drop .item ul {
     display: none;
     position: absolute;
@@ -264,10 +334,12 @@ ul {
     z-index: 1;
     border-top: 1px solid #ddd;
 }
+
 .notification-drop .item ul li {
     font-size: 16px;
     padding: 15px 0 15px 25px;
 }
+
 .notification-drop .item ul li:hover {
     background: #ddd;
     color: rgba(0, 0, 0, 0.8);
@@ -278,6 +350,7 @@ ul {
         display: flex;
         justify-content: flex-end;
     }
+
     .notification-drop .item {
         border: none;
     }
@@ -285,7 +358,7 @@ ul {
 
 
 
-.notification-bell{
+.notification-bell {
     font-size: 20px;
 }
 
@@ -296,7 +369,7 @@ ul {
     position: absolute;
     top: 13px;
     right: 10px;
-    padding:  5px 8px;
+    padding: 5px 8px;
     border-radius: 50%;
 }
 
@@ -316,6 +389,7 @@ ul {
         -webkit-transform: scale(0.9);
         transform: scale(0.9);
     }
+
     70% {
         -moz-transform: scale(1);
         -ms-transform: scale(1);
@@ -323,6 +397,7 @@ ul {
         transform: scale(1);
         box-shadow: 0 0 0 50px rgba(255, 0, 0, 0);
     }
+
     100% {
         -moz-transform: scale(0.9);
         -ms-transform: scale(0.9);
@@ -332,11 +407,21 @@ ul {
     }
 }
 
-.notification-text{
+.notification-text {
     font-size: 14px;
     font-weight: bold;
 }
 
-.notification-text span{
+.notification-text span {
     float: right;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

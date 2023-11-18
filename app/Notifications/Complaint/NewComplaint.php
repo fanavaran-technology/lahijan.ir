@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Complaint;
 
+use App\Notifications\Channels\SMSChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
-class NewDepartment extends Notification
+class NewComplaint extends Notification
 {
+
     use Queueable;
+
     private $details;
 
     /**
@@ -30,21 +31,11 @@ class NewDepartment extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
-    }
+        if (complaintConfig('notifications.send_sms_expert')) {
+            return ['database', SMSChannel::class];
+        }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+        return ['database'];
     }
 
     /**
@@ -59,4 +50,9 @@ class NewDepartment extends Notification
             'message' => $this->details['message'],
         ];
     }
+
+    public function getInfo() {
+        return $this->details;
+    }
 }
+

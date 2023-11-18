@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Complaint;
 
+use App\Notifications\Channels\SMSChannel;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -83,13 +84,11 @@ class MyComplaintController extends Controller
 
         
         DB::transaction(function () use($complaint, $validData, $request) {
-            $isConfirm = complaintConfig('confirm_referrer') ? 0 : 1;
             $complaint->forceFill([
                 'answer' => $validData['answer'],
                 'is_invalid' => 0,
                 'is_answered' => 1,
                 'answered_at' => now(),
-                'is_confirm' => $isConfirm
             ]);
     
             if ($request->filled('files')) {
@@ -101,13 +100,37 @@ class MyComplaintController extends Controller
 
             $userName = auth()->user()->full_name;
 
+            if (complaintConfig('confirm_referrer')) 
+                $this->confirm($complaint);
+
             Log::info("{$userName} پاسخی برای شکایت {$complaint->subject} ثبت کرد.");
         });
         
-
         $complaint->save();
 
         return back()->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید.');
+    }
+
+    public function confirm(Complaint $complaint) 
+    {
+        $complaint->forceFill([
+            'is_confirm' => 1
+        ]);
+
+        $complaint->save();
+
+        $smsCahnnel = new SMSChannel();
+
+        $message = "کاربر گرامی پاسخی برای شکایت شما ثبت گردید شما می توانید با کد پیگیری {$complaint->tracking_code} شکایت خود را پیگیری کنید - شهرداری لاهیجان";
+
+        $details = [
+            'message' => $message,
+            'mobile' => $complaint->phone_number
+        ];
+
+        $smsCahnnel->sendWithoutUser($details);
+
+        return back()->with('toast-success', 'پاسخ متصدی تایید شد.');
     }
 
 }

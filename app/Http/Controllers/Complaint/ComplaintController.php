@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Complaint;
 use App\Http\Services\Image\ImageService;
 use App\Models\ACL\Permission;
 use App\Models\User;
+use App\Notifications\Channels\SMSGroupChannel;
+use App\Notifications\Complaint\NewComplaintSMS;
+use App\Notifications\Complaint\SendGroupSMS;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Complaint\Complaint;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use App\Http\Requests\Complaint\ComplaintRequest;
-use App\Notifications\NewComplaint;
+use App\Notifications\Complaint\NewComplaint;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class ComplaintController extends Controller
 {
@@ -32,25 +37,29 @@ class ComplaintController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(ComplaintRequest $request)
+    public function store(ComplaintRequest $request): RedirectResponse
     {
         $inputs = $request->all();
-        $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
+        DB::transaction(function () use($inputs, $request) {
+            $inputs['tracking_code'] = Complaint::generateTrackingCode();
 
-        $complaint = Complaint::create($inputs);
+            $complaint = Complaint::create($inputs);
 
-        if ($request->filled('files')) {
-            $complaint->files()->create([
-                'files' => explode(',', $inputs['files']),
-            ]);
-        }
+            if ($request->filled('files')) {
+                $complaint->files()->create([
+                    'files' => explode(',', $inputs['files']),
+                ]);
+            }
 
-        $this->newComplintNotifiction($complaint);
+            $this->newComplintNotifiction($complaint);
 
-        Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
+            Log::info("کاربر با آی پی {$request->ip()} شکایتی با عنوان {$complaint->subject} ثبت کرد");
 
-        return response()->json(['success' => true, 'title' => 'شکایت شما با موفقیت ثبت گردید', 'message' => "شما میتوانید با کد پیگیری {$inputs['tracking_code']} از وضعیت شکایت خود مطلع شوید."]);
+            session()->flash("complaint_success", $complaint->tracking_code);
+        });
+
+        return to_route('complaints.create');
     }
 
     public function newComplintNotifiction($complaint)
@@ -58,21 +67,18 @@ class ComplaintController extends Controller
         $subject = $complaint->subject;
 
         $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+
         $userIds = $userPermission->pluck('id')->toArray();
 
         $expertUsers = User::whereIn('id', $userIds)->get();
 
-        $phoneNumbers = implode(",", $expertUsers->pluck('mobile')->toArray());
-
         $details = [
-            'message' => " شکایت با عنوان : {$subject} ثبت شده است " ,
-            "mobile" => $phoneNumbers,
+            'message' => " شکایت با عنوان : {$subject} ثبت شده است ",
             'sms_message' => "شکایت جدیدی در سیستم ثبت گردید - شهرداری لاهیجان",
         ];
 
-        $notification = new NewComplaint($details);
+        Notification::send($expertUsers, new NewComplaint($details));
 
-        Notification::send($expertUsers, $notification);
     }
 
 
@@ -91,8 +97,7 @@ class ComplaintController extends Controller
 
             $imageService->setExclusiveDirectory("images" . DIRECTORY_SEPARATOR . "complaints" . DIRECTORY_SEPARATOR . "plaintiff");
             $file = $imageService->save($uploadedFile);
-        }
-        else {
+        } else {
             $ext = $uploadedFile->extension();
             $file = "docs/" . $uploadedFile->storeAs('/complaints/plaintiff', Str::random(24) . '.' . $ext, ['disk' => 'docs']);
         }

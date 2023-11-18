@@ -1,4 +1,4 @@
-{{--@extends('app.layouts.app', ['title' => 'شهرداری لاهیجان | فرم ثبت شکایات'])--}}
+@extends('app.layouts.app', ['title' => 'شهرداری لاهیجان | فرم ثبت شکایات'])
 
 @section('head-tag')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,36 +26,42 @@
 
             <section class="min-h-screen">
                 <section class="text-center md:w-8/12 mx-3 md:mx-auto mt-14 flex flex-wrap justify-between items-center">
-                        <h1tracking
-                            class="text-xl font-shabnam font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
-                            فرم ثبت شکایات
-                        </h1tracking>
+                    <h1
+                        class="text-xl font-shabnam font-extrabold leading-none tracking-tight text-gray-700 md:text-2xl lg:text-3xl">
+                        فرم ثبت شکایات
+                    </h1>
                     </div>
-                    <a href="{{ route('complaints..index') }}" class="focus:outline-none text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-xs px-5 py-2.5">پیگیری شکایت</a>
+                    <a href="{{ route('complaints.tracking.index') }}"
+                       class="focus:outline-none text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-xs px-5 py-2.5">پیگیری
+                        شکایت</a>
                 </section>
                 <section class="md:w-8/12 bg-white shadow-sm p-3 my-3 md:my-8 mx-1.5 sm:mx-3 md:mx-auto rounded-3xl">
-                    <div id="alert-success"
-                        class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 hidden suc-alert"
-                        role="alert">
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6 ml-2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
 
-                            <h3 class="text-lg font-medium suc-mes-title"></h3>
-                        </div>
-                        <div class="mt-2 mb-4 text-sm suc-mes-desc">
+                    @if (session()->has('complaint_success'))
+                        <div id="alert-success"
+                             class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 suc-alert"
+                             role="alert">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ml-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
 
+                                <h3 class="text-lg font-medium suc-mes-title">شکایت شما با موفقیت ثبت گردید</h3>
+                            </div>
+                            <div class="mt-2 mb-4 text-sm suc-mes-desc">
+                                شما میتوانید با کد پیگیری {{ session()->get('complaint_success') }} از وضعیت شکایت خود مطلع
+                                شوید.
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+                                  d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
                         </svg>
                         <span>اطلاعات هویتی</span>
                     </section>
@@ -65,8 +71,8 @@
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="text" name="first_name" value="{{ old('first_name') }}" autofocus
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -90,15 +96,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-first_name"></span>
+                            @error('first_name')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- last name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="text" name="last_name" value="{{ old('last_name') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -123,15 +131,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-last_name"></span>
+                            @error('last_name')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- national code --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="number" name="national_code" value="{{ old('national_code') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -154,15 +164,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-national_code"></span>
+                            @error('national_code')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- phone number --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="number" name="phone_number" value="{{ old('phone_number') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -185,16 +197,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-phone_number"></span>
+                            @error('phone_number')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
                     </section>
                     <section class="my-4 flex items-center space-x-2 space-x-reverse text-rose-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
+                             stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                         </svg>
                         <span>آدرس</span>
                     </section>
@@ -204,8 +217,8 @@
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-full group">
                                 <input type="text" name="main_st" value="{{ old('main_st') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -229,15 +242,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-main_st"></span>
+                            @error('main_st')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- aux.. st --}}
                         <section class="col-span-full md:col-span-6">
                             <div class="relative w-1/ group">
                                 <input type="text" name="auxiliary_st" value="{{ old('auxiliary_st') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -260,15 +275,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-auxiliary_st"></span>
+                            @error('auxiliary_st')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- alley --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="text" name="alley" value="{{ old('alley') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -290,15 +307,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-alley"></span>
+                            @error('alley')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- deadend --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
                                 <input type="text" name="deadend" value="{{ old('deadend') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -321,15 +340,17 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-deadend"></span>
+                            @error('deadend')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         {{-- corporate name --}}
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-full group">
                                 <input type="text" name="builing_name" value="{{ old('builing_name') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -353,14 +374,16 @@
                                 </fieldset>
                             </div>
 
-                            <span class="text-red-500 font-bold text-xs er-builing_name"></span>
+                            @error('builing_name')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
 
                         <section class="col-span-full md:col-span-6 lg:col-span-3">
                             <div class="relative w-1/ group">
                                 <input type="number" name="postal_code" value="{{ old('postal_code') }}"
-                                    class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                    placeholder=" " />
+                                       class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                       placeholder=" " />
 
                                 <label
                                     class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -384,7 +407,9 @@
                                     </legend>
                                 </fieldset>
                             </div>
-                            <span class="text-red-500 font-bold text-xs er-postal_code"></span>
+                            @error('postal_code')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                         </section>
                     </section>
 
@@ -392,17 +417,17 @@
                         <section class="col-span-full">
                             <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                 </svg>
                                 <span>شرح شکایت</span>
                             </section>
                             <section class="col-span-full mb-3">
                                 <div class="relative w-full group">
                                     <input type="text" name="subject" value="{{ old('subject') }}" autofocus
-                                        class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                        placeholder=" " />
+                                           class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
+                                           placeholder=" " />
 
                                     <label
                                         class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -428,12 +453,14 @@
                                         </legend>
                                     </fieldset>
                                 </div>
-                                <span class="text-red-500 font-bold text-xs er-subject"></span>
+                                @error('subject')
+                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                                @enderror
                             </section>
                             <section class="col-span-full my-3">
                                 <div class="relative w-full group">
                                     <textarea type="text" name="description" rows="7"
-                                        class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer" placeholder=" ">{{ old('description') }}</textarea>
+                                              class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer" placeholder=" ">{{ old('description') }}</textarea>
 
                                     <label
                                         class="absolute right-[9px] text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
@@ -457,7 +484,9 @@
                                             شکایت *</legend>
                                     </fieldset>
                                 </div>
-                                <span class="text-red-500 font-bold text-xs er-description"></span>
+                                @error('description')
+                                <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                                @enderror
                             </section>
 
                         </section>
@@ -468,9 +497,9 @@
                         <section class="col-span-full">
                             <section class="my-6 flex items-center space-x-2 space-x-reverse text-rose-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
+                                          d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
                                 </svg>
                                 <span>مستندات (در صورت لزوم)</span>
                             </section>
@@ -489,14 +518,15 @@
                             <div id="my-dropzone" class="dropzone">
 
                             </div>
-                            <div class="text-red-500 mt-2 text-center font-bold text-xs er-files">
-                            </div>
+                            @error('files')
+                            <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                            @enderror
                             <button type="button" id="upload-button"
-                                class="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 mt-2 px-4 rounded inline-flex items-center space-x-2 space-x-reverse">
+                                    class="bg-green-300 hover:bg-green-400 text-green-800 font-bold py-2 mt-2 px-4 rounded inline-flex items-center space-x-2 space-x-reverse">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                     stroke-width="2" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                          d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                                 </svg>
                                 <span>آپلود</span>
                             </button>
@@ -505,16 +535,17 @@
 
                     <section class="my-8 w-full flex flex-col items-center">
                         @recaptcha
-                        <div class="text-red-500 mt-2 text-center font-bold text-xs er-g-recaptcha-response">
-                        </div>
+                        @error('g-recaptcha-response')
+                        <span class="text-red-500 font-bold text-xs">{{ $message }}</span>
+                        @enderror
                     </section>
                     <section class="flex justify-center py-4">
                         <button type="submit" id="submit-button"
-                            class="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">
+                                class="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-300 font-medium rounded-full text-sm px-7 py-3 text-center mb-2">
                             ثبت
                             <svg aria-hidden="true" role="status"
-                                class="inline w-4 h-4 mr-3 text-white animate-spin hidden" viewBox="0 0 100 101"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 class="inline w-4 h-4 mr-3 text-white animate-spin hidden" viewBox="0 0 100 101"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                                     fill="#E5E7EB" />
@@ -534,7 +565,7 @@
 @section('script')
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
-    <script>
+    {{-- <script>
         const complaintForm = document.querySelector('#complaint_form');
         const submitBtn = document.querySelector('#submit-button');
 
@@ -603,7 +634,7 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 
     <script>
         var acceptedFiles = "{{ complaintConfig('allowed-extensions') }}";

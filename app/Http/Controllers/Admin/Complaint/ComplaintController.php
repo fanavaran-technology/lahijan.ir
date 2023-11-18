@@ -123,18 +123,7 @@ class ComplaintController extends Controller
 
         return back()->with('toast-success', "شکایت با موفقیت به متصدی مدنظر ارجاع داده شد.");
     }
-
-    public function confirm(Complaint $complaint) 
-    {
-        $complaint->forceFill([
-            'is_confirm' => 1
-        ]);
-
-        $complaint->save();
-
-        return back()->with('toast-success', 'پاسخ متصدی تایید شد.');
-    }
-
+    
     public function newReferrallNotifiction($complaint , $userReferral)
     {
         $subject = $complaint->subject;
@@ -144,7 +133,6 @@ class ComplaintController extends Controller
         $details = [
             'message' => " شکایت با عنوان : {$subject} ارجاع داده شد " ,
             "sms_message" => "یک شکایت منتظر شماست. لطفاً به آن پاسخ دهید - شهرداری لاهیجان",
-            "mobile" => $userPermission->mobile
         ];
 
         $userPermission->notify(new ReferenceComplaint($details));
