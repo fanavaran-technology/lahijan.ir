@@ -34,7 +34,7 @@ class ComplaintController extends Controller
             'referenced' => Complaint::whereNotNull('reference_id')->count(),
             'waitingAnswer' => Complaint::whereNotNull("reference_id")->where('is_invalid', 0)->whereNull('answer')->count(),
             'invalids' => Complaint::where('is_invalid', 1)->count(),
-            'answered' => Complaint::where('is_answered', 1)->count(),
+            'answered' => Complaint::where('is_answered', 1)->where('is_confirm', 1)->count(),
             'not-confirmed' => Complaint::whereNotNull('answer')->where('is_confirm', 0)->count(),
         ];
 
@@ -45,7 +45,7 @@ class ComplaintController extends Controller
     {
         $complaints = Complaint::query()->select('id', 'first_name', 'last_name', 'subject', 'reference_id', 'is_invalid', 'is_answered');
 
-        switch ($filter = request('filter')) {
+        switch (request('filter')) {
             case 'not-referenced-complaints':
                 $complaints->whereNull('reference_id');
                 break;
