@@ -130,7 +130,7 @@ class ComplaintController extends Controller
         $subject = $complaint->subject;
 
         $userPermission = Permission::where("key", "complaint_handler")->first()->users()->whereNotNull('mobile')->get();
-        
+
         $userIds = $userPermission->pluck('id')->toArray();
 
         $details = [
@@ -145,7 +145,6 @@ class ComplaintController extends Controller
 
     public function readAll()
     {
-        dd('hi');
         $notifications = auth()->user()->notifications;
         foreach ($notifications as $notification){
             $notification->update(['read_at' => now()]);
