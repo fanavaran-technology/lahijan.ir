@@ -22,6 +22,7 @@ class MyComplaintController extends Controller
     public function __construct()
     {
         $this->middleware('can:complaint_handler')->except('confirm');
+        $this->middleware('can:manage_complaint')->only('confirm');
     }
 
     /**
