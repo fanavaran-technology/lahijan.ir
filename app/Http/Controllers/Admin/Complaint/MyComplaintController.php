@@ -112,7 +112,7 @@ class MyComplaintController extends Controller
         
         $complaint->save();
 
-        // return back()->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید.');
+        return back()->with('toast-success', 'پاسخ شما با موفقیت ثبت گردید.');
     }
 
     public function confirm(Complaint $complaint) 
