@@ -6,9 +6,8 @@ use App\Notifications\Channels\SMSChannel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class NewComplaint extends Notification
+class ConfirmReferreComplaint extends Notification
 {
-
     use Queueable;
 
     private $details;
@@ -26,18 +25,19 @@ class NewComplaint extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
     {
-        return complaintConfig('notifications.send_sms_expert') ? ['database', SMSChannel::class] : ['database'];
+        return complaintConfig('notifications.send_sms_confirm_referrer') ? ['database', SMSChannel::class] : ['database'];
+
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)
@@ -51,4 +51,3 @@ class NewComplaint extends Notification
         return $this->details;
     }
 }
-

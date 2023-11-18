@@ -117,9 +117,10 @@ class DepartementController extends Controller
      */
     public function destroy(Departement $departement): RedirectResponse
     {
-        if ($departement->userFails->isNotEmpty()) {
+        if ($departement->userFails->isNotEmpty() || $departement->complaints->isNotEmpty()) {
             return back()->with('toast-error', 'امکان حذف این دپارتمان وجود ندارد.');
         }
+
         $departement->users()->detach();
 
         $userName = auth()->user()->full_name;

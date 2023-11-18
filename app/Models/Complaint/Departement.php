@@ -5,6 +5,7 @@ namespace App\Models\Complaint;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Departement extends Model
@@ -23,6 +24,10 @@ class Departement extends Model
     public function userFails() 
     {
         return $this->hasMany(ComplaintUserFail::class);
+    }
+
+    public function complaints() {
+        return $this->HasMany(Complaint::class);
     }
 
 }

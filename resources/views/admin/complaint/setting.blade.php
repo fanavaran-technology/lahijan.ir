@@ -114,7 +114,7 @@
                         <div class="row">
                             <!-- places content -->
                             <div class="col-md-12">
-                                <div class="form-check form-check-inline col-md-6 mx-0 my-3">
+                                <div class="form-check form-check-inline mx-0 my-3">
                                     <input id="send_sms_operator" name="notifications[send_sms_operator]" value="1"
                                         data-width="100" data-off="غیرفعال" data-on="فعال" data-onstyle="success"
                                         data-offstyle="danger" class="form-check-input" type="checkbox"
@@ -123,7 +123,7 @@
                                         رسانی پاسخ دهنده شکایت</label>
                                 </div>
 
-                                <div class="form-check form-check-inline col-md-5 mx-0 my-3">
+                                <div class="form-check form-check-inline mx-0 my-3">
                                     <input id="send_sms_plaintiff" name="notifications[send_sms_plaintiff]"
                                         value="1" data-width="100" data-off=" غیرفعال" data-on="فعال"
                                         data-onstyle="success" data-offstyle="danger" class="form-check-input"
@@ -134,7 +134,7 @@
                                         رسانی شاکی </label>
                                 </div>
 
-                                <div class="form-check form-check-inline col-md-5 mx-0 my-3">
+                                <div class="form-check form-check-inline mx-0 my-3">
                                     <input id="send_sms_expert" name="notifications[send_sms_expert]"
                                         value="1" data-width="100" data-off=" غیرفعال" data-on="فعال"
                                         data-onstyle="success" data-offstyle="danger" class="form-check-input"
@@ -142,6 +142,17 @@
                                         @checked($config['notifications']['send_sms_expert'])>
                                     <label for="send_sms_expert" class="form-check-label pr-2 pl-0">
                                         ارسال sms به کارشناس بعد از ثبت شکایت جدید.
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline mx-0 my-3">
+                                    <input id="send_sms_confirm_referrer" name="notifications[send_sms_confirm_referrer]"
+                                        value="1" data-width="100" data-off=" غیرفعال" data-on="فعال"
+                                        data-onstyle="success" data-offstyle="danger" class="form-check-input"
+                                        type="checkbox" data-toggle="toggle" data-style="mr-1"
+                                        @checked($config['notifications']['send_sms_confirm_referrer'])>
+                                    <label for="send_sms_confirm_referrer" class="form-check-label pr-2 pl-0">
+                                        ارسال sms جهت تایید شکایت متصدی برای کارشناس
                                     </label>
                                 </div>
                             </div> <!-- /. col -->

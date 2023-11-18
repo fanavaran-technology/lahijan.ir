@@ -78,6 +78,9 @@ class Complaint extends Model
         return $this->hasMany(ComplaintUserFail::class);
     }
 
+    public function department() {
+        return $this->belongsTo(Departement::class, 'departement_id');
+    }
 
     // other
     public static function generateTrackingCode()

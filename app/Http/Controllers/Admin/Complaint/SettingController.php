@@ -48,9 +48,12 @@ class SettingController extends Controller
             $configs['notifications'][$key] = $request->input("notifications.{$key}") ? (bool) $request->input("notifications.{$key}") : false;
         }
         unset($validData['notifications']);
-        
+
         $validData['confirm_referrer'] = (bool) $request->get('confirm_referrer');
-    
+        
+        if (!$validData['confirm_referrer'])
+        $configs['notifications']['send_sms_confirm_referrer'] = false;
+        
         $configs = array_replace($configs, $validData);
 
         file_put_contents($this->configPath, json_encode($configs, JSON_PRETTY_PRINT));

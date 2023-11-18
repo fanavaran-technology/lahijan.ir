@@ -36,10 +36,7 @@ class Kernel extends ConsoleKernel
                     'departement_id' => $complaint->departement_id
                 ]);
             }
-
-            // TODO : send sms and notification
-
-        });
+        })->everySixHours();
     }
 
     /**
