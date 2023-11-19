@@ -20,9 +20,9 @@ class HomeController extends Controller
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
         $news = [
-            'latestNews'    => News::latest()->wherePublished()->take(5)->get(),
-            'newsHasVideo'  => News::latest()->wherePublished()->has('video')->take(5)->get(),
-            'reportImages'  => News::latest()->wherePublished()->has('gallerizable')->take(5)->get(),
+            'latestNews'    => News::latest()->wherePublished()->where('is_fire_station', 0)->take(5)->get(),
+            'newsHasVideo'  => News::latest()->wherePublished()->where('is_fire_station', 0)->has('video')->take(5)->get(),
+            'reportImages'  => News::latest()->wherePublished()->where('is_fire_station', 0)->has('gallerizable')->take(5)->get(),
         ];
 
         $publicCells = PublicCall::latest()->take(2)->where('status' , 1)->get();

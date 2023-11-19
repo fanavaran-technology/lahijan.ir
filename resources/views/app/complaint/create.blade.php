@@ -54,6 +54,12 @@
                                 شما میتوانید با کد پیگیری {{ session()->get('complaint_success') }} از وضعیت شکایت خود مطلع
                                 شوید.
                             </div>
+
+                            @if (complaintConfig('notifications.send_sms_plaintiff'))
+                            <div class="mt-2 font-bold mb-4 text-sm suc-mes-desc">
+                                در صورت ثبت پاسخ برای شکایت شما متعاقبا از طریق پیامک به شما اطلاع رسانی خواهد شد.
+                            </div>
+                            @endif
                         </div>
                     @endif
 
