@@ -14,7 +14,7 @@
             </defs>
         </svg>
 
-        <span class="text-sm font-bold  text-gray-700">بررسی شکایات</span>
+        <span class="text-sm font-bold  text-gray-700">سامانه شکایت</span>
     </a>
 
     <a href="{{ route('communications.create') }}"
