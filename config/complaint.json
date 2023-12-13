@@ -9,6 +9,5 @@
     "allowed-extensions": ".jpg,.jpeg,.png,.gif",
     "max-files": "3",
     "max-file-size": "1",
-    "deadline-responding": "1",
-    "send_sms_confirm_referrer": false
+    "deadline-responding": "1"
 }

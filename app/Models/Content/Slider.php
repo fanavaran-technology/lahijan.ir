@@ -26,7 +26,7 @@ class Slider extends Model
     // accessors
     public function getPublishStatusAttribute()
     {
-        return $this->published_at <= now() ? 'منتشر شده' : jalaliDate($this->published_at, "%Y/%m/%d H:i:s");
+        return $this->published_at <= now() ? 'منتشر شده' : jalaliDate($this->published_at <= now(), "%Y/%m/%d H:i:s");
     }
 
     // scopes

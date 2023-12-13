@@ -60,6 +60,7 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 */
 require __DIR__ .'/auth.php';
 
+
 Route::prefix('shafaf')->group(function () {
     Route::get('/', [ClarificationController::class, 'index'])->name('clarification.index');
 

@@ -24,8 +24,7 @@
                                 <div class="relative w-full group">
                                     <input type="text" name="tracking_code" value="{{ old('tracking_code') }}" autofocus
                                         class="border-none w-full focus:border-none focus:ring-0 outline-none px-3 py-3 peer"
-                                        placeholder=" " />
-
+                                        placeholder=""/>
                                     <label
                                         class="absolute right-[9px] top-px text-sm text-gray-500 transition-all duration-300 px-1 transform -translate-y-1/2 pointer-events-none
                                     peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-md group-focus-within:!top-px group-focus-within:!text-sm group-focus-within:!text-rose-500">کد
