@@ -19,7 +19,7 @@ class NewsController extends Controller
      */
     public function index(): View
     {
-        $allNews = News::query()->wherePublished();
+        $allNews = News::query()->wherePublished()->where('is_fire_station', 0);
 
         if ($dateFilter = $this->dateFilter()) {
             $allNews->where('created_at' , '>=' , $dateFilter['start_date'])->where('created_at' , '<=' , $dateFilter['end_date']);
@@ -46,7 +46,7 @@ class NewsController extends Controller
      */
     public function show(News $news): View
     {
-        $latestNews = News::latest()->take(10)->get()->except($news->id);
+        $latestNews = News::where('is_fire_station', 0)->latest()->take(10)->get()->except($news->id);
         return view('app.content.news.show' , compact('news' , 'latestNews'));
     }
 

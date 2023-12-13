@@ -66,7 +66,7 @@ class ComplaintController extends Controller
     {
         $subject = $complaint->subject;
 
-        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->whereNotNull('mobile')->get();
 
         $userIds = $userPermission->pluck('id')->toArray();
 

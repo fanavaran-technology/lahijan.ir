@@ -21,7 +21,8 @@ class MyComplaintController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:complaint_handler');
+        $this->middleware('can:complaint_handler')->except('confirm');
+        $this->middleware('can:manage_complaint')->only('confirm');
     }
 
     /**
@@ -140,7 +141,7 @@ class MyComplaintController extends Controller
         
         $department = $complaint->department->title;
 
-        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->get();
+        $userPermission = Permission::where("key", "manage_complaint")->first()->users()->whereNotNull('mobile')->get();
 
         $userIds = $userPermission->pluck('id')->toArray();
 
