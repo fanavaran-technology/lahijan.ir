@@ -20,7 +20,7 @@ class HomeController extends Controller
         $sliders = Slider::latest()->take(8)->where('status' , 1)->get();
 
         $news = [
-            'latestNews'    => News::latest()->wherePublished()->where('is_fire_station', 0)->take(5)->get(),
+            'latestNews'    => News::latest()->wherePublished()->where('is_fire_station', 0)->take(6)->get(),
             'newsHasVideo'  => News::latest()->wherePublished()->where('is_fire_station', 0)->has('video')->take(5)->get(),
             'reportImages'  => News::latest()->wherePublished()->where('is_fire_station', 0)->has('gallerizable')->take(5)->get(),
         ];
